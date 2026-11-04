@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 from openpyxl.workbook.workbook import Workbook
 
 from excel_io.reader import iter_data_sheets, read_headers
+from rules import business_rules
 from rules.business_rules import load_business_rules
 from rules.interpreter import interpret_comment
 from rules.models import ValidationRule
@@ -39,6 +40,86 @@ class SheetValidationResult:
     columns_needing_review: list[str] = field(default_factory=list)
     issues: list[RowIssue] = field(default_factory=list)
 
+def _condition_matches(
+    condition: dict,
+    row_values: dict[str, object],
+) -> bool:
+    """Evalúa una condición configurada en business_rules.yaml."""
+
+    if "any" in condition:
+        return any(
+            _condition_matches(item, row_values)
+            for item in condition["any"]
+        )
+
+    if "all" in condition:
+        return all(
+            _condition_matches(item, row_values)
+            for item in condition["all"]
+        )
+
+    column = condition.get("column")
+    operator = condition.get("operator", "not_blank")
+    value = row_values.get(column)
+
+    blank = value is None or (
+        isinstance(value, str) and value.strip() == ""
+    )
+
+    if operator == "not_blank":
+        return not blank
+
+    if operator == "blank":
+        return blank
+
+    if operator == "gt":
+        try:
+            return (
+                not blank
+                and float(str(value).replace(",", ""))
+                > float(condition.get("value", 0))
+            )
+        except (TypeError, ValueError):
+            return False
+
+    if operator == "eq":
+        return (
+            not blank
+            and str(value).strip()
+            == str(condition.get("value", ""))
+        )
+
+    if operator == "in":
+        return (
+            not blank
+            and str(value).strip()
+            in {str(v) for v in condition.get("values", [])}
+        )
+
+    return False
+
+
+def _conditional_requirement_applies(
+    rules: dict,
+    sheet_name: str,
+    column_name: str,
+    row_values: dict[str, object],
+) -> bool | None:
+    """Retorna True/False si hay condición configurada; None si no existe."""
+
+    sheet_rules = rules.get(
+        "conditional_required_fields", {}
+    ).get(sheet_name, {})
+
+    config = sheet_rules.get(column_name)
+
+    if not config:
+        return None
+
+    return _condition_matches(
+        config.get("when", {}),
+        row_values,
+    )
 
 def validate_workbook(workbook: Workbook) -> list[SheetValidationResult]:
     business_rules = load_business_rules()
@@ -82,16 +163,51 @@ def validate_workbook(workbook: Workbook) -> list[SheetValidationResult]:
         for row_values, row_idx in zip(row_dicts, row_numbers):
             for col_name, value in row_values.items():
                 rule = rules_by_column[col_name]
-                for issue in validate_cell(rule, value):
+
+                condition_applies = _conditional_requirement_applies(
+                    business_rules,
+                    ws.title,
+                    col_name,
+                    row_values,
+                )
+
+                for issue in validate_cell(
+                    rule,
+                    value,
+                    condition_applies,
+                ):
                     result.issues.append(
-                        RowIssue(ws.title, row_idx, col_name, value, issue.message, issue.severity)
+                        RowIssue(
+                            ws.title,
+                            row_idx,
+                            col_name,
+                            value,
+                            issue.message,
+                            issue.severity,
+                        )
                     )
 
                 biz = business_rules.get(col_name)
-                if biz and biz.get("kind") not in (None, "cross_row_consistency_note"):
-                    for issue in validate_business_rule(biz["kind"], biz, value, row_values):
+
+                if biz and biz.get("kind") not in (
+                    None,
+                    "cross_row_consistency_note",
+                ):
+                    for issue in validate_business_rule(
+                        biz["kind"],
+                        biz,
+                        value,
+                        row_values,
+                    ):
                         result.issues.append(
-                            RowIssue(ws.title, row_idx, col_name, value, issue.message, issue.severity)
+                            RowIssue(
+                                ws.title,
+                                row_idx,
+                                col_name,
+                                value,
+                                issue.message,
+                                issue.severity,
+                            )
                         )
 
         # --- Consistencia entre filas (unicidad de un código) ---

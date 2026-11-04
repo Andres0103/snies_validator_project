@@ -26,6 +26,9 @@ class Issue:
 def _is_blank(value: Any) -> bool:
     return value is None or (isinstance(value, str) and value.strip() == "")
 
+def _is_codigo_field(column_name: str) -> bool:
+    return column_name.strip().upper().startswith("CODIGO")
+
 
 
 def _to_number(value: Any) -> float | None:
@@ -54,58 +57,84 @@ def _to_date(value: Any, formats: list[str]) -> datetime.date | None:
     return None
 
 
-def validate_cell(rule: ValidationRule, value: Any) -> list[Issue]:
-    """Valida obligatoriedad, tipo, longitud y valores permitidos de una celda.
-
-    No evalúa reglas de negocio que dependen de OTRAS celdas (eso lo hace
-    `validate_business_rule` / `cross_row_validator.py`, que sí tienen
-    acceso a la fila o al resto de la columna).
-    """
+def validate_cell(
+    rule: ValidationRule,
+    value: Any,
+    conditional_applies: bool | None = None,
+) -> list[Issue]:
+    """Valida obligatoriedad, tipo, longitud y valores permitidos de una celda."""
     issues: list[Issue] = []
 
     if _is_blank(value):
         if rule.required:
-            issues.append(Issue(f"Campo obligatorio vacío ('{rule.column_name}')."))
-        elif rule.conditional_requirement:
             issues.append(
-                Issue(
-                    f"Campo vacío; verificar si aplica: {rule.conditional_requirement.raw_text}.",
-                    severity="warning",
-                )
+                Issue(f"Campo obligatorio vacío ('{rule.column_name}').")
             )
-        return issues  # campo opcional vacío: nada más que revisar
+        elif rule.conditional_requirement:
+            if conditional_applies is True:
+                issues.append(
+                    Issue(
+                        f"Campo obligatorio por condición: "
+                        f"{rule.conditional_requirement.raw_text}.",
+                        severity="error",
+                    )
+                )
+            elif conditional_applies is None:
+                issues.append(
+                    Issue(
+                        f"Campo vacío; verificar si aplica: "
+                        f"{rule.conditional_requirement.raw_text}.",
+                        severity="warning",
+                    )
+                )
 
-    # --- Tipo de dato ---
+        return issues
+
+    # Validación del tipo de dato
     if rule.datatype == DataType.INTEGER:
         num = _to_number(value)
         if num is None or not float(num).is_integer():
-            issues.append(Issue(f"'{value}' no es un número entero válido."))
+            issues.append(
+                Issue(f"'{value}' no es un número entero válido.")
+            )
+
     elif rule.datatype == DataType.DECIMAL:
         if _to_number(value) is None:
-            issues.append(Issue(f"'{value}' no es un valor numérico válido."))
+            issues.append(
+                Issue(f"'{value}' no es un valor numérico válido.")
+            )
+
     elif rule.datatype == DataType.DATE:
         if _to_date(value, rule.date_formats) is None:
             fmt = rule.date_formats[0] if rule.date_formats else "DD-MM-AAAA"
-            issues.append(Issue(f"'{value}' no es una fecha válida (formato esperado {fmt})."))
+            issues.append(
+                Issue(
+                    f"'{value}' no es una fecha válida "
+                    f"(formato esperado {fmt})."
+                )
+            )
 
-        # --- Longitud ---
-    # Convertimos el valor a texto y eliminamos espacios al inicio y al final.
-    # La longitud se mide sobre el dato que realmente se ingresó.
+    # Validación de longitud
     text_value = str(value).strip()
 
-    # Validar longitud máxima.
-    # Esta regla se aplica a todos los campos, incluidos los que comienzan
-    # por CODIGO. No se debe permitir que un código numérico supere el límite
-    # mientras que uno alfanumérico sí sea evaluado.
     if rule.max_length and len(text_value) > rule.max_length:
-        issues.append(
-            Issue(
-                f"'{value}' tiene {len(text_value)} caracteres; "
-                f"máximo {rule.max_length}."
+        if _is_codigo_field(rule.column_name):
+            if _to_number(value) is None:
+                issues.append(
+                    Issue(
+                        f"'{value}' tiene {len(text_value)} caracteres "
+                        f"(máximo {rule.max_length}) y no es un valor "
+                        f"numérico. ¿Escribió una descripción en vez del código?"
+                    )
+                )
+        else:
+            issues.append(
+                Issue(
+                    f"'{value}' tiene {len(text_value)} caracteres; "
+                    f"máximo {rule.max_length}."
+                )
             )
-        )
 
-    # Validar longitud mínima, si la regla la define.
     if rule.min_length and len(text_value) < rule.min_length:
         issues.append(
             Issue(
@@ -114,7 +143,7 @@ def validate_cell(rule: ValidationRule, value: Any) -> list[Issue]:
             )
         )
 
-    # Validar longitud exacta, si la regla la define.
+    # Validación de longitud exacta
     if rule.exact_length and len(text_value) != rule.exact_length:
         issues.append(
             Issue(
@@ -123,26 +152,20 @@ def validate_cell(rule: ValidationRule, value: Any) -> list[Issue]:
             )
         )
 
-    # --- Valores permitidos ---
+    # Validación de valores permitidos
     if rule.allowed_values:
-        normalized = text_value.upper()
-        valid_codes = {v.code.upper() for v in rule.allowed_values}
-        # Tolerar "1" vs "1.0" vs 1 (Excel guarda números como float).
-        numeric_equivalent = None
-        num = _to_number(value)
-        if num is not None and float(num).is_integer():
-            numeric_equivalent = str(int(num))
-        if normalized not in valid_codes and numeric_equivalent not in valid_codes:
+        allowed_codes = {item.code for item in rule.allowed_values}
+        allowed_displays = {item.display for item in rule.allowed_values}
+        value_text = str(value).strip()
+
+        if value_text not in allowed_codes and value_text not in allowed_displays:
             issues.append(
                 Issue(
-                    f"'{value}' no es un código válido para '{rule.column_name}'. "
-                    f"¿Quizás escribió la descripción en vez del código? "
-                    f"Valores esperados: {', '.join(sorted(valid_codes))[:120]}."
+                    f"'{value}' no está dentro de los valores permitidos."
                 )
             )
 
     return issues
-
 
 def validate_business_rule(kind: str, params: dict, value: Any, row_values: dict[str, Any]) -> list[Issue]:
     """Valida reglas que dependen de la propia celda (no de otras filas)."""
@@ -164,9 +187,24 @@ def validate_business_rule(kind: str, params: dict, value: Any, row_values: dict
         after_col = params.get("after_column")
         other = row_values.get(after_col)
         other_d = _to_date(other, []) if other is not None else None
-        if d and other_d and not (d >= other_d):
-            issues.append(Issue(params.get("message", "La fecha final debe ser igual o posterior a la fecha de inicio.")))
 
+        if d and other_d:
+            strict = params.get("strict", False)
+
+            if strict:
+                valid = d > other_d
+            else:
+                valid = d >= other_d
+
+            if not valid:
+                default_message = (
+                    "La fecha final debe ser posterior a la fecha de inicio."
+                    if strict
+                    else "La fecha final debe ser igual o posterior a la fecha de inicio."
+                )
+                issues.append(
+                    Issue(params.get("message", default_message))
+                )
     elif kind == "non_negative":
         num = _to_number(value)
         if num is not None and num < 0:

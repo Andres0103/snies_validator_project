@@ -206,22 +206,42 @@ def build_business_rule_validation(kind: str, params: dict, column_letter: str, 
     return dv
 
 
-def build_date_after_column_validation(own_column_letter: str, after_column_letter: str, after_column_name: str = "") -> DataValidation:
-    """FECHA_FINAL debe ser igual o posterior a FECHA_INICIO en la misma fila.
+def build_date_after_column_validation(
+    own_column_letter: str,
+    after_column_letter: str,
+    after_column_name: str = "",
+    strict: bool = False,
+) -> DataValidation:
+    """Valida la fecha contra otra columna de la misma fila."""
 
-    La fórmula se ancla en la fila 2 (primera fila de datos); Excel ajusta
-    las referencias de forma relativa para el resto del rango al que se
-    aplique la validación, igual que con cualquier fórmula normal.
-    """
+    operator = ">" if strict else ">="
+
     dv = DataValidation(
         type="custom",
-        formula1=f"=OR(ISBLANK({own_column_letter}2),{own_column_letter}2>={after_column_letter}2)",
+        formula1=(
+            f"=OR(ISBLANK({own_column_letter}2),"
+            f"{own_column_letter}2{operator}{after_column_letter}2)"
+        ),
     )
+
     dv.allow_blank = True
     dv.showErrorMessage = True
     dv.errorTitle = "Regla de negocio"
-    dv.error = "La fecha final debe ser igual o posterior a la fecha de inicio."
+
+    if strict:
+        dv.error = "La fecha final debe ser posterior a la fecha de inicio."
+        comparison_text = "posterior"
+    else:
+        dv.error = "La fecha final debe ser igual o posterior a la fecha de inicio."
+        comparison_text = "igual o posterior"
+
     dv.showInputMessage = True
     dv.promptTitle = "Fecha final"
-    dv.prompt = f"Debe ser igual o posterior a la fecha en '{after_column_name}' de la misma fila." if after_column_name else "Debe ser igual o posterior a la fecha de inicio de la misma fila."
+    dv.prompt = (
+        f"Debe ser {comparison_text} a la fecha en "
+        f"'{after_column_name}' de la misma fila."
+        if after_column_name
+        else f"Debe ser {comparison_text} a la fecha de inicio de la misma fila."
+    )
+
     return dv

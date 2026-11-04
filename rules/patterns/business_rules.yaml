@@ -21,6 +21,7 @@ FECHA_INICIO:
 FECHA_FINAL:
   kind: date_after_column
   after_column: FECHA_INICIO
+  strict: true
   message: "La fecha final debe ser igual o posterior a la fecha de inicio."
 
 DEDICACION:
@@ -125,3 +126,36 @@ sheet_scoped_rules:
         entidad nacional (si el mismo servicio tiene más de una entidad
         nacional asociada, cada fila debe tener una entidad DISTINTA; si
         el código se repitió con la misma entidad, es un duplicado real).
+# Campos condicionalmente obligatorios en la plantilla CONSULTORIA.
+# Las condiciones se evalúan usando los valores de la misma fila.
+
+conditional_required_fields:
+  CONSULTORIA:
+
+    VLR_FINANCIACION_NACIONAL:
+      when:
+        column: ID_FUENTE_NACIONAL
+        operator: not_blank
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      when:
+        column: ID_FUENTE_INTERNACIONAL
+        operator: not_blank
+
+    NOMBRE_INSTITUCION:
+      when:
+        any:
+          - column: ID_FUENTE_INTERNACIONAL
+            operator: not_blank
+          - column: VLR_FINANCIACION_INTERNACIONAL
+            operator: gt
+            value: 0
+
+    ID_PAIS_FINANCIADOR:
+      when:
+        any:
+          - column: ID_FUENTE_INTERNACIONAL
+            operator: not_blank
+          - column: VLR_FINANCIACION_INTERNACIONAL
+            operator: gt
+            value: 0
