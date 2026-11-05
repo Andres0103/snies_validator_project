@@ -4,37 +4,37 @@ validation_config:
   # Configuración de archivos maestros
   master_tables:
     paises:
-      file: "insumos/Tabla paises SNIES.xlsx"
+      file: "catalogs/Tabla_paises_SNIES.yaml"
       key_column: "ID_PAIS"
       description_column: "DESC_PAIS"
 
     departamentos:
-      file: "insumos/Listado_departamentos_municipios.xlsx"
+      file: "catalogs/Listado_departamentos_municipios.yaml"
       key_column: "ID_DEPARTAMENTO"
       description_column: "DESC_DEPARTAMENTO"
 
     cine_campos:
-      file: "insumos/Cine_Campo_Detallado.xlsx"
+      file: "catalogs/cine_campo_detallado.yaml"
       key_column: "ID_CINE_CAMPO_DETALLADO"
       description_column: "DESC_CINE_CAMPO_DETALLADO"
 
     fuente_internacional:
-      file: "insumos/tablas-unicas-consultoria/Tabla fuente internacional.xlsx"
+      file: "catalogs/Tabla_fuente_internacional.yaml"
       key_column: "ID_FUENTE_INTERNACIONAL"
       description_column: "DESCRIPCIÓN"
 
     fuente_nacional:
-      file: "insumos/tablas-unicas-consultoria/Tabla fuente nacional.xlsx"
+      file: "catalogs/Tabla_fuente_nacional.yaml"
       key_column: "ID_FUENTE_NACIONAL"
       description_column: "DESCRIPCIÓN"
 
     sector_consultoria:
-      file: "insumos/tablas-unicas-consultoria/Tabla sector consultoria.xlsx"
+      file: "catalogs/tablas-unicas-consultoria/Tabla_sector_consultoria.yaml"
       key_column: "ID_SECTOR_CONSULTORIA"
       description_column: "DESCRIPCIÓN"
 
     sede:
-      file: "insumos/tablas-unicas-consultoria/Tabla sede.xlsx"
+      file: "catalogs/Tabla_sede.yaml"
       key_column: "ID_IES_UDEA"
       description_column: "Descripción"
 
@@ -150,10 +150,6 @@ validation_config:
       master_table: "fuente_internacional"
       description: "ID de fuente internacional debe existir en la tabla de fuentes internacionales"
 
-    VLR_FINANCIACION_INTERNACIONAL:
-      type: "integer"
-      required: true
-      description: "Valor de financiación internacional debe ser positivo si se especifica"
 
   # Reglas de lógica de negocio
   business_rules:

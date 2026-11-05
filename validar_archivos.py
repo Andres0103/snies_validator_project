@@ -22,6 +22,7 @@ from copy import copy
 from pathlib import Path
 
 import openpyxl
+from openpyxl import cell
 from openpyxl.comments import Comment
 from openpyxl.styles import PatternFill
 
@@ -135,19 +136,9 @@ def mark_issues(workbook, validation_results) -> None:
 
             # Si la celda ya tenía un comentario, lo conservamos
             # y agregamos el nuevo hallazgo al final.
-            previous_comment = cell.comment.text if cell.comment else ""
+            # El comentario debe mostrar únicamente el hallazgo actual.
+            comment_text = f"[{issue.severity.upper()}] {issue.message}"
 
-            new_comment = (
-                f"[{issue.severity.upper()}] {issue.message}"
-            )
-
-            if previous_comment:
-                comment_text = previous_comment + "\n\n" + new_comment
-            else:
-                comment_text = new_comment
-
-            # Excel muestra este comentario al pasar el cursor
-            # sobre la celda.
             cell.comment = Comment(comment_text, "Validador SNIES")
 
 

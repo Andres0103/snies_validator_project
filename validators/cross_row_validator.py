@@ -72,7 +72,8 @@ def check_code_consistency(
         code_value = row.get(code_column)
         if code_value is None or str(code_value).strip() == "":
             continue
-        key = str(code_value).strip()
+
+        key: Any = str(code_value).strip()
         if group_by:
             secondary = row.get(group_by)
             key = (key, str(secondary).strip() if secondary is not None else "")
@@ -81,13 +82,19 @@ def check_code_consistency(
     for key, indices in groups.items():
         if len(indices) < 2:
             continue
+
         for col in check_columns:
             distinct_values = {
-                str(rows[i].get(col)).strip()
+                "" if rows[i].get(col) is None else str(rows[i].get(col)).strip()
                 for i in indices
-                if rows[i].get(col) is not None and str(rows[i].get(col)).strip() != ""
             }
+
             if len(distinct_values) > 1:
+                displayed_values = sorted(
+                    "(vacío)" if value == "" else value
+                    for value in distinct_values
+                )
+
                 for i in indices:
                     issues.append(
                         CrossRowIssue(
@@ -95,9 +102,36 @@ def check_code_consistency(
                             column_name=col,
                             message=(
                                 f"Inconsistencia: filas con {code_column}='{key}' "
-                                f"tienen valores distintos en '{col}': {sorted(distinct_values)}."
+                                f"tienen valores distintos en '{col}': "
+                                f"{displayed_values}."
                             ),
                         )
                     )
+            # None se convierte en cadena vacía; los textos se limpian con strip().
+            # Así, vacío y valor informado se consideran diferentes.
+            distinct_values = {
+                "" if rows[i].get(col) is None else str(rows[i].get(col)).strip()
+                for i in indices
+            }
+
+            if len(distinct_values) <= 1:
+                continue
+
+            displayed_values = sorted(
+                "(vacío)" if value == "" else value
+                for value in distinct_values
+            )
+            for i in indices:
+                issues.append(
+                    CrossRowIssue(
+                        row=row_numbers[i],
+                        column_name=col,
+                        message=(
+                            f"Inconsistencia: filas con {code_column}='{key}' "
+                            f"tienen valores distintos en '{col}': "
+                            f"{displayed_values}."
+                        ),
+                    )
+                )
 
     return issues

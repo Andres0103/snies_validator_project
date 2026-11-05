@@ -68,3 +68,11 @@ def apply_known_field_fallback(rule: ValidationRule) -> ValidationRule:
         ]
 
     return rule
+def apply_known_field_overrides(rule: ValidationRule) -> ValidationRule:
+    """Aplica reglas autoritativas del manual que prevalecen sobre el comentario."""
+    if rule.column_name == "DESCRIPCION_CONSULTORIA":
+        rule.datatype = DataType.ALPHANUMERIC
+        rule.max_length = 200
+        rule.required = True
+
+    return rule

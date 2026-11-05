@@ -10,7 +10,10 @@ from __future__ import annotations
 
 import re
 
-from rules.known_fields import apply_known_field_fallback
+from rules.known_fields import (
+    apply_known_field_fallback,
+    apply_known_field_overrides,
+)
 from rules.master_tables import apply_master_table_reference
 from rules.models import ValidationRule
 from rules.strategies.base import RuleRecognizer
@@ -38,7 +41,8 @@ def interpret_comment(column_name: str, raw_comment: str) -> ValidationRule:
 
     if not raw_comment:
         rule.unparsed_fragments.append("(sin comentario)")
-        return apply_known_field_fallback(rule)
+        rule = apply_known_field_fallback(rule)
+        return apply_known_field_overrides(rule)
 
     text = normalize(raw_comment)
 
@@ -53,4 +57,5 @@ def interpret_comment(column_name: str, raw_comment: str) -> ValidationRule:
         rule.description = remainder[0].upper() + remainder[1:] if remainder else ""
 
     rule = apply_master_table_reference(rule, raw_comment)
-    return apply_known_field_fallback(rule)
+    rule = apply_known_field_fallback(rule)
+    return apply_known_field_overrides(rule)

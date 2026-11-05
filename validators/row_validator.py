@@ -10,7 +10,6 @@ nunca pueden desalinearse entre sí.
 from __future__ import annotations
 
 import datetime
-import re
 from dataclasses import dataclass
 from typing import Any
 
@@ -26,34 +25,39 @@ class Issue:
 def _is_blank(value: Any) -> bool:
     return value is None or (isinstance(value, str) and value.strip() == "")
 
+
 def _is_codigo_field(column_name: str) -> bool:
     return column_name.strip().upper().startswith("CODIGO")
-
 
 
 def _to_number(value: Any) -> float | None:
     if isinstance(value, (int, float)) and not isinstance(value, bool):
         return float(value)
+
     if isinstance(value, str):
         cleaned = value.strip().replace(",", "")
         try:
             return float(cleaned)
         except ValueError:
             return None
+
     return None
 
 
 def _to_date(value: Any, formats: list[str]) -> datetime.date | None:
     if isinstance(value, datetime.datetime):
         return value.date()
+
     if isinstance(value, datetime.date):
         return value
+
     if isinstance(value, str):
         for fmt in formats or ["%d-%m-%Y", "%d/%m/%Y"]:
             try:
                 return datetime.datetime.strptime(value.strip(), fmt).date()
             except ValueError:
                 continue
+
     return None
 
 
@@ -90,18 +94,41 @@ def validate_cell(
 
         return issues
 
-    # Validación del tipo de dato
-    if rule.datatype == DataType.INTEGER:
-        num = _to_number(value)
-        if num is None or not float(num).is_integer():
+    # Texto utilizado para validar caracteres y longitud.
+    text_value = str(value).strip()
+
+    # Validación del tipo de dato.
+    if rule.datatype == DataType.ALPHANUMERIC:
+        # CODIGO_CONSULTORIA admite signos y separadores.
+        # Para los demás campos alfanuméricos se aplica la validación estricta.
+        if (
+            rule.column_name.strip().upper() != "CODIGO_CONSULTORIA"
+            and not text_value.isalnum()
+        ):
             issues.append(
-                Issue(f"'{value}' no es un número entero válido.")
+                Issue(
+                    "El campo debe contener únicamente letras y números."
+                )
+            )
+
+    elif rule.datatype == DataType.ALPHABETIC:
+        if not text_value.isalpha():
+            issues.append(
+                Issue("El campo debe contener únicamente letras.")
+            )
+
+    elif rule.datatype == DataType.INTEGER:
+        num = _to_number(value)
+
+        if num is None or not num.is_integer():
+            issues.append(
+                Issue("El campo debe contener un número entero válido.")
             )
 
     elif rule.datatype == DataType.DECIMAL:
         if _to_number(value) is None:
             issues.append(
-                Issue(f"'{value}' no es un valor numérico válido.")
+                Issue("El campo debe contener un valor numérico válido.")
             )
 
     elif rule.datatype == DataType.DATE:
@@ -109,78 +136,95 @@ def validate_cell(
             fmt = rule.date_formats[0] if rule.date_formats else "DD-MM-AAAA"
             issues.append(
                 Issue(
-                    f"'{value}' no es una fecha válida "
+                    f"El campo debe contener una fecha válida "
                     f"(formato esperado {fmt})."
                 )
             )
 
-    # Validación de longitud
-    text_value = str(value).strip()
-
-    if rule.max_length and len(text_value) > rule.max_length:
-        if _is_codigo_field(rule.column_name):
-            if _to_number(value) is None:
-                issues.append(
-                    Issue(
-                        f"'{value}' tiene {len(text_value)} caracteres "
-                        f"(máximo {rule.max_length}) y no es un valor "
-                        f"numérico. ¿Escribió una descripción en vez del código?"
-                    )
+    # Validación de longitud máxima.
+    if rule.max_length is not None and len(text_value) > rule.max_length:
+        if _is_codigo_field(rule.column_name) and _to_number(value) is None:
+            issues.append(
+                Issue(
+                    f"El código supera la longitud máxima de "
+                    f"{rule.max_length} caracteres y no parece ser "
+                    f"un código válido."
                 )
+            )
         else:
             issues.append(
                 Issue(
-                    f"'{value}' tiene {len(text_value)} caracteres; "
-                    f"máximo {rule.max_length}."
+                    f"La longitud es de {len(text_value)} caracteres; "
+                    f"máximo permitido: {rule.max_length}."
                 )
             )
 
-    if rule.min_length and len(text_value) < rule.min_length:
+    # Validación de longitud mínima.
+    if rule.min_length is not None and len(text_value) < rule.min_length:
         issues.append(
             Issue(
-                f"'{value}' tiene {len(text_value)} caracteres; "
-                f"mínimo {rule.min_length}."
+                f"La longitud es de {len(text_value)} caracteres; "
+                f"mínimo permitido: {rule.min_length}."
             )
         )
 
-    # Validación de longitud exacta
-    if rule.exact_length and len(text_value) != rule.exact_length:
+    # Validación de longitud exacta.
+    if rule.exact_length is not None and len(text_value) != rule.exact_length:
         issues.append(
             Issue(
-                f"'{value}' debe tener exactamente "
+                f"La longitud debe ser exactamente "
                 f"{rule.exact_length} caracteres."
             )
         )
 
-    # Validación de valores permitidos
+    # Validación de valores permitidos.
+    # Validación de valores permitidos.
     if rule.allowed_values:
-        allowed_codes = {item.code for item in rule.allowed_values}
-        allowed_displays = {item.display for item in rule.allowed_values}
+        allowed_codes = {
+            str(item.code).strip()
+            for item in rule.allowed_values
+        }
+        allowed_displays = {
+            str(item.display).strip()
+            for item in rule.allowed_values
+        }
         value_text = str(value).strip()
 
-        if value_text not in allowed_codes and value_text not in allowed_displays:
+        if (
+            value_text not in allowed_codes
+            and value_text not in allowed_displays
+        ):
             issues.append(
-                Issue(
-                    f"'{value}' no está dentro de los valores permitidos."
-                )
+                Issue("El valor no está dentro de los valores permitidos.")
             )
 
     return issues
 
-def validate_business_rule(kind: str, params: dict, value: Any, row_values: dict[str, Any]) -> list[Issue]:
+
+def validate_business_rule(
+    kind: str,
+    params: dict,
+    value: Any,
+    row_values: dict[str, Any],
+) -> list[Issue]:
     """Valida reglas que dependen de la propia celda (no de otras filas)."""
     issues: list[Issue] = []
+
     if _is_blank(value):
         return issues
 
     if kind == "date_within_past_years":
         d = _to_date(value, [])
+
         if d:
             years = params.get("years", 80)
             today = datetime.date.today()
             earliest = today.replace(year=today.year - years)
+
             if not (earliest <= d <= today):
-                issues.append(Issue(params.get("message", "Fecha fuera de rango.")))
+                issues.append(
+                    Issue(params.get("message", "Fecha fuera de rango."))
+                )
 
     elif kind == "date_after_column":
         d = _to_date(value, [])
@@ -200,27 +244,48 @@ def validate_business_rule(kind: str, params: dict, value: Any, row_values: dict
                 default_message = (
                     "La fecha final debe ser posterior a la fecha de inicio."
                     if strict
-                    else "La fecha final debe ser igual o posterior a la fecha de inicio."
+                    else "La fecha final debe ser igual o posterior "
+                    "a la fecha de inicio."
                 )
                 issues.append(
                     Issue(params.get("message", default_message))
                 )
+
     elif kind == "non_negative":
         num = _to_number(value)
+
         if num is not None and num < 0:
-            issues.append(Issue(params.get("message", "El valor no puede ser negativo.")))
+            issues.append(
+                Issue(params.get("message", "El valor no puede ser negativo."))
+            )
 
     elif kind == "non_negative_with_min_length":
         num = _to_number(value)
         text_value = str(value).strip()
         min_len = params.get("min_length", 1)
+
         if num is not None and num < 0:
-            issues.append(Issue(params.get("message", "El valor no puede ser negativo.")))
+            issues.append(
+                Issue(params.get("message", "El valor no puede ser negativo."))
+            )
+
         if len(text_value) < min_len:
-            issues.append(Issue(f"'{value}' tiene menos de {min_len} caracteres."))
+            issues.append(
+                Issue(
+                    f"La longitud es menor que el mínimo permitido "
+                    f"de {min_len} caracteres."
+                )
+            )
 
     elif kind == "email_format":
         if "@" not in str(value):
-            issues.append(Issue(params.get("message", "El email no tiene un formato válido.")))
+            issues.append(
+                Issue(
+                    params.get(
+                        "message",
+                        "El correo electrónico no tiene un formato válido.",
+                    )
+                )
+            )
 
     return issues

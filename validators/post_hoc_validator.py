@@ -1,9 +1,8 @@
+
 """Orquesta la validación post-hoc de un archivo SNIES ya diligenciado.
 
-Reutiliza exactamente el mismo motor de reglas que genera las plantillas
-(`rules/interpreter.py`, `rules/known_fields.py`, `rules/business_rules.py`),
-así que las reglas nunca se desalinean entre "lo que se previene al
-escribir" y "lo que se detecta después de escrito".
+Reutiliza el motor de reglas de la configuración para mantener alineadas
+las validaciones de las plantillas y las validaciones posteriores.
 """
 
 from __future__ import annotations
@@ -13,12 +12,19 @@ from dataclasses import dataclass, field
 from openpyxl.workbook.workbook import Workbook
 
 from excel_io.reader import iter_data_sheets, read_headers
-from rules import business_rules
-from rules.business_rules import load_business_rules
+from rules.config_loader import (
+    load_rule_configuration,
+    resolve_business_rule,
+    get_global_business_rules,
+)
 from rules.interpreter import interpret_comment
 from rules.models import ValidationRule
-from validators.cross_row_validator import check_code_consistency, check_uniqueness
+from validators.cross_row_validator import (
+    check_code_consistency,
+    check_uniqueness,
+)
 from validators.row_validator import validate_business_rule, validate_cell
+
 
 HEADER_ROW = 1
 
@@ -39,6 +45,7 @@ class SheetValidationResult:
     total_rows: int
     columns_needing_review: list[str] = field(default_factory=list)
     issues: list[RowIssue] = field(default_factory=list)
+
 
 def _condition_matches(
     condition: dict,
@@ -121,142 +128,238 @@ def _conditional_requirement_applies(
         row_values,
     )
 
+
 def validate_workbook(workbook: Workbook) -> list[SheetValidationResult]:
-    business_rules = load_business_rules()
+    """Valida todas las hojas de datos de un libro de Excel."""
+
+    configuration = load_rule_configuration()
+
+    business_rules = configuration.business_rules
+    global_business_rules = get_global_business_rules(configuration)
+
     results: list[SheetValidationResult] = []
 
+    # Recorrer cada hoja de datos del libro.
     for ws in iter_data_sheets(workbook):
+
         headers = read_headers(ws)
+
         if not headers:
             continue
 
+        # Interpretar las reglas definidas en los comentarios de los encabezados.
         rules_by_column: dict[str, ValidationRule] = {
-            h.column_name: interpret_comment(h.column_name, h.comment_text) for h in headers
+            header.column_name: interpret_comment(
+                header.column_name,
+                header.comment_text,
+            )
+            for header in headers
         }
-        column_letter_by_name = {h.column_name: h.column_letter for h in headers}
-        columns_needing_review = [c for c, r in rules_by_column.items() if r.needs_manual_review]
+
+        column_letter_by_name = {
+            header.column_name: header.column_letter
+            for header in headers
+        }
+
+        columns_needing_review = [
+            column_name
+            for column_name, rule in rules_by_column.items()
+            if rule.needs_manual_review
+        ]
 
         max_row = ws.max_row
-        result = SheetValidationResult(sheet_name=ws.title, total_rows=max(max_row - HEADER_ROW, 0))
+
+        result = SheetValidationResult(
+            sheet_name=ws.title,
+            total_rows=max(max_row - HEADER_ROW, 0),
+        )
+
         result.columns_needing_review = columns_needing_review
 
-        # Recolectar filas de datos como diccionarios {columna: valor} para
-        # poder validar reglas que dependen de OTRA celda de la misma fila
-        # (ej. FECHA_FINAL > FECHA_INICIO) y para el chequeo de
-        # consistencia entre filas.
+        # Recopilar las filas como diccionarios.
+        # Esto permite consultar otras columnas de la misma fila
+        # y comparar información entre diferentes filas.
         row_dicts: list[dict[str, object]] = []
         row_numbers: list[int] = []
+
         for row_idx in range(HEADER_ROW + 1, max_row + 1):
-            row_values = {}
+
+            row_values: dict[str, object] = {}
             is_empty_row = True
-            for h in headers:
-                cell = ws[f"{h.column_letter}{row_idx}"]
-                row_values[h.column_name] = cell.value
-                if cell.value is not None and str(cell.value).strip() != "":
+
+            for header in headers:
+
+                cell = ws[f"{header.column_letter}{row_idx}"]
+
+                row_values[header.column_name] = cell.value
+
+                if (
+                    cell.value is not None
+                    and str(cell.value).strip() != ""
+                ):
                     is_empty_row = False
+
+            # Ignorar filas completamente vacías.
             if is_empty_row:
                 continue
+
             row_dicts.append(row_values)
             row_numbers.append(row_idx)
 
-        # --- Validación por celda ---
+        # ---------------------------------------------------------
+        # 1. Validaciones por celda y reglas de negocio por fila.
+        # ---------------------------------------------------------
         for row_values, row_idx in zip(row_dicts, row_numbers):
+
             for col_name, value in row_values.items():
+
+                # Validaciones interpretadas desde los comentarios.
                 rule = rules_by_column[col_name]
 
-                condition_applies = _conditional_requirement_applies(
-                    business_rules,
-                    ws.title,
-                    col_name,
-                    row_values,
-                )
+                for issue in validate_cell(rule, value):
 
-                for issue in validate_cell(
-                    rule,
-                    value,
-                    condition_applies,
-                ):
                     result.issues.append(
                         RowIssue(
-                            ws.title,
-                            row_idx,
-                            col_name,
-                            value,
-                            issue.message,
-                            issue.severity,
+                            sheet=ws.title,
+                            row=row_idx,
+                            column_name=col_name,
+                            value=value,
+                            message=issue.message,
+                            severity=issue.severity,
                         )
                     )
 
-                biz = business_rules.get(col_name)
+                # Resolver la regla de negocio correspondiente
+                # a la hoja y a la columna actual.
+                biz = resolve_business_rule(
+                    configuration,
+                    column_name=col_name,
+                    sheet_name=ws.title,
+                )
 
+                # Las reglas de consistencia entre filas y unicidad
+                # se procesan en secciones independientes.
                 if biz and biz.get("kind") not in (
                     None,
                     "cross_row_consistency_note",
+                    "unique_in_sheet",
                 ):
-                    for issue in validate_business_rule(
+
+                    business_issues = validate_business_rule(
                         biz["kind"],
                         biz,
                         value,
                         row_values,
-                    ):
+                    )
+
+                    for issue in business_issues:
+
                         result.issues.append(
                             RowIssue(
-                                ws.title,
-                                row_idx,
-                                col_name,
-                                value,
-                                issue.message,
-                                issue.severity,
+                                sheet=ws.title,
+                                row=row_idx,
+                                column_name=col_name,
+                                value=value,
+                                message=issue.message,
+                                severity=issue.severity,
                             )
                         )
 
-        # --- Consistencia entre filas (unicidad de un código) ---
-        for col_name, biz in business_rules.items():
+        # ---------------------------------------------------------
+        # 2. Consistencia entre filas.
+        # ---------------------------------------------------------
+        for col_name, biz in global_business_rules.items():
+
             if biz.get("kind") != "cross_row_consistency_note":
                 continue
+
             check_columns = biz.get("check_columns", [])
-            # Solo aplica en la hoja que realmente tiene el código Y todas
-            # las columnas que se van a comparar (esto excluye de forma
-            # natural a hojas hijas/detalle que no las tienen, ej. la
-            # hoja de recurso humano no tiene DESCRIPCION_CONSULTORIA).
+
+            # La regla solo aplica cuando la hoja contiene
+            # el código y todas las columnas que deben compararse.
             if col_name not in column_letter_by_name:
                 continue
-            if not check_columns or not all(c in column_letter_by_name for c in check_columns):
+
+            if (
+                not check_columns
+                or not all(
+                    column in column_letter_by_name
+                    for column in check_columns
+                )
+            ):
                 continue
+
             group_by = biz.get("group_by")
+
             if group_by and group_by not in column_letter_by_name:
                 group_by = None
-            for cri in check_code_consistency(col_name, check_columns, row_dicts, row_numbers, group_by):
-                idx = row_numbers.index(cri.row)
+
+            consistency_issues = check_code_consistency(
+                col_name,
+                check_columns,
+                row_dicts,
+                row_numbers,
+                group_by,
+            )
+
+            for cross_issue in consistency_issues:
+
+                idx = row_numbers.index(cross_issue.row)
+
                 result.issues.append(
                     RowIssue(
-                        ws.title, cri.row, cri.column_name,
-                        row_dicts[idx].get(cri.column_name),
-                        cri.message, cri.severity,
+                        sheet=ws.title,
+                        row=cross_issue.row,
+                        column_name=cross_issue.column_name,
+                        value=row_dicts[idx].get(
+                            cross_issue.column_name
+                        ),
+                        message=cross_issue.message,
+                        severity=cross_issue.severity,
                     )
                 )
 
-        # --- Reglas específicas de hoja+columna (ej. código único) ---
-        sheet_scoped = business_rules.get("sheet_scoped_rules", {}).get(ws.title, {})
-        for col_name, cfg in sheet_scoped.items():
-            if cfg.get("kind") != "unique_in_sheet":
+        # ---------------------------------------------------------
+        # 3. Reglas de unicidad específicas de cada hoja.
+        # ---------------------------------------------------------
+        for col_name in column_letter_by_name:
+
+            cfg = resolve_business_rule(
+                configuration,
+                column_name=col_name,
+                sheet_name=ws.title,
+            )
+
+            if not cfg or cfg.get("kind") != "unique_in_sheet":
                 continue
-            if col_name not in column_letter_by_name:
-                continue
-            for cri in check_uniqueness(
-                col_name, row_dicts, row_numbers,
+
+            uniqueness_issues = check_uniqueness(
+                col_name,
+                row_dicts,
+                row_numbers,
                 severity=cfg.get("severity", "warning"),
                 message_template=cfg.get("message"),
-            ):
-                idx = row_numbers.index(cri.row)
+            )
+
+            for cross_issue in uniqueness_issues:
+
+                idx = row_numbers.index(cross_issue.row)
+
                 result.issues.append(
                     RowIssue(
-                        ws.title, cri.row, cri.column_name,
-                        row_dicts[idx].get(cri.column_name),
-                        cri.message, cri.severity,
+                        sheet=ws.title,
+                        row=cross_issue.row,
+                        column_name=cross_issue.column_name,
+                        value=row_dicts[idx].get(
+                            cross_issue.column_name
+                        ),
+                        message=cross_issue.message,
+                        severity=cross_issue.severity,
                     )
                 )
 
+        # Guardar el resultado de esta hoja.
+        # Debe ejecutarse dentro del recorrido de las hojas.
         results.append(result)
 
     return results
