@@ -1,0 +1,17 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Backend: terminal con entorno activo",
+			"type": "shell",
+			"command": "powershell.exe",
+			"args": [
+				"-NoExit",
+				"-Command",
+				"Set-Location 'C:\\Users\\c.diaz3\\Documents\\snies_validator_proyecto\\Backend'; . .\\.venv\\Scripts\\Activate.ps1"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

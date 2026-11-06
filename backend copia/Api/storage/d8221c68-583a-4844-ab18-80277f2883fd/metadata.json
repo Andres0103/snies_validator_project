@@ -1,0 +1,25 @@
+{
+  "id": "d8221c68-583a-4844-ab18-80277f2883fd",
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-06T15:33:20.805455+00:00",
+  "iniciado_en": "2026-11-06T15:33:20.862654+00:00",
+  "finalizado_en": "2026-11-06T15:33:21.203143+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 115,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Consultoria_origina_marcado.xlsx",
+      "total_errores": 115,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

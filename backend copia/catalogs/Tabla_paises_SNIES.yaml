@@ -1,0 +1,1577 @@
+master_tables:
+  paises:
+    source_file: Tabla paises SNIES.csv
+    columns:
+    - ID_PAIS
+    - DESC_PAIS
+    - ALFA-3
+    - ALFA-2
+    - FECHA_INICIAL
+    - FECHA_FINAL
+    records:
+    - ID_PAIS: '535'
+      DESC_PAIS: Bonaire, San Eustaquio y Saba
+      ALFA-3: BES
+      ALFA-2: BQ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '20'
+      DESC_PAIS: Andorra
+      ALFA-3: AND
+      ALFA-2: AD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '784'
+      DESC_PAIS: Emiratos Árabes Unidos
+      ALFA-3: ARE
+      ALFA-2: AE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '4'
+      DESC_PAIS: Afganistán
+      ALFA-3: AFG
+      ALFA-2: AF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '28'
+      DESC_PAIS: Antigua y Barbuda
+      ALFA-3: ATG
+      ALFA-2: AG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '660'
+      DESC_PAIS: Anguila
+      ALFA-3: AIA
+      ALFA-2: AI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '8'
+      DESC_PAIS: Albania
+      ALFA-3: ALB
+      ALFA-2: AL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '51'
+      DESC_PAIS: Armenia
+      ALFA-3: ARM
+      ALFA-2: AM
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '530'
+      DESC_PAIS: ANTILLAS NEERLANDESAS
+      ALFA-3: ANT
+      ALFA-2: AN
+      FECHA_INICIAL: 01/01/1986
+      FECHA_FINAL: 10/10/2010
+    - ID_PAIS: '180'
+      DESC_PAIS: República Democrática del Congo
+      ALFA-3: COD
+      ALFA-2: CD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '24'
+      DESC_PAIS: Angola
+      ALFA-3: AGO
+      ALFA-2: AO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '10'
+      DESC_PAIS: Antártida
+      ALFA-3: ATA
+      ALFA-2: AQ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '32'
+      DESC_PAIS: Argentina
+      ALFA-3: ARG
+      ALFA-2: AR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '16'
+      DESC_PAIS: Samoa Americana
+      ALFA-3: ASM
+      ALFA-2: AS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '40'
+      DESC_PAIS: Austria
+      ALFA-3: AUT
+      ALFA-2: AT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '36'
+      DESC_PAIS: Australia
+      ALFA-3: AUS
+      ALFA-2: AU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '533'
+      DESC_PAIS: Aruba
+      ALFA-3: ABW
+      ALFA-2: AW
+      FECHA_INICIAL: 01/01/1986
+      FECHA_FINAL: null
+    - ID_PAIS: '248'
+      DESC_PAIS: Islas Åland
+      ALFA-3: ALA
+      ALFA-2: AX
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '31'
+      DESC_PAIS: Azerbaiyán
+      ALFA-3: AZE
+      ALFA-2: AZ
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '70'
+      DESC_PAIS: Bosnia y Herzegovina
+      ALFA-3: BIH
+      ALFA-2: BA
+      FECHA_INICIAL: 01/01/1992
+      FECHA_FINAL: null
+    - ID_PAIS: '52'
+      DESC_PAIS: Barbados
+      ALFA-3: BRB
+      ALFA-2: BB
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '50'
+      DESC_PAIS: Bangladesh
+      ALFA-3: BGD
+      ALFA-2: BD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '56'
+      DESC_PAIS: Bélgica
+      ALFA-3: BEL
+      ALFA-2: BE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '854'
+      DESC_PAIS: Burkina Faso
+      ALFA-3: BFA
+      ALFA-2: BF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '100'
+      DESC_PAIS: Bulgaria
+      ALFA-3: BGR
+      ALFA-2: BG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '48'
+      DESC_PAIS: Bahrein
+      ALFA-3: BHR
+      ALFA-2: BH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '108'
+      DESC_PAIS: Burundi
+      ALFA-3: BDI
+      ALFA-2: BI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '204'
+      DESC_PAIS: Benin
+      ALFA-3: BEN
+      ALFA-2: BJ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '652'
+      DESC_PAIS: San Bartolome
+      ALFA-3: BLM
+      ALFA-2: BL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '60'
+      DESC_PAIS: Bermuda
+      ALFA-3: BMU
+      ALFA-2: BM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '68'
+      DESC_PAIS: Bolivia (Estado Plurinacional de)
+      ALFA-3: BOL
+      ALFA-2: BO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '76'
+      DESC_PAIS: Brasil
+      ALFA-3: BRA
+      ALFA-2: BR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '44'
+      DESC_PAIS: Bahamas
+      ALFA-3: BHS
+      ALFA-2: BS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '64'
+      DESC_PAIS: Bután
+      ALFA-3: BTN
+      ALFA-2: BT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '74'
+      DESC_PAIS: Isla Bouvet
+      ALFA-3: BVT
+      ALFA-2: BV
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '72'
+      DESC_PAIS: Botswana
+      ALFA-3: BWA
+      ALFA-2: BW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '112'
+      DESC_PAIS: Belarús
+      ALFA-3: BLR
+      ALFA-2: BY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '84'
+      DESC_PAIS: Belice
+      ALFA-3: BLZ
+      ALFA-2: BZ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '124'
+      DESC_PAIS: Canadá
+      ALFA-3: CAN
+      ALFA-2: CA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '166'
+      DESC_PAIS: Islas Cocos (Keeling)
+      ALFA-3: CCK
+      ALFA-2: CC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '140'
+      DESC_PAIS: República Centroafricana
+      ALFA-3: CAF
+      ALFA-2: CF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '178'
+      DESC_PAIS: Congo
+      ALFA-3: COG
+      ALFA-2: CG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '756'
+      DESC_PAIS: Suiza
+      ALFA-3: CHE
+      ALFA-2: CH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '384'
+      DESC_PAIS: Costa de Marfil
+      ALFA-3: CIV
+      ALFA-2: CI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '184'
+      DESC_PAIS: Islas Cook
+      ALFA-3: COK
+      ALFA-2: CK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '581'
+      DESC_PAIS: Islas menores alejadas de Estados Unidos
+      ALFA-3: UMI
+      ALFA-2: UM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '152'
+      DESC_PAIS: Chile
+      ALFA-3: CHL
+      ALFA-2: CL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '120'
+      DESC_PAIS: Camerún
+      ALFA-3: CMR
+      ALFA-2: CM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '156'
+      DESC_PAIS: China
+      ALFA-3: CHN
+      ALFA-2: CN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '170'
+      DESC_PAIS: Colombia
+      ALFA-3: COL
+      ALFA-2: CO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '188'
+      DESC_PAIS: Costa Rica
+      ALFA-3: CRI
+      ALFA-2: CR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '192'
+      DESC_PAIS: Cuba
+      ALFA-3: CUB
+      ALFA-2: CU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '132'
+      DESC_PAIS: Cabo Verde
+      ALFA-3: CPV
+      ALFA-2: CV
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '162'
+      DESC_PAIS: Isla Christmas
+      ALFA-3: CXR
+      ALFA-2: CX
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '196'
+      DESC_PAIS: Chipre
+      ALFA-3: CYP
+      ALFA-2: CY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '203'
+      DESC_PAIS: Republica Checa
+      ALFA-3: CZE
+      ALFA-2: CZ
+      FECHA_INICIAL: 01/01/1993
+      FECHA_FINAL: null
+    - ID_PAIS: '276'
+      DESC_PAIS: Alemania
+      ALFA-3: DEU
+      ALFA-2: DE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '262'
+      DESC_PAIS: Djibouti
+      ALFA-3: DJI
+      ALFA-2: DJ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '208'
+      DESC_PAIS: Dinamarca
+      ALFA-3: DNK
+      ALFA-2: DK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '212'
+      DESC_PAIS: Dominica
+      ALFA-3: DMA
+      ALFA-2: DM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '214'
+      DESC_PAIS: República Dominicana
+      ALFA-3: DOM
+      ALFA-2: DO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '12'
+      DESC_PAIS: Argelia
+      ALFA-3: DZA
+      ALFA-2: DZ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '218'
+      DESC_PAIS: Ecuador
+      ALFA-3: ECU
+      ALFA-2: EC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '233'
+      DESC_PAIS: Estonia
+      ALFA-3: EST
+      ALFA-2: EE
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '818'
+      DESC_PAIS: Egipto
+      ALFA-3: EGY
+      ALFA-2: EG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '732'
+      DESC_PAIS: Sahara Occidental
+      ALFA-3: ESH
+      ALFA-2: EH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '232'
+      DESC_PAIS: Eritrea
+      ALFA-3: ERI
+      ALFA-2: ER
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '724'
+      DESC_PAIS: España
+      ALFA-3: ESP
+      ALFA-2: ES
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '231'
+      DESC_PAIS: Etiopía
+      ALFA-3: ETH
+      ALFA-2: ET
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '246'
+      DESC_PAIS: Finlandia
+      ALFA-3: FIN
+      ALFA-2: FI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '242'
+      DESC_PAIS: Fiji
+      ALFA-3: FJI
+      ALFA-2: FJ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '238'
+      DESC_PAIS: Islas Malvinas (Falkland)
+      ALFA-3: KLK
+      ALFA-2: FK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '583'
+      DESC_PAIS: Micronesia (Estados Federados de)
+      ALFA-3: FSM
+      ALFA-2: FM
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '234'
+      DESC_PAIS: Islas Feroe
+      ALFA-3: FRO
+      ALFA-2: FO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '250'
+      DESC_PAIS: Francia
+      ALFA-3: FRA
+      ALFA-2: FR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '266'
+      DESC_PAIS: Gabón
+      ALFA-3: GAB
+      ALFA-2: GA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '308'
+      DESC_PAIS: Granada
+      ALFA-3: GRD
+      ALFA-2: GD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '268'
+      DESC_PAIS: Georgia
+      ALFA-3: GEO
+      ALFA-2: GE
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '254'
+      DESC_PAIS: Guayana Francesa
+      ALFA-3: GUF
+      ALFA-2: GF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '831'
+      DESC_PAIS: Guernsey
+      ALFA-3: GGY
+      ALFA-2: GG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '288'
+      DESC_PAIS: Ghana
+      ALFA-3: GHA
+      ALFA-2: GH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '292'
+      DESC_PAIS: Gibraltar
+      ALFA-3: GIB
+      ALFA-2: GI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '304'
+      DESC_PAIS: Groenlandia
+      ALFA-3: GRL
+      ALFA-2: GL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '270'
+      DESC_PAIS: Gambia
+      ALFA-3: GMB
+      ALFA-2: GM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '324'
+      DESC_PAIS: Guinea
+      ALFA-3: GIN
+      ALFA-2: GN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '312'
+      DESC_PAIS: Guadalupe
+      ALFA-3: GLP
+      ALFA-2: GP
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '226'
+      DESC_PAIS: Guinea Ecuatorial
+      ALFA-3: GNQ
+      ALFA-2: GQ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '300'
+      DESC_PAIS: Grecia
+      ALFA-3: GRC
+      ALFA-2: GR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '239'
+      DESC_PAIS: Georgia del Sur y las Islas Sandwich del Sur
+      ALFA-3: SGS
+      ALFA-2: GS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '320'
+      DESC_PAIS: Guatemala
+      ALFA-3: GTM
+      ALFA-2: GT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '316'
+      DESC_PAIS: Guam
+      ALFA-3: GUM
+      ALFA-2: GU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '624'
+      DESC_PAIS: Guinea-Bissau
+      ALFA-3: GNB
+      ALFA-2: GW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '328'
+      DESC_PAIS: Guyana
+      ALFA-3: GUY
+      ALFA-2: GY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '344'
+      DESC_PAIS: Hong Kong
+      ALFA-3: HKG
+      ALFA-2: HK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '334'
+      DESC_PAIS: Islas Heard y McDonald
+      ALFA-3: HMD
+      ALFA-2: HM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '340'
+      DESC_PAIS: Honduras
+      ALFA-3: HND
+      ALFA-2: HN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '191'
+      DESC_PAIS: Croacia
+      ALFA-3: HRV
+      ALFA-2: HR
+      FECHA_INICIAL: 01/01/1992
+      FECHA_FINAL: null
+    - ID_PAIS: '332'
+      DESC_PAIS: Haití
+      ALFA-3: HTI
+      ALFA-2: HT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '348'
+      DESC_PAIS: Hungría
+      ALFA-3: HUN
+      ALFA-2: HU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '360'
+      DESC_PAIS: Indonesia
+      ALFA-3: IDN
+      ALFA-2: ID
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '372'
+      DESC_PAIS: Irlanda
+      ALFA-3: IRL
+      ALFA-2: IE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '376'
+      DESC_PAIS: Israel
+      ALFA-3: ISR
+      ALFA-2: IL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '833'
+      DESC_PAIS: Isla de Man
+      ALFA-3: IMN
+      ALFA-2: IM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '356'
+      DESC_PAIS: India
+      ALFA-3: IND
+      ALFA-2: IN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '86'
+      DESC_PAIS: Territorio Británico del Océano Índico
+      ALFA-3: IOT
+      ALFA-2: IO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '368'
+      DESC_PAIS: Iraq
+      ALFA-3: IRQ
+      ALFA-2: IQ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '364'
+      DESC_PAIS: Irán (República Islámica del)
+      ALFA-3: IRN
+      ALFA-2: IR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '352'
+      DESC_PAIS: Islandia
+      ALFA-3: ISL
+      ALFA-2: IS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '380'
+      DESC_PAIS: Italia
+      ALFA-3: ITA
+      ALFA-2: IT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '832'
+      DESC_PAIS: Jersey
+      ALFA-3: JEY
+      ALFA-2: JE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '388'
+      DESC_PAIS: Jamaica
+      ALFA-3: JAM
+      ALFA-2: JM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '400'
+      DESC_PAIS: Jordania
+      ALFA-3: JOR
+      ALFA-2: JO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '392'
+      DESC_PAIS: Japón
+      ALFA-3: JPN
+      ALFA-2: JP
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '404'
+      DESC_PAIS: Kenya
+      ALFA-3: KEN
+      ALFA-2: KE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '417'
+      DESC_PAIS: Kirguistán
+      ALFA-3: KGZ
+      ALFA-2: KG
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '116'
+      DESC_PAIS: Camboya
+      ALFA-3: KHM
+      ALFA-2: KH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '296'
+      DESC_PAIS: Kiribati
+      ALFA-3: KIR
+      ALFA-2: KI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '174'
+      DESC_PAIS: Comoras
+      ALFA-3: COM
+      ALFA-2: KM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '659'
+      DESC_PAIS: Saint Kitts y Nevis
+      ALFA-3: KNA
+      ALFA-2: KN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '408'
+      DESC_PAIS: República Popular Democrática de Corea
+      ALFA-3: PRK
+      ALFA-2: KP
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '414'
+      DESC_PAIS: Kuwait
+      ALFA-3: KWT
+      ALFA-2: KW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '136'
+      DESC_PAIS: Islas Caimán
+      ALFA-3: CYM
+      ALFA-2: KY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '398'
+      DESC_PAIS: Kazajstán
+      ALFA-3: KAZ
+      ALFA-2: KZ
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '422'
+      DESC_PAIS: Líbano
+      ALFA-3: LBN
+      ALFA-2: LB
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '662'
+      DESC_PAIS: Santa Lucía
+      ALFA-3: LCA
+      ALFA-2: LC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '438'
+      DESC_PAIS: Liechtenstein
+      ALFA-3: LIE
+      ALFA-2: LI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '144'
+      DESC_PAIS: Sri Lanka
+      ALFA-3: LKA
+      ALFA-2: LK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '430'
+      DESC_PAIS: Liberia
+      ALFA-3: LBR
+      ALFA-2: LR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '426'
+      DESC_PAIS: Lesotho
+      ALFA-3: LSO
+      ALFA-2: LS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '440'
+      DESC_PAIS: Lituania
+      ALFA-3: LTU
+      ALFA-2: LT
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '442'
+      DESC_PAIS: Luxemburgo
+      ALFA-3: LUX
+      ALFA-2: LU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '428'
+      DESC_PAIS: Letonia
+      ALFA-3: LVA
+      ALFA-2: LV
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '434'
+      DESC_PAIS: Libia
+      ALFA-3: LBY
+      ALFA-2: LY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '504'
+      DESC_PAIS: Marruecos
+      ALFA-3: MAR
+      ALFA-2: MA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '492'
+      DESC_PAIS: Mónaco
+      ALFA-3: MCO
+      ALFA-2: MC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '498'
+      DESC_PAIS: República de Moldova
+      ALFA-3: MDA
+      ALFA-2: MD
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '499'
+      DESC_PAIS: Montenegro
+      ALFA-3: MNE
+      ALFA-2: ME
+      FECHA_INICIAL: 03/06/2006
+      FECHA_FINAL: null
+    - ID_PAIS: '450'
+      DESC_PAIS: Madagascar
+      ALFA-3: MDG
+      ALFA-2: MG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '584'
+      DESC_PAIS: Islas Marshall
+      ALFA-3: MHL
+      ALFA-2: MH
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '807'
+      DESC_PAIS: Macedonia del Norte
+      ALFA-3: MKD
+      ALFA-2: MK
+      FECHA_INICIAL: 01/01/1992
+      FECHA_FINAL: null
+    - ID_PAIS: '466'
+      DESC_PAIS: Malí
+      ALFA-3: MLI
+      ALFA-2: ML
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '104'
+      DESC_PAIS: Myanmar
+      ALFA-3: MMR
+      ALFA-2: MM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '496'
+      DESC_PAIS: Mongolia
+      ALFA-3: MNG
+      ALFA-2: MN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '446'
+      DESC_PAIS: Macao
+      ALFA-3: MAC
+      ALFA-2: MO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '474'
+      DESC_PAIS: Martinica
+      ALFA-3: MTQ
+      ALFA-2: MQ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '478'
+      DESC_PAIS: Mauritania
+      ALFA-3: MRT
+      ALFA-2: MR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '500'
+      DESC_PAIS: Montserrat
+      ALFA-3: MSR
+      ALFA-2: MS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '470'
+      DESC_PAIS: Malta
+      ALFA-3: MLT
+      ALFA-2: MT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '480'
+      DESC_PAIS: Mauricio
+      ALFA-3: MUS
+      ALFA-2: MU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '462'
+      DESC_PAIS: Maldivas
+      ALFA-3: MDV
+      ALFA-2: MV
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '454'
+      DESC_PAIS: Malawi
+      ALFA-3: MWI
+      ALFA-2: MW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '484'
+      DESC_PAIS: México
+      ALFA-3: MEX
+      ALFA-2: MX
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '508'
+      DESC_PAIS: Mozambique
+      ALFA-3: MOZ
+      ALFA-2: MZ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '580'
+      DESC_PAIS: Islas Marianas Septentrionales
+      ALFA-3: MNP
+      ALFA-2: MP
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '540'
+      DESC_PAIS: Nueva Caledonia
+      ALFA-3: NCL
+      ALFA-2: NC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '574'
+      DESC_PAIS: Isla Norfolk
+      ALFA-3: NFK
+      ALFA-2: NF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '566'
+      DESC_PAIS: Nigeria
+      ALFA-3: NGA
+      ALFA-2: NG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '528'
+      DESC_PAIS: Países Bajos
+      ALFA-3: NLD
+      ALFA-2: NL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '578'
+      DESC_PAIS: Noruega
+      ALFA-3: NOR
+      ALFA-2: 'NO'
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '520'
+      DESC_PAIS: Nauru
+      ALFA-3: NRU
+      ALFA-2: NR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '554'
+      DESC_PAIS: Nueva Zelanda
+      ALFA-3: NZL
+      ALFA-2: NZ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '591'
+      DESC_PAIS: Panamá
+      ALFA-3: PAN
+      ALFA-2: PA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '258'
+      DESC_PAIS: Polinesia Francesa
+      ALFA-3: PYF
+      ALFA-2: PF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '598'
+      DESC_PAIS: Papúa Nueva Guinea
+      ALFA-3: PNG
+      ALFA-2: PG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '586'
+      DESC_PAIS: Pakistán
+      ALFA-3: PAK
+      ALFA-2: PK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '616'
+      DESC_PAIS: Polonia
+      ALFA-3: POL
+      ALFA-2: PL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '612'
+      DESC_PAIS: Pitcairn
+      ALFA-3: PCN
+      ALFA-2: PN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '630'
+      DESC_PAIS: Puerto Rico
+      ALFA-3: PRI
+      ALFA-2: PR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '275'
+      DESC_PAIS: Estado de Palestina
+      ALFA-3: PSE
+      ALFA-2: PS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '585'
+      DESC_PAIS: Palau
+      ALFA-3: PLW
+      ALFA-2: PW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '600'
+      DESC_PAIS: Paraguay
+      ALFA-3: PRY
+      ALFA-2: PY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '638'
+      DESC_PAIS: Reunión
+      ALFA-3: REU
+      ALFA-2: RE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '688'
+      DESC_PAIS: Serbia
+      ALFA-3: SRB
+      ALFA-2: RS
+      FECHA_INICIAL: 03/06/2006
+      FECHA_FINAL: null
+    - ID_PAIS: '643'
+      DESC_PAIS: Federación de Rusia
+      ALFA-3: RUS
+      ALFA-2: RU
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '682'
+      DESC_PAIS: Arabia Saudita
+      ALFA-3: SAU
+      ALFA-2: SA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '690'
+      DESC_PAIS: Seychelles
+      ALFA-3: SYC
+      ALFA-2: SC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '736'
+      DESC_PAIS: SUDÁN
+      ALFA-3: SDN
+      ALFA-2: SD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 09/07/2011
+    - ID_PAIS: '702'
+      DESC_PAIS: Singapur
+      ALFA-3: SGP
+      ALFA-2: SG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '654'
+      DESC_PAIS: Santa Elena
+      ALFA-3: SHN
+      ALFA-2: SH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '744'
+      DESC_PAIS: Islas Svalbard y Jan Mayen
+      ALFA-3: SJM
+      ALFA-2: SJ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '703'
+      DESC_PAIS: Eslovaquia
+      ALFA-3: SVK
+      ALFA-2: SK
+      FECHA_INICIAL: 01/01/1993
+      FECHA_FINAL: null
+    - ID_PAIS: '674'
+      DESC_PAIS: San Marino
+      ALFA-3: SMR
+      ALFA-2: SM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '686'
+      DESC_PAIS: Senegal
+      ALFA-3: SEN
+      ALFA-2: SN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '740'
+      DESC_PAIS: Surinam
+      ALFA-3: SUR
+      ALFA-2: SR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '678'
+      DESC_PAIS: Santo Tomé y Príncipe
+      ALFA-3: STP
+      ALFA-2: ST
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '760'
+      DESC_PAIS: República Árabe Siria
+      ALFA-3: SYR
+      ALFA-2: SY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '748'
+      DESC_PAIS: Eswatini
+      ALFA-3: SWZ
+      ALFA-2: SZ
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '148'
+      DESC_PAIS: Chad
+      ALFA-3: TCD
+      ALFA-2: TD
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '768'
+      DESC_PAIS: Togo
+      ALFA-3: TGO
+      ALFA-2: TG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '834'
+      DESC_PAIS: República Unida de Tanzanía
+      ALFA-3: TZA
+      ALFA-2: TH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '762'
+      DESC_PAIS: Tayikistán
+      ALFA-3: TJK
+      ALFA-2: TJ
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '626'
+      DESC_PAIS: Timor-Leste
+      ALFA-3: TLS
+      ALFA-2: TL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '795'
+      DESC_PAIS: Turkmenistán
+      ALFA-3: TKM
+      ALFA-2: TM
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '776'
+      DESC_PAIS: Tonga
+      ALFA-3: TON
+      ALFA-2: TO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '780'
+      DESC_PAIS: Trinidad y Tobago
+      ALFA-3: TTO
+      ALFA-2: TT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '798'
+      DESC_PAIS: Tuvalu
+      ALFA-3: TUV
+      ALFA-2: TV
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '804'
+      DESC_PAIS: Ucrania
+      ALFA-3: UKR
+      ALFA-2: UA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '840'
+      DESC_PAIS: Estados Unidos de América
+      ALFA-3: USA
+      ALFA-2: US
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '860'
+      DESC_PAIS: Uzbekistán
+      ALFA-3: UZB
+      ALFA-2: UZ
+      FECHA_INICIAL: 01/01/1991
+      FECHA_FINAL: null
+    - ID_PAIS: '336'
+      DESC_PAIS: Santa Sede
+      ALFA-3: VAT
+      ALFA-2: VA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '862'
+      DESC_PAIS: Venezuela (República Bolivariana de)
+      ALFA-3: VEN
+      ALFA-2: VE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '92'
+      DESC_PAIS: Islas Vírgenes Británicas
+      ALFA-3: VGB
+      ALFA-2: VG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '850'
+      DESC_PAIS: Islas Vírgenes de los Estados Unidos
+      ALFA-3: VIR
+      ALFA-2: VI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '704'
+      DESC_PAIS: Viet Nam
+      ALFA-3: VNM
+      ALFA-2: VN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '882'
+      DESC_PAIS: Samoa
+      ALFA-3: WSM
+      ALFA-2: WS
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '175'
+      DESC_PAIS: Mayotte
+      ALFA-3: MYT
+      ALFA-2: YT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '534'
+      DESC_PAIS: San Martín (parte Holandesa)
+      ALFA-3: SXM
+      ALFA-2: SX
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '894'
+      DESC_PAIS: Zambia
+      ALFA-3: ZMB
+      ALFA-2: ZM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '716'
+      DESC_PAIS: Zimbabwe
+      ALFA-3: ZWE
+      ALFA-2: ZW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '729'
+      DESC_PAIS: Sudán
+      ALFA-3: SDN
+      ALFA-2: SD
+      FECHA_INICIAL: 09/07/2011
+      FECHA_FINAL: null
+    - ID_PAIS: '96'
+      DESC_PAIS: Brunei Darussalam
+      ALFA-3: BRN
+      ALFA-2: BN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '260'
+      DESC_PAIS: Territorio de las Tierras Australes Francesas
+      ALFA-3: ATF
+      ALFA-2: TF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '410'
+      DESC_PAIS: República de Corea
+      ALFA-3: KOR
+      ALFA-2: KR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '418'
+      DESC_PAIS: República Democrática Popular Lao
+      ALFA-3: LAO
+      ALFA-2: LA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '826'
+      DESC_PAIS: Reino Unido de Gran Bretaña e Irlanda del Norte
+      ALFA-3: GBR
+      ALFA-2: GB
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '876'
+      DESC_PAIS: Islas Wallis y Futuna
+      ALFA-3: WLF
+      ALFA-2: WF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '458'
+      DESC_PAIS: Malasia
+      ALFA-3: MYS
+      ALFA-2: MY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '516'
+      DESC_PAIS: Namibia
+      ALFA-3: NAM
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '562'
+      DESC_PAIS: Níger
+      ALFA-3: NER
+      ALFA-2: NE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '558'
+      DESC_PAIS: Nicaragua
+      ALFA-3: NIC
+      ALFA-2: NI
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '524'
+      DESC_PAIS: Nepal
+      ALFA-3: NPL
+      ALFA-2: NP
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '570'
+      DESC_PAIS: Niue
+      ALFA-3: NIU
+      ALFA-2: NU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '512'
+      DESC_PAIS: Omán
+      ALFA-3: OMN
+      ALFA-2: OM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '604'
+      DESC_PAIS: Perú
+      ALFA-3: PER
+      ALFA-2: PE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '608'
+      DESC_PAIS: Filipinas
+      ALFA-3: PHL
+      ALFA-2: PH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '666'
+      DESC_PAIS: San Pedro y Miquelón
+      ALFA-3: SPM
+      ALFA-2: PM
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '620'
+      DESC_PAIS: Portugal
+      ALFA-3: PRT
+      ALFA-2: PT
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '634'
+      DESC_PAIS: Qatar
+      ALFA-3: QAT
+      ALFA-2: QA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '642'
+      DESC_PAIS: Rumania
+      ALFA-3: ROU
+      ALFA-2: RO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '646'
+      DESC_PAIS: Ruanda
+      ALFA-3: RWA
+      ALFA-2: RW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '90'
+      DESC_PAIS: Islas Salomón
+      ALFA-3: SLB
+      ALFA-2: SB
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '752'
+      DESC_PAIS: Suecia
+      ALFA-3: SWE
+      ALFA-2: SE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '705'
+      DESC_PAIS: Eslovenia
+      ALFA-3: SVN
+      ALFA-2: SI
+      FECHA_INICIAL: 01/01/1992
+      FECHA_FINAL: null
+    - ID_PAIS: '694'
+      DESC_PAIS: Sierra Leona
+      ALFA-3: SLE
+      ALFA-2: SL
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '706'
+      DESC_PAIS: Somalia
+      ALFA-3: SOM
+      ALFA-2: SO
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '222'
+      DESC_PAIS: El Salvador
+      ALFA-3: SLV
+      ALFA-2: SV
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '796'
+      DESC_PAIS: Islas Turcas y Caicos
+      ALFA-3: TCA
+      ALFA-2: TC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '764'
+      DESC_PAIS: Tailandia
+      ALFA-3: THA
+      ALFA-2: TH
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '772'
+      DESC_PAIS: Tokelau
+      ALFA-3: TKL
+      ALFA-2: TK
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '788'
+      DESC_PAIS: Túnez
+      ALFA-3: TUN
+      ALFA-2: TN
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '792'
+      DESC_PAIS: Turquía
+      ALFA-3: TUR
+      ALFA-2: TR
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '158'
+      DESC_PAIS: Taiwán (Provincia de China)
+      ALFA-3: TWN
+      ALFA-2: TW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 25/10/1971
+    - ID_PAIS: '800'
+      DESC_PAIS: Uganda
+      ALFA-3: UGA
+      ALFA-2: UG
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '858'
+      DESC_PAIS: Uruguay
+      ALFA-3: URY
+      ALFA-2: UY
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '670'
+      DESC_PAIS: San Vicente y las Granadinas
+      ALFA-3: VCT
+      ALFA-2: VC
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '548'
+      DESC_PAIS: Vanuatu
+      ALFA-3: VUT
+      ALFA-2: VU
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '887'
+      DESC_PAIS: Yemen
+      ALFA-3: YEM
+      ALFA-2: YE
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '710'
+      DESC_PAIS: Sudáfrica
+      ALFA-3: ZAF
+      ALFA-2: ZA
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '728'
+      DESC_PAIS: Sudán del Sur
+      ALFA-3: SSD
+      ALFA-2: SS
+      FECHA_INICIAL: 09/07/2011
+      FECHA_FINAL: null
+    - ID_PAIS: '0'
+      DESC_PAIS: Sin información
+      ALFA-3: null
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '87'
+      DESC_PAIS: BELGICA
+      ALFA-3: BEL
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '573'
+      DESC_PAIS: HOLANDA
+      ALFA-3: HOL
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '200'
+      DESC_PAIS: CHECOSLOVAQUIA
+      ALFA-3: CHE
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 01/01/1993
+    - ID_PAIS: '891'
+      DESC_PAIS: Yugoslavia - Serbia y Montenegro
+      ALFA-3: YUG
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 03/06/2006
+    - ID_PAIS: '903'
+      DESC_PAIS: ESCOCIA
+      ALFA-3: ESC
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '906'
+      DESC_PAIS: INGLATERRA
+      ALFA-3: ING
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '901'
+      DESC_PAIS: GRAN BRETAÑA
+      ALFA-3: GRB
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '905'
+      DESC_PAIS: COREA
+      ALFA-3: COR
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '908'
+      DESC_PAIS: UNION SOVIETICA
+      ALFA-3: UNI
+      ALFA-2: null
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_PAIS: '531'
+      DESC_PAIS: Curazao
+      ALFA-3: CUW
+      ALFA-2: CW
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023
+    - ID_PAIS: '663'
+      DESC_PAIS: San Martín (parte francesa)
+      ALFA-3: MAF
+      ALFA-2: MF
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: 30/06/2023

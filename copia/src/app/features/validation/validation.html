@@ -1,0 +1,195 @@
+<div class="validation-page">
+
+  <!-- Encabezado -->
+  <div class="page-heading">
+
+    <div>
+      <h2>Validación de archivos</h2>
+
+      <p>
+        Comprueba la calidad y consistencia de la información
+        contenida en los archivos SNIES.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Información -->
+  <div class="alert alert-info d-flex align-items-start gap-2">
+
+    <i class="bi bi-info-circle mt-1"></i>
+
+    <div>
+      <strong>Información del proceso</strong>
+
+      <p class="mb-0 mt-1">
+        Selecciona los archivos Excel diligenciados que deseas validar.
+        El sistema identificará errores y advertencias.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Selección de archivos -->
+  <div class="card upload-card">
+
+    <div class="card-body">
+
+      <div class="upload-heading">
+
+        <i class="bi bi-file-earmark-check"></i>
+
+        <h5>Seleccionar archivos para validar</h5>
+
+        <p>
+          Puedes seleccionar uno o varios archivos Excel.
+        </p>
+
+      </div>
+
+      <label class="upload-area" for="validationFiles">
+
+        <i class="bi bi-cloud-arrow-up upload-icon"></i>
+
+        <span class="upload-title">
+          Selecciona los archivos que deseas validar
+        </span>
+
+        <span class="upload-description">
+          Haz clic aquí para buscar archivos en tu equipo.
+        </span>
+
+        <span class="upload-format">
+          Formato permitido: .xlsx
+        </span>
+
+        <span class="btn btn-outline-success mt-3">
+          <i class="bi bi-folder2-open me-2"></i>
+          Buscar archivos
+        </span>
+
+      </label>
+
+      <input
+        id="validationFiles"
+        type="file"
+        accept=".xlsx"
+        multiple
+        hidden
+        (change)="onFilesSelected($event)"
+      />
+
+      @if (errorMessage) {
+        <div class="alert alert-danger mt-3 mb-0">
+          <i class="bi bi-exclamation-circle me-2"></i>
+          {{ errorMessage }}
+        </div>
+      }
+
+    </div>
+
+  </div>
+
+  <!-- Archivos seleccionados -->
+  <div class="card files-card mt-4">
+
+    <div class="card-header">
+
+      <div>
+        <h5>Archivos seleccionados</h5>
+
+        <span>
+          Archivos preparados para la validación
+        </span>
+      </div>
+
+      <span class="badge text-bg-secondary">
+        {{ selectedFiles.length }} archivos
+      </span>
+
+    </div>
+
+    <div class="card-body">
+
+      @if (selectedFiles.length === 0) {
+
+        <div class="empty-files">
+
+          <i class="bi bi-inbox"></i>
+
+          <h6>No hay archivos seleccionados</h6>
+
+          <p>
+            Los archivos que selecciones aparecerán aquí.
+          </p>
+
+        </div>
+
+      } @else {
+
+        <div class="file-list">
+
+          @for (file of selectedFiles; track file.name + file.lastModified) {
+
+            <div class="file-item">
+
+              <div class="file-information">
+
+                <div class="file-icon">
+                  <i class="bi bi-file-earmark-excel"></i>
+                </div>
+
+                <div class="file-details">
+
+                  <span class="file-name">
+                    {{ file.name }}
+                  </span>
+
+                  <span class="file-size">
+                    {{ (file.size / 1024 / 1024).toFixed(2) }} MB
+                  </span>
+
+                </div>
+
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                title="Eliminar archivo"
+                (click)="removeFile($index)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+  <!-- Acción principal -->
+  <div class="validation-actions">
+
+    <button
+      type="button"
+      class="btn btn-success"
+      [disabled]="selectedFiles.length === 0"
+      (click)="validateFiles()"
+    >
+
+      <i class="bi bi-shield-check me-2"></i>
+
+      Validar archivos
+
+    </button>
+
+  </div>
+
+</div>
