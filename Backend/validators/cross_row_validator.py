@@ -1,17 +1,12 @@
-"""Reglas que comparan valores ENTRE filas distintas.
 
-Esto es precisamente lo que la validación nativa de Excel no puede hacer
-(una `DataValidation` solo ve la celda que se está editando), y por eso
-en `rules/patterns/business_rules.yaml` estas reglas están marcadas como
-`cross_row_consistency_note`: quedan documentadas en la plantilla, pero
-se aplican de verdad aquí, con Python, que sí puede recorrer toda la
-columna.
-"""
+"""Reglas que comparan valores ENTRE filas distintas."""
 
 from __future__ import annotations
 
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import date, datetime
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 
@@ -23,6 +18,64 @@ class CrossRowIssue:
     severity: str = "error"
 
 
+def _is_blank(value: Any) -> bool:
+    """Determina si un valor está vacío."""
+    return value is None or (
+        isinstance(value, str) and value.strip() == ""
+    )
+
+
+def _normalize_value(value: Any) -> tuple[str, Any]:
+    """
+    Normaliza valores para compararlos según su significado.
+
+    - Vacíos: se representan como una misma categoría.
+    - Fechas: se convierten a fecha ISO.
+    - Números: se comparan mediante Decimal.
+    - Textos: se eliminan espacios externos.
+    """
+    if _is_blank(value):
+        return ("blank", "")
+
+    if isinstance(value, datetime):
+        return ("date", value.date().isoformat())
+
+    if isinstance(value, date):
+        return ("date", value.isoformat())
+
+    if isinstance(value, bool):
+        return ("boolean", value)
+
+    if isinstance(value, (int, float, Decimal)):
+        try:
+            number = Decimal(str(value))
+            return ("number", number.normalize())
+        except InvalidOperation:
+            pass
+
+    if isinstance(value, str):
+        text = value.strip()
+
+        # Normalización de fechas con formatos habituales.
+        for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%m-%Y"):
+            try:
+                parsed = datetime.strptime(text, fmt).date()
+                return ("date", parsed.isoformat())
+            except ValueError:
+                continue
+
+        # Normalización de números escritos como texto.
+        try:
+            number = Decimal(text.replace(",", ""))
+            return ("number", number.normalize())
+        except InvalidOperation:
+            pass
+
+        return ("text", text)
+
+    return ("other", str(value).strip())
+
+
 def check_uniqueness(
     column_name: str,
     rows: list[dict[str, Any]],
@@ -30,22 +83,37 @@ def check_uniqueness(
     severity: str = "warning",
     message_template: str | None = None,
 ) -> list[CrossRowIssue]:
-    """Genera una alerta cuando un valor se repite en una columna que debería
-    identificar de forma única cada fila de la hoja."""
+    """Genera una alerta cuando un valor se repite en una columna."""
     issues: list[CrossRowIssue] = []
     seen: dict[str, list[int]] = defaultdict(list)
+
     for i, row in enumerate(rows):
         value = row.get(column_name)
-        if value is None or str(value).strip() == "":
+
+        if _is_blank(value):
             continue
+
         seen[str(value).strip()].append(i)
 
     for value, indices in seen.items():
         if len(indices) < 2:
             continue
+
         for i in indices:
-            msg = message_template or f"'{value}' está repetido en '{column_name}' ({len(indices)} filas)."
-            issues.append(CrossRowIssue(row=row_numbers[i], column_name=column_name, message=msg, severity=severity))
+            msg = (
+                message_template
+                or f"'{value}' está repetido en '{column_name}' "
+                   f"({len(indices)} filas)."
+            )
+
+            issues.append(
+                CrossRowIssue(
+                    row=row_numbers[i],
+                    column_name=column_name,
+                    message=msg,
+                    severity=severity,
+                )
+            )
 
     return issues
 
@@ -57,60 +125,42 @@ def check_code_consistency(
     row_numbers: list[int],
     group_by: str | None = None,
 ) -> list[CrossRowIssue]:
-    """Para un mismo valor de `code_column` (+ `group_by` si se indica), las
-    columnas en `check_columns` deben coincidir entre filas del grupo.
+    """
+    Verifica que las columnas configuradas mantengan los mismos valores
+    para cada código y, opcionalmente, grupo adicional.
 
-    Solo se comparan las columnas explícitamente listadas — nunca "todas
-    las columnas de la hoja" — para no generar falsos positivos en hojas
-    donde es normal que otras columnas varíen dentro del mismo grupo (ej.
-    varias personas bajo el mismo código en una hoja de recurso humano).
+    Los valores vacíos también se comparan: vacío y diligenciado
+    representan valores diferentes.
     """
     issues: list[CrossRowIssue] = []
 
     groups: dict[Any, list[int]] = defaultdict(list)
+
     for i, row in enumerate(rows):
         code_value = row.get(code_column)
-        if code_value is None or str(code_value).strip() == "":
+
+        if _is_blank(code_value):
             continue
 
         key: Any = str(code_value).strip()
+
         if group_by:
             secondary = row.get(group_by)
-            key = (key, str(secondary).strip() if secondary is not None else "")
+            secondary_key = (
+                "" if _is_blank(secondary)
+                else str(secondary).strip()
+            )
+            key = (key, secondary_key)
+
         groups[key].append(i)
 
     for key, indices in groups.items():
         if len(indices) < 2:
             continue
 
-        for col in check_columns:
+        for column in check_columns:
             distinct_values = {
-                "" if rows[i].get(col) is None else str(rows[i].get(col)).strip()
-                for i in indices
-            }
-
-            if len(distinct_values) > 1:
-                displayed_values = sorted(
-                    "(vacío)" if value == "" else value
-                    for value in distinct_values
-                )
-
-                for i in indices:
-                    issues.append(
-                        CrossRowIssue(
-                            row=row_numbers[i],
-                            column_name=col,
-                            message=(
-                                f"Inconsistencia: filas con {code_column}='{key}' "
-                                f"tienen valores distintos en '{col}': "
-                                f"{displayed_values}."
-                            ),
-                        )
-                    )
-            # None se convierte en cadena vacía; los textos se limpian con strip().
-            # Así, vacío y valor informado se consideran diferentes.
-            distinct_values = {
-                "" if rows[i].get(col) is None else str(rows[i].get(col)).strip()
+                _normalize_value(rows[i].get(column))
                 for i in indices
             }
 
@@ -118,17 +168,18 @@ def check_code_consistency(
                 continue
 
             displayed_values = sorted(
-                "(vacío)" if value == "" else value
-                for value in distinct_values
+                "(vacío)" if kind == "blank" else str(value)
+                for kind, value in distinct_values
             )
+
             for i in indices:
                 issues.append(
                     CrossRowIssue(
                         row=row_numbers[i],
-                        column_name=col,
+                        column_name=column,
                         message=(
                             f"Inconsistencia: filas con {code_column}='{key}' "
-                            f"tienen valores distintos en '{col}': "
+                            f"tienen valores distintos en '{column}': "
                             f"{displayed_values}."
                         ),
                     )

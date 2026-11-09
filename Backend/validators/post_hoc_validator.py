@@ -12,18 +12,28 @@ from dataclasses import dataclass, field
 from openpyxl.workbook.workbook import Workbook
 
 from excel_io.reader import iter_data_sheets, read_headers
+
 from rules.config_loader import (
     load_rule_configuration,
     resolve_business_rule,
     get_global_business_rules,
 )
+
 from rules.interpreter import interpret_comment
 from rules.models import ValidationRule
+
+
 from validators.cross_row_validator import (
     check_code_consistency,
     check_uniqueness,
 )
-from validators.row_validator import validate_business_rule, validate_cell
+
+from validators.cross_sheet_validator import validate_sheet_references
+
+from validators.row_validator import (
+    validate_business_rule,
+    validate_cell,
+)
 
 
 HEADER_ROW = 1
@@ -115,7 +125,8 @@ def _conditional_requirement_applies(
     """Retorna True/False si hay condición configurada; None si no existe."""
 
     conditional_rules = rules.get(
-        "conditional_required_fields", {}
+        "conditional_required_fields",
+        {}
     )
 
     sheet_rules = conditional_rules.get(sheet_name, {})
@@ -135,14 +146,22 @@ def validate_workbook(
 ) -> list[SheetValidationResult]:
     """Valida todas las hojas de datos de un libro de Excel."""
 
+    # ---------------------------------------------------------
+    # 1. Cargar configuración y detectar plantilla.
+    # ---------------------------------------------------------
+
     configuration = load_rule_configuration()
 
     business_rules = configuration.business_rules
     global_business_rules = get_global_business_rules(configuration)
 
+
     results: list[SheetValidationResult] = []
 
-    # Recorrer cada hoja de datos del libro.
+    # ---------------------------------------------------------
+    # 2. Recorrer las hojas de datos.
+    # ---------------------------------------------------------
+
     for ws in iter_data_sheets(workbook):
 
         headers = read_headers(ws)
@@ -179,7 +198,10 @@ def validate_workbook(
 
         result.columns_needing_review = columns_needing_review
 
+        # ---------------------------------------------------------
         # Recopilar las filas como diccionarios.
+        # ---------------------------------------------------------
+
         row_dicts: list[dict[str, object]] = []
         row_numbers: list[int] = []
 
@@ -208,8 +230,9 @@ def validate_workbook(
             row_numbers.append(row_idx)
 
         # ---------------------------------------------------------
-        # 1. Validaciones por celda y reglas de negocio por fila.
+        # 3. Validaciones por celda y reglas de negocio por fila.
         # ---------------------------------------------------------
+
         for row_values, row_idx in zip(row_dicts, row_numbers):
 
             for col_name, value in row_values.items():
@@ -217,8 +240,7 @@ def validate_workbook(
                 # Obtener la regla interpretada desde el comentario.
                 rule = rules_by_column[col_name]
 
-                # Evaluar si existe una condición de obligatoriedad
-                # configurada para esta columna.
+                # Evaluar si existe una condición de obligatoriedad.
                 conditional_applies = (
                     _conditional_requirement_applies(
                         business_rules,
@@ -284,8 +306,9 @@ def validate_workbook(
                         )
 
         # ---------------------------------------------------------
-        # 2. Consistencia entre filas.
+        # 4. Consistencia entre filas.
         # ---------------------------------------------------------
+
         for col_name, biz in global_business_rules.items():
 
             if biz.get("kind") != "cross_row_consistency_note":
@@ -338,8 +361,9 @@ def validate_workbook(
                 )
 
         # ---------------------------------------------------------
-        # 3. Reglas de unicidad específicas de cada hoja.
+        # 5. Reglas de unicidad específicas de cada hoja.
         # ---------------------------------------------------------
+
         for col_name in column_letter_by_name:
 
             cfg = resolve_business_rule(
@@ -378,5 +402,36 @@ def validate_workbook(
 
         # Guardar el resultado de esta hoja.
         results.append(result)
+
+        # ---------------------------------------------------------
+    # 6. Validaciones referenciales entre hojas disponibles.
+    # ---------------------------------------------------------
+
+    reference_issues = validate_sheet_references(workbook)
+
+    for issue in reference_issues:
+
+        target = next(
+            (
+                result
+                for result in results
+                if result.sheet_name == issue["sheet"]
+            ),
+            None,
+        )
+
+        if target is None:
+            continue
+
+        target.issues.append(
+            RowIssue(
+                sheet=issue["sheet"],
+                row=issue["row"],
+                column_name=issue["column_name"],
+                value=issue["value"],
+                message=issue["message"],
+                severity=issue["severity"],
+            )
+        )
 
     return results

@@ -1,4 +1,0 @@
-# On Python 3.15 for Windows, set PYYAML_FORCE_LIBYAML=0 before installing
-# to skip PyYAML's optional C extension when Microsoft C++ Build Tools are absent.
-openpyxl==3.1.5
-pyyaml==6.0.3

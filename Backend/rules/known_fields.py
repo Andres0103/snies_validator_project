@@ -68,11 +68,27 @@ def apply_known_field_fallback(rule: ValidationRule) -> ValidationRule:
         ]
 
     return rule
+
 def apply_known_field_overrides(rule: ValidationRule) -> ValidationRule:
     """Aplica reglas autoritativas del manual que prevalecen sobre el comentario."""
+
     if rule.column_name == "DESCRIPCION_CONSULTORIA":
         rule.datatype = DataType.ALPHANUMERIC
         rule.max_length = 200
         rule.required = True
+
+    elif rule.column_name == "ID_SECTOR_CONSULTORIA":
+        # El campo contiene códigos enteros del 1 al 8.
+        # Aunque el comentario de la plantilla diga "numérico",
+        # no debe aceptar valores decimales.
+        rule.datatype = DataType.INTEGER
+        rule.max_length = 2
+        rule.required = True
+
+    elif rule.column_name == "ID_FUENTE_NACIONAL":
+    # Código opcional de fuente de financiación nacional.
+    # Solo admite números enteros de dos caracteres como máximo.
+        rule.datatype = DataType.INTEGER
+        rule.max_length = 2
 
     return rule

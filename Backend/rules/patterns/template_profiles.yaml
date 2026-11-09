@@ -1,0 +1,177 @@
+
+version: "2026.1"
+
+templates:
+
+  CONSULTORIA:
+    main_sheet: CONSULTORIA
+
+    sheets:
+      - CONSULTORIA
+      - CONSULTORIA_REC_HUMANO
+
+    record_key:
+      - CODIGO_CONSULTORIA
+
+    references:
+      - child_sheet: CONSULTORIA_REC_HUMANO
+        parent_sheet: CONSULTORIA
+        key:
+          - AÑO
+          - SEMESTRE
+          - CODIGO_CONSULTORIA
+
+  SERVICIOS_EXTENSION:
+    main_sheet: SERVICIOS_EXTENSION
+
+    sheets:
+      - SERVICIOS_EXTENSION
+      - SERV_EXT_AREA_TRABAJO
+      - SERV_EXT_CICLO_VITAL
+      - SERV_EXT_ENTIDAD_NACIONAL
+      - SERV_EXT_FUENTE_INTERNACIONAL
+      - SERV_EXT_FUENTE_NACIONAL
+      - SERV_EXT_OTRAS_ENTIDADES
+      - SERV_EXT_POBL_CONDICION
+      - SERV_EXT_POBL_GRUPO
+
+    record_key:
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_SERVICIO
+
+    references:
+      - child_sheet: SERV_EXT_AREA_TRABAJO
+        parent_sheet: SERVICIOS_EXTENSION
+        key: &servicio_key
+          - AÑO
+          - SEMESTRE
+          - CODIGO_UNIDAD_ORGANIZACIONAL
+          - CODIGO_SERVICIO
+
+      - child_sheet: SERV_EXT_CICLO_VITAL
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_ENTIDAD_NACIONAL
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_FUENTE_INTERNACIONAL
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_FUENTE_NACIONAL
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_OTRAS_ENTIDADES
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_POBL_CONDICION
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+      - child_sheet: SERV_EXT_POBL_GRUPO
+        parent_sheet: SERVICIOS_EXTENSION
+        key: *servicio_key
+
+  ACTIVIDAD_CULTURAL:
+    main_sheet: ACTIVIDAD_CULTURAL
+
+    sheets:
+      - ACTIVIDAD_CULTURAL
+      - ACT_CULTURAL_REC_HUMANO
+
+    record_key:
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_ACTIVIDAD
+
+    references:
+      - child_sheet: ACT_CULTURAL_REC_HUMANO
+        parent_sheet: ACTIVIDAD_CULTURAL
+        key:
+          - AÑO
+          - SEMESTRE
+          - CODIGO_UNIDAD_ORGANIZACIONAL
+          - CODIGO_ACTIVIDAD
+
+  EVENTO_CULTURAL:
+    main_sheet: EVENTO_CULTURAL
+
+    sheets:
+      - EVENTO_CULTURAL
+      - EVENTO_CULT_REC_HUMANO
+      - EVENTO_CULT_BENEFICIARIOS
+
+    record_key:
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_EVENTO
+
+    references:
+      - child_sheet: EVENTO_CULT_REC_HUMANO
+        parent_sheet: EVENTO_CULTURAL
+        key: &evento_key
+          - AÑO
+          - SEMESTRE
+          - CODIGO_UNIDAD_ORGANIZACIONAL
+          - CODIGO_EVENTO
+
+      - child_sheet: EVENTO_CULT_BENEFICIARIOS
+        parent_sheet: EVENTO_CULTURAL
+        key: *evento_key
+
+  PROYECTOS_EXTENSION:
+    main_sheet: PROYECTOS_EXTENSION
+
+    sheets:
+      - PROYECTOS_EXTENSION
+      - PROY_EXT_AREA_TRABAJO
+      - PROY_EXT_CICLO_VITAL
+      - PROY_EXT_ENTIDAD_NACIONAL
+      - PROY_EXT_FUENTE_INTERNACIONAL
+      - PROY_EXT_FUENTE_NACIONAL
+      - PROY_EXT_OTRAS_ENTIDADES
+      - PROY_EXT_POBL_CONDICION
+      - PROY_EXT_POBL_GRUPO
+
+    record_key:
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_PROYECTO
+
+    references:
+      - child_sheet: PROY_EXT_AREA_TRABAJO
+        parent_sheet: PROYECTOS_EXTENSION
+        key: &proyecto_key
+          - AÑO
+          - SEMESTRE
+          - CODIGO_UNIDAD_ORGANIZACIONAL
+          - CODIGO_PROYECTO
+
+      - child_sheet: PROY_EXT_CICLO_VITAL
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_ENTIDAD_NACIONAL
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_FUENTE_INTERNACIONAL
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_FUENTE_NACIONAL
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_OTRAS_ENTIDADES
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_POBL_CONDICION
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
+
+      - child_sheet: PROY_EXT_POBL_GRUPO
+        parent_sheet: PROYECTOS_EXTENSION
+        key: *proyecto_key
