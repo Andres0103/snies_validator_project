@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from rules.models import AllowedValue, ValidationRule
+from backend.rules.general_model import AllowedValue, ValidationRule
 from rules.strategies.base import RuleRecognizer
 
 # Marca el inicio del bloque de valores permitidos. Se han visto ambas
@@ -54,7 +54,7 @@ class ListRecognizer(RuleRecognizer):
                 # descartarla silenciosamente.
                 rule.unparsed_fragments.append(line)
 
-        rule.allowed_values = _dedupe(values)
+        rule.allowed_values = _dedupe(values, rule)
         return before
 
     def _extract_fallback(self, text: str, rule: ValidationRule) -> str:
@@ -91,17 +91,41 @@ class ListRecognizer(RuleRecognizer):
             item_match = _LIST_ITEM.match(line.strip())
             code, label = item_match.group(1), item_match.group(2).strip()
             values.append(AllowedValue(code=code, label=label))
-        rule.allowed_values = _dedupe(values)
+        rule.allowed_values = _dedupe(values, rule)
 
         remaining = lines[:best_start] + lines[best_end:]
         return "\n".join(remaining)
 
+# funcion para eliminar duplicados de la lista de AllowedValue, manteniendo solo la primera ocurrencia de cada código y registrando inconsistencias en rule.unparsed_fragments
+def _dedupe(
+    values: list[AllowedValue],
+    rule: ValidationRule,
+) -> list[AllowedValue]:
+    seen: dict[str, str] = {}
+    deduped: list[AllowedValue] = []
 
-def _dedupe(values: list[AllowedValue]) -> list[AllowedValue]:
-    seen = set()
-    deduped = []
-    for v in values:
-        if v.code not in seen:
-            seen.add(v.code)
-            deduped.append(v)
+    for value in values:
+        previous_label = seen.get(value.code)
+
+        if previous_label is None:
+            seen[value.code] = value.label
+            deduped.append(value)
+            continue
+
+        if previous_label == value.label:
+            # Mismo código y misma descripción:
+            # se trata de un duplicado exacto.
+            continue
+
+        # Mismo código con una descripción diferente:
+        # no se incorpora una segunda definición del código.
+        # Se registra la inconsistencia para revisión manual.
+        fragment = (
+            f"Código '{value.code}' con descripciones diferentes: "
+            f"'{previous_label}' y '{value.label}'."
+        )
+
+        if fragment not in rule.unparsed_fragments:
+            rule.unparsed_fragments.append(fragment)
+
     return deduped

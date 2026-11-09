@@ -19,11 +19,11 @@ from pathlib import Path
 import openpyxl
 from openpyxl import Workbook
 
-from excel_io.writer import ColumnReport, process_workbook
-from excel_io.post_hoc_marker import mark_workbook
+from excel.writer import ColumnReport, process_workbook
+from excel.post_hoc_marker import mark_workbook
 
-from reporting.report_generator import build_report_workbook
-from reporting.post_hoc_report import build_post_hoc_report
+from reports.report_generator import build_report_workbook
+from reports.post_hoc_report import build_post_hoc_report
 
 from validators.post_hoc_validator import (
     SheetValidationResult,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from rules.models import DataType, ValidationRule
+from backend.rules.general_model import DataType, ValidationRule
 from rules.strategies.base import RuleRecognizer
 
 # Ej.: "alfanumérico (30)", "numérico (4)", "alfabético (2)", "numerico(15)"
@@ -10,6 +10,12 @@ from rules.strategies.base import RuleRecognizer
 _TYPE_WITH_LENGTH = re.compile(
     r"\b(alfanum[eé]ric[oa]|alfab[eé]tic[oa]|num[eé]ric[oa]|entero|decimal|texto)\s*"
     r"\(\s*(\d+)\s*\)",
+    re.IGNORECASE,
+)
+
+_TYPE_WITHOUT_LENGTH = re.compile(
+    r"\b(alfanum[eé]ric[oa]|alfab[eé]tic[oa]|"
+    r"num[eé]ric[oa]|entero|decimal|texto)\b",
     re.IGNORECASE,
 )
 
@@ -75,6 +81,17 @@ class DatatypeRecognizer(RuleRecognizer):
             rule.datatype = _TYPE_KEYWORD_TO_ENUM.get(keyword, DataType.UNKNOWN)
             rule.max_length = length
             return text[: type_len_match.start()] + text[type_len_match.end():]
+        
+        type_match = _TYPE_WITHOUT_LENGTH.search(text)
+
+        if type_match:
+            keyword = type_match.group(1).lower()
+            rule.datatype = _TYPE_KEYWORD_TO_ENUM.get(
+                keyword,
+                DataType.UNKNOWN,
+            )
+
+            return text[:type_match.start()] + text[type_match.end():]
 
         if _DATE_BARE.search(text):
             rule.datatype = DataType.DATE

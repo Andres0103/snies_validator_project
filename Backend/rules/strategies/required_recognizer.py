@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 
-from rules.models import ConditionalRequirement, ValidationRule
+from backend.rules.general_model import ConditionalRequirement, ValidationRule
 from rules.strategies.base import RuleRecognizer
 
 # "Obligatorio para fuente internacional", "Obligatorio para fuente nacional",
@@ -29,11 +29,15 @@ class RequiredRecognizer(RuleRecognizer):
             text = text[: conditional_match.start()] + text[conditional_match.end():]
             return text
 
-        if _REQUIRED_PATTERN.search(text):
-            rule.required = True
-            text = _REQUIRED_PATTERN.sub("", text, count=1)
-        elif _OPTIONAL_PATTERN.search(text):
+        optional_match = _OPTIONAL_PATTERN.search(text)
+        required_match = _REQUIRED_PATTERN.search(text)
+
+        if optional_match:
             rule.required = False
             text = _OPTIONAL_PATTERN.sub("", text, count=1)
+
+        elif required_match:
+            rule.required = True
+            text = _REQUIRED_PATTERN.sub("", text, count=1)
 
         return text

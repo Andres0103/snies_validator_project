@@ -12,8 +12,8 @@ from fastapi import HTTPException, UploadFile
 from starlette.concurrency import run_in_threadpool
 
 from validators.post_hoc_validator import validate_workbook
-from excel_io.post_hoc_marker import mark_workbook
-from reporting.post_hoc_report import build_post_hoc_report
+from excel.post_hoc_marker import mark_workbook
+from reports.post_hoc_report import build_post_hoc_report
 
 
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-STORAGE_DIR = PROJECT_ROOT / "Api" / "storage"
+STORAGE_DIR = PROJECT_ROOT / "api" / "storage"
 
 MAX_FILE_SIZE = 20 * 1024 * 1024
 
@@ -330,29 +330,37 @@ async def create_validation_job(
 # PROCESAMIENTO DE EXCEL
 # ==========================================================
 
+
+def process_workbook(workbook):
+    """
+    Ejecuta el motor de validación y marca las incidencias
+    sobre un Workbook que ya está abierto.
+
+    No se encarga de abrir ni guardar archivos.
+    """
+
+    # Ejecutar las reglas SNIES.
+    results = validate_workbook(workbook)
+
+    # Marcar errores y advertencias.
+    mark_workbook(workbook, results)
+
+    return results
+
+
 def process_excel_file(
     input_path: Path,
     output_path: Path,
 ):
     """
-    Ejecuta el motor de validación sobre un Excel.
-
-    Esta función es síncrona y se ejecuta en un hilo
-    de trabajo para no bloquear el event loop.
+    Abre un archivo Excel, delega su procesamiento
+    y guarda el resultado marcado.
     """
 
     workbook = openpyxl.load_workbook(input_path)
 
     try:
-
-        # Ejecutar reglas SNIES.
-        results = validate_workbook(workbook)
-
-        # Marcar errores y advertencias.
-        mark_workbook(
-            workbook,
-            results,
-        )
+        results = process_workbook(workbook)
 
         # Guardar Excel marcado.
         workbook.save(output_path)
@@ -360,7 +368,6 @@ def process_excel_file(
         return results
 
     finally:
-
         workbook.close()
 
 

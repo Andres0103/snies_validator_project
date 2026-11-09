@@ -7,7 +7,7 @@ from typing import Any
 
 from openpyxl.workbook.workbook import Workbook
 
-from excel_io.reader import read_headers
+from excel.reader import read_headers
 from rules.template_profiles import load_template_profiles
 
 

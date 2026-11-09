@@ -167,3 +167,28 @@ conditional_required_fields:
           - column: VLR_FINANCIACION_INTERNACIONAL
             operator: gt
             value: 0
+
+# ============================================================
+# REGLAS DE VALORES NUMÉRICOS NO NEGATIVOS
+# Fuente: Manual MEN V8.12
+# ============================================================
+
+VALOR_SERVICIO:
+  kind: non_negative
+  message: "El valor del servicio no puede ser negativo."
+
+VALOR_PROYECTO:
+  kind: non_negative
+  message: "El valor del proyecto no puede ser negativo."
+
+VALOR_FINANCIACION:
+  kind: non_negative
+  message: "El valor de financiación no puede ser negativo."
+
+TOTAL_ASISTENTES:
+  kind: non_negative
+  message: "El total de asistentes no puede ser negativo."
+
+VALOR_ENTRADA:
+  kind: non_negative
+  message: "El valor de entrada no puede ser negativo."

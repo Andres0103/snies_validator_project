@@ -1,50 +1,59 @@
 
-"""Validación de una celda individual contra su ValidationRule."""
+"""
+Validador de celdas y reglas de negocio.
+
+Este módulo contiene las funciones encargadas de validar valores
+individuales utilizando las reglas definidas en ValidationRule.
+
+No debe contener condiciones particulares de una plantilla.
+Las restricciones específicas se reciben mediante la configuración.
+"""
 
 from __future__ import annotations
+
+# ============================================================
+# 1. IMPORTACIONES
+# ============================================================
 
 import datetime
 import unicodedata
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from rules.models import DataType, ValidationRule
+from backend.rules.general_model import DataType, ValidationRule
 
+
+# ============================================================
+# 2. ESTRUCTURA PARA REPORTAR ERRORES
+# ============================================================
 
 @dataclass
 class Issue:
+    """Representa un problema encontrado durante una validación."""
+
     message: str
     severity: str = "error"
 
 
+# ============================================================
+# 3. FUNCIONES AUXILIARES
+# ============================================================
+
 def _is_blank(value: Any) -> bool:
+    """Determina si un valor está vacío."""
+
     return value is None or (
         isinstance(value, str) and value.strip() == ""
     )
 
 
-def _is_codigo_field(column_name: str) -> bool:
-    return column_name.strip().upper().startswith("CODIGO")
-
-
-def _is_identifier_field(column_name: str) -> bool:
-    """Identificadores que no deben admitir espacios ni puntuación."""
-    name = column_name.strip().upper()
-
-    return (
-        name.startswith("CODIGO")
-        or name in {
-            "NUM_DOCUMENTO",
-            "ID_TIPO_DOCUMENTO",
-        }
-    )
-
-
 def _is_alphabetic_text(value: str) -> bool:
     """
-    Acepta letras Unicode, marcas diacríticas, espacios,
-    apóstrofos y guiones.
+    Comprueba que el texto contenga letras Unicode,
+    marcas diacríticas, espacios, apóstrofos o guiones.
     """
+
     allowed_separators = {"'", "’", "-", " "}
 
     for char in value:
@@ -63,9 +72,10 @@ def _is_alphabetic_text(value: str) -> bool:
 
 def _is_descriptive_alphanumeric(value: str) -> bool:
     """
-    Acepta letras, números, espacios y signos de puntuación
-    en campos descriptivos.
+    Comprueba que el texto contenga letras, números,
+    espacios y signos de puntuación.
     """
+
     for char in value:
         category = unicodedata.category(char)
 
@@ -80,56 +90,62 @@ def _is_descriptive_alphanumeric(value: str) -> bool:
     return True
 
 
-def _to_number(value: Any) -> float | None:
-    if isinstance(value, (int, float)) and not isinstance(value, bool):
-        return float(value)
+def _to_number(value: Any) -> Decimal | None:
+    """
+    Convierte un valor a Decimal sin introducir imprecisiones
+    propias de la conversión a float.
+    """
+
+    if isinstance(value, bool):
+        return None
+
+    if isinstance(value, Decimal):
+        return value
+
+    if isinstance(value, (int, float)):
+        try:
+            return Decimal(str(value))
+        except InvalidOperation:
+            return None
 
     if isinstance(value, str):
         cleaned = value.strip().replace(",", "")
 
         try:
-            return float(cleaned)
-        except ValueError:
+            return Decimal(cleaned)
+        except InvalidOperation:
             return None
 
     return None
 
 
-def _to_date(
-    value: Any,
-    formats: list[str],
-) -> datetime.date | None:
-
-    if isinstance(value, datetime.datetime):
-        return value.date()
-
-    if isinstance(value, datetime.date):
-        return value
-
-    if isinstance(value, str):
-        for fmt in formats or ["%d-%m-%Y", "%d/%m/%Y"]:
-            try:
-                return datetime.datetime.strptime(
-                    value.strip(), fmt
-                ).date()
-            except ValueError:
-                continue
-
-    return None
-
+# ============================================================
+# 4. VALIDACIÓN GENERAL DE CELDAS
+# ============================================================
 
 def validate_cell(
     rule: ValidationRule,
     value: Any,
     conditional_applies: bool | None = None,
 ) -> list[Issue]:
-    """Valida obligatoriedad, tipo, longitud y valores permitidos."""
+    """
+    Valida una celda utilizando las propiedades de ValidationRule.
+
+    Comprueba:
+    - Obligatoriedad.
+    - Tipo de dato.
+    - Longitud mínima.
+    - Longitud máxima.
+    - Longitud exacta.
+    - Valores permitidos.
+    """
 
     issues: list[Issue] = []
 
-    column_name = rule.column_name.strip().upper()
+    # --------------------------------------------------------
+    # 4.1. Validación de obligatoriedad
+    # --------------------------------------------------------
 
-    # 1. Validación de obligatoriedad
     if _is_blank(value):
 
         if rule.required:
@@ -169,61 +185,33 @@ def validate_cell(
                 )
             )
 
+        # No se deben ejecutar las demás validaciones
+        # cuando el valor está vacío.
         return issues
 
-    # 2. Preparación del valor
+    # --------------------------------------------------------
+    # 4.2. Preparación del valor
+    # --------------------------------------------------------
+
     text_value = str(value).strip()
 
-    # 3. Validación del tipo de dato
+    # --------------------------------------------------------
+    # 4.3. Validación del tipo de dato
+    # --------------------------------------------------------
 
     if rule.datatype == DataType.ALPHANUMERIC:
 
-        # Los identificadores tienen restricciones más estrictas.
-        if _is_identifier_field(column_name):
-
-            # CODIGO_CONSULTORIA admite separadores según
-            # la excepción implementada previamente.
-            if column_name != "CODIGO_CONSULTORIA":
-                if not text_value.isalnum():
-                    issues.append(
-                        Issue(
-                            "El campo debe contener únicamente "
-                            "letras y números."
-                        )
-                    )
-
-        else:
-            if not _is_descriptive_alphanumeric(text_value):
-                issues.append(
-                    Issue(
-                        "El campo debe contener letras, números "
-                        "y signos de puntuación válidos."
-                    )
+        if not _is_descriptive_alphanumeric(text_value):
+            issues.append(
+                Issue(
+                    "El campo debe contener letras, números "
+                    "y signos de puntuación válidos."
                 )
+            )
 
     elif rule.datatype == DataType.ALPHABETIC:
 
-        descriptive_fields = {
-            "DESCRIPCION_CONSULTORIA",
-            "NOMBRE_ENTIDAD",
-            "NOMBRE_INSTITUCION",
-        }
-
-        # SEMESTRE se controla mediante los valores permitidos
-        # definidos en su regla, no mediante una expresión alfabética.
-        if column_name == "SEMESTRE":
-            pass
-
-        elif column_name in descriptive_fields:
-            if not _is_descriptive_alphanumeric(text_value):
-                issues.append(
-                    Issue(
-                        "El campo debe contener letras, números "
-                        "y signos de puntuación válidos."
-                    )
-                )
-
-        elif not _is_alphabetic_text(text_value):
+        if not _is_alphabetic_text(text_value):
             issues.append(
                 Issue(
                     "El campo debe contener únicamente letras."
@@ -234,7 +222,7 @@ def validate_cell(
 
         num = _to_number(value)
 
-        if num is None or not num.is_integer():
+        if num is None or not num.to_integral_value():
             issues.append(
                 Issue(
                     "El campo debe contener un número entero válido."
@@ -266,30 +254,28 @@ def validate_cell(
                 )
             )
 
-    # 4. Validación de longitud máxima
+    # TEXT y UNKNOWN no tienen una validación de caracteres
+    # específica en este módulo.
+
+    # --------------------------------------------------------
+    # 4.4. Validación de longitud máxima
+    # --------------------------------------------------------
+
     if (
         rule.max_length is not None
         and len(text_value) > rule.max_length
     ):
-        if (
-            _is_codigo_field(column_name)
-            and _to_number(value) is None
-        ):
-            issues.append(
-                Issue(
-                    f"El código supera la longitud máxima de "
-                    f"{rule.max_length} caracteres."
-                )
+        issues.append(
+            Issue(
+                f"La longitud es de {len(text_value)} caracteres; "
+                f"máximo permitido: {rule.max_length}."
             )
-        else:
-            issues.append(
-                Issue(
-                    f"La longitud es de {len(text_value)} caracteres; "
-                    f"máximo permitido: {rule.max_length}."
-                )
-            )
+        )
 
-    # 5. Validación de longitud mínima
+    # --------------------------------------------------------
+    # 4.5. Validación de longitud mínima
+    # --------------------------------------------------------
+
     if (
         rule.min_length is not None
         and len(text_value) < rule.min_length
@@ -301,7 +287,10 @@ def validate_cell(
             )
         )
 
-    # 6. Validación de longitud exacta
+    # --------------------------------------------------------
+    # 4.6. Validación de longitud exacta
+    # --------------------------------------------------------
+
     if (
         rule.exact_length is not None
         and len(text_value) != rule.exact_length
@@ -313,8 +302,19 @@ def validate_cell(
             )
         )
 
-    # 7. Validación de valores permitidos
+    # --------------------------------------------------------
+    # 4.7. Validación de valores permitidos
+    # --------------------------------------------------------
+
+        # --------------------------------------------------------
+    # 4.7. Validación de valores permitidos
+    # --------------------------------------------------------
+
     if rule.allowed_values:
+
+        value_text = str(value).strip()
+
+        # Se obtienen los códigos y sus representaciones completas.
         allowed_codes = {
             str(item.code).strip()
             for item in rule.allowed_values
@@ -325,20 +325,47 @@ def validate_cell(
             for item in rule.allowed_values
         }
 
-        value_text = str(value).strip()
+        # Primero se comprueba la coincidencia textual exacta.
+        is_valid = (
+            value_text in allowed_codes
+            or value_text in allowed_displays
+        )
 
-        if (
-            value_text not in allowed_codes
-            and value_text not in allowed_displays
-        ):
+        # Para campos numéricos se permite comparar
+        # representaciones numéricas equivalentes.
+        if not is_valid and rule.datatype in {
+            DataType.INTEGER,
+            DataType.DECIMAL,
+        }:
+
+            if not isinstance(value, bool):
+                try:
+                    numeric_value = Decimal(
+                        value_text.replace(",", "")
+                    )
+
+                    allowed_numeric_codes = {
+                        Decimal(code.replace(",", ""))
+                        for code in allowed_codes
+                        if code
+                    }
+
+                    is_valid = numeric_value in allowed_numeric_codes
+
+                except (InvalidOperation, ValueError):
+                    is_valid = False
+
+        if not is_valid:
             issues.append(
                 Issue(
                     "El valor no está dentro de los valores permitidos."
                 )
             )
 
-    return issues
 
+# ============================================================
+# 5. VALIDACIÓN DE REGLAS DE NEGOCIO INDIVIDUALES
+# ============================================================
 
 def validate_business_rule(
     kind: str,
@@ -346,46 +373,76 @@ def validate_business_rule(
     value: Any,
     row_values: dict[str, Any],
 ) -> list[Issue]:
-    """Valida reglas que dependen de la propia celda."""
+    """
+    Ejecuta reglas de negocio que requieren evaluar un valor
+    junto con otros datos de la misma fila.
+    """
 
     issues: list[Issue] = []
+
+    # --------------------------------------------------------
+    # 5.1. Comprobación de valores vacíos
+    # --------------------------------------------------------
 
     if _is_blank(value):
         return issues
 
-    if kind == "date_within_past_years":
-        d = _to_date(value, [])
+    # --------------------------------------------------------
+    # 5.2. Fecha dentro de un rango de años anteriores
+    # --------------------------------------------------------
 
-        if d:
+    if kind == "date_within_past_years":
+
+        date_value = _to_date(value, [])
+
+        if date_value:
             years = params.get("years", 80)
             today = datetime.date.today()
-            earliest = today.replace(year=today.year - years)
 
-            if not (earliest <= d <= today):
+            try:
+                earliest = today.replace(year=today.year - years)
+            except ValueError:
+                # Maneja el caso del 29 de febrero
+                # cuando el año de destino no es bisiesto.
+                earliest = today.replace(
+                    year=today.year - years,
+                    day=28,
+                )
+
+            if not (earliest <= date_value <= today):
                 issues.append(
                     Issue(
-                        params.get("message", "Fecha fuera de rango.")
+                        params.get(
+                            "message",
+                            "Fecha fuera de rango.",
+                        )
                     )
                 )
 
-    elif kind == "date_after_column":
-        d = _to_date(value, [])
-        after_col = params.get("after_column")
-        other = row_values.get(after_col)
+    # --------------------------------------------------------
+    # 5.3. Comparación entre dos fechas
+    # --------------------------------------------------------
 
-        other_d = (
-            _to_date(other, [])
-            if other is not None
+    elif kind == "date_after_column":
+
+        date_value = _to_date(value, [])
+        after_column = params.get("after_column")
+        other_value = row_values.get(after_column)
+
+        other_date = (
+            _to_date(other_value, [])
+            if other_value is not None
             else None
         )
 
-        if d and other_d:
+        if date_value and other_date:
+
             strict = params.get("strict", False)
 
             if strict:
-                valid = d > other_d
+                valid = date_value > other_date
             else:
-                valid = d >= other_d
+                valid = date_value >= other_date
 
             if not valid:
                 default_message = (
@@ -402,7 +459,12 @@ def validate_business_rule(
                     )
                 )
 
+    # --------------------------------------------------------
+    # 5.4. Validación de valores no negativos
+    # --------------------------------------------------------
+
     elif kind == "non_negative":
+
         num = _to_number(value)
 
         if num is not None and num < 0:
@@ -414,11 +476,16 @@ def validate_business_rule(
                     )
                 )
             )
+
+    # --------------------------------------------------------
+    # 5.5. Validación de valor no negativo y longitud mínima
+    # --------------------------------------------------------
 
     elif kind == "non_negative_with_min_length":
+
         num = _to_number(value)
         text_value = str(value).strip()
-        min_len = params.get("min_length", 1)
+        min_length = params.get("min_length", 1)
 
         if num is not None and num < 0:
             issues.append(
@@ -430,15 +497,20 @@ def validate_business_rule(
                 )
             )
 
-        if len(text_value) < min_len:
+        if len(text_value) < min_length:
             issues.append(
                 Issue(
                     f"La longitud es menor que el mínimo permitido "
-                    f"de {min_len} caracteres."
+                    f"de {min_length} caracteres."
                 )
             )
 
+    # --------------------------------------------------------
+    # 5.6. Validación básica de formato de correo electrónico
+    # --------------------------------------------------------
+
     elif kind == "email_format":
+
         if "@" not in str(value):
             issues.append(
                 Issue(

@@ -10,17 +10,14 @@ from __future__ import annotations
 
 import re
 
-from rules.known_fields import (
-    apply_known_field_fallback,
-    apply_known_field_overrides,
-)
+from rules.known_fields import apply_known_field_fallback
 from rules.master_tables import apply_master_table_reference
-from rules.models import ValidationRule
+from backend.rules.general_model import ValidationRule
 from rules.strategies.base import RuleRecognizer
 from rules.strategies.datatype_recognizer import DatatypeRecognizer
 from rules.strategies.list_recognizer import ListRecognizer
 from rules.strategies.required_recognizer import RequiredRecognizer
-from utils.text_normalizer import normalize
+from core.text_normalizer import normalize
 
 # El orden importa: ListRecognizer debe ir primero porque el bloque de
 # valores permitidos puede contener texto que confundiría a los demás
@@ -35,14 +32,35 @@ DEFAULT_RECOGNIZERS: list[RuleRecognizer] = [
 _NOISE_ONLY = re.compile(r"^[\s,.\-:;]*$")
 
 
-def interpret_comment(column_name: str, raw_comment: str) -> ValidationRule:
-    """Convierte el comentario en lenguaje natural de una columna en una ValidationRule."""
-    rule = ValidationRule(column_name=column_name, raw_comment=raw_comment or "")
+
+def interpret_comment(
+    column_name: str,
+    raw_comment: str,
+    known_fields: dict | None = None,
+    sheet_name: str | None = None,
+) -> ValidationRule:
+    """
+    Convierte el comentario de una columna en una ValidationRule.
+
+    Puede complementar la interpretación con definiciones de campos
+    provenientes de la configuración de una plantilla y una hoja.
+    """
+
+    rule = ValidationRule(
+        column_name=column_name,
+        raw_comment=raw_comment or "",
+    )
 
     if not raw_comment:
         rule.unparsed_fragments.append("(sin comentario)")
-        rule = apply_known_field_fallback(rule)
-        return apply_known_field_overrides(rule)
+
+        rule = apply_known_field_fallback(
+            rule,
+            known_fields=known_fields,
+            sheet_name=sheet_name,
+        )
+
+        return rule
 
     text = normalize(raw_comment)
 
@@ -50,12 +68,16 @@ def interpret_comment(column_name: str, raw_comment: str) -> ValidationRule:
         text = recognizer.recognize(text, rule)
 
     remainder = text.strip(" .,\n")
+
     if remainder and not _NOISE_ONLY.match(remainder):
-        # Lo que sobra tras quitar obligatoriedad/tipo/lista es, casi
-        # siempre, la descripción humana del campo (ej. "código de la
-        # consultoria"). Se capitaliza para presentación.
-        rule.description = remainder[0].upper() + remainder[1:] if remainder else ""
+        rule.description = remainder[0].upper() + remainder[1:]
 
     rule = apply_master_table_reference(rule, raw_comment)
-    rule = apply_known_field_fallback(rule)
-    return apply_known_field_overrides(rule)
+
+    rule = apply_known_field_fallback(
+        rule,
+        known_fields=known_fields,
+        sheet_name=sheet_name,
+    )
+
+    return rule

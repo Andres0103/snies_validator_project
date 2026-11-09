@@ -9,7 +9,7 @@ from fastapi import (
 )
 from fastapi.responses import FileResponse
 
-from Api.services.validation_service import (
+from api.services.validation_service import  (
     create_validation_job,
     process_validation_job,
     get_validation,
@@ -18,7 +18,7 @@ from Api.services.validation_service import (
     list_validations,
 )
 
-from Api.schemas.validation import (
+from api.schemas.validation import (
     ValidationResponse,
     ValidationHistoryResponse,
     ValidationErrorsResponse,

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from Api.routes.validations import router as validations_router
+from api.routes.validations import router as validations_router
 
 
 app = FastAPI(

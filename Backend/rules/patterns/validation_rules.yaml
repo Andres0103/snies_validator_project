@@ -5,38 +5,51 @@ validation_config:
   master_tables:
     paises:
       file: "catalogs/Tabla_paises_SNIES.yaml"
+      records_path: "master_tables.paises.records"
       key_column: "ID_PAIS"
       description_column: "DESC_PAIS"
+      active_date_column: "FECHA_FINAL"
+      
 
     departamentos:
       file: "catalogs/Listado_departamentos_municipios.yaml"
+      records_path: "master_tables.departamentos_municipios.records"
       key_column: "ID_DEPARTAMENTO"
       description_column: "DESC_DEPARTAMENTO"
+      active_date_column: "FECHA_FINAL"
 
     cine_campos:
       file: "catalogs/cine_campo_detallado.yaml"
-      key_column: "ID_CINE_CAMPO_DETALLADO"
-      description_column: "DESC_CINE_CAMPO_DETALLADO"
+      records_path: "records"
+      key_column: "codigo"
+      description_column: "descripcion"
 
     fuente_internacional:
       file: "catalogs/Tabla_fuente_internacional.yaml"
+      records_path: "master_tables.fuentes_internacionales.records"
       key_column: "ID_FUENTE_INTERNACIONAL"
-      description_column: "DESCRIPCIÓN"
+      description_column: "DESC_FUENTE_INTERNACIONAL"
+      active_date_column: "FECHA_FINAL"
 
     fuente_nacional:
       file: "catalogs/Tabla_fuente_nacional.yaml"
+      records_path: "master_tables.fuentes_nacionales.records"
       key_column: "ID_FUENTE_NACIONAL"
-      description_column: "DESCRIPCIÓN"
+      description_column: "DESC_FUENTE_NACIONAL"
+      active_date_column: "FECHA_FINAL"
 
     sector_consultoria:
-      file: "catalogs/tablas-unicas-consultoria/Tabla_sector_consultoria.yaml"
+      file: "catalogs/Tabla_sector_consultoria.yaml"
+      records_path: "master_tables.sectores_consultoria.records"
       key_column: "ID_SECTOR_CONSULTORIA"
-      description_column: "DESCRIPCIÓN"
+      description_column: "DESC_SECTOR_CONSULTORIA"
+      active_date_column: "FECHA_FINAL"
 
     sede:
       file: "catalogs/Tabla_sede.yaml"
+      records_path: "master_tables.sedes.records"
       key_column: "ID_IES_UDEA"
-      description_column: "Descripción"
+      description_column: "Descripcion"
 
   # Reglas de validación por columna
   column_rules:

@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 
-from rules.models import ValidationRule
+from backend.rules.general_model import ValidationRule
 
 
 class RuleRecognizer(ABC):

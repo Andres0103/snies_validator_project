@@ -1,15 +1,19 @@
-"""Detecta referencias a catálogos y carga sus valores."""
+"""Detecta referencias a catálogos y carga sus valores desde YAML."""
 
 from __future__ import annotations
 
-import csv
 import re
 from pathlib import Path
+from typing import Any
 
-from rules.models import AllowedValue, ValidationRule
+import yaml
+
+from backend.rules.general_model import AllowedValue, ValidationRule
 
 
-_DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+CATALOGS_DIR = PROJECT_ROOT / "catalogs"
+
 
 _TRIGGER_PATTERNS: list[tuple[re.Pattern, str]] = [
     (
@@ -23,11 +27,38 @@ _TRIGGER_PATTERNS: list[tuple[re.Pattern, str]] = [
 ]
 
 
-def _load_paises() -> list[AllowedValue]:
-    """Carga el catálogo de países desde el CSV."""
-    path = _DATA_DIR / "paises.csv"
+def _read_yaml(path: Path) -> Any:
+    """Lee el contenido de un archivo YAML."""
 
     if not path.exists():
+        return None
+
+    with path.open("r", encoding="utf-8") as file:
+        return yaml.safe_load(file)
+
+
+def _load_paises() -> list[AllowedValue]:
+    """Carga los países vigentes desde su catálogo YAML."""
+
+    path = CATALOGS_DIR / "Tabla_paises_SNIES.yaml"
+    catalog_data = _read_yaml(path)
+
+    if not isinstance(catalog_data, dict):
+        return []
+
+    master_tables = catalog_data.get("master_tables", {})
+
+    if not isinstance(master_tables, dict):
+        return []
+
+    paises = master_tables.get("paises", {})
+
+    if not isinstance(paises, dict):
+        return []
+
+    records = paises.get("records", [])
+
+    if not isinstance(records, list):
         return []
 
     values = [
@@ -37,53 +68,67 @@ def _load_paises() -> list[AllowedValue]:
         )
     ]
 
-    with open(path, encoding="utf-8-sig", newline="") as file:
-        reader = csv.DictReader(file, delimiter=";")
+    for record in records:
+        if not isinstance(record, dict):
+            continue
 
-        for row in reader:
-            if row.get("FECHA_FINAL", "").strip():
-                continue
 
-            code = row.get("ID_PAIS", "").strip()
-            label = row.get("DESC_PAIS", "").strip()
+        code = record.get("ID_PAIS")
+        label = record.get("DESC_PAIS")
 
-            if code and label:
-                values.append(
-                    AllowedValue(
-                        code=code,
-                        label=label,
-                    )
+        if code is None or label is None:
+            continue
+
+        code_text = str(code).strip()
+        label_text = str(label).strip()
+
+        if code_text and label_text:
+            values.append(
+                AllowedValue(
+                    code=code_text,
+                    label=label_text,
                 )
+            )
 
     return values
 
 
 def _load_cine_campo_detallado() -> list[AllowedValue]:
-    """Carga la clasificación CINE desde el CSV."""
-    path = _DATA_DIR / "cine_campo_detallado.csv"
+    """Carga la clasificación CINE desde su catálogo YAML."""
 
-    if not path.exists():
+    path = CATALOGS_DIR / "cine_campo_detallado.yaml"
+    catalog_data = _read_yaml(path)
+
+    if not isinstance(catalog_data, dict):
+        return []
+
+    records = catalog_data.get("records", [])
+
+    if not isinstance(records, list):
         return []
 
     values: list[AllowedValue] = []
 
-    with open(path, encoding="utf-8-sig", newline="") as file:
-        reader = csv.DictReader(file, delimiter=";")
+    for record in records:
+        if not isinstance(record, dict):
+            continue
 
-        for row in reader:
-            if row.get("FECHA_FINAL", "").strip():
-                continue
+        code = record.get("codigo")
+        label = record.get("descripcion")
 
-            code = row.get("ID_CINE_CAMPO_DETALLADO", "").strip()
-            label = row.get("DESC_CINE_CAMPO_DETALLADO", "").strip()
+        if code is None or label is None:
+            continue
 
-            if code and label:
-                values.append(
-                    AllowedValue(
-                        code=code,
-                        label=label,
-                    )
+        code_text = str(code).strip()
+        label_text = str(label).strip()
+
+        if code_text and label_text:
+            values.append(
+                AllowedValue(
+                    code=code_text,
+                    label=label_text,
                 )
+            )
 
     return values
 
@@ -99,6 +144,7 @@ def apply_master_table_reference(
     raw_comment: str,
 ) -> ValidationRule:
     """Carga el catálogo correspondiente según el comentario."""
+
     if rule.allowed_values:
         return rule
 

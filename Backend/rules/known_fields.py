@@ -1,21 +1,36 @@
-"""Aplica el catálogo de `known_fields.yaml` como relleno de huecos.
 
-Este módulo NUNCA sobre-escribe lo que el comentario de la celda ya logró
-comunicar; solo completa lo que quedó en blanco (datatype UNKNOWN, o sin
-`allowed_values`). Esto respeta la regla de que el comentario del Excel es
-la fuente de verdad principal: el catálogo es un auxiliar, no un reemplazo.
+"""Aplica el catálogo de known_fields.yaml como complemento de reglas.
+
+Este módulo completa los atributos que no pudieron interpretarse
+desde los comentarios de Excel.
+
+La configuración específica de cada plantilla y hoja tiene prioridad
+como fuente de configuración. El catálogo global anterior se conserva
+únicamente para mantener compatibilidad con las plantillas no migradas.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
+import re
 
 import yaml
 
-from rules.models import AllowedValue, DataType, ValidationRule
+from backend.rules.general_model import AllowedValue, DataType, ValidationRule
 
-_CATALOG_PATH = Path(__file__).parent / "patterns" / "known_fields.yaml"
 
+# ============================================================
+# CONFIGURACIÓN
+# ============================================================
+
+_CATALOG_PATH = (
+    Path(__file__).parent
+    / "patterns"
+    / "known_fields.yaml"
+)
+
+
+# Traducción de los tipos definidos en YAML a DataType.
 _DATATYPE_MAP = {
     "integer": DataType.INTEGER,
     "decimal": DataType.DECIMAL,
@@ -26,69 +41,180 @@ _DATATYPE_MAP = {
 }
 
 
+# ============================================================
+# CARGA DEL CATÁLOGO LEGACY
+# ============================================================
+
 def _load_catalog() -> dict:
+    """Carga el catálogo global anterior de campos conocidos."""
+
     if not _CATALOG_PATH.exists():
         return {}
-    with open(_CATALOG_PATH, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+
+    with open(
+        _CATALOG_PATH,
+        encoding="utf-8",
+    ) as file:
+        return yaml.safe_load(file) or {}
 
 
 _CATALOG = _load_catalog()
 
 
-def apply_known_field_fallback(rule: ValidationRule) -> ValidationRule:
-    """Completa huecos en `rule` usando el catálogo, si el nombre de columna coincide."""
-    entry = _CATALOG.get(rule.column_name)
-    if not entry:
+# ============================================================
+# COMPLEMENTO DE REGLAS
+# ============================================================
+
+def apply_known_field_fallback(
+    rule: ValidationRule,
+    known_fields: dict | None = None,
+    sheet_name: str | None = None,
+) -> ValidationRule:
+    """
+    Completa los atributos que no pudieron interpretarse
+    desde el comentario del Excel.
+
+    Puede recibir reglas específicas de una hoja. Si no recibe
+    configuración externa, utiliza el catálogo global anterior.
+
+    No sobrescribe atributos que ya fueron interpretados.
+    """
+
+    catalog = (
+        known_fields
+        if known_fields is not None
+        else _CATALOG
+    )
+
+    # --------------------------------------------------------
+    # 1. Localizar la definición del campo.
+    # --------------------------------------------------------
+
+    if "sheets" in catalog:
+
+        sheets = catalog.get(
+            "sheets",
+            {},
+        )
+
+        sheet_rules = sheets.get(
+            sheet_name,
+            {},
+        )
+
+        entry = sheet_rules.get(
+            rule.column_name,
+            {},
+        )
+
+    else:
+        # Compatibilidad con el formato global anterior.
+        entry = catalog.get(
+            rule.column_name,
+            {},
+        )
+
+    if not isinstance(entry, dict) or not entry:
         return rule
 
-    if rule.datatype == DataType.UNKNOWN and "datatype" in entry:
-        rule.datatype = _DATATYPE_MAP.get(entry["datatype"], DataType.UNKNOWN)
+    # --------------------------------------------------------
+    # 2. Completar el tipo de dato.
+    # --------------------------------------------------------
 
-    if rule.max_length is None and "max_length" in entry:
+    if (
+        rule.datatype == DataType.UNKNOWN
+        and "datatype" in entry
+    ):
+        datatype_name = str(
+            entry["datatype"]
+        ).lower()
+
+        rule.datatype = _DATATYPE_MAP.get(
+            datatype_name,
+            DataType.UNKNOWN,
+        )
+
+    # --------------------------------------------------------
+    # 3. Completar restricciones de longitud.
+    # --------------------------------------------------------
+
+    if (
+        rule.max_length is None
+        and "max_length" in entry
+    ):
         rule.max_length = entry["max_length"]
 
-    if not rule.required and not rule.conditional_requirement and entry.get("required"):
-        rule.required = True
+    if (
+        rule.min_length is None
+        and "min_length" in entry
+    ):
+        rule.min_length = entry["min_length"]
 
-    if not rule.allowed_values and "allowed_values" in entry:
+    if (
+        rule.exact_length is None
+        and "exact_length" in entry
+    ):
+        rule.exact_length = entry["exact_length"]
+
+    # --------------------------------------------------------
+    # 4. Completar obligatoriedad.
+    # --------------------------------------------------------
+    
+    
+    es_obligatorio = re.search(
+        r"\bobligatorio\b",
+        rule.raw_comment or "",
+        re.IGNORECASE,
+    )
+    es_opcional = re.search(
+        r"\bopcional\b",
+        rule.raw_comment or "",
+        re.IGNORECASE,
+    )
+
+    if (
+        not es_obligatorio
+        and not es_opcional
+        and not rule.conditional_requirement
+        and "required" in entry
+    ):
+        rule.required = entry["required"]
+
+    # --------------------------------------------------------
+    # 5. Completar valores permitidos.
+    # --------------------------------------------------------
+
+    if (
+        not rule.allowed_values
+        and "allowed_values" in entry
+    ):
         rule.allowed_values = [
-            AllowedValue(code=str(v["code"]), label=v["label"])
-            for v in entry["allowed_values"]
+            AllowedValue(
+                code=str(value["code"]),
+                label=value["label"],
+            )
+            for value in entry["allowed_values"]
         ]
 
-    if not rule.description and "description" in entry:
+    # --------------------------------------------------------
+    # 6. Completar descripción.
+    # --------------------------------------------------------
+
+    if (
+        not rule.description
+        and "description" in entry
+    ):
         rule.description = entry["description"]
 
-    # Ya no necesita revisión manual solo por falta de tipo, si el catálogo
-    # lo resolvió.
+    # --------------------------------------------------------
+    # 7. Actualizar estado de revisión manual.
+    # --------------------------------------------------------
+
     if rule.datatype != DataType.UNKNOWN:
         rule.unparsed_fragments = [
-            f for f in rule.unparsed_fragments if f != "(sin comentario)"
+            fragment
+            for fragment in rule.unparsed_fragments
+            if fragment != "(sin comentario)"
         ]
-
-    return rule
-
-def apply_known_field_overrides(rule: ValidationRule) -> ValidationRule:
-    """Aplica reglas autoritativas del manual que prevalecen sobre el comentario."""
-
-    if rule.column_name == "DESCRIPCION_CONSULTORIA":
-        rule.datatype = DataType.ALPHANUMERIC
-        rule.max_length = 200
-        rule.required = True
-
-    elif rule.column_name == "ID_SECTOR_CONSULTORIA":
-        # El campo contiene códigos enteros del 1 al 8.
-        # Aunque el comentario de la plantilla diga "numérico",
-        # no debe aceptar valores decimales.
-        rule.datatype = DataType.INTEGER
-        rule.max_length = 2
-        rule.required = True
-
-    elif rule.column_name == "ID_FUENTE_NACIONAL":
-    # Código opcional de fuente de financiación nacional.
-    # Solo admite números enteros de dos caracteres como máximo.
-        rule.datatype = DataType.INTEGER
-        rule.max_length = 2
 
     return rule
