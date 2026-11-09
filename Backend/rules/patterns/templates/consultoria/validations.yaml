@@ -1,0 +1,49 @@
+# Validaciones de campos de la plantilla CONSULTORIA.
+#
+# Este archivo contiene restricciones ejecutables sobre campos
+# individuales: rangos, formatos, valores permitidos y catálogos.
+#
+# Las características de los campos están en rules.yaml.
+# Las reglas que relacionan varios campos están en business_rules.yaml.
+# La definición física de los catálogos estará en catalogs.yaml.
+
+sheets:
+
+  CONSULTORIA:
+
+    SEDE QUE GESTIONA LA CONSULTORÍA:
+      catalog: sede
+
+    CODIGO_CONSULTORIA:
+      pattern: "^[A-Z0-9-]+$"
+
+    ID_CINE_CAMPO_DETALLADO:
+      catalog: cine_campos
+
+    ID_SECTOR_CONSULTORIA:
+      catalog: sector_consultoria
+
+    VALOR:
+      min_value: 0
+
+    FECHA_INICIO:
+      format: "%d-%m-%Y"
+      date_within_past_years: 80
+
+    FECHA_FINAL:
+      format: "%d-%m-%Y"
+
+    ID_FUENTE_NACIONAL:
+      catalog: fuente_nacional
+
+    VLR_FINANCIACION_NACIONAL:
+      min_value: 0
+
+    ID_PAIS_FINANCIADOR:
+      catalog: paises
+
+    ID_FUENTE_INTERNACIONAL:
+      catalog: fuente_internacional
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      min_value: 0

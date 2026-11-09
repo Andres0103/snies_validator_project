@@ -1,0 +1,52 @@
+# Catálogos utilizados por la plantilla CONSULTORIA.
+#
+# Cada catálogo define:
+# file: ubicación del archivo YAML.
+# records_path: ruta interna hasta los registros.
+# key_column: columna que contiene el código.
+# description_column: columna que contiene la descripción.
+# active_date_column: fecha utilizada para filtrar registros inactivos.
+#
+# Las referencias desde validations.yaml utilizan el nombre del catálogo.
+
+master_tables:
+
+  sede:
+    file: "catalogs/Tabla_sede.yaml"
+    records_path: "master_tables.sedes.records"
+    key_column: "ID_IES_UDEA"
+    description_column: "Descripcion"
+
+  cine_campos:
+    file: "catalogs/cine_campo_detallado.yaml"
+    records_path: "records"
+    key_column: "codigo"
+    description_column: "descripcion"
+
+  sector_consultoria:
+    file: "catalogs/Tabla_sector_consultoria.yaml"
+    records_path: "master_tables.sectores_consultoria.records"
+    key_column: "ID_SECTOR_CONSULTORIA"
+    description_column: "DESC_SECTOR_CONSULTORIA"
+    active_date_column: "FECHA_FINAL"
+
+  fuente_nacional:
+    file: "catalogs/Tabla_fuente_nacional.yaml"
+    records_path: "master_tables.fuentes_nacionales.records"
+    key_column: "ID_FUENTE_NACIONAL"
+    description_column: "DESC_FUENTE_NACIONAL"
+    active_date_column: "FECHA_FINAL"
+
+  paises:
+    file: "catalogs/Tabla_paises_SNIES.yaml"
+    records_path: "master_tables.paises.records"
+    key_column: "ID_PAIS"
+    description_column: "DESC_PAIS"
+    active_date_column: "FECHA_FINAL"
+
+  fuente_internacional:
+    file: "catalogs/Tabla_fuente_internacional.yaml"
+    records_path: "master_tables.fuentes_internacionales.records"
+    key_column: "ID_FUENTE_INTERNACIONAL"
+    description_column: "DESC_FUENTE_INTERNACIONAL"
+    active_date_column: "FECHA_FINAL"
