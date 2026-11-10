@@ -1,4 +1,3 @@
-
 """Orquesta la validación post-hoc de un archivo SNIES.
 
 Integra:
@@ -33,7 +32,7 @@ from rules.config_loader import (
 )
 from rules.catalog_loader import load_catalog
 from rules.interpreter import interpret_comment
-from backend.rules.general_model import ValidationRule
+from backend.rules.general_model import DataType, ValidationRule
 from rules.template_profiles import (
     detect_templates,
     load_template_profiles,
@@ -94,17 +93,28 @@ def _to_decimal(value: Any) -> Decimal | None:
     if isinstance(value, bool):
         return None
 
+
     if isinstance(value, (int, float, Decimal)):
         try:
-            return Decimal(str(value))
+            num = Decimal(str(value))
+            
+            if num.is_finite(): 
+                return num
+            else:
+                return None
+        
         except InvalidOperation:
             return None
 
     if isinstance(value, str):
-        cleaned = value.strip().replace(",", "")
-
         try:
-            return Decimal(cleaned)
+            num = Decimal(value.strip())
+
+            if num.is_finite():
+                return num
+            else:
+                return None
+            
         except InvalidOperation:
             return None
 
@@ -895,20 +905,28 @@ def validate_workbook(
         # 5.5. Consistencia entre filas.
         # -----------------------------------------------------
 
-        for col_name, business_rule in (
-            global_business_rules.items()
-        ):
+        # Construir el diccionario con el tipo de dato de cada columna.
+        # Se calcula una sola vez porque sirve para todas las reglas
+        # de consistencia y unicidad de esta hoja.
+        column_types = {
+            column_name: rule.datatype
+            for column_name, rule in rules_by_column.items()
+        }
 
-            if (
-                business_rule.get("kind")
-                != "cross_row_consistency_note"
-            ):
+        # Relacionar cada número real de fila de Excel con sus valores.
+        # Esto permite recuperar los datos originales cuando se genera
+        # una incidencia entre filas.
+        row_values_by_number = {
+            number: values
+            for number, values in zip(row_numbers, row_dicts)
+        }
+
+        for col_name, business_rule in global_business_rules.items():
+
+            if business_rule.get("kind") != "cross_row_consistency_note":
                 continue
 
-            check_columns = business_rule.get(
-                "check_columns",
-                [],
-            )
+            check_columns = business_rule.get("check_columns", [])
 
             if col_name not in column_letter_by_name:
                 continue
@@ -924,28 +942,20 @@ def validate_workbook(
 
             group_by = business_rule.get("group_by")
 
-            if (
-                group_by
-                and group_by not in column_letter_by_name
-            ):
+            if group_by and group_by not in column_letter_by_name:
                 group_by = None
 
+            # Ejecutar la validación entre filas.
             consistency_issues = check_code_consistency(
                 col_name,
                 check_columns,
                 row_dicts,
                 row_numbers,
+                column_types,
                 group_by,
             )
 
-            row_values_by_number = {
-                number: values
-                for number, values in zip(
-                    row_numbers,
-                    row_dicts,
-                )
-            }
-
+            # Incorporar las incidencias al resultado de la hoja.
             for cross_issue in consistency_issues:
 
                 row_values = row_values_by_number.get(
@@ -988,22 +998,13 @@ def validate_workbook(
                 col_name,
                 row_dicts,
                 row_numbers,
+                column_types=column_types,
                 severity=business_rule.get(
                     "severity",
                     "warning",
                 ),
-                message_template=business_rule.get(
-                    "message"
-                ),
+                message_template=business_rule.get("message"),
             )
-
-            row_values_by_number = {
-                number: values
-                for number, values in zip(
-                    row_numbers,
-                    row_dicts,
-                )
-            }
 
             for cross_issue in uniqueness_issues:
 
@@ -1024,8 +1025,6 @@ def validate_workbook(
                         severity=cross_issue.severity,
                     )
                 )
-
-        results.append(result)
 
     # ---------------------------------------------------------
     # 6. Validaciones referenciales entre hojas.

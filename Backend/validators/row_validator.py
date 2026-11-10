@@ -15,6 +15,7 @@ from __future__ import annotations
 # 1. IMPORTACIONES
 # ============================================================
 
+from cmath import isfinite
 import datetime
 import unicodedata
 from dataclasses import dataclass
@@ -96,28 +97,79 @@ def _to_number(value: Any) -> Decimal | None:
     propias de la conversión a float.
     """
 
+    #evitamos convertir valores booleanos a números poruqe un bool no debe considerarse un número en este contexto  
     if isinstance(value, bool):
         return None
 
+    #validamos que el valor sea finito
     if isinstance(value, Decimal):
-        return value
+        if value.is_finite(): 
+            return value
+        return None
 
+    #convertimos a Decimal desde int o float, evitando problemas de precisión
     if isinstance(value, (int, float)):
         try:
-            return Decimal(str(value))
+            num = Decimal(str(value))
+            if num.is_finite():
+                return num
+            
+            return None
         except InvalidOperation:
             return None
 
     if isinstance(value, str):
-        cleaned = value.strip().replace(",", "")
-
         try:
-            return Decimal(cleaned)
+            num = Decimal(value.strip())
+            if num.is_finite():
+                return num
+            return None
+        
         except InvalidOperation:
             return None
 
     return None
 
+def _to_date(value: Any, formats: list[str]) -> datetime.date | None:
+
+    # 1. Comprobar si está vacío.
+    if _is_blank(value):
+        return None
+
+    # 2. Si es datetime, obtener únicamente la fecha.
+    if isinstance(value, datetime.datetime):
+        return value.date()
+
+    # 3. Si ya es date, devolverlo directamente.
+    if isinstance(value, datetime.date):
+        return value
+
+    # 4. Si no es string, retornar None.
+    if not isinstance(value, str):
+        return None
+
+    # 5. Definir los formatos predeterminados.
+    if not formats:
+        formats = [
+            "%Y-%m-%d",
+            "%d/%m/%Y",
+            "%d-%m-%Y"
+        ]
+
+    # 6. Intentar convertir utilizando cada formato.
+    for formato in formats:
+        try:
+            fecha = datetime.datetime.strptime(value.strip(), formato)
+
+            # Retornar únicamente la fecha.
+            return fecha.date()
+
+        except ValueError:
+            # Intentar con el siguiente formato.
+            continue
+
+    # 7. Ningún formato consiguió convertir el valor.
+    return None
 
 # ============================================================
 # 4. VALIDACIÓN GENERAL DE CELDAS
@@ -222,7 +274,7 @@ def validate_cell(
 
         num = _to_number(value)
 
-        if num is None or not num.to_integral_value():
+        if num is None or num != num.to_integral_value():
             issues.append(
                 Issue(
                     "El campo debe contener un número entero válido."
@@ -306,10 +358,6 @@ def validate_cell(
     # 4.7. Validación de valores permitidos
     # --------------------------------------------------------
 
-        # --------------------------------------------------------
-    # 4.7. Validación de valores permitidos
-    # --------------------------------------------------------
-
     if rule.allowed_values:
 
         value_text = str(value).strip()
@@ -338,22 +386,16 @@ def validate_cell(
             DataType.DECIMAL,
         }:
 
-            if not isinstance(value, bool):
-                try:
-                    numeric_value = Decimal(
-                        value_text.replace(",", "")
-                    )
+           if not isinstance (value, bool):
+                
+                allowed_numeric_codes = set()
 
-                    allowed_numeric_codes = {
-                        Decimal(code.replace(",", ""))
-                        for code in allowed_codes
-                        if code
-                    }
+                for code in allowed_codes:
+                    numeric_code = _to_number(code)
 
-                    is_valid = numeric_value in allowed_numeric_codes
-
-                except (InvalidOperation, ValueError):
-                    is_valid = False
+                    if numeric_code is not None:
+                        allowed_numeric_codes.add(numeric_code)
+                                    
 
         if not is_valid:
             issues.append(
@@ -361,6 +403,8 @@ def validate_cell(
                     "El valor no está dentro de los valores permitidos."
                 )
             )
+        
+    return issues
 
 
 # ============================================================
