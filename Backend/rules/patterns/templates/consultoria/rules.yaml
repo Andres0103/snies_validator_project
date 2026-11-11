@@ -28,7 +28,7 @@ sheets:
     CODIGO_CONSULTORIA:
       datatype: alphanumeric
       required: true
-      exact_length: 30
+      max_length: 30
       description: "Código de identificación de la consultoría."
 
     DESCRIPCION_CONSULTORIA:
@@ -124,13 +124,13 @@ sheets:
     CODIGO_CONSULTORIA:
       datatype: alphanumeric
       required: true
-      exact_length: 15
-      description: "Código de identificación de la consultoría asociada."
+      max_length: 30
+      description: "Código de identificación de la consultoría."
 
     ID_TIPO_DOCUMENTO:
       datatype: alphanumeric
       required: true
-      exact_length: 2
+      max_length: 2
       description: "Tipo de documento de identidad del recurso humano."
 
     NUM_DOCUMENTO:

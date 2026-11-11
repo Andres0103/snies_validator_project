@@ -30,14 +30,35 @@ DEFAULT_DATE_FORMATS = (
 
 def _normalize_text(value: Any) -> str | None:
     """
-    Normaliza un valor textual.
+    Normaliza valores para comparaciones referenciales.
 
-    Conserva los ceros iniciales y evita convertir identificadores
-    textuales en números.
+    Los valores numéricos enteros almacenados por Excel como
+    float se representan sin la parte decimal .0.
+
+    Los valores textuales conservan sus ceros iniciales,
+    caracteres internos y signos originales.
     """
 
     if value is None:
         return None
+
+    if isinstance(value, bool):
+        return str(value).upper()
+
+    if isinstance(value, (int, float, Decimal)):
+        try:
+            number = Decimal(str(value))
+
+            if not number.is_finite():
+                return None
+
+            if number == number.to_integral_value():
+                return str(int(number))
+
+            return format(number.normalize(), "f")
+
+        except (InvalidOperation, ValueError, TypeError):
+            return None
 
     text = str(value).strip()
 
@@ -45,7 +66,6 @@ def _normalize_text(value: Any) -> str | None:
         return None
 
     return text.upper()
-
 
 def _normalize_integer(value: Any) -> str | None:
     """

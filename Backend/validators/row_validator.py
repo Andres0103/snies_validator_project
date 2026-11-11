@@ -54,10 +54,11 @@ def _is_blank(value: Any) -> bool:
 def _is_alphabetic_text(value: str) -> bool:
     """
     Comprueba que el texto contenga letras Unicode,
-    marcas diacríticas, espacios, apóstrofos o guiones.
+    marcas diacríticas, espacios, apóstrofos, guiones
+    o el acento grave utilizado en algunos apellidos.
     """
 
-    allowed_separators = {"'", "’", "-", " "}
+    allowed_separators = {"'", "’", "-", " ", "`"}
 
     for char in value:
         category = unicodedata.category(char)
@@ -247,7 +248,25 @@ def validate_cell(
     # 4.2. Preparación del valor
     # --------------------------------------------------------
 
+    # --------------------------------------------------------
+    # 4.2. Preparación del valor
+    # --------------------------------------------------------
+
     text_value = str(value).strip()
+
+    # Longitud utilizada para las restricciones del campo.
+    # En los enteros se cuentan los dígitos, sin incluir
+    # el signo negativo.
+    length_value = len(text_value)
+
+    if rule.datatype == DataType.INTEGER:
+        numeric_value = _to_number(value)
+
+        if (
+            numeric_value is not None
+            and numeric_value == numeric_value.to_integral_value()
+        ):
+            length_value = len(str(abs(int(numeric_value))))
 
     # --------------------------------------------------------
     # 4.3. Validación del tipo de dato
@@ -317,11 +336,11 @@ def validate_cell(
 
     if (
         rule.max_length is not None
-        and len(text_value) > rule.max_length
+        and length_value > rule.max_length
     ):
         issues.append(
             Issue(
-                f"La longitud es de {len(text_value)} caracteres; "
+                f"La longitud es de {length_value} caracteres; "
                 f"máximo permitido: {rule.max_length}."
             )
         )
@@ -332,29 +351,28 @@ def validate_cell(
 
     if (
         rule.min_length is not None
-        and len(text_value) < rule.min_length
+        and length_value < rule.min_length
     ):
         issues.append(
             Issue(
-                f"La longitud es de {len(text_value)} caracteres; "
+                f"La longitud es de {length_value} caracteres; "
                 f"mínimo permitido: {rule.min_length}."
             )
         )
-
     # --------------------------------------------------------
     # 4.6. Validación de longitud exacta
     # --------------------------------------------------------
 
     if (
         rule.exact_length is not None
-        and len(text_value) != rule.exact_length
+        and length_value != rule.exact_length
     ):
         issues.append(
             Issue(
                 f"La longitud debe ser exactamente "
                 f"{rule.exact_length} caracteres."
             )
-        )
+    )
 
     # --------------------------------------------------------
     # 4.7. Validación de valores permitidos

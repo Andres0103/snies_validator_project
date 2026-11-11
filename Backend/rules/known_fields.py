@@ -396,33 +396,29 @@ def apply_known_field_fallback(
     # 3. COMPLETAR RESTRICCIONES DE LONGITUD
     # --------------------------------------------------------
 
-    if (
-        rule.max_length is None
-        and "max_length" in entry
-    ):
+        # --------------------------------------------------------
+    # 3. COMPLETAR RESTRICCIONES DE LONGITUD
+    # --------------------------------------------------------
 
+    # Las restricciones explícitas de la configuración YAML
+    # tienen prioridad sobre las longitudes interpretadas
+    # desde los comentarios de Excel.
+
+    if "max_length" in entry:
         rule.max_length = _validate_length(
             entry["max_length"],
             "max_length",
             rule.column_name,
         )
 
-    if (
-        rule.min_length is None
-        and "min_length" in entry
-    ):
-
+    if "min_length" in entry:
         rule.min_length = _validate_length(
             entry["min_length"],
             "min_length",
             rule.column_name,
         )
 
-    if (
-        rule.exact_length is None
-        and "exact_length" in entry
-    ):
-
+    if "exact_length" in entry:
         rule.exact_length = _validate_length(
             entry["exact_length"],
             "exact_length",
@@ -431,12 +427,12 @@ def apply_known_field_fallback(
 
     # Comprobar que las restricciones resultantes
     # no sean contradictorias.
+
     if (
         rule.min_length is not None
         and rule.max_length is not None
         and rule.min_length > rule.max_length
     ):
-
         raise ValueError(
             f"El campo '{rule.column_name}' tiene una "
             "longitud mínima superior a la máxima."
@@ -447,7 +443,6 @@ def apply_known_field_fallback(
         and rule.min_length is not None
         and rule.exact_length < rule.min_length
     ):
-
         raise ValueError(
             f"El campo '{rule.column_name}' tiene una "
             "longitud exacta inferior a la mínima."
@@ -458,7 +453,6 @@ def apply_known_field_fallback(
         and rule.max_length is not None
         and rule.exact_length > rule.max_length
     ):
-
         raise ValueError(
             f"El campo '{rule.column_name}' tiene una "
             "longitud exacta superior a la máxima."
