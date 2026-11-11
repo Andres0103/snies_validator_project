@@ -1,19 +1,19 @@
-
+﻿
 """
 Reconocedor de listas de valores permitidos.
 
 Responsabilidades:
-    - Detectar listas introducidas por frases explícitas.
+    - Detectar listas introducidas por frases explÃ­citas.
     - Detectar listas sin frase introductoria mediante un mecanismo
       de respaldo conservador.
     - Convertir cada elemento en AllowedValue.
-    - Detectar códigos duplicados e inconsistencias.
+    - Detectar cÃ³digos duplicados e inconsistencias.
     - Devolver el texto que no pertenece a la lista para que
       los siguientes reconocedores puedan procesarlo.
 
 Principio importante:
 
-    Este reconocedor solamente debe consumir las líneas que
+    Este reconocedor solamente debe consumir las lÃ­neas que
     realmente pertenecen a una lista.
 
     Nunca debe descartar las instrucciones restantes del comentario.
@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import re
 
-from backend.rules.general_model import (
+from rules.general_model import (
     AllowedValue,
     ValidationRule,
 )
@@ -37,28 +37,28 @@ from rules.strategies.base import RuleRecognizer
 
 # Detecta frases como:
 #
-# Los valores válidos son:
+# Los valores vÃ¡lidos son:
 # Los valores posibles son:
-# El valor válido es:
+# El valor vÃ¡lido es:
 #
 # Se aceptan las formas singular y plural.
 _LIST_MARKER = re.compile(
     r"\b(?:los?\s+valores?|el\s+valor)\s+"
-    r"(?:v[aá]lidos?|posibles?)\s+"
+    r"(?:v[aÃ¡]lidos?|posibles?)\s+"
     r"(?:son|es)\s*:?",
     re.IGNORECASE,
 )
 
 
-# Lista explícita:
+# Lista explÃ­cita:
 #
 # 1 Sector empresarial
-# CC Cédula de ciudadanía
+# CC CÃ©dula de ciudadanÃ­a
 # 6. Todas las anteriores
-# A01 Descripción
+# A01 DescripciÃ³n
 #
-# Se permite un código alfanumérico corto.
-# La interpretación está respaldada por la frase introductoria.
+# Se permite un cÃ³digo alfanumÃ©rico corto.
+# La interpretaciÃ³n estÃ¡ respaldada por la frase introductoria.
 _LIST_ITEM = re.compile(
     r"^\s*([A-Za-z0-9]{1,4})[\.\)\s]+(.+?)\s*$"
 )
@@ -66,11 +66,11 @@ _LIST_ITEM = re.compile(
 
 # Lista detectada por respaldo:
 #
-# Aquí exigimos códigos numéricos, alfabéticos en mayúsculas
-# o alfanuméricos que contengan al menos un número.
+# AquÃ­ exigimos cÃ³digos numÃ©ricos, alfabÃ©ticos en mayÃºsculas
+# o alfanumÃ©ricos que contengan al menos un nÃºmero.
 #
-# Es más restrictivo que el patrón explícito para evitar
-# interpretar palabras normales como códigos.
+# Es mÃ¡s restrictivo que el patrÃ³n explÃ­cito para evitar
+# interpretar palabras normales como cÃ³digos.
 _FALLBACK_LIST_ITEM = re.compile(
     r"^\s*("
     r"\d{1,4}"
@@ -81,8 +81,8 @@ _FALLBACK_LIST_ITEM = re.compile(
 )
 
 
-# Cantidad mínima de líneas consecutivas para activar
-# la detección de respaldo.
+# Cantidad mÃ­nima de lÃ­neas consecutivas para activar
+# la detecciÃ³n de respaldo.
 _MIN_FALLBACK_RUN = 3
 
 
@@ -92,18 +92,18 @@ _MIN_FALLBACK_RUN = 3
 
 class ListRecognizer(RuleRecognizer):
     """
-    Extrae listas código-descripción de comentarios Excel.
+    Extrae listas cÃ³digo-descripciÃ³n de comentarios Excel.
 
     Trabaja en dos modalidades:
 
-        1. Lista explícita:
+        1. Lista explÃ­cita:
            El comentario contiene una frase introductoria
-           como "Los valores válidos son:".
+           como "Los valores vÃ¡lidos son:".
 
         2. Lista por respaldo:
            No existe frase introductoria, pero se encuentra
-           una secuencia de al menos tres líneas con formato
-           código-descripción.
+           una secuencia de al menos tres lÃ­neas con formato
+           cÃ³digo-descripciÃ³n.
     """
 
     def recognize(
@@ -126,7 +126,7 @@ class ListRecognizer(RuleRecognizer):
         )
 
         # ----------------------------------------------------
-        # LISTA EXPLÍCITA
+        # LISTA EXPLÃCITA
         # ----------------------------------------------------
 
         if marker_match:
@@ -155,7 +155,7 @@ class ListRecognizer(RuleRecognizer):
         )
 
     # ========================================================
-    # EXTRACCIÓN DE LISTA EXPLÍCITA
+    # EXTRACCIÃ“N DE LISTA EXPLÃCITA
     # ========================================================
 
     def _extract_from_block(
@@ -164,18 +164,18 @@ class ListRecognizer(RuleRecognizer):
         rule: ValidationRule,
     ) -> str:
         """
-        Extrae una lista explícita sin consumir las instrucciones
-        que aparezcan antes o después de ella.
+        Extrae una lista explÃ­cita sin consumir las instrucciones
+        que aparezcan antes o despuÃ©s de ella.
 
-        La lista comienza en la primera línea que coincide
-        con el patrón código-descripción.
+        La lista comienza en la primera lÃ­nea que coincide
+        con el patrÃ³n cÃ³digo-descripciÃ³n.
 
-        Una vez iniciada, se aceptan líneas vacías entre
+        Una vez iniciada, se aceptan lÃ­neas vacÃ­as entre
         elementos.
 
-        Cuando aparece una línea que no corresponde a un
-        elemento de lista, se considera que terminó el bloque.
-        Esa línea y las siguientes se conservan.
+        Cuando aparece una lÃ­nea que no corresponde a un
+        elemento de lista, se considera que terminÃ³ el bloque.
+        Esa lÃ­nea y las siguientes se conservan.
         """
 
         lines = block.split("\n")
@@ -186,7 +186,7 @@ class ListRecognizer(RuleRecognizer):
 
         list_started = False
 
-        # Conserva temporalmente los saltos de línea entre
+        # Conserva temporalmente los saltos de lÃ­nea entre
         # elementos para poder devolverlos si no pertenecen
         # finalmente a la lista.
         pending_blank_lines: list[str] = []
@@ -211,8 +211,8 @@ class ListRecognizer(RuleRecognizer):
 
                 list_started = True
 
-            # Una vez iniciada la lista, permitimos líneas
-            # vacías entre sus elementos.
+            # Una vez iniciada la lista, permitimos lÃ­neas
+            # vacÃ­as entre sus elementos.
             if not stripped_line:
 
                 pending_blank_lines.append(line)
@@ -222,15 +222,15 @@ class ListRecognizer(RuleRecognizer):
 
             if not item_match:
 
-                # La línea no pertenece a la lista.
-                # Recuperamos los saltos de línea pendientes.
+                # La lÃ­nea no pertenece a la lista.
+                # Recuperamos los saltos de lÃ­nea pendientes.
                 remaining.extend(
                     pending_blank_lines
                 )
 
                 pending_blank_lines.clear()
 
-                # Conservamos esta línea y todo lo posterior.
+                # Conservamos esta lÃ­nea y todo lo posterior.
                 remaining.extend(
                     lines[index:]
                 )
@@ -251,8 +251,8 @@ class ListRecognizer(RuleRecognizer):
 
         else:
 
-            # Si llegamos al final, las líneas vacías pendientes
-            # no pertenecen a ningún elemento.
+            # Si llegamos al final, las lÃ­neas vacÃ­as pendientes
+            # no pertenecen a ningÃºn elemento.
             remaining.extend(
                 pending_blank_lines
             )
@@ -266,7 +266,7 @@ class ListRecognizer(RuleRecognizer):
         return "\n".join(remaining)
 
     # ========================================================
-    # DETECCIÓN DE RESPALDO
+    # DETECCIÃ“N DE RESPALDO
     # ========================================================
 
     def _extract_fallback(
@@ -277,13 +277,13 @@ class ListRecognizer(RuleRecognizer):
         """
         Detecta una lista sin frase introductoria.
 
-        Requiere al menos tres líneas consecutivas que cumplan
-        el patrón más estricto de código-descripción.
+        Requiere al menos tres lÃ­neas consecutivas que cumplan
+        el patrÃ³n mÃ¡s estricto de cÃ³digo-descripciÃ³n.
 
-        Si existen varias secuencias, selecciona la más larga.
+        Si existen varias secuencias, selecciona la mÃ¡s larga.
 
         El texto anterior y posterior a la lista se conserva
-        para los demás reconocedores.
+        para los demÃ¡s reconocedores.
         """
 
         lines = text.split("\n")
@@ -294,7 +294,7 @@ class ListRecognizer(RuleRecognizer):
         run_start: int | None = None
 
         # Se agrega un centinela para cerrar una secuencia
-        # que llegue hasta la última línea.
+        # que llegue hasta la Ãºltima lÃ­nea.
         for index, line in enumerate(lines + [""]):
 
             matches = bool(
@@ -325,7 +325,7 @@ class ListRecognizer(RuleRecognizer):
 
                 run_start = None
 
-        # No se encontró ninguna secuencia suficientemente larga.
+        # No se encontrÃ³ ninguna secuencia suficientemente larga.
         if best_start is None:
             return text
 
@@ -341,8 +341,8 @@ class ListRecognizer(RuleRecognizer):
                 line.strip()
             )
 
-            # Esta comprobación protege el código frente a
-            # cambios futuros en el patrón.
+            # Esta comprobaciÃ³n protege el cÃ³digo frente a
+            # cambios futuros en el patrÃ³n.
             if item_match is None:
                 continue
 
@@ -388,7 +388,7 @@ class ListRecognizer(RuleRecognizer):
         Une el texto anterior y posterior a la lista.
 
         Evita generar separadores innecesarios cuando uno
-        de los fragmentos está vacío.
+        de los fragmentos estÃ¡ vacÃ­o.
         """
 
         parts = [
@@ -401,7 +401,7 @@ class ListRecognizer(RuleRecognizer):
 
 
 # ============================================================
-# ELIMINACIÓN DE DUPLICADOS
+# ELIMINACIÃ“N DE DUPLICADOS
 # ============================================================
 
 def _dedupe(
@@ -409,16 +409,16 @@ def _dedupe(
     rule: ValidationRule,
 ) -> list[AllowedValue]:
     """
-    Elimina códigos duplicados conservando la primera aparición.
+    Elimina cÃ³digos duplicados conservando la primera apariciÃ³n.
 
     Casos:
 
-        Código repetido con misma descripción:
+        CÃ³digo repetido con misma descripciÃ³n:
             Se elimina silenciosamente.
 
-        Código repetido con descripción diferente:
-            Se conserva la primera definición y se registra
-            la inconsistencia para revisión manual.
+        CÃ³digo repetido con descripciÃ³n diferente:
+            Se conserva la primera definiciÃ³n y se registra
+            la inconsistencia para revisiÃ³n manual.
     """
 
     seen: dict[str, str] = {}
@@ -432,7 +432,7 @@ def _dedupe(
 
         previous_label = seen.get(code)
 
-        # Primera aparición del código.
+        # Primera apariciÃ³n del cÃ³digo.
         if previous_label is None:
 
             seen[code] = label
@@ -450,9 +450,9 @@ def _dedupe(
         if previous_label == label:
             continue
 
-        # Mismo código con descripción diferente.
+        # Mismo cÃ³digo con descripciÃ³n diferente.
         fragment = (
-            f"Código '{code}' con descripciones diferentes: "
+            f"CÃ³digo '{code}' con descripciones diferentes: "
             f"'{previous_label}' y '{label}'."
         )
 
@@ -462,3 +462,4 @@ def _dedupe(
             )
 
     return deduped
+

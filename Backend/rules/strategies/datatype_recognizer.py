@@ -29,7 +29,7 @@ from __future__ import annotations
 
 import re
 
-from backend.rules.general_model import DataType, ValidationRule
+from rules.general_model import DataType, ValidationRule
 from rules.strategies.base import RuleRecognizer
 
 

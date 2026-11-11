@@ -1,10 +1,10 @@
-
+﻿
 """
 Convierte una ValidationRule y sus reglas de negocio opcionales
 en objetos DataValidation de openpyxl.
 
-Este módulo centraliza la construcción de las validaciones nativas
-de Excel. Ningún otro módulo debería construir DataValidation
+Este mÃ³dulo centraliza la construcciÃ³n de las validaciones nativas
+de Excel. NingÃºn otro mÃ³dulo deberÃ­a construir DataValidation
 directamente.
 
 Responsabilidades:
@@ -26,10 +26,10 @@ from __future__ import annotations
 
 from openpyxl.worksheet.datavalidation import DataValidation
 
-from backend.rules.general_model import DataType, ValidationRule
+from rules.general_model import DataType, ValidationRule
 
 
-# Excel admite mensajes de validación de longitud limitada.
+# Excel admite mensajes de validaciÃ³n de longitud limitada.
 MAX_EXCEL_MESSAGE_LEN = 255
 
 
@@ -43,39 +43,39 @@ def _truncate(
 ) -> str:
     """
     Limita la longitud de un mensaje para evitar problemas
-    con los límites de Excel.
+    con los lÃ­mites de Excel.
 
-    Si el mensaje supera el límite, se recorta y se agrega
-    un carácter de elipsis.
+    Si el mensaje supera el lÃ­mite, se recorta y se agrega
+    un carÃ¡cter de elipsis.
     """
 
     if len(text) <= limit:
         return text
 
-    return text[: limit - 1].rstrip() + "…"
+    return text[: limit - 1].rstrip() + "â€¦"
 
 
 def _build_input_message(
     rule: ValidationRule,
 ) -> tuple[str, str]:
     """
-    Construye el título y el cuerpo del mensaje de ayuda
+    Construye el tÃ­tulo y el cuerpo del mensaje de ayuda
     que Excel muestra al seleccionar una celda.
 
     Retorna:
         (title, body)
     """
 
-    # Excel limita los títulos de los mensajes a 32 caracteres.
+    # Excel limita los tÃ­tulos de los mensajes a 32 caracteres.
     title = rule.column_name[:32]
 
     parts: list[str] = []
 
-    # Descripción funcional del campo.
+    # DescripciÃ³n funcional del campo.
     if rule.description:
         parts.append(rule.description)
 
-    # Información de obligatoriedad.
+    # InformaciÃ³n de obligatoriedad.
     if rule.required:
         parts.append("Campo obligatorio.")
 
@@ -86,8 +86,8 @@ def _build_input_message(
         )
 
     # Restricciones de longitud.
-    # La longitud exacta tiene prioridad sobre los límites mínimo
-    # y máximo para evitar mensajes contradictorios.
+    # La longitud exacta tiene prioridad sobre los lÃ­mites mÃ­nimo
+    # y mÃ¡ximo para evitar mensajes contradictorios.
     if rule.exact_length is not None:
 
         parts.append(
@@ -99,12 +99,12 @@ def _build_input_message(
 
         if rule.min_length is not None:
             parts.append(
-                f"Mínimo {rule.min_length} caracteres."
+                f"MÃ­nimo {rule.min_length} caracteres."
             )
 
         if rule.max_length is not None:
             parts.append(
-                f"Máximo {rule.max_length} caracteres."
+                f"MÃ¡ximo {rule.max_length} caracteres."
             )
 
     # Formatos de fecha aceptados por la regla.
@@ -113,7 +113,7 @@ def _build_input_message(
             f"Formato de fecha: {' o '.join(rule.date_formats)}."
         )
 
-    # Información sobre catálogos o listas de valores permitidos.
+    # InformaciÃ³n sobre catÃ¡logos o listas de valores permitidos.
     if rule.allowed_values:
 
         legend = "; ".join(
@@ -122,18 +122,18 @@ def _build_input_message(
         )
 
         # Solo se muestran los valores si caben en el mensaje.
-        # No se trunca una lista porque podría inducir al usuario
-        # a pensar que los valores omitidos no son válidos.
+        # No se trunca una lista porque podrÃ­a inducir al usuario
+        # a pensar que los valores omitidos no son vÃ¡lidos.
         if len(legend) <= 180:
 
             parts.append(
-                f"Valores válidos: {legend}."
+                f"Valores vÃ¡lidos: {legend}."
             )
 
         else:
 
             parts.append(
-                "Seleccione un código del listado desplegable "
+                "Seleccione un cÃ³digo del listado desplegable "
                 "(ver hoja '_Listas_Auxiliares' para el detalle)."
             )
 
@@ -143,7 +143,7 @@ def _build_input_message(
 
 
 # ============================================================
-# VALIDACIÓN DE LISTAS DESPLEGABLES
+# VALIDACIÃ“N DE LISTAS DESPLEGABLES
 # ============================================================
 
 def build_list_validation(
@@ -151,17 +151,17 @@ def build_list_validation(
     defined_name: str,
 ) -> DataValidation:
     """
-    Construye una validación de lista desplegable.
+    Construye una validaciÃ³n de lista desplegable.
 
     La lista se encuentra en un rango con nombre definido
     previamente en la hoja auxiliar.
 
     Args:
         rule:
-            Regla de validación de la columna.
+            Regla de validaciÃ³n de la columna.
 
         defined_name:
-            Nombre definido de Excel que referencia el catálogo.
+            Nombre definido de Excel que referencia el catÃ¡logo.
 
     Returns:
         Objeto DataValidation configurado como lista.
@@ -181,7 +181,7 @@ def build_list_validation(
     dv.errorTitle = "Valor no permitido"
 
     dv.error = _truncate(
-        f"'{rule.column_name}' debe ser uno de los códigos "
+        f"'{rule.column_name}' debe ser uno de los cÃ³digos "
         "de la lista desplegable."
     )
 
@@ -196,7 +196,7 @@ def build_list_validation(
 
 
 # ============================================================
-# VALIDACIÓN DE TIPOS DE DATOS Y LONGITUDES
+# VALIDACIÃ“N DE TIPOS DE DATOS Y LONGITUDES
 # ============================================================
 
 def build_type_validation(
@@ -204,7 +204,7 @@ def build_type_validation(
     column_letter: str = "A",
 ) -> DataValidation | None:
     """
-    Construye una validación nativa de Excel según el tipo
+    Construye una validaciÃ³n nativa de Excel segÃºn el tipo
     de dato y las restricciones de longitud de la regla.
 
     Tipos soportados:
@@ -215,37 +215,37 @@ def build_type_validation(
         - ALPHABETIC
         - TEXT
 
-    Para los tipos numéricos y fechas se utilizan fórmulas
+    Para los tipos numÃ©ricos y fechas se utilizan fÃ³rmulas
     personalizadas que hacen referencia a la fila 2.
 
     Para los tipos textuales se utilizan validaciones
     de longitud de texto.
 
     IMPORTANTE:
-    El rango al que se aplique esta validación debe comenzar
-    en la fila 2, o la referencia de la fórmula debe ajustarse.
+    El rango al que se aplique esta validaciÃ³n debe comenzar
+    en la fila 2, o la referencia de la fÃ³rmula debe ajustarse.
 
     Returns:
-        DataValidation si existe una validación aplicable.
-        None si el tipo no necesita una validación nativa.
+        DataValidation si existe una validaciÃ³n aplicable.
+        None si el tipo no necesita una validaciÃ³n nativa.
     """
 
     dv: DataValidation | None = None
 
     # --------------------------------------------------------
-    # 1. TIPOS NUMÉRICOS
+    # 1. TIPOS NUMÃ‰RICOS
     # --------------------------------------------------------
 
     if rule.datatype == DataType.INTEGER:
 
         row_cell = f"{column_letter}2"
 
-        # Comprueba que el contenido sea numérico y que no tenga
+        # Comprueba que el contenido sea numÃ©rico y que no tenga
         # parte decimal.
         #
-        # MOD(valor, 1) = 0 permite identificar números enteros.
-        # IFERROR evita que una entrada no numérica produzca
-        # un error en la fórmula de validación.
+        # MOD(valor, 1) = 0 permite identificar nÃºmeros enteros.
+        # IFERROR evita que una entrada no numÃ©rica produzca
+        # un error en la fÃ³rmula de validaciÃ³n.
         dv = DataValidation(
             type="custom",
             formula1=(
@@ -260,8 +260,8 @@ def build_type_validation(
 
         row_cell = f"{column_letter}2"
 
-        # Comprueba que Excel reconozca el contenido como número.
-        # No se establecen límites numéricos arbitrarios.
+        # Comprueba que Excel reconozca el contenido como nÃºmero.
+        # No se establecen lÃ­mites numÃ©ricos arbitrarios.
         dv = DataValidation(
             type="custom",
             formula1=f"=ISNUMBER({row_cell})",
@@ -275,8 +275,8 @@ def build_type_validation(
 
         row_cell = f"{column_letter}2"
 
-        # Excel representa internamente las fechas como números.
-        # La comprobación completa del formato y de la fecha
+        # Excel representa internamente las fechas como nÃºmeros.
+        # La comprobaciÃ³n completa del formato y de la fecha
         # corresponde al validador post-hoc.
         #
         # No se imponen rangos de fechas arbitrarios.
@@ -304,7 +304,7 @@ def build_type_validation(
                 formula1=str(rule.exact_length),
             )
 
-        # Si existen límites mínimo y máximo,
+        # Si existen lÃ­mites mÃ­nimo y mÃ¡ximo,
         # el contenido debe encontrarse entre ambos.
         elif (
             rule.min_length is not None
@@ -318,7 +318,7 @@ def build_type_validation(
                 formula2=str(rule.max_length),
             )
 
-        # Solo existe longitud máxima.
+        # Solo existe longitud mÃ¡xima.
         elif rule.max_length is not None:
 
             dv = DataValidation(
@@ -327,7 +327,7 @@ def build_type_validation(
                 formula1=str(rule.max_length),
             )
 
-        # Solo existe longitud mínima.
+        # Solo existe longitud mÃ­nima.
         elif rule.min_length is not None:
 
             dv = DataValidation(
@@ -336,21 +336,21 @@ def build_type_validation(
                 formula1=str(rule.min_length),
             )
 
-    # Si no se construyó una validación,
-    # el tipo no requiere una validación nativa en Excel.
+    # Si no se construyÃ³ una validaciÃ³n,
+    # el tipo no requiere una validaciÃ³n nativa en Excel.
     if dv is None:
         return None
 
     # --------------------------------------------------------
-    # 4. CONFIGURACIÓN COMÚN
+    # 4. CONFIGURACIÃ“N COMÃšN
     # --------------------------------------------------------
 
-    # La obligatoriedad se controla también mediante las
+    # La obligatoriedad se controla tambiÃ©n mediante las
     # validaciones de obligatoriedad y el validador post-hoc.
     dv.allow_blank = not rule.required
 
     dv.showErrorMessage = True
-    dv.errorTitle = "Dato inválido"
+    dv.errorTitle = "Dato invÃ¡lido"
 
     dv.error = _truncate(
         _build_error_text(rule)
@@ -367,7 +367,7 @@ def build_type_validation(
 
 
 # ============================================================
-# CONSTRUCCIÓN DE MENSAJES DE ERROR
+# CONSTRUCCIÃ“N DE MENSAJES DE ERROR
 # ============================================================
 
 def _build_error_text(
@@ -380,15 +380,15 @@ def _build_error_text(
 
     column = f"'{rule.column_name}'"
 
-    # Errores de tipos numéricos.
+    # Errores de tipos numÃ©ricos.
     if rule.datatype == DataType.INTEGER:
         return (
-            f"{column} debe contener un número entero."
+            f"{column} debe contener un nÃºmero entero."
         )
 
     if rule.datatype == DataType.DECIMAL:
         return (
-            f"{column} debe contener un valor numérico."
+            f"{column} debe contener un valor numÃ©rico."
         )
 
     # Error de fecha.
@@ -401,7 +401,7 @@ def _build_error_text(
         )
 
         return (
-            f"{column} debe contener una fecha válida "
+            f"{column} debe contener una fecha vÃ¡lida "
             f"(formato {fmt})."
         )
 
@@ -437,7 +437,7 @@ def _build_error_text(
             f"{rule.max_length} caracteres."
         )
 
-    return f"Valor inválido para {column}."
+    return f"Valor invÃ¡lido para {column}."
 
 
 # ============================================================
@@ -460,7 +460,7 @@ def build_business_rule_validation(
         - non_negative_with_min_length
         - email_format
 
-    La regla date_after_column se resuelve mediante una función
+    La regla date_after_column se resuelve mediante una funciÃ³n
     independiente porque necesita la referencia de otra columna.
 
     Args:
@@ -468,21 +468,21 @@ def build_business_rule_validation(
             Tipo de regla de negocio.
 
         params:
-            Parámetros de configuración de la regla.
+            ParÃ¡metros de configuraciÃ³n de la regla.
 
         column_letter:
-            Letra de la columna donde se aplica la validación.
+            Letra de la columna donde se aplica la validaciÃ³n.
 
         rule:
             Regla general asociada al campo. Es opcional.
 
     Returns:
-        DataValidation si el tipo de regla está soportado.
+        DataValidation si el tipo de regla estÃ¡ soportado.
         None si debe resolverse desde otro lugar.
     """
 
     # --------------------------------------------------------
-    # 1. FECHA DENTRO DE LOS ÚLTIMOS N AÑOS
+    # 1. FECHA DENTRO DE LOS ÃšLTIMOS N AÃ‘OS
     # --------------------------------------------------------
 
     if kind == "date_within_past_years":
@@ -497,7 +497,7 @@ def build_business_rule_validation(
         )
 
     # --------------------------------------------------------
-    # 2. VALOR NUMÉRICO NO NEGATIVO
+    # 2. VALOR NUMÃ‰RICO NO NEGATIVO
     # --------------------------------------------------------
 
     elif kind == "non_negative":
@@ -509,7 +509,7 @@ def build_business_rule_validation(
         )
 
     # --------------------------------------------------------
-    # 3. VALOR NO NEGATIVO CON LONGITUD MÍNIMA
+    # 3. VALOR NO NEGATIVO CON LONGITUD MÃNIMA
     # --------------------------------------------------------
 
     elif kind == "non_negative_with_min_length":
@@ -519,12 +519,12 @@ def build_business_rule_validation(
         row_cell = f"{column_letter}2"
 
         # Comprueba:
-        #   - Que el contenido tenga la longitud mínima.
-        #   - Que pueda convertirse en número.
+        #   - Que el contenido tenga la longitud mÃ­nima.
+        #   - Que pueda convertirse en nÃºmero.
         #   - Que su valor sea mayor o igual a cero.
         #
         # IFERROR evita que VALUE genere errores ante texto
-        # que no representa un valor numérico.
+        # que no representa un valor numÃ©rico.
         dv = DataValidation(
             type="custom",
             formula1=(
@@ -537,21 +537,21 @@ def build_business_rule_validation(
         )
 
     # --------------------------------------------------------
-    # 4. FORMATO BÁSICO DE CORREO ELECTRÓNICO
+    # 4. FORMATO BÃSICO DE CORREO ELECTRÃ“NICO
     # --------------------------------------------------------
 
     elif kind == "email_format":
 
         row_cell = f"{column_letter}2"
 
-        # Esta fórmula realiza una comprobación básica:
-        #   - Debe existir exactamente un símbolo @.
+        # Esta fÃ³rmula realiza una comprobaciÃ³n bÃ¡sica:
+        #   - Debe existir exactamente un sÃ­mbolo @.
         #   - Debe existir texto antes del @.
-        #   - Debe existir texto después del @.
+        #   - Debe existir texto despuÃ©s del @.
         #   - Debe existir un punto en el dominio.
         #   - No se permiten espacios.
         #
-        # No sustituye la validación completa del post-hoc.
+        # No sustituye la validaciÃ³n completa del post-hoc.
         dv = DataValidation(
             type="custom",
             formula1=(
@@ -584,10 +584,10 @@ def build_business_rule_validation(
         return None
 
     # --------------------------------------------------------
-    # 6. CONFIGURACIÓN COMÚN DE LA REGLA DE NEGOCIO
+    # 6. CONFIGURACIÃ“N COMÃšN DE LA REGLA DE NEGOCIO
     # --------------------------------------------------------
 
-    # Se permite vacío en esta validación individual.
+    # Se permite vacÃ­o en esta validaciÃ³n individual.
     # La obligatoriedad debe controlarse mediante la regla
     # general del campo y el validador post-hoc.
     dv.allow_blank = True
@@ -630,7 +630,7 @@ def build_business_rule_validation(
 
 
 # ============================================================
-# VALIDACIÓN DE FECHAS ENTRE COLUMNAS
+# VALIDACIÃ“N DE FECHAS ENTRE COLUMNAS
 # ============================================================
 
 def build_date_after_column_validation(
@@ -640,7 +640,7 @@ def build_date_after_column_validation(
     strict: bool = False,
 ) -> DataValidation:
     """
-    Construye una validación que compara dos fechas
+    Construye una validaciÃ³n que compara dos fechas
     de la misma fila.
 
     Ejemplo:
@@ -651,10 +651,10 @@ def build_date_after_column_validation(
             Letra de la columna que contiene la fecha evaluada.
 
         after_column_letter:
-            Letra de la columna con la fecha de comparación.
+            Letra de la columna con la fecha de comparaciÃ³n.
 
         after_column_name:
-            Nombre de la columna de comparación. Se utiliza
+            Nombre de la columna de comparaciÃ³n. Se utiliza
             para construir el mensaje informativo.
 
         strict:
@@ -662,16 +662,16 @@ def build_date_after_column_validation(
             True: exige una fecha posterior (>).
 
     IMPORTANTE:
-    La fórmula utiliza la fila 2 como referencia.
+    La fÃ³rmula utiliza la fila 2 como referencia.
     El rango aplicado debe comenzar en esa fila.
     """
 
-    # Define el operador de comparación.
+    # Define el operador de comparaciÃ³n.
     operator = ">" if strict else ">="
 
-    # La validación permite que la fecha evaluada esté vacía.
+    # La validaciÃ³n permite que la fecha evaluada estÃ© vacÃ­a.
     # Si tiene un valor, ambas celdas deben contener fechas
-    # reconocidas como valores numéricos por Excel.
+    # reconocidas como valores numÃ©ricos por Excel.
     dv = DataValidation(
         type="custom",
         formula1=(
@@ -689,7 +689,7 @@ def build_date_after_column_validation(
     dv.showErrorMessage = True
     dv.errorTitle = "Regla de negocio"
 
-    # Mensaje de error según el operador utilizado.
+    # Mensaje de error segÃºn el operador utilizado.
     if strict:
 
         dv.error = (
@@ -727,3 +727,4 @@ def build_date_after_column_validation(
         )
 
     return dv
+

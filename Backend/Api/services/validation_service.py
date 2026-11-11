@@ -467,13 +467,36 @@ def process_validation_sync(validation_id: str):
         validation_dir / "input.json"
     )
 
+def process_validation_sync(validation_id: str):
+    """
+    Procesa todos los Excel asociados a una validación.
+
+    Esta función completa se ejecuta fuera del event loop.
+    """
+
+    validation_dir = get_validation_directory(validation_id)
+
+    if validation_dir is None:
+
+        raise RuntimeError(
+            "No se encontró el directorio de validación."
+        )
+
+    metadata_path = validation_dir / "metadata.json"
+
+    metadata = read_json(metadata_path)
+
+    manifest = read_json(
+        validation_dir / "input.json"
+    )
+
     if metadata is None or manifest is None:
 
         raise RuntimeError(
             "No se encontró la información de la validación."
         )
     
-        template_name = metadata.get("plantilla")
+    template_name = metadata.get("plantilla") 
 
     if not template_name:
         raise RuntimeError(

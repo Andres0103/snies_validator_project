@@ -1,0 +1,26 @@
+{
+  "id": "c0469715-78d0-4643-b963-2bd0987260ab",
+  "plantilla": "CONSULTORIA",
+  "estado": "FALLIDO",
+  "progreso": 100,
+  "mensaje": "Error interno durante la validación.",
+  "creado_en": "2026-11-11T19:19:31.711286+00:00",
+  "iniciado_en": null,
+  "finalizado_en": "2026-11-11T19:19:31.803203+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 0,
+  "total_archivos_fallidos": 0,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "estado": "PENDIENTE",
+      "archivo_marcado": null,
+      "total_errores": 0,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

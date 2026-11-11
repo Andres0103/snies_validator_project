@@ -1,11 +1,11 @@
-
+﻿
 """
-Orquesta la generación de plantillas SNIES con validaciones nativas.
+Orquesta la generaciÃ³n de plantillas SNIES con validaciones nativas.
 
 Flujo por workbook:
-    1. Identificar la plantilla y cargar su configuración.
+    1. Identificar la plantilla y cargar su configuraciÃ³n.
     2. Leer encabezados e interpretar sus comentarios.
-    3. Completar las reglas con known_fields y los catálogos YAML.
+    3. Completar las reglas con known_fields y los catÃ¡logos YAML.
     4. Construir la hoja auxiliar con las listas desplegables.
     5. Construir y aplicar las validaciones nativas de Excel.
     6. Generar un reporte de las validaciones aplicadas y pendientes.
@@ -17,7 +17,7 @@ IMPORTANTE:
 Excel no permite combinar libremente distintos tipos de
 DataValidation sobre una misma celda.
 
-Por eso este módulo aplica una sola validación nativa por columna
+Por eso este mÃ³dulo aplica una sola validaciÃ³n nativa por columna
 y registra las restricciones que deben verificarse mediante
 el validador post-hoc.
 """
@@ -55,17 +55,17 @@ from rules.template_profiles import detect_templates
 from rules.catalog_loader import load_catalog
 from rules.interpreter import interpret_comment
 
-from backend.rules.general_model import DataType, ValidationRule
+from rules.general_model import DataType, ValidationRule
 
 
 # ============================================================
-# CONFIGURACIÓN GENERAL
+# CONFIGURACIÃ“N GENERAL
 # ============================================================
 
-# Número de filas que cubrirán las validaciones nativas.
+# NÃºmero de filas que cubrirÃ¡n las validaciones nativas.
 #
 # La fila 1 contiene encabezados y los datos comienzan en la 2.
-# Por tanto, este valor representa la última fila cubierta,
+# Por tanto, este valor representa la Ãºltima fila cubierta,
 # no la cantidad de registros.
 DATA_ROWS_TO_COVER = 2000
 
@@ -79,7 +79,7 @@ CONFIG_FILES = (
 )
 
 
-# Reglas de negocio que tienen constructor de validación nativa.
+# Reglas de negocio que tienen constructor de validaciÃ³n nativa.
 SUPPORTED_BUSINESS_RULES = {
     "date_within_past_years",
     "non_negative",
@@ -96,7 +96,7 @@ SUPPORTED_BUSINESS_RULES = {
 @dataclass
 class ColumnReport:
     """
-    Resultado de la generación de validaciones para una columna.
+    Resultado de la generaciÃ³n de validaciones para una columna.
 
     Attributes:
         sheet_name:
@@ -113,7 +113,7 @@ class ColumnReport:
             que quedan pendientes para el post-hoc.
 
         needs_review:
-            Indica si la columna requiere revisión adicional
+            Indica si la columna requiere revisiÃ³n adicional
             mediante el validador post-hoc.
     """
 
@@ -125,19 +125,19 @@ class ColumnReport:
 
 
 # ============================================================
-# DETECCIÓN DE ARQUITECTURA DE CONFIGURACIÓN
+# DETECCIÃ“N DE ARQUITECTURA DE CONFIGURACIÃ“N
 # ============================================================
 
 def _has_new_configuration(template_name: str) -> bool:
     """
     Comprueba si una plantilla utiliza la nueva arquitectura.
 
-    Se verifica que exista el directorio específico de la plantilla
-    y al menos un archivo de configuración reconocido en el
-    directorio común o en el directorio de la plantilla.
+    Se verifica que exista el directorio especÃ­fico de la plantilla
+    y al menos un archivo de configuraciÃ³n reconocido en el
+    directorio comÃºn o en el directorio de la plantilla.
 
-    Esta comprobación detecta la presencia de configuración,
-    pero no garantiza que todos los archivos requeridos estén
+    Esta comprobaciÃ³n detecta la presencia de configuraciÃ³n,
+    pero no garantiza que todos los archivos requeridos estÃ©n
     completos. Esa responsabilidad corresponde al cargador.
     """
 
@@ -159,7 +159,7 @@ def _has_new_configuration(template_name: str) -> bool:
     if not template_dir.is_dir():
         return False
 
-    # Revisar configuración común y configuración específica.
+    # Revisar configuraciÃ³n comÃºn y configuraciÃ³n especÃ­fica.
     for directory in (common_dir, template_dir):
 
         if not directory.is_dir():
@@ -175,7 +175,7 @@ def _has_new_configuration(template_name: str) -> bool:
 
 
 # ============================================================
-# CONFIGURACIÓN POR HOJA
+# CONFIGURACIÃ“N POR HOJA
 # ============================================================
 
 def _get_sheet_configuration(
@@ -183,13 +183,13 @@ def _get_sheet_configuration(
     sheet_name: str,
 ) -> dict[str, Any]:
     """
-    Obtiene las reglas, validaciones y catálogos de una hoja.
+    Obtiene las reglas, validaciones y catÃ¡logos de una hoja.
 
     Prioridad:
         1. Nueva arquitectura: sheet_configurations.
         2. Arquitectura anterior: validation_config.
 
-    Esto permite mantener compatibilidad durante la migración.
+    Esto permite mantener compatibilidad durante la migraciÃ³n.
     """
 
     sheet_configurations = getattr(
@@ -205,7 +205,7 @@ def _get_sheet_configuration(
         if configured_name.strip().casefold() == normalized_sheet_name:
             return sheet_config
 
-    # Compatibilidad con la configuración anterior.
+    # Compatibilidad con la configuraciÃ³n anterior.
     validation_config = getattr(
         configuration,
         "validation_config",
@@ -230,7 +230,7 @@ def _get_sheet_configuration(
 
 
 # ============================================================
-# APLICACIÓN DE CATÁLOGOS CONFIGURADOS
+# APLICACIÃ“N DE CATÃLOGOS CONFIGURADOS
 # ============================================================
 
 def _apply_configured_catalog(
@@ -240,13 +240,13 @@ def _apply_configured_catalog(
     catalogs: dict[str, Any],
 ) -> None:
     """
-    Carga el catálogo configurado para una columna.
+    Carga el catÃ¡logo configurado para una columna.
 
-    Cuando validations.yaml declara explícitamente un catálogo,
+    Cuando validations.yaml declara explÃ­citamente un catÃ¡logo,
     este tiene prioridad sobre los valores interpretados desde
     el comentario de Excel.
 
-    La función modifica rule.allowed_values.
+    La funciÃ³n modifica rule.allowed_values.
     """
 
     validation = validations.get(
@@ -256,14 +256,14 @@ def _apply_configured_catalog(
 
     if not isinstance(validation, dict):
         raise ValueError(
-            f"La configuración de validación de la columna "
+            f"La configuraciÃ³n de validaciÃ³n de la columna "
             f"'{rule.column_name}' en la hoja '{sheet_name}' "
             "debe ser un diccionario."
         )
 
     catalog_name = validation.get("catalog")
 
-    # Si no hay catálogo configurado, se conservan los valores
+    # Si no hay catÃ¡logo configurado, se conservan los valores
     # interpretados desde el comentario de Excel.
     if rule.allowed_values:
         return
@@ -276,12 +276,12 @@ def _apply_configured_catalog(
     if catalog_config is None:
         raise ValueError(
             f"La columna '{rule.column_name}' de la hoja "
-            f"'{sheet_name}' referencia el catálogo "
-            f"'{catalog_name}', pero no está definido "
+            f"'{sheet_name}' referencia el catÃ¡logo "
+            f"'{catalog_name}', pero no estÃ¡ definido "
             "en catalogs.yaml."
         )
 
-    # El catálogo YAML reemplaza los valores del comentario.
+    # El catÃ¡logo YAML reemplaza los valores del comentario.
     rule.allowed_values = load_catalog(
         catalog_config,
         catalog_name,
@@ -289,7 +289,7 @@ def _apply_configured_catalog(
 
 
 # ============================================================
-# DEDUPLICACIÓN DE LISTAS DESPLEGABLES
+# DEDUPLICACIÃ“N DE LISTAS DESPLEGABLES
 # ============================================================
 
 def _dedup_rules_with_lists(
@@ -297,15 +297,15 @@ def _dedup_rules_with_lists(
     rules_by_key: dict[tuple[str, str], ValidationRule],
 ) -> list[ValidationRule]:
     """
-    Reúne las reglas que contienen listas de valores permitidos.
+    ReÃºne las reglas que contienen listas de valores permitidos.
 
     La hoja auxiliar identifica sus rangos por nombre de columna.
     Por eso, si una misma columna aparece en varias hojas,
-    sus catálogos deben ser iguales.
+    sus catÃ¡logos deben ser iguales.
 
-    Si existen catálogos diferentes para una misma columna,
+    Si existen catÃ¡logos diferentes para una misma columna,
     se genera un error en lugar de reutilizar silenciosamente
-    un catálogo incorrecto.
+    un catÃ¡logo incorrecto.
     """
 
     unique_rules: dict[str, ValidationRule] = {}
@@ -348,7 +348,7 @@ def _dedup_rules_with_lists(
 
         if existing_values != current_values:
             raise ValueError(
-                f"La columna '{column_name}' tiene catálogos "
+                f"La columna '{column_name}' tiene catÃ¡logos "
                 "diferentes en varias hojas del workbook. "
                 "La hoja auxiliar actual no permite distinguir "
                 "listas diferentes para columnas con el mismo nombre."
@@ -358,13 +358,13 @@ def _dedup_rules_with_lists(
 
 
 # ============================================================
-# IDENTIFICACIÓN DE RESTRICCIONES
+# IDENTIFICACIÃ“N DE RESTRICCIONES
 # ============================================================
 
 def _has_type_validation(rule: ValidationRule) -> bool:
     """
-    Determina si la regla general tiene alguna restricción
-    que pueda convertirse en validación nativa de Excel.
+    Determina si la regla general tiene alguna restricciÃ³n
+    que pueda convertirse en validaciÃ³n nativa de Excel.
     """
 
     if rule.datatype in {
@@ -395,8 +395,8 @@ def _get_type_validation_description(
     rule: ValidationRule,
 ) -> str:
     """
-    Construye una descripción para el reporte de las restricciones
-    de tipo y longitud que requieren validación post-hoc.
+    Construye una descripciÃ³n para el reporte de las restricciones
+    de tipo y longitud que requieren validaciÃ³n post-hoc.
     """
 
     if rule.datatype == DataType.INTEGER:
@@ -446,16 +446,16 @@ def _get_configured_post_hoc_constraints(
     Identifica las restricciones de validations.yaml que deben
     comprobarse mediante el validador post-hoc.
 
-    El catálogo se excluye porque se representa mediante
+    El catÃ¡logo se excluye porque se representa mediante
     la lista desplegable nativa de Excel.
 
-    No significa que las restricciones se ejecuten aquí:
-    únicamente se identifican para el reporte del writer.
+    No significa que las restricciones se ejecuten aquÃ­:
+    Ãºnicamente se identifican para el reporte del writer.
     """
 
     if not isinstance(validation, dict):
         raise ValueError(
-            "La configuración de validación de una columna "
+            "La configuraciÃ³n de validaciÃ³n de una columna "
             "debe ser un diccionario."
         )
 
@@ -471,7 +471,7 @@ def _get_configured_post_hoc_constraints(
     return pending_constraints
 
 # ============================================================
-# CONSTRUCCIÓN DE VALIDACIÓN DE NEGOCIO
+# CONSTRUCCIÃ“N DE VALIDACIÃ“N DE NEGOCIO
 # ============================================================
 
 def _build_business_validation(
@@ -482,7 +482,7 @@ def _build_business_validation(
     sheet_name: str,
 ) -> DataValidation | None:
     """
-    Construye la validación nativa correspondiente a una regla
+    Construye la validaciÃ³n nativa correspondiente a una regla
     de negocio.
 
     Las reglas que comparan dos columnas se resuelven mediante
@@ -537,7 +537,7 @@ def _build_business_validation(
 
 
 # ============================================================
-# APLICACIÓN DE UNA VALIDACIÓN NATIVA
+# APLICACIÃ“N DE UNA VALIDACIÃ“N NATIVA
 # ============================================================
 
 def _apply_validation(
@@ -546,10 +546,10 @@ def _apply_validation(
     data_range: str,
 ) -> None:
     """
-    Agrega una validación al worksheet y la aplica al rango.
+    Agrega una validaciÃ³n al worksheet y la aplica al rango.
 
-    Centralizar esta operación evita repetir el mismo código
-    en cada tipo de validación.
+    Centralizar esta operaciÃ³n evita repetir el mismo cÃ³digo
+    en cada tipo de validaciÃ³n.
     """
 
     worksheet.add_data_validation(validation)
@@ -565,9 +565,9 @@ def process_workbook(
 ) -> list[ColumnReport]:
     """
     Aplica validaciones nativas a todas las hojas de datos
-    del workbook y devuelve un reporte de generación.
+    del workbook y devuelve un reporte de generaciÃ³n.
 
-    Prioridad de validación nativa por columna:
+    Prioridad de validaciÃ³n nativa por columna:
 
         1. Lista desplegable.
         2. Regla de negocio.
@@ -605,7 +605,7 @@ def process_workbook(
     )
 
     # --------------------------------------------------------
-    # 2. CARGAR LA CONFIGURACIÓN CORRESPONDIENTE
+    # 2. CARGAR LA CONFIGURACIÃ“N CORRESPONDIENTE
     # --------------------------------------------------------
 
     if (
@@ -620,8 +620,8 @@ def process_workbook(
 
     else:
 
-        # Plantilla todavía no migrada.
-        # Se conserva la configuración anterior.
+        # Plantilla todavÃ­a no migrada.
+        # Se conserva la configuraciÃ³n anterior.
         configuration = load_rule_configuration()
 
     # Convertir a lista para garantizar que podamos recorrer
@@ -652,7 +652,7 @@ def process_workbook(
         headers = read_headers(ws)
         all_headers.extend(headers)
 
-        # Obtener la configuración particular de la hoja.
+        # Obtener la configuraciÃ³n particular de la hoja.
         sheet_configuration = _get_sheet_configuration(
             configuration,
             ws.title,
@@ -670,7 +670,7 @@ def process_workbook(
                 sheet_name=ws.title,
             )
 
-            # Incorporar el catálogo YAML explícito.
+            # Incorporar el catÃ¡logo YAML explÃ­cito.
             _apply_configured_catalog(
                 rule,
                 ws.title,
@@ -686,7 +686,7 @@ def process_workbook(
             if key in rules_by_key:
                 raise ValueError(
                     f"La hoja '{header.sheet_name}' contiene "
-                    f"más de un encabezado llamado "
+                    f"mÃ¡s de un encabezado llamado "
                     f"'{header.column_name}'."
                 )
 
@@ -697,7 +697,7 @@ def process_workbook(
 
             if not isinstance(validation, dict):
                 raise ValueError(
-                    f"La validación de '{header.column_name}' "
+                    f"La validaciÃ³n de '{header.column_name}' "
                     f"en la hoja '{ws.title}' debe ser un diccionario."
                 )
 
@@ -797,7 +797,7 @@ def process_workbook(
             has_type_rule = _has_type_validation(rule)
 
             # ------------------------------------------------
-            # B. CONSTRUIR LA VALIDACIÓN NATIVA PRIORITARIA
+            # B. CONSTRUIR LA VALIDACIÃ“N NATIVA PRIORITARIA
             # ------------------------------------------------
 
             validation: DataValidation | None = None
@@ -805,7 +805,7 @@ def process_workbook(
             # Prioridad 1: lista desplegable.
             #
             # Se conserva el desplegable porque permite al usuario
-            # seleccionar directamente un código del catálogo.
+            # seleccionar directamente un cÃ³digo del catÃ¡logo.
             if has_list:
 
                 defined_name = defined_names.get(
@@ -814,7 +814,7 @@ def process_workbook(
 
                 if not defined_name:
                     raise ValueError(
-                        f"No se encontró el rango definido "
+                        f"No se encontrÃ³ el rango definido "
                         f"para la lista de la columna "
                         f"'{rule.column_name}' en la hoja "
                         f"'{ws.title}'."
@@ -882,7 +882,7 @@ def process_workbook(
                     f"post_hoc:regla_negocio:{business_kind}"
                 )
             # ------------------------------------------------
-            # C. APLICAR LA VALIDACIÓN NATIVA
+            # C. APLICAR LA VALIDACIÃ“N NATIVA
             # ------------------------------------------------
 
             if validation is not None:
@@ -897,7 +897,7 @@ def process_workbook(
             # D. REGISTRAR RESTRICCIONES PENDIENTES
             # ------------------------------------------------
 
-            # Si se aplicó una lista, la validación de tipo
+            # Si se aplicÃ³ una lista, la validaciÃ³n de tipo
             # y las reglas de negocio adicionales no quedan
             # combinadas en Excel.
             #
@@ -915,8 +915,8 @@ def process_workbook(
                         f"post_hoc:regla_negocio:{business_kind}"
                     )
 
-            # Si se aplicó una regla de negocio, la validación
-            # general de tipo o longitud no se combinó con ella.
+            # Si se aplicÃ³ una regla de negocio, la validaciÃ³n
+            # general de tipo o longitud no se combinÃ³ con ella.
             elif has_business_rule:
 
                 if has_type_rule:
@@ -946,13 +946,13 @@ def process_workbook(
             applied.extend(configured_constraints)
 
             # ------------------------------------------------
-            # E. DETERMINAR SI REQUIERE REVISIÓN POST-HOC
+            # E. DETERMINAR SI REQUIERE REVISIÃ“N POST-HOC
             # ------------------------------------------------
 
-            # Requiere revisión cuando:
-            #   - La regla original indica revisión manual.
+            # Requiere revisiÃ³n cuando:
+            #   - La regla original indica revisiÃ³n manual.
             #   - Hay restricciones que no se combinaron
-            #     en la validación nativa.
+            #     en la validaciÃ³n nativa.
             #   - Existe una regla de negocio no soportada.
             #   - Hay una regla de consistencia entre filas.
             #
@@ -981,3 +981,4 @@ def process_workbook(
             )
 
     return reports
+

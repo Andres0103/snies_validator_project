@@ -1,18 +1,18 @@
-
+﻿
 """Construye la hoja auxiliar oculta que respalda las listas desplegables.
 
 Responsabilidades:
 1. Crear o reutilizar la hoja auxiliar.
-2. Limpiar los catálogos generados anteriormente.
-3. Escribir los códigos y sus descripciones.
+2. Limpiar los catÃ¡logos generados anteriormente.
+3. Escribir los cÃ³digos y sus descripciones.
 4. Crear o actualizar los nombres definidos de Excel.
 5. Evitar que se acumulen listas obsoletas entre generaciones.
 
-La hoja auxiliar utiliza dos columnas por catálogo:
-- Primera columna: código que aparecerá en el desplegable.
-- Segunda columna: descripción del código.
+La hoja auxiliar utiliza dos columnas por catÃ¡logo:
+- Primera columna: cÃ³digo que aparecerÃ¡ en el desplegable.
+- Segunda columna: descripciÃ³n del cÃ³digo.
 
-Los nombres definidos son administrados por este módulo y utilizan
+Los nombres definidos son administrados por este mÃ³dulo y utilizan
 el prefijo reservado 'Lista_'.
 """
 
@@ -24,13 +24,13 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.worksheet.worksheet import Worksheet
 
-from backend.rules.general_model import ValidationRule
+from rules.general_model import ValidationRule
 
 
 HELPER_SHEET_NAME = "_Listas_Auxiliares"
 
 # Los nombres que comienzan con este prefijo pertenecen
-# a las listas desplegables administradas por este módulo.
+# a las listas desplegables administradas por este mÃ³dulo.
 DEFINED_NAME_PREFIX = "Lista_"
 
 _INVALID_NAME_CHARS = re.compile(r"[^A-Za-z0-9_]")
@@ -41,15 +41,15 @@ def _safe_defined_name(
     used_names: set[str],
 ) -> str:
     """
-    Genera un nombre válido y único para un rango de Excel.
+    Genera un nombre vÃ¡lido y Ãºnico para un rango de Excel.
 
     Excel no permite espacios ni caracteres especiales en los
-    nombres definidos. También debemos evitar nombres duplicados
-    después de normalizar los caracteres.
+    nombres definidos. TambiÃ©n debemos evitar nombres duplicados
+    despuÃ©s de normalizar los caracteres.
 
     Ejemplo:
         CODIGO_SERVICIO -> Lista_CODIGO_SERVICIO
-        AÑO             -> Lista_A_O
+        AÃ‘O             -> Lista_A_O
     """
 
     cleaned = _INVALID_NAME_CHARS.sub(
@@ -70,8 +70,8 @@ def _safe_defined_name(
     candidate = base_name
     counter = 2
 
-    # Los nombres definidos no distinguen mayúsculas
-    # de minúsculas para efectos de unicidad.
+    # Los nombres definidos no distinguen mayÃºsculas
+    # de minÃºsculas para efectos de unicidad.
     while candidate.upper() in used_names:
 
         suffix = f"_{counter}"
@@ -92,8 +92,8 @@ def _clear_helper_sheet(helper_ws: Worksheet) -> None:
     """
     Elimina el contenido anterior de la hoja auxiliar.
 
-    Se eliminan filas y columnas para evitar que queden códigos
-    o descripciones de catálogos que ya no existen.
+    Se eliminan filas y columnas para evitar que queden cÃ³digos
+    o descripciones de catÃ¡logos que ya no existen.
     """
 
     if helper_ws.max_row > 0:
@@ -114,7 +114,7 @@ def _clear_helper_sheet(helper_ws: Worksheet) -> None:
 
 def _remove_previous_defined_names(workbook) -> None:
     """
-    Elimina los nombres definidos generados por este módulo.
+    Elimina los nombres definidos generados por este mÃ³dulo.
 
     No elimina nombres definidos ajenos a las listas auxiliares.
     """
@@ -126,7 +126,7 @@ def _remove_previous_defined_names(workbook) -> None:
     ]
 
     # Compatibilidad con nombres generados por versiones
-    # anteriores de este módulo.
+    # anteriores de este mÃ³dulo.
     for name in names_to_remove:
         workbook.defined_names.pop(
             name,
@@ -138,14 +138,14 @@ def _validate_rules(
     rules_with_lists: list[ValidationRule],
 ) -> None:
     """
-    Comprueba que no existan catálogos diferentes para una
+    Comprueba que no existan catÃ¡logos diferentes para una
     misma columna.
 
-    La implementación actual de writer.py identifica las listas
+    La implementaciÃ³n actual de writer.py identifica las listas
     por nombre de columna. Por tanto, no puede representar dos
-    catálogos diferentes para columnas con el mismo nombre.
+    catÃ¡logos diferentes para columnas con el mismo nombre.
 
-    Esta comprobación evita reutilizar un catálogo incorrecto.
+    Esta comprobaciÃ³n evita reutilizar un catÃ¡logo incorrecto.
     """
 
     catalogs_by_column: dict[str, list[tuple[str, str]]] = {}
@@ -178,8 +178,8 @@ def _validate_rules(
         if existing_catalog != current_catalog:
             raise ValueError(
                 f"La columna '{rule.column_name}' tiene "
-                "catálogos diferentes. No es posible generar "
-                "un único rango definido para esa columna."
+                "catÃ¡logos diferentes. No es posible generar "
+                "un Ãºnico rango definido para esa columna."
             )
 
 
@@ -190,9 +190,9 @@ def build_helper_sheet(
     """
     Construye la hoja auxiliar y los rangos definidos.
 
-    Parámetros:
+    ParÃ¡metros:
         workbook:
-            Libro Excel que recibirá la hoja auxiliar.
+            Libro Excel que recibirÃ¡ la hoja auxiliar.
 
         rules_with_lists:
             Reglas cuyas columnas tienen valores permitidos.
@@ -210,7 +210,7 @@ def build_helper_sheet(
     """
 
     # --------------------------------------------------------
-    # 1. Validar los catálogos recibidos.
+    # 1. Validar los catÃ¡logos recibidos.
     # --------------------------------------------------------
 
     _validate_rules(rules_with_lists)
@@ -246,7 +246,7 @@ def build_helper_sheet(
     used_names: set[str] = set()
 
     # --------------------------------------------------------
-    # 4. Reconstruir los catálogos.
+    # 4. Reconstruir los catÃ¡logos.
     # --------------------------------------------------------
 
     next_column = 1
@@ -268,16 +268,16 @@ def build_helper_sheet(
         helper_ws.cell(
             row=1,
             column=next_column,
-            value=f"{rule.column_name} (código)",
+            value=f"{rule.column_name} (cÃ³digo)",
         )
 
         helper_ws.cell(
             row=1,
             column=next_column + 1,
-            value="Descripción",
+            value="DescripciÃ³n",
         )
 
-        # Escribir los valores del catálogo.
+        # Escribir los valores del catÃ¡logo.
         for row_number, value in enumerate(
             rule.allowed_values,
             start=2,
@@ -295,18 +295,18 @@ def build_helper_sheet(
                 value=value.label,
             )
 
-        # Última fila ocupada por el catálogo.
+        # Ãšltima fila ocupada por el catÃ¡logo.
         last_row = (
             len(rule.allowed_values) + 1
         )
 
-        # Generar un nombre definido válido y único.
+        # Generar un nombre definido vÃ¡lido y Ãºnico.
         defined_name_str = _safe_defined_name(
             rule.column_name,
             used_names,
         )
 
-        # Construir la referencia absoluta al rango de códigos.
+        # Construir la referencia absoluta al rango de cÃ³digos.
         reference = (
             f"'{HELPER_SHEET_NAME}'!"
             f"${column_letter}$2:"
@@ -329,8 +329,8 @@ def build_helper_sheet(
             rule.column_name
         ] = defined_name_str
 
-        # Cada catálogo utiliza dos columnas:
-        # una para códigos y otra para descripciones.
+        # Cada catÃ¡logo utiliza dos columnas:
+        # una para cÃ³digos y otra para descripciones.
         next_column += 2
 
     # --------------------------------------------------------
@@ -340,3 +340,4 @@ def build_helper_sheet(
     helper_ws.sheet_state = "hidden"
 
     return defined_names
+

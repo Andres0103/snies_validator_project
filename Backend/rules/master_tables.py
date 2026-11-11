@@ -242,21 +242,13 @@ def _load_paises() -> list[AllowedValue]:
             "no contiene una lista de registros."
         )
 
-    additional_values = [
-        AllowedValue(
-            code="0",
-            label="No Aplica (Organismo Multilateral)",
-        )
-    ]
 
     return _build_allowed_values(
-        records=records,
-        code_column="ID_PAIS",
-        label_column="DESC_PAIS",
-        catalog_name="paises",
-        additional_values=additional_values,
-    )
-
+    records=records,
+    code_column="ID_PAIS",
+    label_column="DESC_PAIS",
+    catalog_name="paises",
+)
 
 # ============================================================
 # CATÁLOGO CINE CAMPO DETALLADO
