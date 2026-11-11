@@ -31,7 +31,7 @@ from typing import Any
 
 import yaml
 
-from backend.rules.general_model import AllowedValue
+from rules.general_model import AllowedValue
 
 
 # ============================================================

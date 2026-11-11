@@ -1,15 +1,17 @@
+
 from typing import Annotated
 
 from fastapi import (
     APIRouter,
     BackgroundTasks,
     File,
+    Form,
     HTTPException,
     UploadFile,
 )
 from fastapi.responses import FileResponse
 
-from api.services.validation_service import  (
+from api.services.validation_service import (
     create_validation_job,
     process_validation_job,
     get_validation,
@@ -42,16 +44,31 @@ router = APIRouter(
 )
 async def upload_files(
     background_tasks: BackgroundTasks,
+    plantilla: Annotated[
+        str,
+        Form(
+            description=(
+                "Nombre de la plantilla SNIES seleccionada."
+            )
+        ),
+    ],
     archivos: Annotated[
         list[UploadFile],
         File(
-            description="Selecciona uno o varios archivos Excel .xlsx"
+            description="Selecciona uno o varios archivos Excel .xlsx."
         ),
     ],
 ):
     """
-    Recibe uno o varios archivos Excel y programa su validación.
+    Recibe la plantilla seleccionada y uno o varios archivos Excel.
+    Programa su validación en segundo plano.
     """
+
+    if not plantilla or not plantilla.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Debes seleccionar una plantilla SNIES.",
+        )
 
     if not archivos:
         raise HTTPException(
@@ -59,7 +76,10 @@ async def upload_files(
             detail="Debes seleccionar al menos un archivo.",
         )
 
-    validation = await create_validation_job(archivos)
+    validation = await create_validation_job(
+        uploads=archivos,
+        template_name=plantilla.strip(),
+    )
 
     background_tasks.add_task(
         process_validation_job,
@@ -175,7 +195,7 @@ async def download_validation_report(validation_id: str):
 @router.get("/{validation_id}/archivos/{filename}")
 async def download_marked_file(
     validation_id: str,
-    filename: str
+    filename: str,
 ):
     """
     Descarga el Excel individual con las marcas de validación.
@@ -183,13 +203,13 @@ async def download_marked_file(
 
     path = get_artifact_path(
         validation_id,
-        filename
+        filename,
     )
 
     if path is None:
         raise HTTPException(
             status_code=404,
-            detail="El archivo marcado no está disponible."
+            detail="El archivo marcado no está disponible.",
         )
 
     return FileResponse(
@@ -198,5 +218,5 @@ async def download_marked_file(
         media_type=(
             "application/vnd.openxmlformats-officedocument."
             "spreadsheetml.sheet"
-        )
+        ),
     )

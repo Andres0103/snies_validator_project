@@ -9,6 +9,14 @@ import {
   ValidationHistoryResponse
 } from '../models/validation.model';
 
+export type TemplateName =
+  | 'CONSULTORIA'
+  | 'EVENTO_CULTURAL'
+  | 'ACTIVIDAD_CULTURAL'
+  | 'SERVICIOS_EXTENSION'
+  | 'PROYECTOS_EXTENSION'
+  | 'CURSOS';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,11 +27,17 @@ export class ValidationApiService {
   private readonly apiUrl =
     'http://127.0.0.1:8000/api/validaciones';
 
-
-  // Enviar archivos Excel
-  uploadFiles(files: File[]): Observable<ValidationResponse> {
+  /**
+   * Envía los archivos Excel y la plantilla seleccionada.
+   */
+  uploadFiles(
+    templateName: TemplateName,
+    files: File[]
+  ): Observable<ValidationResponse> {
 
     const formData = new FormData();
+
+    formData.append('plantilla', templateName);
 
     files.forEach(file => {
       formData.append('archivos', file, file.name);
@@ -35,8 +49,9 @@ export class ValidationApiService {
     );
   }
 
-
-  // Consultar estado de una validación
+  /**
+   * Consulta el estado de una validación.
+   */
   getValidation(id: string): Observable<ValidationResponse> {
 
     return this.http.get<ValidationResponse>(
@@ -44,8 +59,9 @@ export class ValidationApiService {
     );
   }
 
-
-  // Consultar errores y advertencias
+  /**
+   * Consulta los errores y advertencias.
+   */
   getValidationErrors(
     id: string
   ): Observable<ValidationErrorsResponse> {
@@ -55,8 +71,9 @@ export class ValidationApiService {
     );
   }
 
-
-  // Consultar historial
+  /**
+   * Consulta el historial de validaciones.
+   */
   getHistory(): Observable<ValidationHistoryResponse> {
 
     return this.http.get<ValidationHistoryResponse>(
@@ -64,8 +81,9 @@ export class ValidationApiService {
     );
   }
 
-
-  // Descargar reporte consolidado
+  /**
+   * Descarga el reporte consolidado.
+   */
   downloadReport(id: string): Observable<Blob> {
 
     return this.http.get(
@@ -74,8 +92,9 @@ export class ValidationApiService {
     );
   }
 
-
-  // Descargar Excel marcado
+  /**
+   * Descarga el archivo Excel marcado.
+   */
   downloadMarkedFile(
     id: string,
     filename: string

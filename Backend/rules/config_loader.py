@@ -596,6 +596,7 @@ def _load_template_profile(
 # CARGA DE LA NUEVA ARQUITECTURA
 # ============================================================
 
+
 def _load_template_configuration(
     template_name: str,
     directory: Path,
@@ -604,24 +605,9 @@ def _load_template_configuration(
     Carga y consolida la configuración común y específica
     de una plantilla SNIES.
 
-    Estructura esperada:
-
-        patterns/
-            known_fields.yaml
-            template_profiles.yaml
-
-            common/
-                rules.yaml
-                validations.yaml
-                catalogs.yaml
-                business_rules.yaml
-
-            templates/
-                nombre_plantilla/
-                    rules.yaml
-                    validations.yaml
-                    catalogs.yaml
-                    business_rules.yaml
+    Las reglas compartidas se buscan primero en common/.
+    Si business_rules.yaml no existe allí, se utiliza el
+    archivo general ubicado directamente en patterns/.
     """
 
     common_dir = directory / "common"
@@ -662,8 +648,20 @@ def _load_template_configuration(
         common_dir / "catalogs.yaml"
     )
 
-    common_business_rules = load_yaml_file(
+    # Buscar primero las reglas de negocio en common/.
+    common_business_rules_path = (
         common_dir / "business_rules.yaml"
+    )
+
+    # Mantener compatibilidad con el archivo general
+    # ubicado directamente en rules/patterns/.
+    if not common_business_rules_path.is_file():
+        common_business_rules_path = (
+            directory / "business_rules.yaml"
+        )
+
+    common_business_rules = load_yaml_file(
+        common_business_rules_path
     )
 
     # --------------------------------------------------------
@@ -781,7 +779,6 @@ def _load_template_configuration(
         template_name=template_name,
         sheet_configurations=sheet_configurations,
     )
-
 
 # ============================================================
 # FUNCIÓN PÚBLICA DE CARGA

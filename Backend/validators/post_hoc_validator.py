@@ -34,7 +34,7 @@ from rules.config_loader import (
 )
 from rules.catalog_loader import load_catalog
 from rules.interpreter import interpret_comment
-from backend.rules.general_model import DataType, ValidationRule
+from rules.general_model import DataType, ValidationRule
 from rules.template_profiles import (
     detect_templates,
     load_template_profiles,
@@ -1058,6 +1058,50 @@ def validate_workbook(
 
     data_sheets = list(iter_data_sheets(workbook))
 
+        # ---------------------------------------------------------
+    # 4.1. DETECTAR HOJAS OBLIGATORIAS AUSENTES
+    # ---------------------------------------------------------
+
+    workbook_sheet_names = {
+        ws.title.strip().casefold()
+        for ws in data_sheets
+    }
+
+    missing_sheets = [
+        sheet
+        for sheet in expected_sheets
+        if sheet.strip().casefold() not in workbook_sheet_names
+    ]
+
+    if missing_sheets:
+
+        missing_sheet_issues = []
+
+        for sheet_name in missing_sheets:
+
+            missing_sheet_issues.append(
+                RowIssue(
+                    sheet="ESTRUCTURA_LIBRO",
+                    row=1,
+                    column_name="HOJAS",
+                    value=sheet_name,
+                    message=(
+                        f"Falta la hoja obligatoria '{sheet_name}' "
+                        f"de la plantilla {template_name}. "
+                        "El archivo debe contener todas las hojas "
+                        "definidas para esta plantilla."
+                    ),
+                    severity="error",
+                )
+            )
+
+        results.append(
+            SheetValidationResult(
+                sheet_name="ESTRUCTURA_LIBRO",
+                total_rows=0,
+                issues=missing_sheet_issues,
+            )
+        )
     unexpected_sheets = {
         ws.title
         for ws in data_sheets
@@ -1164,6 +1208,54 @@ def validate_workbook(
         result.columns_needing_review = (
             columns_needing_review
         )
+        
+                # -----------------------------------------------------
+        # 5.1. VALIDAR PRESENCIA DE COLUMNAS DE LA PLANTILLA
+        # -----------------------------------------------------
+
+        configured_rules = sheet_configuration.get(
+            "rules",
+            {},
+        )
+
+        if not isinstance(configured_rules, dict):
+            raise ValueError(
+                f"Las reglas de la hoja '{ws.title}' "
+                "deben ser un diccionario."
+            )
+
+        # Normalizar los nombres para evitar diferencias
+        # por mayúsculas o espacios exteriores.
+        actual_headers = {
+            header.column_name.strip().casefold()
+            for header in headers
+            if header.column_name.strip()
+        }
+
+        missing_columns = [
+            column_name
+            for column_name in configured_rules
+            if column_name.strip().casefold()
+            not in actual_headers
+        ]
+
+        for column_name in missing_columns:
+
+            result.issues.append(
+                RowIssue(
+                    sheet=ws.title,
+                    row=HEADER_ROW,
+                    column_name=column_name,
+                    value=None,
+                    message=(
+                        f"Falta la columna obligatoria de estructura "
+                        f"'{column_name}' en la hoja '{ws.title}'. "
+                        "La columna debe conservarse aunque sus "
+                        "valores puedan ser opcionales."
+                    ),
+                    severity="error",
+                )
+            )
 
         # -----------------------------------------------------
         # 5.2. VALIDACIONES ESTRUCTURALES DE ENCABEZADOS

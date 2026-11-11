@@ -18,8 +18,8 @@
     <div>
       <strong>Información del proceso</strong>
       <p class="mb-0 mt-1">
-        Selecciona los archivos Excel diligenciados que deseas validar.
-        El sistema identificará errores y advertencias.
+        Selecciona primero la plantilla SNIES que deseas validar y después
+        carga los archivos Excel correspondientes.
       </p>
     </div>
   </div>
@@ -49,6 +49,49 @@
     </div>
   }
 
+  <!-- SELECCIÓN DE PLANTILLA -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="mb-3">
+        <h5>Seleccionar plantilla SNIES</h5>
+        <p class="text-muted mb-0">
+          Indica a qué plantilla pertenecen los archivos que vas a validar.
+        </p>
+      </div>
+
+      <label for="templateSelect" class="form-label">
+        Plantilla
+      </label>
+
+      <select
+        id="templateSelect"
+        class="form-select"
+        [value]="selectedTemplate"
+        [disabled]="isUploading || isProcessing"
+        (change)="onTemplateChange($event)"
+      >
+        <option value="">Selecciona una plantilla</option>
+
+        @for (template of templates; track template.value) {
+          <option [value]="template.value">
+            {{ template.label }}
+          </option>
+        }
+      </select>
+
+      @if (selectedTemplate) {
+        <div class="form-text mt-2">
+          Plantilla seleccionada:
+          <strong>{{ selectedTemplate }}</strong>
+        </div>
+      } @else {
+        <div class="form-text mt-2">
+          Debes seleccionar una plantilla para habilitar la carga de archivos.
+        </div>
+      }
+    </div>
+  </div>
+
   <!-- SELECCIÓN DE ARCHIVOS -->
   <div class="card upload-card">
     <div class="card-body">
@@ -59,7 +102,11 @@
         <p>Puedes seleccionar uno o varios archivos Excel.</p>
       </div>
 
-      <label class="upload-area" for="validationFiles">
+      <label
+        class="upload-area"
+        for="validationFiles"
+        [class.disabled]="!selectedTemplate || isUploading || isProcessing"
+      >
         <i class="bi bi-cloud-arrow-up upload-icon"></i>
 
         <span class="upload-title">
@@ -67,7 +114,11 @@
         </span>
 
         <span class="upload-description">
-          Haz clic aquí para buscar archivos en tu equipo.
+          @if (selectedTemplate) {
+            Haz clic aquí para buscar archivos en tu equipo.
+          } @else {
+            Primero debes seleccionar una plantilla SNIES.
+          }
         </span>
 
         <span class="upload-format">
@@ -86,7 +137,7 @@
         accept=".xlsx"
         multiple
         hidden
-        [disabled]="isUploading || isProcessing"
+        [disabled]="!selectedTemplate || isUploading || isProcessing"
         (change)="onFilesSelected($event)"
       />
 
@@ -181,6 +232,7 @@
       type="button"
       class="btn btn-success"
       [disabled]="
+        !selectedTemplate ||
         selectedFiles.length === 0 ||
         isUploading ||
         isProcessing

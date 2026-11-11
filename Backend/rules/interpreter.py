@@ -17,7 +17,7 @@ import re
 from rules.known_fields import apply_known_field_fallback
 from rules.master_tables import apply_master_table_reference
 
-from backend.rules.general_model import ValidationRule
+from rules.general_model import ValidationRule
 
 from rules.strategies.base import RuleRecognizer
 from rules.strategies.datatype_recognizer import DatatypeRecognizer

@@ -18,7 +18,7 @@ from typing import Callable
 
 import yaml
 
-from backend.rules.general_model import AllowedValue, ValidationRule
+from rules.general_model import AllowedValue, ValidationRule
 
 
 # ============================================================

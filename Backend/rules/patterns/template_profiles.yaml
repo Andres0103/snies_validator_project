@@ -175,3 +175,12 @@ templates:
       - child_sheet: PROY_EXT_POBL_GRUPO
         parent_sheet: PROYECTOS_EXTENSION
         key: *proyecto_key
+
+  CURSOS:
+    main_sheet: CURSO
+
+    sheets:
+      - CURSO
+
+    record_key:
+      - CODIGO_CURSO

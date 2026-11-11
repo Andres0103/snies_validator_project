@@ -14,7 +14,10 @@ from starlette.concurrency import run_in_threadpool
 from validators.post_hoc_validator import validate_workbook
 from excel.post_hoc_marker import mark_workbook
 from reports.post_hoc_report import build_post_hoc_report
-
+from rules.template_profiles import (
+    detect_templates,
+    load_template_profiles,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +30,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 STORAGE_DIR = PROJECT_ROOT / "api" / "storage"
 
-MAX_FILE_SIZE = 20 * 1024 * 1024
 
 
 # ==========================================================
@@ -128,18 +130,48 @@ def safe_filename(filename: str | None) -> str:
 
 async def create_validation_job(
     uploads: list[UploadFile],
+    template_name: str,
 ):
     """
-    Recibe los archivos Excel, los almacena y registra
-    una nueva validación en estado PENDIENTE.
-
-    Todavía no ejecuta las reglas SNIES.
+    Recibe archivos Excel y la plantilla SNIES seleccionada.
+    Los almacena y registra una nueva validación pendiente.
     """
+
+    if not isinstance(template_name, str) or not template_name.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Debes seleccionar una plantilla SNIES.",
+        )
+
+    # Verificar que la plantilla seleccionada exista.
+    profiles = load_template_profiles()
+
+    templates = profiles.get("templates", {})
+
+    selected_template = next(
+        (
+            name
+            for name in templates
+            if name.casefold() == template_name.strip().casefold()
+        ),
+        None,
+    )
+
+    if selected_template is None:
+        raise HTTPException(
+            status_code=400,
+            detail=f"La plantilla '{template_name}' no está soportada.",
+        )
+
+    if not uploads:
+        raise HTTPException(
+            status_code=400,
+            detail="Debes seleccionar al menos un archivo.",
+        )
 
     validation_id = str(uuid4())
 
     validation_dir = STORAGE_DIR / validation_id
-
     originals_dir = validation_dir / "originales"
 
     originals_dir.mkdir(
@@ -149,16 +181,11 @@ async def create_validation_job(
 
     accepted_files = []
     rejected_files = []
-
     used_names = set()
 
     for upload in uploads:
 
         filename = safe_filename(upload.filename)
-
-        # ----------------------------------------------
-        # Validar extensión
-        # ----------------------------------------------
 
         if Path(filename).suffix.lower() != ".xlsx":
 
@@ -167,11 +194,8 @@ async def create_validation_job(
                 "motivo": "Solo se permiten archivos .xlsx.",
             })
 
+            await upload.close()
             continue
-
-        # ----------------------------------------------
-        # Evitar nombres duplicados
-        # ----------------------------------------------
 
         stem = Path(filename).stem
         suffix = Path(filename).suffix
@@ -181,17 +205,12 @@ async def create_validation_job(
 
         while unique_filename.lower() in used_names:
 
-            unique_filename = (
-                f"{stem}_{counter}{suffix}"
-            )
-
+            unique_filename = f"{stem}_{counter}{suffix}"
             counter += 1
 
         used_names.add(unique_filename.lower())
 
         destination = originals_dir / unique_filename
-
-        content_size = 0
 
         try:
 
@@ -199,28 +218,15 @@ async def create_validation_job(
 
                 while True:
 
-                    chunk = await upload.read(
-                        1024 * 1024
-                    )
+                    chunk = await upload.read(1024 * 1024)
 
                     if not chunk:
                         break
 
-                    content_size += len(chunk)
-
-                    if content_size > MAX_FILE_SIZE:
-
-                        raise ValueError(
-                            "El archivo supera el límite de 20 MB."
-                        )
-
                     output.write(chunk)
 
-            if content_size == 0:
-
-                raise ValueError(
-                    "El archivo está vacío."
-                )
+            if destination.stat().st_size == 0:
+                raise ValueError("El archivo está vacío.")
 
             accepted_files.append({
                 "nombre_archivo": unique_filename,
@@ -251,12 +257,7 @@ async def create_validation_job(
             })
 
         finally:
-
             await upload.close()
-
-    # ----------------------------------------------
-    # Verificar que exista al menos un Excel válido
-    # ----------------------------------------------
 
     if not accepted_files:
 
@@ -267,10 +268,6 @@ async def create_validation_job(
                 "archivos_rechazados": rejected_files,
             },
         )
-
-    # ----------------------------------------------
-    # Crear resumen inicial de los archivos
-    # ----------------------------------------------
 
     file_summaries = [
         {
@@ -285,6 +282,7 @@ async def create_validation_job(
 
     validation = {
         "id": validation_id,
+        "plantilla": selected_template,
         "estado": "PENDIENTE",
         "progreso": 0,
         "mensaje": "Archivos recibidos. Validación pendiente.",
@@ -301,10 +299,6 @@ async def create_validation_job(
         "archivos_rechazados": rejected_files,
     }
 
-    # ----------------------------------------------
-    # Guardar información de la validación
-    # ----------------------------------------------
-
     write_json(
         validation_dir / "metadata.json",
         validation,
@@ -315,9 +309,6 @@ async def create_validation_job(
         {"items": []},
     )
 
-    # El manifiesto conserva las rutas internas.
-    # Estas rutas no se devuelven al frontend.
-
     write_json(
         validation_dir / "input.json",
         {"archivos": accepted_files},
@@ -325,52 +316,69 @@ async def create_validation_job(
 
     return validation
 
-
 # ==========================================================
 # PROCESAMIENTO DE EXCEL
 # ==========================================================
 
-
-def process_workbook(workbook):
+def process_workbook(
+    workbook,
+    template_name: str,
+):
     """
-    Ejecuta el motor de validación y marca las incidencias
-    sobre un Workbook que ya está abierto.
-
-    No se encarga de abrir ni guardar archivos.
+    Comprueba que el libro corresponda a la plantilla seleccionada,
+    ejecuta el motor SNIES y marca las incidencias.
     """
 
-    # Ejecutar las reglas SNIES.
+    detected_templates = detect_templates(
+        workbook.sheetnames
+    )
+
+    if detected_templates != [template_name]:
+
+        detected_description = (
+            ", ".join(detected_templates)
+            if detected_templates
+            else "ninguna plantilla reconocida"
+        )
+
+        raise ValueError(
+            f"El archivo no corresponde a la plantilla "
+            f"seleccionada '{template_name}'. "
+            f"Plantilla detectada: {detected_description}."
+        )
+
     results = validate_workbook(workbook)
 
-    # Marcar errores y advertencias.
     mark_workbook(workbook, results)
 
     return results
 
-
 def process_excel_file(
     input_path: Path,
     output_path: Path,
+    template_name: str,
 ):
     """
-    Abre un archivo Excel, delega su procesamiento
-    y guarda el resultado marcado.
+    Abre un Excel, ejecuta la validación correspondiente
+    a la plantilla seleccionada y guarda el archivo marcado.
     """
 
     workbook = openpyxl.load_workbook(input_path)
 
     try:
-        results = process_workbook(workbook)
 
-        # Guardar Excel marcado.
+        results = process_workbook(
+            workbook,
+            template_name,
+        )
+
         workbook.save(output_path)
 
         return results
 
     finally:
         workbook.close()
-
-
+        
 # ==========================================================
 # SERIALIZACIÓN DE INCIDENCIAS
 # ==========================================================
@@ -464,6 +472,13 @@ def process_validation_sync(validation_id: str):
         raise RuntimeError(
             "No se encontró la información de la validación."
         )
+    
+        template_name = metadata.get("plantilla")
+
+    if not template_name:
+        raise RuntimeError(
+            "La validación no tiene una plantilla SNIES registrada."
+        )
 
     # ----------------------------------------------
     # Cambiar estado a PROCESANDO
@@ -528,6 +543,7 @@ def process_validation_sync(validation_id: str):
             results = process_excel_file(
                 input_path,
                 output_path,
+                template_name,
             )
 
             all_results[filename] = results

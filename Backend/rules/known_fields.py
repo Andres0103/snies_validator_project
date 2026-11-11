@@ -42,7 +42,7 @@ from typing import Any
 
 import yaml
 
-from backend.rules.general_model import (
+from rules.general_model import (
     AllowedValue,
     DataType,
     ValidationRule,

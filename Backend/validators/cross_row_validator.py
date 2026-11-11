@@ -9,7 +9,7 @@ from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from backend.rules.general_model import DataType
+from rules.general_model import DataType
 
 
 @dataclass

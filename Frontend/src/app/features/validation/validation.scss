@@ -1,3 +1,4 @@
+
 :host {
   display: block;
 }
@@ -25,6 +26,48 @@
     margin-bottom: 0;
   }
 }
+
+/* Selector de plantilla */
+
+.validation-page > .card {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.validation-page > .card .card-body {
+  padding: 24px;
+}
+
+.validation-page > .card h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.validation-page .form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.validation-page .form-select {
+  min-height: 42px;
+  font-size: 13px;
+  border-color: var(--color-border);
+}
+
+.validation-page .form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.12);
+}
+
+.validation-page .form-text {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* Área de carga */
 
 .upload-card,
 .files-card {
@@ -82,6 +125,18 @@
     border-color: var(--color-primary);
     background-color: #f0f7f3;
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    background-color: #f8fafc;
+    border-color: #d1d5db;
+
+    &:hover {
+      border-color: #d1d5db;
+      background-color: #f8fafc;
+    }
+  }
 }
 
 .upload-icon {
@@ -108,8 +163,9 @@
   color: var(--color-text-secondary);
 }
 
-.files-card {
+/* Lista de archivos */
 
+.files-card {
   .card-header {
     display: flex;
     align-items: center;
@@ -224,6 +280,8 @@
   color: var(--color-text-secondary);
 }
 
+/* Acciones */
+
 .validation-actions {
   display: flex;
   justify-content: flex-end;
@@ -234,22 +292,6 @@
     padding: 0 22px;
     font-size: 13px;
   }
-}
-
-@media (max-width: 576px) {
-
-  .upload-card .card-body {
-    padding: 18px;
-  }
-
-  .upload-area {
-    padding: 20px;
-  }
-
-  .validation-actions button {
-    width: 100%;
-  }
-
 }
 
 /* Resultados de validación */
@@ -282,4 +324,28 @@
 
 .validation-page .card {
   margin-bottom: 18px;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 576px) {
+  .upload-card .card-body {
+    padding: 18px;
+  }
+
+  .upload-area {
+    padding: 20px;
+  }
+
+  .validation-page > .card .card-body {
+    padding: 18px;
+  }
+
+  .validation-actions button {
+    width: 100%;
+  }
+
+  .file-item {
+    align-items: flex-start;
+  }
 }

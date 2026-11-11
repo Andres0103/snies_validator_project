@@ -1,13 +1,18 @@
+
 import {
   Component,
   OnDestroy,
   ChangeDetectorRef,
   inject
 } from '@angular/core';
+
 import { Subscription, timer } from 'rxjs';
 import { switchMap, takeWhile } from 'rxjs/operators';
 
-import { ValidationApiService } from '../../core/services/validation-api.service';
+import {
+  ValidationApiService,
+  TemplateName
+} from '../../core/services/validation-api.service';
 
 import {
   ValidationResponse,
@@ -28,6 +33,46 @@ export class Validation implements OnDestroy {
 
   private pollingSubscription?: Subscription;
 
+  // =====================================================
+  // PLANTILLAS DISPONIBLES
+  // =====================================================
+
+  readonly templates: {
+    value: TemplateName;
+    label: string;
+  }[] = [
+    {
+      value: 'CONSULTORIA',
+      label: 'Consultoría'
+    },
+    {
+      value: 'EVENTO_CULTURAL',
+      label: 'Evento cultural'
+    },
+    {
+      value: 'ACTIVIDAD_CULTURAL',
+      label: 'Actividad cultural'
+    },
+    {
+      value: 'SERVICIOS_EXTENSION',
+      label: 'Servicios de extensión'
+    },
+    {
+      value: 'PROYECTOS_EXTENSION',
+      label: 'Proyectos de extensión'
+    },
+    {
+      value: 'CURSOS',
+      label: 'Cursos'
+    }
+  ];
+
+  selectedTemplate: TemplateName | '' = '';
+
+  // =====================================================
+  // ESTADO DEL COMPONENTE
+  // =====================================================
+
   selectedFiles: File[] = [];
 
   validationResult: ValidationResponse | null = null;
@@ -44,7 +89,34 @@ export class Validation implements OnDestroy {
 
   showSuccessMessage = false;
 
+  // =====================================================
+  // SELECCIÓN DE PLANTILLA
+  // =====================================================
 
+  onTemplateChange(event: Event): void {
+
+    const select = event.target as HTMLSelectElement;
+
+    const value = select.value;
+
+    const templateExists = this.templates.some(
+      template => template.value === value
+    );
+
+    this.selectedTemplate = templateExists
+      ? value as TemplateName
+      : '';
+
+    this.errorMessage = '';
+    this.showSuccessMessage = false;
+
+    // Si cambia la plantilla, los archivos anteriores
+    // deben retirarse para evitar mezclar formatos.
+    this.selectedFiles = [];
+
+    this.validationResult = null;
+    this.issues = [];
+  }
 
   // =====================================================
   // SELECCIÓN DE ARCHIVOS
@@ -58,6 +130,15 @@ export class Validation implements OnDestroy {
       return;
     }
 
+    if (!this.selectedTemplate) {
+
+      this.errorMessage =
+        'Primero debes seleccionar una plantilla SNIES.';
+
+      input.value = '';
+      return;
+    }
+
     const files = Array.from(input.files);
 
     const validFiles = files.filter(file =>
@@ -67,10 +148,14 @@ export class Validation implements OnDestroy {
     this.showSuccessMessage = false;
 
     if (validFiles.length !== files.length) {
+
       this.errorMessage =
         'Solo se permiten archivos Excel con extensión .xlsx.';
+
     } else {
+
       this.errorMessage = '';
+
     }
 
     for (const file of validFiles) {
@@ -108,9 +193,19 @@ export class Validation implements OnDestroy {
 
   validateFiles(): void {
 
+    if (!this.selectedTemplate) {
+
+      this.errorMessage =
+        'Debes seleccionar una plantilla SNIES.';
+
+      return;
+    }
+
     if (this.selectedFiles.length === 0) {
+
       this.errorMessage =
         'Debes seleccionar al menos un archivo Excel.';
+
       return;
     }
 
@@ -127,21 +222,25 @@ export class Validation implements OnDestroy {
 
     this.pollingSubscription?.unsubscribe();
 
-    this.validationApi.uploadFiles(this.selectedFiles).subscribe({
+    this.validationApi.uploadFiles(
+      this.selectedTemplate,
+      this.selectedFiles
+    ).subscribe({
 
       next: response => {
 
-      console.log('[FRONT] Archivos enviados:', response);
+        console.log('[FRONT] Archivos enviados:', response);
 
-      this.isUploading = false;
-      this.isProcessing = true;
+        this.isUploading = false;
+        this.isProcessing = true;
 
-      this.validationResult = response;
+        this.validationResult = response;
 
-      this.cdr.detectChanges();
+        this.cdr.detectChanges();
 
-      this.startPolling(response.id);
-    },
+        this.startPolling(response.id);
+      },
+
       error: error => {
 
         this.isUploading = false;
@@ -156,6 +255,8 @@ export class Validation implements OnDestroy {
             ? detail
             : detail?.mensaje ||
               'No fue posible enviar los archivos al servidor.';
+
+        this.cdr.detectChanges();
       }
 
     });
@@ -165,102 +266,107 @@ export class Validation implements OnDestroy {
   // CONSULTAR PROGRESO
   // =====================================================
 
-  
+  private startPolling(validationId: string): void {
 
-private startPolling(validationId: string): void {
+    const finalStates = [
+      'COMPLETADO',
+      'COMPLETADO_CON_OBSERVACIONES',
+      'COMPLETADO_PARCIAL',
+      'FALLIDO'
+    ];
 
-  const finalStates = [
-    'COMPLETADO',
-    'COMPLETADO_CON_OBSERVACIONES',
-    'COMPLETADO_PARCIAL',
-    'FALLIDO'
-  ];
+    this.isProcessing = true;
+    this.isUploading = false;
+    this.showSuccessMessage = false;
 
-  this.isProcessing = true;
-  this.isUploading = false;
-  this.showSuccessMessage = false;
+    this.cdr.detectChanges();
 
-  this.cdr.detectChanges();
+    this.pollingSubscription?.unsubscribe();
 
-  this.pollingSubscription?.unsubscribe();
-
-  this.pollingSubscription = timer(0, 2000)
-    .pipe(
-      switchMap(() =>
-        this.validationApi.getValidation(validationId)
-      ),
-      takeWhile(
-        response => !finalStates.includes(response.estado),
-        true
+    this.pollingSubscription = timer(0, 2000)
+      .pipe(
+        switchMap(() =>
+          this.validationApi.getValidation(validationId)
+        ),
+        takeWhile(
+          response => !finalStates.includes(response.estado),
+          true
+        )
       )
-    )
-    .subscribe({
+      .subscribe({
 
-      next: response => {
+        next: response => {
 
-        console.log('[FRONT] Estado recibido:', response.estado);
+          console.log('[FRONT] Estado recibido:', response.estado);
 
-        this.validationResult = response;
-        this.isUploading = false;
+          this.validationResult = response;
+          this.isUploading = false;
 
-        if (finalStates.includes(response.estado)) {
+          if (finalStates.includes(response.estado)) {
 
-          console.log('[FRONT] Validación finalizada');
+            console.log('[FRONT] Validación finalizada');
 
+            this.isProcessing = false;
+
+            this.showSuccessMessage =
+              response.estado !== 'FALLIDO';
+
+            this.cdr.detectChanges();
+
+            this.loadIssues(validationId);
+
+          } else {
+
+            this.cdr.detectChanges();
+
+          }
+
+        },
+
+        error: error => {
+
+          console.error(
+            '[FRONT] Error consultando validación:',
+            error
+          );
+
+          this.isUploading = false;
           this.isProcessing = false;
 
-          this.showSuccessMessage =
-            response.estado !== 'FALLIDO';
+          this.errorMessage =
+            'No fue posible consultar el estado de la validación.';
 
           this.cdr.detectChanges();
 
-          this.loadIssues(validationId);
+        },
 
-        } else {
+        complete: () => {
+
+          console.log('[FRONT] Consulta de estado finalizada');
+
+          this.isUploading = false;
+          this.isProcessing = false;
 
           this.cdr.detectChanges();
 
         }
 
-      },
-
-      error: error => {
-
-        console.error('[FRONT] Error consultando validación:', error);
-
-        this.isUploading = false;
-        this.isProcessing = false;
-
-        this.errorMessage =
-          'No fue posible consultar el estado de la validación.';
-
-        this.cdr.detectChanges();
-
-      },
-
-      complete: () => {
-
-        console.log('[FRONT] Consulta de estado finalizada');
-
-        this.isUploading = false;
-        this.isProcessing = false;
-
-        this.cdr.detectChanges();
-
-      }
-
-    });
-}
-
-
+      });
+  }
 
   // =====================================================
   // CONSULTAR ERRORES
   // =====================================================
 
-  /*private loadIssues(validationId: string): void {
+  private loadIssues(validationId: string): void {
+
+    console.log(
+      '[FRONT] Iniciando consulta de incidencias:',
+      validationId
+    );
 
     this.isLoadingIssues = true;
+    this.cdr.detectChanges();
 
     this.validationApi
       .getValidationErrors(validationId)
@@ -268,80 +374,42 @@ private startPolling(validationId: string): void {
 
         next: response => {
 
-          this.issues = response.items;
+          console.log(
+            '[FRONT] Respuesta de incidencias:',
+            response
+          );
+
+          this.issues = response.items ?? [];
 
           this.isLoadingIssues = false;
+
+          console.log(
+            '[FRONT] Total de incidencias:',
+            this.issues.length
+          );
+
+          this.cdr.detectChanges();
+
         },
 
         error: error => {
 
-          console.error('Error consultando incidencias:', error);
+          console.error(
+            '[FRONT] Error consultando incidencias:',
+            error
+          );
 
           this.isLoadingIssues = false;
 
           this.errorMessage =
             'La validación terminó, pero no fue posible consultar sus incidencias.';
+
+          this.cdr.detectChanges();
+
         }
 
       });
-  }*/
-
-      
-
-private loadIssues(validationId: string): void {
-
-  console.log(
-    '[FRONT] Iniciando consulta de incidencias:',
-    validationId
-  );
-
-  this.isLoadingIssues = true;
-  this.cdr.detectChanges();
-
-  this.validationApi
-    .getValidationErrors(validationId)
-    .subscribe({
-
-      next: response => {
-
-        console.log(
-          '[FRONT] Respuesta de incidencias:',
-          response
-        );
-
-        this.issues = response.items ?? [];
-
-        this.isLoadingIssues = false;
-
-        console.log(
-          '[FRONT] Total de incidencias:',
-          this.issues.length
-        );
-
-        this.cdr.detectChanges();
-
-      },
-
-      error: error => {
-
-        console.error(
-          '[FRONT] Error consultando incidencias:',
-          error
-        );
-
-        this.isLoadingIssues = false;
-
-        this.errorMessage =
-          'La validación terminó, pero no fue posible consultar sus incidencias.';
-
-        this.cdr.detectChanges();
-
-      }
-
-    });
-}
-
-
+  }
 
   // =====================================================
   // DESPLAZARSE A LOS RESULTADOS

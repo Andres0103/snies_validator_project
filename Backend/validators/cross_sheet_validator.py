@@ -9,7 +9,7 @@ from typing import Any
 
 from openpyxl.workbook.workbook import Workbook
 
-from backend.rules.general_model import DataType
+from rules.general_model import DataType
 from excel.reader import read_headers
 from rules.template_profiles import load_template_profiles
 
