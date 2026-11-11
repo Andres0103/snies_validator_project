@@ -24,6 +24,8 @@ from typing import Any
 
 from backend.rules.general_model import DataType, ValidationRule
 
+import re
+
 
 # ============================================================
 # 2. ESTRUCTURA PARA REPORTAR ERRORES
@@ -386,15 +388,19 @@ def validate_cell(
             DataType.DECIMAL,
         }:
 
-           if not isinstance (value, bool):
+           if not isinstance(value, bool):
                 
                 allowed_numeric_codes = set()
+                #convierte el valor de la celda y lo guarda en numeric_value
+                numeric_value = _to_number(value)
 
                 for code in allowed_codes:
                     numeric_code = _to_number(code)
 
                     if numeric_code is not None:
                         allowed_numeric_codes.add(numeric_code)
+                    
+                is_valid = numeric_value is not None and numeric_value in allowed_numeric_codes
                                     
 
         if not is_valid:
@@ -555,7 +561,12 @@ def validate_business_rule(
 
     elif kind == "email_format":
 
-        if "@" not in str(value):
+        email = str(value).strip()
+
+        if not re.fullmatch(
+            r"[^@\s]+@[^@\s]+\.[^@\s]+",
+            email
+        ):
             issues.append(
                 Issue(
                     params.get(

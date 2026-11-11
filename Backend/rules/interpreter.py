@@ -1,5 +1,6 @@
 
-"""Orquesta la interpretación de un comentario de celda en una ValidationRule.
+"""
+Orquesta la interpretación de un comentario de celda en una ValidationRule.
 
 No conoce cómo funciona cada regla individual. Su responsabilidad es ejecutar
 los RuleRecognizer registrados, en el orden definido, sobre el mismo texto.
@@ -15,22 +16,35 @@ import re
 
 from rules.known_fields import apply_known_field_fallback
 from rules.master_tables import apply_master_table_reference
+
 from backend.rules.general_model import ValidationRule
+
 from rules.strategies.base import RuleRecognizer
 from rules.strategies.datatype_recognizer import DatatypeRecognizer
 from rules.strategies.list_recognizer import ListRecognizer
 from rules.strategies.required_recognizer import RequiredRecognizer
+
 from core.text_normalizer import normalize
 
 
-# Orden de ejecución de los reconocedores.
+# ============================================================
+# RECONOCEDORES
+# ============================================================
+
+# Los reconocedores se ejecutan en un orden determinado.
 #
-# ListRecognizer debe ejecutarse primero porque una lista de valores permitidos
-# puede contener números que podrían confundirse con longitudes o restricciones
-# de otros tipos de reglas.
+# ListRecognizer:
+#     Identifica listas de valores permitidos.
 #
-# Cada reconocedor interpreta una parte del comentario y devuelve el texto
-# restante para que pueda ser procesado por el siguiente.
+# RequiredRecognizer:
+#     Identifica obligatoriedad y obligatoriedad condicional.
+#
+# DatatypeRecognizer:
+#     Identifica tipos de datos y restricciones de longitud.
+#
+# El orden es importante porque una lista puede contener
+# números que no deben confundirse con longitudes o tipos.
+
 DEFAULT_RECOGNIZERS: list[RuleRecognizer] = [
     ListRecognizer(),
     RequiredRecognizer(),
@@ -38,11 +52,24 @@ DEFAULT_RECOGNIZERS: list[RuleRecognizer] = [
 ]
 
 
-# Identifica fragmentos residuales que contienen únicamente espacios
-# o signos de puntuación. Estos fragmentos no representan información
-# relevante y no necesitan conservarse como descripción.
-_NOISE_ONLY = re.compile(r"^[\s,.**\-**:;]*$")
+# ============================================================
+# NORMALIZACIÓN DEL TEXTO RESIDUAL
+# ============================================================
 
+# Identifica fragmentos compuestos únicamente por espacios
+# o signos de puntuación.
+#
+# Estos fragmentos no contienen información útil para
+# describir una regla.
+
+_NOISE_ONLY = re.compile(
+    r"^[\s,.*\-:;]+$"
+)
+
+
+# ============================================================
+# INTERPRETACIÓN
+# ============================================================
 
 def interpret_comment(
     column_name: str,
@@ -70,78 +97,143 @@ def interpret_comment(
     Retorna:
         ValidationRule:
             Objeto que contiene las reglas identificadas para la columna.
+
+    Flujo:
+        1. Crear la regla.
+        2. Comprobar si el comentario está vacío.
+        3. Normalizar el comentario.
+        4. Ejecutar los reconocedores.
+        5. Conservar el texto no interpretado como descripción.
+        6. Resolver referencias a catálogos maestros.
+        7. Completar información mediante known_fields.
     """
 
-    # Creamos el objeto que almacenará todas las reglas interpretadas.
-    # También conservamos el comentario original para disponer de la
-    # información de origen durante las etapas posteriores.
+    # --------------------------------------------------------
+    # 1. CREAR LA REGLA
+    # --------------------------------------------------------
+
+    # Conservamos el comentario original para que las capas
+    # posteriores puedan consultar la fuente de información.
     rule = ValidationRule(
         column_name=column_name,
         raw_comment=raw_comment or "",
     )
 
-    # Si la columna no tiene comentario, registramos esta situación.
-    #
-    # Posteriormente intentamos completar la información utilizando
-    # la configuración de campos conocidos.
-    if not raw_comment:
-        rule.unparsed_fragments.append("(sin comentario)")
+    # --------------------------------------------------------
+    # 2. COMPROBAR SI EL COMENTARIO ESTÁ VACÍO
+    # --------------------------------------------------------
 
-        rule = apply_known_field_fallback(
+    # strip() también detecta comentarios compuestos únicamente
+    # por espacios, tabulaciones o saltos de línea.
+    if not raw_comment or not raw_comment.strip():
+
+        rule.unparsed_fragments.append(
+            "(sin comentario)"
+        )
+
+        # Si no existe comentario, intentamos completar
+        # la regla utilizando la configuración conocida.
+        return apply_known_field_fallback(
             rule,
             known_fields=known_fields,
             sheet_name=sheet_name,
         )
 
-        return rule
+    # --------------------------------------------------------
+    # 3. NORMALIZAR EL COMENTARIO
+    # --------------------------------------------------------
 
-    # Normalizamos el comentario para facilitar su interpretación.
-    # Esta operación trabaja sobre el texto utilizado por los reconocedores;
-    # raw_comment conserva el comentario original.
+    # Trabajamos con una copia normalizada.
+    #
+    # raw_comment permanece intacto dentro de ValidationRule.
     text = normalize(raw_comment)
 
-    # Ejecutamos los reconocedores en el orden establecido.
-    #
-    # Cada reconocedor:
-    # 1. Examina el texto recibido.
-    # 2. Identifica la información correspondiente a su responsabilidad.
-    # 3. Actualiza los atributos necesarios de ValidationRule.
-    # 4. Devuelve el texto que todavía no ha sido interpretado.
+    # La normalización también puede producir un texto vacío.
+    # Lo tratamos como comentario sin contenido interpretable.
+    if not text:
+
+        rule.unparsed_fragments.append(
+            "(sin comentario)"
+        )
+
+        return apply_known_field_fallback(
+            rule,
+            known_fields=known_fields,
+            sheet_name=sheet_name,
+        )
+
+    # --------------------------------------------------------
+    # 4. EJECUTAR LOS RECONOCEDORES
+    # --------------------------------------------------------
+
+    # Cada reconocedor analiza el texto restante, actualiza
+    # los atributos de ValidationRule y devuelve el texto
+    # que todavía no ha sido interpretado.
     for recognizer in DEFAULT_RECOGNIZERS:
-        text = recognizer.recognize(text, rule)
 
-    # Eliminamos espacios y signos de puntuación de los extremos
-    # del texto que quedó después de ejecutar los reconocedores.
-    remainder = text.strip(" .,\n")
+        text = recognizer.recognize(
+            text,
+            rule,
+        )
 
-    # Si todavía existe texto relevante, lo conservamos como descripción.
-    #
-    # No guardamos fragmentos compuestos únicamente por puntuación,
-    # porque no aportan información útil para explicar la regla.
-    if remainder and not _NOISE_ONLY.match(remainder):
-        rule.description = remainder[0].upper() + remainder[1:]
+    # --------------------------------------------------------
+    # 5. CONSERVAR EL TEXTO NO INTERPRETADO
+    # --------------------------------------------------------
 
-    # Buscamos referencias a catálogos maestros mencionados en el comentario.
-    #
-    # Si se identifica una referencia reconocida, master_tables puede cargar
-    # los valores permitidos correspondientes.
-    #
-    # Sin embargo, si rule.allowed_values ya contiene información,
-    # apply_master_table_reference evita sobrescribirla.
-    rule = apply_master_table_reference(rule, raw_comment)
+    # Quitamos espacios y puntuación de los extremos.
+    remainder = text.strip(
+        " .,\n\t"
+    )
 
-    # Aplicamos la configuración de campos conocidos como complemento.
+    # Si el texto restante contiene información, lo guardamos
+    # como descripción de la regla.
     #
-    # Esta etapa permite completar información que no se obtuvo del comentario
-    # ni de las referencias a catálogos maestros.
+    # No lo descartamos: puede contener instrucciones
+    # importantes del MEN que todavía no tienen reconocedor.
+    if (
+        remainder
+        and not _NOISE_ONLY.fullmatch(remainder)
+    ):
+
+        rule.description = (
+            remainder[0].upper()
+            + remainder[1:]
+        )
+
+    # --------------------------------------------------------
+    # 6. RESOLVER CATÁLOGOS MAESTROS
+    # --------------------------------------------------------
+
+    # Busca referencias reconocidas a catálogos dentro
+    # del comentario original.
     #
-    # El fallback completa información faltante sin reemplazar las reglas
-    # explícitas que ya fueron interpretadas.
+    # Si el comentario ya produjo una lista explícita,
+    # master_tables no debe sobrescribirla.
+    #
+    # Si se identifica una referencia y el catálogo no puede
+    # cargarse, el error debe propagarse.
+    rule = apply_master_table_reference(
+        rule,
+        raw_comment,
+    )
+
+    # --------------------------------------------------------
+    # 7. COMPLETAR CON CAMPOS CONOCIDOS
+    # --------------------------------------------------------
+
+    # known_fields completa los atributos que no pudieron
+    # identificarse en los pasos anteriores.
+    #
+    # La información explícita del comentario conserva
+    # prioridad sobre la configuración complementaria.
     rule = apply_known_field_fallback(
         rule,
         known_fields=known_fields,
         sheet_name=sheet_name,
     )
 
-    # Devolvemos la regla construida con la información disponible.
+    # --------------------------------------------------------
+    # 8. DEVOLVER LA REGLA
+    # --------------------------------------------------------
+
     return rule

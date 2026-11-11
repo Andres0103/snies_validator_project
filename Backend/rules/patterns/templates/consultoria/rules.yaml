@@ -13,10 +13,17 @@ sheets:
 
   CONSULTORIA:
 
-    SEDE QUE GESTIONA LA CONSULTORÍA:
+    AÑO:
       datatype: integer
       required: true
-      description: "Identificador de la sede que gestiona la consultoría."
+      exact_length: 4
+      description: "Año del período académico reportado."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      description: "Semestre del período académico reportado."
 
     CODIGO_CONSULTORIA:
       datatype: alphanumeric
@@ -61,7 +68,7 @@ sheets:
 
     FECHA_FINAL:
       datatype: date
-      required: true
+      required: false
       description: "Fecha de finalización de la consultoría."
 
     ID_FUENTE_NACIONAL:
@@ -99,3 +106,41 @@ sheets:
       required: false
       max_length: 15
       description: "Valor de financiación internacional."
+
+  CONSULTORIA_REC_HUMANO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del período académico reportado."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      description: "Semestre del período académico reportado."
+
+    CODIGO_CONSULTORIA:
+      datatype: alphanumeric
+      required: true
+      exact_length: 15
+      description: "Código de identificación de la consultoría asociada."
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      description: "Tipo de documento de identidad del recurso humano."
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Número de documento de identidad del recurso humano."
+
+    ID_MAXIMO_NIVEL_ESTUDIO:
+      datatype: integer
+      required: true
+      max_length: 2
+      description: "Identificador del máximo nivel de estudios del recurso humano."

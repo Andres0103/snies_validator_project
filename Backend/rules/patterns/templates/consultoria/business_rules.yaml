@@ -30,11 +30,10 @@ CODIGO_CONSULTORIA:
     - VALOR
     - FECHA_INICIO
     - FECHA_FINAL
-    - SEDE QUE GESTIONA LA CONSULTORÍA
   message: >
     Para un mismo CODIGO_CONSULTORIA no puede haber valores
     distintos de descripción, campo CINE, nombre de entidad,
-    sector, valor, fechas o sede que gestiona la consultoría.
+    sector, valor, fecha de inicio o fecha final.
 
 
 # ---------------------------------------------------------

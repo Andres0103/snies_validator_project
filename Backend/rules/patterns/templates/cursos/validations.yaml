@@ -1,0 +1,9 @@
+# Validaciones específicas de la plantilla CURSOS.
+# Los valores permitidos S/N se obtienen de los comentarios del Excel.
+
+sheets:
+
+  CURSO:
+
+    ID_CINE_CAMPO_DETALLADO:
+      catalog: cine_campos

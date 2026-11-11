@@ -1,0 +1,38 @@
+
+# Definición de campos de la plantilla CURSOS.
+# Fuente: Manual conceptual SNIES, sección 3.7.3, página 149.
+# Todos los campos son obligatorios.
+
+sheets:
+
+  CURSO:
+
+    CODIGO_CURSO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 20
+      description: "Código del curso."
+
+    NOMBRE_CURSO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 200
+      description: "Nombre del curso."
+
+    ID_CINE_CAMPO_DETALLADO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Campo detallado según clasificación CINE 2013."
+
+    ES_EXTENSION:
+      datatype: alphabetic
+      required: true
+      exact_length: 1
+      description: "Indica si el curso es de extensión."
+
+    ACTIVO:
+      datatype: alphabetic
+      required: true
+      exact_length: 1
+      description: "Indica si el curso está activo."

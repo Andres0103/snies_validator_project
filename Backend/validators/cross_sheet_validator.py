@@ -3,16 +3,38 @@
 
 from __future__ import annotations
 
+import datetime
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from openpyxl.workbook.workbook import Workbook
 
+from backend.rules.general_model import DataType
 from excel.reader import read_headers
 from rules.template_profiles import load_template_profiles
 
 
-def _normalize_key_value(value: Any) -> str | None:
-    """Normaliza valores para comparar claves provenientes de Excel."""
+HEADER_ROW = 1
+
+DEFAULT_DATE_FORMATS = (
+    "%Y-%m-%d",
+    "%d/%m/%Y",
+    "%d-%m-%Y",
+    "%Y/%m/%d",
+)
+
+
+# ============================================================
+# NORMALIZACIÓN DE VALORES
+# ============================================================
+
+def _normalize_text(value: Any) -> str | None:
+    """
+    Normaliza un valor textual.
+
+    Conserva los ceros iniciales y evita convertir identificadores
+    textuales en números.
+    """
 
     if value is None:
         return None
@@ -22,21 +44,180 @@ def _normalize_key_value(value: Any) -> str | None:
     if not text:
         return None
 
-    # Evitar diferencias entre valores como 2026 y 2026.0.
-    try:
-        number = float(text)
-
-        if number.is_integer():
-            return str(int(number))
-
-    except ValueError:
-        pass
-
     return text.upper()
 
 
-def _read_rows(ws):
-    """Obtiene los encabezados y las filas de una hoja."""
+def _normalize_integer(value: Any) -> str | None:
+    """
+    Normaliza un valor entero.
+
+    Acepta representaciones equivalentes como:
+        2026
+        2026.0
+        "2026"
+        "2026.0"
+
+    No acepta valores fraccionarios.
+    """
+
+    if value is None or isinstance(value, bool):
+        return None
+
+    try:
+        number = Decimal(str(value).strip())
+
+    except (InvalidOperation, ValueError, TypeError):
+        return None
+
+    if not number.is_finite():
+        return None
+
+    if number != number.to_integral_value():
+        return None
+
+    return str(int(number))
+
+
+def _normalize_decimal(value: Any) -> str | None:
+    """
+    Normaliza números decimales sin depender de float.
+
+    Por ejemplo:
+        10
+        10.0
+        "10.000"
+
+    Se convierten a la misma representación normalizada.
+    """
+
+    if value is None or isinstance(value, bool):
+        return None
+
+    try:
+        number = Decimal(str(value).strip())
+
+    except (InvalidOperation, ValueError, TypeError):
+        return None
+
+    if not number.is_finite():
+        return None
+
+    normalized = number.normalize()
+
+    if normalized == 0:
+        normalized = Decimal(0)
+
+    return format(normalized, "f")
+
+
+def _normalize_date(value: Any) -> str | None:
+    """
+    Normaliza fechas a ISO 8601 (YYYY-MM-DD).
+
+    Acepta fechas nativas de Excel y los formatos textuales
+    generales utilizados por el motor.
+    """
+
+    if value is None:
+        return None
+
+    if isinstance(value, datetime.datetime):
+        return value.date().isoformat()
+
+    if isinstance(value, datetime.date):
+        return value.isoformat()
+
+    if isinstance(value, str):
+
+        text = value.strip()
+
+        if not text:
+            return None
+
+        for date_format in DEFAULT_DATE_FORMATS:
+
+            try:
+                parsed_date = datetime.datetime.strptime(
+                    text,
+                    date_format,
+                ).date()
+
+                return parsed_date.isoformat()
+
+            except ValueError:
+                continue
+
+        # Si no se reconoce como fecha, no se convierte
+        # silenciosamente a otra representación.
+        return text.upper()
+
+    return None
+
+
+def _normalize_key_value(
+    value: Any,
+    data_type: DataType = DataType.UNKNOWN,
+) -> str | None:
+    """
+    Normaliza un componente de una clave referencial según su tipo.
+
+    TEXT, ALPHANUMERIC y ALPHABETIC:
+        Conservan los ceros iniciales.
+
+    INTEGER:
+        Normaliza representaciones numéricas enteras.
+
+    DECIMAL:
+        Normaliza representaciones decimales.
+
+    DATE:
+        Normaliza fechas a YYYY-MM-DD.
+
+    UNKNOWN:
+        Conserva el valor como texto para no perder información.
+    """
+
+    if value is None:
+        return None
+
+    if isinstance(value, str) and not value.strip():
+        return None
+
+    if data_type == DataType.INTEGER:
+        return _normalize_integer(value)
+
+    if data_type == DataType.DECIMAL:
+        return _normalize_decimal(value)
+
+    if data_type == DataType.DATE:
+        return _normalize_date(value)
+
+    if data_type in (
+        DataType.TEXT,
+        DataType.ALPHANUMERIC,
+        DataType.ALPHABETIC,
+    ):
+        return _normalize_text(value)
+
+    return _normalize_text(value)
+
+
+# ============================================================
+# LECTURA DE HOJAS
+# ============================================================
+
+def _read_rows(
+    ws: Any,
+) -> tuple[list[str], list[tuple[int, dict[str, Any]]]]:
+    """
+    Obtiene los encabezados y las filas de una hoja.
+
+    Retorna:
+        - Lista de nombres de columnas.
+        - Lista de tuplas (número de fila, valores de la fila).
+
+    Las filas completamente vacías se omiten.
+    """
 
     headers = read_headers(ws)
 
@@ -45,70 +226,271 @@ def _read_rows(ws):
         for header in headers
     ]
 
-    rows = []
+    rows: list[tuple[int, dict[str, Any]]] = []
 
-    for row_number in range(2, ws.max_row + 1):
+    for row_number in range(
+        HEADER_ROW + 1,
+        ws.max_row + 1,
+    ):
 
         values = {
-            name: ws.cell(
+            header.column_name: ws.cell(
                 row_number,
-                header.cell.column
+                header.cell.column,
             ).value
-            for name, header in zip(names, headers)
+            for header in headers
         }
 
         if any(
-            _normalize_key_value(value) is not None
+            value is not None
+            and not (
+                isinstance(value, str)
+                and not value.strip()
+            )
             for value in values.values()
         ):
-            rows.append((row_number, values))
+            rows.append(
+                (row_number, values)
+            )
 
     return names, rows
 
 
+# ============================================================
+# CONFIGURACIÓN DE TIPOS
+# ============================================================
+
+def _get_column_type(
+    column_types_by_sheet: dict[str, dict[str, DataType]],
+    sheet_name: str,
+    column_name: str,
+) -> DataType:
+    """
+    Obtiene el tipo de dato de una columna.
+
+    La búsqueda de la hoja ignora mayúsculas y espacios exteriores.
+    Si no existe información del tipo, utiliza UNKNOWN.
+    """
+
+    normalized_sheet = sheet_name.strip().casefold()
+
+    for configured_sheet, column_types in column_types_by_sheet.items():
+
+        if (
+            configured_sheet.strip().casefold()
+            == normalized_sheet
+        ):
+
+            if not isinstance(column_types, dict):
+                return DataType.UNKNOWN
+
+            data_type = column_types.get(
+                column_name,
+                DataType.UNKNOWN,
+            )
+
+            if isinstance(data_type, DataType):
+                return data_type
+
+            # Compatibilidad si algún consumidor proporciona
+            # el valor textual del enum.
+            try:
+                return DataType(data_type)
+
+            except (ValueError, TypeError):
+                return DataType.UNKNOWN
+
+    return DataType.UNKNOWN
+
+
+def _build_row_key(
+    row: dict[str, Any],
+    key_columns: list[str],
+    column_types: dict[str, DataType],
+) -> tuple[str, ...] | None:
+    """
+    Construye una clave normalizada.
+
+    Retorna None cuando alguno de sus componentes está vacío
+    o no puede normalizarse.
+    """
+
+    normalized_values = []
+
+    for column in key_columns:
+
+        data_type = column_types.get(
+            column,
+            DataType.UNKNOWN,
+        )
+
+        normalized_value = _normalize_key_value(
+            row.get(column),
+            data_type,
+        )
+
+        if normalized_value is None:
+            return None
+
+        normalized_values.append(normalized_value)
+
+    return tuple(normalized_values)
+
+
+# ============================================================
+# VALIDACIÓN REFERENCIAL
+# ============================================================
+
 def validate_sheet_references(
     workbook: Workbook,
     template_name: str | None = None,
-) -> list[dict]:
+    column_types_by_sheet: dict[
+        str,
+        dict[str, DataType],
+    ] | None = None,
+) -> list[dict[str, Any]]:
     """
-    Comprueba relaciones entre hojas cuando ambas están disponibles.
+    Comprueba relaciones entre hojas principales y complementarias.
 
     No exige que el libro contenga todas las hojas de una plantilla.
 
-    Si template_name se proporciona, limita la validación a esa plantilla.
-    Si no se proporciona, evalúa todas las relaciones configuradas.
+    Si falta la hoja principal o complementaria de una relación,
+    esta relación se omite.
+
+    Si ambas hojas existen, comprueba que las claves completas
+    de la hoja hija estén presentes en la hoja principal.
+
+    Los valores se normalizan según el DataType de cada columna.
     """
 
-    profiles = load_template_profiles().get("templates", {})
+    profiles = load_template_profiles().get(
+        "templates",
+        {},
+    )
 
-    issues = []
+    issues: list[dict[str, Any]] = []
 
-    # Recorrer las relaciones configuradas.
+    column_types_by_sheet = (
+        column_types_by_sheet or {}
+    )
+
+    # --------------------------------------------------------
+    # 1. INDEXAR LAS HOJAS DEL LIBRO
+    # --------------------------------------------------------
+
+    workbook_sheets_by_normalized = {
+        sheet_name.strip().casefold(): sheet_name
+        for sheet_name in workbook.sheetnames
+    }
+
+    # --------------------------------------------------------
+    # 2. RECORRER LOS PERFILES
+    # --------------------------------------------------------
+
     for current_template, profile in profiles.items():
 
-        # Mantener compatibilidad con llamadas que especifican plantilla.
         if (
             template_name is not None
-            and current_template != template_name
+            and current_template.strip().casefold()
+            != template_name.strip().casefold()
         ):
             continue
 
-        for relation in profile.get("references", []):
+        references = profile.get(
+            "references",
+            [],
+        )
 
-            child_name = relation["child_sheet"]
-            parent_name = relation["parent_sheet"]
-            key_columns = relation["key"]
+        if not isinstance(references, list):
+            raise ValueError(
+                f"Las referencias de '{current_template}' "
+                "deben estar definidas como una lista."
+            )
 
-            # Si falta cualquiera de las hojas, no se ejecuta
-            # esta relación. Su ausencia no genera un error.
+        for relation in references:
+
+            if not isinstance(relation, dict):
+                raise ValueError(
+                    f"Existe una relación mal configurada "
+                    f"en el perfil '{current_template}'."
+                )
+
+            child_name = relation.get("child_sheet")
+            parent_name = relation.get("parent_sheet")
+            key_columns = relation.get("key")
+
+            # ------------------------------------------------
+            # 2.1. VALIDAR CONFIGURACIÓN DE LA RELACIÓN
+            # ------------------------------------------------
+
             if (
-                child_name not in workbook.sheetnames
-                or parent_name not in workbook.sheetnames
+                not isinstance(child_name, str)
+                or not child_name.strip()
+            ):
+                raise ValueError(
+                    f"Una relación de '{current_template}' "
+                    "no tiene un child_sheet válido."
+                )
+
+            if (
+                not isinstance(parent_name, str)
+                or not parent_name.strip()
+            ):
+                raise ValueError(
+                    f"Una relación de '{current_template}' "
+                    "no tiene un parent_sheet válido."
+                )
+
+            if (
+                not isinstance(key_columns, list)
+                or not key_columns
+                or any(
+                    not isinstance(column, str)
+                    or not column.strip()
+                    for column in key_columns
+                )
+            ):
+                raise ValueError(
+                    f"La relación '{child_name} -> {parent_name}' "
+                    "debe tener una lista no vacía de columnas "
+                    "en 'key'."
+                )
+
+            if len(set(key_columns)) != len(key_columns):
+                raise ValueError(
+                    f"La relación '{child_name} -> {parent_name}' "
+                    "contiene columnas clave duplicadas."
+                )
+
+            # ------------------------------------------------
+            # 2.2. LOCALIZAR LAS HOJAS
+            # ------------------------------------------------
+
+            normalized_child = child_name.strip().casefold()
+            normalized_parent = parent_name.strip().casefold()
+
+            actual_child_name = workbook_sheets_by_normalized.get(
+                normalized_child
+            )
+
+            actual_parent_name = workbook_sheets_by_normalized.get(
+                normalized_parent
+            )
+
+            # La ausencia de una hoja no genera error por sí sola.
+            # Esto mantiene la compatibilidad con libros parciales.
+            if (
+                actual_child_name is None
+                or actual_parent_name is None
             ):
                 continue
 
-            parent_ws = workbook[parent_name]
-            child_ws = workbook[child_name]
+            child_ws = workbook[actual_child_name]
+            parent_ws = workbook[actual_parent_name]
+
+            # ------------------------------------------------
+            # 2.3. LEER ENCABEZADOS Y FILAS
+            # ------------------------------------------------
 
             parent_headers, parent_rows = _read_rows(parent_ws)
             child_headers, child_rows = _read_rows(child_ws)
@@ -125,81 +507,135 @@ def validate_sheet_references(
                 if column not in child_headers
             ]
 
-            # Si faltan columnas necesarias para comparar,
-            # se informa que no fue posible ejecutar la relación.
+            # ------------------------------------------------
+            # 2.4. VALIDAR COLUMNAS NECESARIAS
+            # ------------------------------------------------
+
             if missing_parent_columns or missing_child_columns:
 
-                issues.append({
-                    "sheet": child_name,
-                    "row": 1,
-                    "column_name": ", ".join(
-                        missing_child_columns
-                        or missing_parent_columns
-                    ),
-                    "value": None,
-                    "message": (
-                        f"No se puede comprobar la relación "
-                        f"{child_name} -> {parent_name}. "
-                        f"Columnas faltantes en padre: "
-                        f"{missing_parent_columns}; "
-                        f"en hija: {missing_child_columns}."
-                    ),
-                    "severity": "error",
-                })
+                missing_columns = (
+                    missing_child_columns
+                    or missing_parent_columns
+                )
+
+                issues.append(
+                    {
+                        "sheet": actual_child_name,
+                        "row": HEADER_ROW,
+                        "column_name": ", ".join(missing_columns),
+                        "value": None,
+                        "message": (
+                            f"No se puede comprobar la relación "
+                            f"{actual_child_name} -> "
+                            f"{actual_parent_name}. "
+                            f"Columnas faltantes en padre: "
+                            f"{missing_parent_columns}; "
+                            f"en hija: {missing_child_columns}."
+                        ),
+                        "severity": "error",
+                    }
+                )
 
                 continue
 
-            # Construir las claves existentes en la hoja principal.
-            parent_keys = set()
+            # ------------------------------------------------
+            # 2.5. OBTENER LOS TIPOS DE LAS COLUMNAS CLAVE
+            # ------------------------------------------------
+
+            parent_column_types = {
+                column: _get_column_type(
+                    column_types_by_sheet,
+                    actual_parent_name,
+                    column,
+                )
+                for column in key_columns
+            }
+
+            child_column_types = {
+                column: _get_column_type(
+                    column_types_by_sheet,
+                    actual_child_name,
+                    column,
+                )
+                for column in key_columns
+            }
+
+            # Una relación debe comparar cada componente con
+            # una semántica compatible en ambas hojas.
+            #
+            # Si los tipos difieren, se usa UNKNOWN para ese
+            # componente y se conserva su representación textual.
+            compatible_column_types: dict[str, DataType] = {}
+
+            for column in key_columns:
+
+                parent_type = parent_column_types[column]
+                child_type = child_column_types[column]
+
+                if parent_type == child_type:
+                    compatible_column_types[column] = parent_type
+
+                else:
+                    compatible_column_types[column] = DataType.UNKNOWN
+
+            # ------------------------------------------------
+            # 2.6. CONSTRUIR LAS CLAVES DEL PADRE
+            # ------------------------------------------------
+
+            parent_keys: set[tuple[str, ...]] = set()
 
             for _, parent_row in parent_rows:
 
-                values = [
-                    _normalize_key_value(
-                        parent_row.get(column)
-                    )
-                    for column in key_columns
-                ]
+                parent_key = _build_row_key(
+                    parent_row,
+                    key_columns,
+                    compatible_column_types,
+                )
 
-                if all(value is not None for value in values):
-                    parent_keys.add(tuple(values))
+                if parent_key is not None:
+                    parent_keys.add(parent_key)
 
-            # Comprobar las referencias de cada fila hija.
+            # ------------------------------------------------
+            # 2.7. VALIDAR LAS REFERENCIAS DE LAS FILAS HIJAS
+            # ------------------------------------------------
+
             for row_number, child_row in child_rows:
 
-                values = [
-                    _normalize_key_value(
-                        child_row.get(column)
-                    )
-                    for column in key_columns
-                ]
+                child_key = _build_row_key(
+                    child_row,
+                    key_columns,
+                    compatible_column_types,
+                )
 
                 # Las claves incompletas corresponden a las
                 # validaciones de obligatoriedad de las columnas.
-                if not all(value is not None for value in values):
+                if child_key is None:
                     continue
 
-                key = tuple(values)
-
-                if key not in parent_keys:
+                if child_key not in parent_keys:
 
                     readable_key = " | ".join(
                         f"{column}={child_row.get(column)}"
                         for column in key_columns
                     )
 
-                    issues.append({
-                        "sheet": child_name,
-                        "row": row_number,
-                        "column_name": key_columns[-1],
-                        "value": child_row.get(key_columns[-1]),
-                        "message": (
-                            f"El registro de '{child_name}' no tiene "
-                            f"un registro principal correspondiente "
-                            f"en '{parent_name}'. "
-                            f"Clave: {readable_key}."
-                        ),
-                        "severity": "error",
-                    })
+                    issues.append(
+                        {
+                            "sheet": actual_child_name,
+                            "row": row_number,
+                            "column_name": key_columns[-1],
+                            "value": child_row.get(
+                                key_columns[-1]
+                            ),
+                            "message": (
+                                f"El registro de "
+                                f"'{actual_child_name}' no tiene "
+                                f"un registro principal correspondiente "
+                                f"en '{actual_parent_name}'. "
+                                f"Clave: {readable_key}."
+                            ),
+                            "severity": "error",
+                        }
+                    )
 
     return issues

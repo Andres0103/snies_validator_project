@@ -1,18 +1,15 @@
 # Validaciones de campos de la plantilla CONSULTORIA.
 #
 # Este archivo contiene restricciones ejecutables sobre campos
-# individuales: rangos, formatos, valores permitidos y catálogos.
+# individuales: patrones, rangos, formatos y referencias a catálogos.
 #
-# Las características de los campos están en rules.yaml.
+# Las características estructurales están en rules.yaml.
 # Las reglas que relacionan varios campos están en business_rules.yaml.
-# La definición física de los catálogos estará en catalogs.yaml.
+# La definición física de los catálogos está en catalogs.yaml.
 
 sheets:
 
   CONSULTORIA:
-
-    SEDE QUE GESTIONA LA CONSULTORÍA:
-      catalog: sede
 
     CODIGO_CONSULTORIA:
       pattern: "^[A-Z0-9-]+$"

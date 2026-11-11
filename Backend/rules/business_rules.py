@@ -1,17 +1,49 @@
-"""Carga `rules/patterns/business_rules.yaml` (reglas del manual MEN que no
-vienen en los comentarios de Excel)."""
+
+"""
+Interfaz de compatibilidad para cargar reglas de negocio.
+
+La carga y combinación de configuraciones es responsabilidad
+de config_loader.py.
+
+Este módulo se conserva para evitar romper los componentes
+que todavía importan load_business_rules().
+"""
 
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
-import yaml
-
-_CATALOG_PATH = Path(__file__).parent / "patterns" / "business_rules.yaml"
+from rules.config_loader import load_rule_configuration
 
 
-def load_business_rules() -> dict:
-    if not _CATALOG_PATH.exists():
-        return {}
-    with open(_CATALOG_PATH, encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+def load_business_rules(
+    template_name: str | None = None,
+    rules_dir: Path | str | None = None,
+) -> dict[str, Any]:
+    """
+    Carga las reglas de negocio mediante el cargador central.
+
+    Parámetros:
+        template_name:
+            Nombre de la plantilla SNIES.
+
+            Si se proporciona, carga las reglas comunes y
+            las específicas de esa plantilla.
+
+            Si es None, utiliza la configuración legacy.
+
+        rules_dir:
+            Directorio de configuración. Permite utilizar
+            configuraciones alternativas.
+
+    Retorna:
+        Diccionario consolidado de reglas de negocio.
+    """
+
+    configuration = load_rule_configuration(
+        template_name=template_name,
+        rules_dir=rules_dir,
+    )
+
+    return configuration.business_rules

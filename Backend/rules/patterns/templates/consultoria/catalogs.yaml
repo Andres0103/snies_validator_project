@@ -11,12 +11,6 @@
 
 master_tables:
 
-  sede:
-    file: "catalogs/Tabla_sede.yaml"
-    records_path: "master_tables.sedes.records"
-    key_column: "ID_IES_UDEA"
-    description_column: "Descripcion"
-
   cine_campos:
     file: "catalogs/cine_campo_detallado.yaml"
     records_path: "records"
@@ -50,3 +44,21 @@ master_tables:
     key_column: "ID_FUENTE_INTERNACIONAL"
     description_column: "DESC_FUENTE_INTERNACIONAL"
     active_date_column: "FECHA_FINAL"
+  
+    semestres:
+    file: "catalogs/consultoria_semestres.yaml"
+    records_path: "records"
+    key_column: "codigo"
+    description_column: "descripcion"
+
+  tipos_documento:
+    file: "catalogs/consultoria_tipos_documento.yaml"
+    records_path: "records"
+    key_column: "codigo"
+    description_column: "descripcion"
+
+  maximos_niveles_estudio:
+    file: "catalogs/consultoria_niveles_estudio.yaml"
+    records_path: "records"
+    key_column: "codigo"
+    description_column: "descripcion"

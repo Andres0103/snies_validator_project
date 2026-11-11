@@ -1,14 +1,35 @@
-"""Interfaz que debe implementar todo reconocedor de reglas.
 
-Cada reconocedor sabe identificar y extraer UN tipo de regla (obligatoriedad,
-tipo de dato, longitud, valores permitidos, etc.) a partir del texto
-normalizado de un comentario. El intérprete (`rules/interpreter.py`) no
-conoce los detalles de ningún reconocedor concreto: solo los ejecuta en
-orden y combina sus resultados sobre la misma `ValidationRule`.
+"""
+Interfaz base para todos los reconocedores de reglas.
 
-Agregar una regla nueva en el futuro = crear una clase nueva aquí que
-implemente `RuleRecognizer` y registrarla en `interpreter.py`. Ningún
-reconocedor existente se modifica (principio Open/Closed).
+Cada reconocedor identifica un tipo de instrucción dentro
+del comentario de un encabezado Excel y actualiza una instancia
+compartida de ValidationRule.
+
+Ejemplos de reconocedores:
+    - ListRecognizer
+    - RequiredRecognizer
+    - DatatypeRecognizer
+
+Responsabilidades del reconocedor:
+    1. Recibir el texto pendiente de interpretación.
+    2. Identificar únicamente las instrucciones de su competencia.
+    3. Actualizar la instancia recibida de ValidationRule.
+    4. Devolver el texto que todavía no ha sido interpretado.
+
+Restricciones:
+    - No debe crear otra instancia de ValidationRule.
+    - No debe ejecutar otros reconocedores.
+    - No debe descartar texto que no haya interpretado.
+    - No debe modificar directamente la configuración externa.
+    - No debe decidir cómo se ejecutan las validaciones.
+
+El orden de ejecución y la coordinación entre reconocedores
+son responsabilidad de interpreter.py.
+
+Para agregar un nuevo tipo de reconocimiento se crea una
+clase que implemente esta interfaz y se registra en el
+intérprete.
 """
 
 from __future__ import annotations
@@ -19,13 +40,40 @@ from backend.rules.general_model import ValidationRule
 
 
 class RuleRecognizer(ABC):
-    """Reconoce un tipo de regla dentro de un comentario y actualiza la ValidationRule."""
+    """
+    Contrato común de los reconocedores de reglas.
+    """
 
     @abstractmethod
-    def recognize(self, normalized_text: str, rule: ValidationRule) -> str:
-        """Analiza `normalized_text`, actualiza `rule` in-place si encuentra
-        coincidencias, y devuelve el texto restante (con las partes
-        reconocidas eliminadas) para que el siguiente reconocedor trabaje
-        sobre lo que aún no se ha interpretado.
+    def recognize(
+        self,
+        normalized_text: str,
+        rule: ValidationRule,
+    ) -> str:
         """
-        raise NotImplementedError
+        Analiza el texto pendiente y actualiza la regla.
+
+        Parámetros:
+            normalized_text:
+                Fragmento del comentario que todavía no ha sido
+                interpretado por los reconocedores anteriores.
+
+            rule:
+                Instancia compartida de ValidationRule.
+                El reconocedor modifica sus atributos directamente.
+
+        Retorna:
+            str:
+                Texto que permanece sin interpretar y que será
+                entregado al siguiente reconocedor.
+
+        Importante:
+            El reconocedor debe conservar cualquier fragmento
+            que no pertenezca a su responsabilidad.
+
+            Si no encuentra ninguna coincidencia, debe devolver
+            el texto recibido sin alteraciones.
+        """
+        raise NotImplementedError(
+            "Cada reconocedor debe implementar recognize()."
+        )

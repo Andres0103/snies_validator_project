@@ -1,4 +1,6 @@
-"""Orquesta la validación post-hoc de un archivo SNIES.
+
+"""
+Orquesta la validación post-hoc de un archivo SNIES.
 
 Integra:
 - Reglas de campos definidas en rules.yaml.
@@ -88,34 +90,33 @@ def _is_blank(value: Any) -> bool:
 
 
 def _to_decimal(value: Any) -> Decimal | None:
-    """Convierte un valor numérico a Decimal."""
+    """
+    Convierte un valor numérico a Decimal.
+
+    Rechaza booleanos, valores no numéricos e infinitos.
+    """
 
     if isinstance(value, bool):
         return None
 
-
     if isinstance(value, (int, float, Decimal)):
         try:
-            num = Decimal(str(value))
-            
-            if num.is_finite(): 
-                return num
-            else:
-                return None
-        
-        except InvalidOperation:
+            number = Decimal(str(value))
+
+            if number.is_finite():
+                return number
+
+        except (InvalidOperation, ValueError, TypeError):
             return None
 
     if isinstance(value, str):
         try:
-            num = Decimal(value.strip())
+            number = Decimal(value.strip())
 
-            if num.is_finite():
-                return num
-            else:
-                return None
-            
-        except InvalidOperation:
+            if number.is_finite():
+                return number
+
+        except (InvalidOperation, ValueError, TypeError):
             return None
 
     return None
@@ -134,15 +135,19 @@ def _to_date(
         return value
 
     if isinstance(value, str):
-        for date_format in formats or [
+
+        date_formats = formats or [
             "%d-%m-%Y",
             "%d/%m/%Y",
-        ]:
+        ]
+
+        for date_format in date_formats:
             try:
                 return datetime.datetime.strptime(
                     value.strip(),
                     date_format,
                 ).date()
+
             except ValueError:
                 continue
 
@@ -152,17 +157,22 @@ def _to_date(
 def _normalize_date_formats(
     configured_format: Any,
 ) -> list[str]:
-    """Normaliza el formato de fecha definido en validations.yaml."""
+    """
+    Normaliza los formatos de fecha configurados en YAML.
+
+    No descarta silenciosamente elementos inválidos.
+    La validación de su contenido se realiza en el punto
+    donde se consume la configuración.
+    """
 
     if isinstance(configured_format, str):
         return [configured_format]
 
     if isinstance(configured_format, list):
-        return [
-            item
-            for item in configured_format
-            if isinstance(item, str)
-        ]
+        return configured_format
+
+    if configured_format is None:
+        return []
 
     return []
 
@@ -172,25 +182,98 @@ def _normalize_date_formats(
 # ============================================================
 
 def _condition_matches(
-    condition: dict,
+    condition: dict[str, Any],
     row_values: dict[str, object],
 ) -> bool:
-    """Evalúa una condición configurada en business_rules.yaml."""
+    """
+    Evalúa una condición configurada en business_rules.yaml.
 
-    if "any" in condition:
-        return any(
-            _condition_matches(item, row_values)
-            for item in condition["any"]
+    Operadores simples:
+        not_blank
+        blank
+        gt
+        eq
+        in
+
+    Operadores compuestos:
+        any
+        all
+
+    Las condiciones mal configuradas generan ValueError.
+    No se interpretan silenciosamente como condiciones falsas.
+    """
+
+    if not isinstance(condition, dict) or not condition:
+        raise ValueError(
+            "Cada condición debe ser un diccionario no vacío."
         )
 
-    if "all" in condition:
+    # --------------------------------------------------------
+    # CONDICIONES COMPUESTAS
+    # --------------------------------------------------------
+
+    has_any = "any" in condition
+    has_all = "all" in condition
+
+    if has_any and has_all:
+        raise ValueError(
+            "Una condición no puede definir simultáneamente "
+            "'any' y 'all'."
+        )
+
+    if has_any or has_all:
+
+        if len(condition) != 1:
+            raise ValueError(
+                "Una condición compuesta no puede combinarse "
+                "con operadores simples en el mismo nivel."
+            )
+
+        if has_any:
+            conditions = condition["any"]
+
+            if not isinstance(conditions, list) or not conditions:
+                raise ValueError(
+                    "La condición 'any' debe contener "
+                    "una lista no vacía."
+                )
+
+            return any(
+                _condition_matches(item, row_values)
+                for item in conditions
+            )
+
+        conditions = condition["all"]
+
+        if not isinstance(conditions, list) or not conditions:
+            raise ValueError(
+                "La condición 'all' debe contener "
+                "una lista no vacía."
+            )
+
         return all(
             _condition_matches(item, row_values)
-            for item in condition["all"]
+            for item in conditions
         )
+
+    # --------------------------------------------------------
+    # CONDICIONES SIMPLES
+    # --------------------------------------------------------
 
     column = condition.get("column")
     operator = condition.get("operator", "not_blank")
+
+    if not isinstance(column, str) or not column.strip():
+        raise ValueError(
+            "Una condición simple debe indicar una columna válida."
+        )
+
+    if not isinstance(operator, str):
+        raise ValueError(
+            f"El operador de la columna '{column}' debe ser texto."
+        )
+
+    operator = operator.strip().lower()
     value = row_values.get(column)
 
     blank = _is_blank(value)
@@ -202,59 +285,142 @@ def _condition_matches(
         return blank
 
     if operator == "gt":
+
+        if blank:
+            return False
+
         number = _to_decimal(value)
 
         if number is None:
             return False
 
-        expected = _to_decimal(condition.get("value", 0))
+        if "value" not in condition:
+            raise ValueError(
+                f"La condición 'gt' de '{column}' "
+                "debe definir la propiedad 'value'."
+            )
 
-        return (
-            expected is not None
-            and number > expected
-        )
+        expected = _to_decimal(condition["value"])
+
+        if expected is None:
+            raise ValueError(
+                f"El valor esperado para 'gt' en '{column}' "
+                "debe ser numérico."
+            )
+
+        return number > expected
 
     if operator == "eq":
+
+        if blank:
+            return False
+
+        if "value" not in condition:
+            raise ValueError(
+                f"La condición 'eq' de '{column}' "
+                "debe definir la propiedad 'value'."
+            )
+
+        expected = condition["value"]
+
         return (
-            not blank
-            and str(value).strip()
-            == str(condition.get("value", ""))
+            str(value).strip()
+            == str(expected).strip()
         )
 
     if operator == "in":
-        return (
-            not blank
-            and str(value).strip()
-            in {
-                str(item)
-                for item in condition.get("values", [])
-            }
-        )
 
-    return False
+        if blank:
+            return False
+
+        allowed_values = condition.get("values")
+
+        if not isinstance(allowed_values, list):
+            raise ValueError(
+                f"La condición 'in' de '{column}' "
+                "debe contener una lista en 'values'."
+            )
+
+        normalized_values = {
+            str(item).strip()
+            for item in allowed_values
+        }
+
+        return str(value).strip() in normalized_values
+
+    raise ValueError(
+        f"Operador de condición no soportado: '{operator}'."
+    )
 
 
 def _conditional_requirement_applies(
-    rules: dict,
+    rules: dict[str, Any],
     sheet_name: str,
     column_name: str,
     row_values: dict[str, object],
 ) -> bool | None:
-    """Retorna True/False si hay condición configurada; None si no existe."""
+    """
+    Determina si un campo es obligatorio condicionalmente.
+
+    Retorna:
+        True: la condición se cumple.
+        False: la condición no se cumple.
+        None: no existe condición configurada para el campo.
+    """
 
     conditional_rules = rules.get(
         "conditional_required_fields",
         {},
     )
 
-    sheet_rules = conditional_rules.get(sheet_name, {})
-    config = sheet_rules.get(column_name)
+    if not isinstance(conditional_rules, dict):
+        raise ValueError(
+            "'conditional_required_fields' debe ser un diccionario."
+        )
 
-    if not config:
+    normalized_sheet = sheet_name.strip().casefold()
+    sheet_rules = None
+
+    for configured_sheet, configured_rules in conditional_rules.items():
+
+        if (
+            isinstance(configured_sheet, str)
+            and configured_sheet.strip().casefold()
+            == normalized_sheet
+        ):
+            sheet_rules = configured_rules
+            break
+
+    if sheet_rules is None:
         return None
 
+    if not isinstance(sheet_rules, dict):
+        raise ValueError(
+            f"Las condiciones de la hoja '{sheet_name}' "
+            "deben estar definidas como un diccionario."
+        )
+
+    config = sheet_rules.get(column_name)
+
+    if config is None:
+        return None
+
+    if not isinstance(config, dict):
+        raise ValueError(
+            f"La configuración de obligatoriedad de "
+            f"'{column_name}' debe ser un diccionario."
+        )
+
+    condition = config.get("when")
+
+    if condition is None:
+        raise ValueError(
+            f"La condición de '{column_name}' en '{sheet_name}' "
+            "no contiene la propiedad 'when'."
+        )
+
     return _condition_matches(
-        config.get("when", {}),
+        condition,
         row_values,
     )
 
@@ -272,9 +438,24 @@ def _validate_configured_constraints(
     """
     Ejecuta las restricciones configuradas en validations.yaml.
 
+    Restricciones soportadas:
+        pattern
+        min_value
+        max_value
+        date_within_past_years
+
+    El formato de fecha se procesa en _build_column_rules()
+    y se valida mediante validate_cell().
+
     Retorna una lista de tuplas:
         (mensaje, severidad)
     """
+
+    if not isinstance(validation, dict):
+        raise ValueError(
+            f"La validación de '{column_name}' debe ser "
+            "un diccionario."
+        )
 
     issues: list[tuple[str, str]] = []
 
@@ -282,104 +463,157 @@ def _validate_configured_constraints(
         return issues
 
     # --------------------------------------------------------
-    # 1. Expresiones regulares.
+    # 1. EXPRESIONES REGULARES
     # --------------------------------------------------------
 
-    pattern = validation.get("pattern")
+    if "pattern" in validation:
 
-    if pattern:
+        pattern = validation["pattern"]
+
+        if not isinstance(pattern, str) or not pattern:
+            raise ValueError(
+                f"El patrón de '{column_name}' debe ser "
+                "un texto no vacío."
+            )
+
         try:
-            if not re.fullmatch(
-                pattern,
-                str(value).strip(),
-            ):
-                issues.append(
-                    (
-                        "El valor no cumple con el patrón "
-                        f"permitido: {pattern}.",
-                        "error",
-                    )
-                )
+            compiled_pattern = re.compile(pattern)
+
         except re.error as exc:
             raise ValueError(
                 f"Expresión regular inválida para "
                 f"'{column_name}': {exc}"
             ) from exc
 
+        if not compiled_pattern.fullmatch(str(value).strip()):
+            issues.append(
+                (
+                    "El valor no cumple con el patrón "
+                    f"permitido: {pattern}.",
+                    "error",
+                )
+            )
+
     # --------------------------------------------------------
-    # 2. Límites numéricos.
+    # 2. LÍMITES NUMÉRICOS
     # --------------------------------------------------------
 
     minimum = validation.get("min_value")
     maximum = validation.get("max_value")
 
-    if minimum is not None or maximum is not None:
+    min_number = None
+    max_number = None
+
+    if minimum is not None:
+
+        min_number = _to_decimal(minimum)
+
+        if min_number is None:
+            raise ValueError(
+                f"'min_value' de '{column_name}' "
+                "debe ser un número válido."
+            )
+
+    if maximum is not None:
+
+        max_number = _to_decimal(maximum)
+
+        if max_number is None:
+            raise ValueError(
+                f"'max_value' de '{column_name}' "
+                "debe ser un número válido."
+            )
+
+    if (
+        min_number is not None
+        and max_number is not None
+        and min_number > max_number
+    ):
+        raise ValueError(
+            f"'min_value' no puede ser mayor que 'max_value' "
+            f"en la configuración de '{column_name}'."
+        )
+
+    if min_number is not None or max_number is not None:
+
         number = _to_decimal(value)
 
-        if number is not None:
+        if number is None:
+            issues.append(
+                (
+                    "El valor debe ser numérico para cumplir "
+                    "los límites configurados.",
+                    "error",
+                )
+            )
 
-            if minimum is not None:
-                min_number = _to_decimal(minimum)
+        else:
 
-                if (
-                    min_number is not None
-                    and number < min_number
-                ):
-                    issues.append(
-                        (
-                            f"El valor debe ser mayor o igual "
-                            f"a {minimum}.",
-                            "error",
-                        )
+            if min_number is not None and number < min_number:
+                issues.append(
+                    (
+                        f"El valor debe ser mayor o igual "
+                        f"a {minimum}.",
+                        "error",
                     )
+                )
 
-            if maximum is not None:
-                max_number = _to_decimal(maximum)
-
-                if (
-                    max_number is not None
-                    and number > max_number
-                ):
-                    issues.append(
-                        (
-                            f"El valor debe ser menor o igual "
-                            f"a {maximum}.",
-                            "error",
-                        )
+            if max_number is not None and number > max_number:
+                issues.append(
+                    (
+                        f"El valor debe ser menor o igual "
+                        f"a {maximum}.",
+                        "error",
                     )
+                )
 
     # --------------------------------------------------------
-    # 3. Antigüedad permitida de una fecha.
+    # 3. ANTIGÜEDAD PERMITIDA DE UNA FECHA
     # --------------------------------------------------------
 
     years = validation.get("date_within_past_years")
 
     if years is not None:
+
+        if (
+            isinstance(years, bool)
+            or not isinstance(years, int)
+            or years < 0
+        ):
+            raise ValueError(
+                f"'date_within_past_years' de '{column_name}' "
+                "debe ser un entero mayor o igual que cero."
+            )
+
+        # El formato ya fue validado por validate_cell().
+        # Aquí únicamente se comprueba la antigüedad.
         parsed_date = _to_date(
             value,
             _normalize_date_formats(
                 validation.get("format")
-            ),
+            ) or None,
         )
 
         if parsed_date is not None:
+
             today = datetime.date.today()
 
             try:
                 earliest_date = today.replace(
-                    year=today.year - int(years)
+                    year=today.year - years,
                 )
+
             except ValueError:
-                # Maneja el caso del 29 de febrero.
+                # Ajuste para fechas como el 29 de febrero.
                 earliest_date = today.replace(
-                    year=today.year - int(years),
+                    year=today.year - years,
                     day=28,
                 )
 
             if not earliest_date <= parsed_date <= today:
                 issues.append(
                     (
-                        f"La fecha debe estar comprendida "
+                        "La fecha debe estar comprendida "
                         f"entre {earliest_date.strftime('%d-%m-%Y')} "
                         f"y {today.strftime('%d-%m-%Y')}.",
                         "error",
@@ -402,6 +636,8 @@ def _get_sheet_configuration(
 
     Para configuraciones nuevas utiliza sheet_configurations.
     Para configuraciones antiguas utiliza validation_config.
+
+    La búsqueda de hojas ignora mayúsculas y espacios exteriores.
     """
 
     sheet_configurations = getattr(
@@ -410,17 +646,48 @@ def _get_sheet_configuration(
         {},
     )
 
-    if sheet_name in sheet_configurations:
-        return sheet_configurations[sheet_name]
+    if not isinstance(sheet_configurations, dict):
+        raise ValueError(
+            "sheet_configurations debe ser un diccionario."
+        )
 
-    # Compatibilidad con la configuración antigua.
+    normalized_name = sheet_name.strip().casefold()
+
+    for configured_name, sheet_configuration in sheet_configurations.items():
+
+        if (
+            isinstance(configured_name, str)
+            and configured_name.strip().casefold()
+            == normalized_name
+        ):
+
+            if not isinstance(sheet_configuration, dict):
+                raise ValueError(
+                    f"La configuración de '{configured_name}' "
+                    "debe ser un diccionario."
+                )
+
+            return sheet_configuration
+
+    # Compatibilidad con la configuración anterior.
+    validation_config = getattr(
+        configuration,
+        "validation_config",
+        {},
+    )
+
+    if not isinstance(validation_config, dict):
+        raise ValueError(
+            "validation_config debe ser un diccionario."
+        )
+
     return {
         "rules": configuration.known_fields,
-        "validations": configuration.validation_config.get(
+        "validations": validation_config.get(
             "column_rules",
             {},
         ),
-        "catalogs": configuration.validation_config.get(
+        "catalogs": validation_config.get(
             "master_tables",
             {},
         ),
@@ -439,8 +706,14 @@ def _build_column_rules(
     """
     Construye las reglas interpretadas de las columnas.
 
-    Integra comentarios de Excel, rules.yaml, validations.yaml
-    y los catálogos correspondientes.
+    Integra:
+        - Comentarios de Excel.
+        - known_fields.
+        - validations.yaml.
+        - Catálogos declarados en catalogs.yaml.
+
+    Los comentarios conservan prioridad sobre las configuraciones
+    complementarias cuando ya aportan información explícita.
     """
 
     rules_by_column: dict[str, ValidationRule] = {}
@@ -455,12 +728,24 @@ def _build_column_rules(
         {},
     )
 
+    if not isinstance(validations_by_column, dict):
+        raise ValueError(
+            f"Las validaciones de la hoja '{sheet_name}' "
+            "deben ser un diccionario."
+        )
+
+    if not isinstance(catalogs, dict):
+        raise ValueError(
+            f"Los catálogos de la hoja '{sheet_name}' "
+            "deben ser un diccionario."
+        )
+
     for header in headers:
 
         column_name = header.column_name
 
         # ----------------------------------------------------
-        # 1. Interpretar el comentario y completar reglas.
+        # 1. INTERPRETAR EL COMENTARIO
         # ----------------------------------------------------
 
         rule = interpret_comment(
@@ -471,7 +756,7 @@ def _build_column_rules(
         )
 
         # ----------------------------------------------------
-        # 2. Obtener restricciones de validations.yaml.
+        # 2. OBTENER VALIDACIONES CONFIGURADAS
         # ----------------------------------------------------
 
         validation = validations_by_column.get(
@@ -479,21 +764,78 @@ def _build_column_rules(
             {},
         )
 
-        # El formato configurado complementa el tipo DATE.
-        configured_formats = _normalize_date_formats(
-            validation.get("format")
-        )
-
-        if configured_formats:
-            rule.date_formats = configured_formats
+        if not isinstance(validation, dict):
+            raise ValueError(
+                f"La validación de '{column_name}' "
+                f"en la hoja '{sheet_name}' debe ser "
+                "un diccionario."
+            )
 
         # ----------------------------------------------------
-        # 3. Cargar el catálogo asociado al campo.
+        # 3. COMPLEMENTAR EL TIPO Y LOS FORMATOS DE FECHA
+        # ----------------------------------------------------
+
+        if "format" in validation:
+
+            configured_formats = _normalize_date_formats(
+                validation["format"]
+            )
+
+            if (
+                not configured_formats
+                or any(
+                    not isinstance(item, str) or not item.strip()
+                    for item in configured_formats
+                )
+            ):
+                raise ValueError(
+                    f"'format' de '{column_name}' debe contener "
+                    "uno o varios formatos de fecha válidos."
+                )
+
+            if rule.datatype == DataType.UNKNOWN:
+                rule.datatype = DataType.DATE
+
+            elif rule.datatype != DataType.DATE:
+
+                message = (
+                    "La configuración de formato de fecha entra "
+                    "en conflicto con el tipo de dato interpretado."
+                )
+
+                if message not in rule.unparsed_fragments:
+                    rule.unparsed_fragments.append(message)
+
+            if rule.datatype == DataType.DATE:
+
+                if not rule.date_formats:
+                    rule.date_formats = configured_formats
+
+                elif set(rule.date_formats) != set(configured_formats):
+
+                    message = (
+                        "Los formatos de fecha del comentario "
+                        "no coinciden con los configurados "
+                        "en validations.yaml."
+                    )
+
+                    if message not in rule.unparsed_fragments:
+                        rule.unparsed_fragments.append(message)
+
+        # ----------------------------------------------------
+        # 4. CARGAR CATÁLOGO CONFIGURADO
         # ----------------------------------------------------
 
         catalog_name = validation.get("catalog")
 
         if catalog_name:
+
+            if not isinstance(catalog_name, str):
+                raise ValueError(
+                    f"El catálogo de '{column_name}' "
+                    "debe identificarse mediante un texto."
+                )
+
             catalog_config = catalogs.get(catalog_name)
 
             if catalog_config is None:
@@ -504,14 +846,86 @@ def _build_column_rules(
                     "en catalogs.yaml."
                 )
 
-            rule.allowed_values = load_catalog(
-                catalog_config,
-                catalog_name,
-            )
+            # Si el comentario ya aportó un catálogo, se conserva.
+            # La configuración YAML complementa la regla cuando
+            # todavía no existen valores permitidos.
+            if not rule.allowed_values:
+                rule.allowed_values = load_catalog(
+                    catalog_config,
+                    catalog_name,
+                )
 
         rules_by_column[column_name] = rule
 
     return rules_by_column, validations_by_column
+
+
+# ============================================================
+# VALIDACIONES ESTRUCTURALES AUXILIARES
+# ============================================================
+
+def _build_structure_result(
+    ws: Any,
+) -> SheetValidationResult:
+    """
+    Construye el resultado de una hoja sin encabezados reconocibles.
+    """
+
+    result = SheetValidationResult(
+        sheet_name=ws.title,
+        total_rows=max(ws.max_row - HEADER_ROW, 0),
+    )
+
+    header_issues = validate_sheet_headers(ws)
+
+    for issue in header_issues:
+
+        result.issues.append(
+            RowIssue(
+                sheet=ws.title,
+                row=issue["row"],
+                column_name=issue["column_name"],
+                value=issue.get("value"),
+                message=issue["message"],
+                severity=issue.get("severity", "error"),
+            )
+        )
+
+    if not result.issues:
+        result.issues.append(
+            RowIssue(
+                sheet=ws.title,
+                row=HEADER_ROW,
+                column_name="__ENCABEZADO_VACIO__",
+                value=None,
+                message=(
+                    "La hoja no contiene encabezados reconocibles "
+                    "en la primera fila."
+                ),
+                severity="error",
+            )
+        )
+
+    return result
+
+
+def _has_invalid_headers(
+    header_issues: list[dict[str, Any]],
+) -> bool:
+    """
+    Determina si existen encabezados que impiden validar las filas.
+
+    No depende exclusivamente del texto del mensaje.
+    """
+
+    return any(
+        issue.get("severity") == "error"
+        and (
+            "duplicado" in issue.get("message", "").lower()
+            or issue.get("column_name") == "__ENCABEZADO_VACIO__"
+        )
+        for issue in header_issues
+    )
 
 
 # ============================================================
@@ -526,7 +940,7 @@ def validate_workbook(
     results: list[SheetValidationResult] = []
 
     # ---------------------------------------------------------
-    # 1. Identificar la plantilla del libro.
+    # 1. IDENTIFICAR LA PLANTILLA DEL LIBRO
     # ---------------------------------------------------------
 
     detected_templates = detect_templates(
@@ -581,12 +995,8 @@ def validate_workbook(
     template_name = detected_templates[0]
 
     # ---------------------------------------------------------
-    # 2. Cargar la configuración correspondiente.
+    # 2. CARGAR LA CONFIGURACIÓN CORRESPONDIENTE
     # ---------------------------------------------------------
-
-    # Las plantillas migradas utilizan la nueva arquitectura.
-    # Las que todavía no tienen directorio propio conservan
-    # temporalmente la configuración anterior.
 
     template_directory = (
         Path(__file__).resolve().parents[1]
@@ -610,7 +1020,7 @@ def validate_workbook(
     )
 
     # ---------------------------------------------------------
-    # 3. Obtener el perfil estructural.
+    # 3. OBTENER EL PERFIL ESTRUCTURAL
     # ---------------------------------------------------------
 
     profiles = load_template_profiles()
@@ -630,18 +1040,30 @@ def validate_workbook(
         [],
     )
 
-    expected_sheet_set = set(expected_sheets)
+    if not isinstance(expected_sheets, list):
+        raise ValueError(
+            f"Las hojas esperadas de '{template_name}' "
+            "deben estar definidas como una lista."
+        )
 
-    data_sheets = iter_data_sheets(workbook)
-
-    present_sheet_names = {
-        ws.title
-        for ws in data_sheets
+    expected_sheet_by_normalized = {
+        sheet.strip().casefold(): sheet
+        for sheet in expected_sheets
+        if isinstance(sheet, str)
     }
 
-    unexpected_sheets = (
-        present_sheet_names - expected_sheet_set
-    )
+    # ---------------------------------------------------------
+    # 4. DETERMINAR LAS HOJAS DEL LIBRO
+    # ---------------------------------------------------------
+
+    data_sheets = list(iter_data_sheets(workbook))
+
+    unexpected_sheets = {
+        ws.title
+        for ws in data_sheets
+        if ws.title.strip().casefold()
+        not in expected_sheet_by_normalized
+    }
 
     if unexpected_sheets:
         results.append(
@@ -665,25 +1087,37 @@ def validate_workbook(
             )
         )
 
-    # ---------------------------------------------------------
-    # 4. Determinar las hojas que deben validarse.
-    # ---------------------------------------------------------
-
     sheets_to_validate = [
         ws
         for ws in data_sheets
-        if ws.title in expected_sheet_set
+        if ws.title.strip().casefold()
+        in expected_sheet_by_normalized
     ]
 
     # ---------------------------------------------------------
-    # 5. Validar cada hoja.
+    # 5. VALIDAR CADA HOJA
     # ---------------------------------------------------------
+
+    # Conservamos el tipo de dato de cada columna por hoja.
+    # El validador entre hojas necesita esta información para
+    # comparar correctamente claves numéricas y textuales.
+    column_types_by_sheet: dict[
+        str,
+        dict[str, DataType],
+    ] = {}
 
     for ws in sheets_to_validate:
 
         headers = read_headers(ws)
 
+        # -----------------------------------------------------
+        # 5.0. HOJAS SIN ENCABEZADOS
+        # -----------------------------------------------------
+
         if not headers:
+            results.append(
+                _build_structure_result(ws)
+            )
             continue
 
         sheet_configuration = _get_sheet_configuration(
@@ -692,7 +1126,7 @@ def validate_workbook(
         )
 
         # -----------------------------------------------------
-        # 5.1. Construir reglas de las columnas.
+        # 5.1. CONSTRUIR LAS REGLAS DE LAS COLUMNAS
         # -----------------------------------------------------
 
         rules_by_column, validations_by_column = (
@@ -703,6 +1137,11 @@ def validate_workbook(
                 configuration,
             )
         )
+
+        column_types_by_sheet[ws.title] = {
+            column_name: rule.datatype
+            for column_name, rule in rules_by_column.items()
+        }
 
         column_letter_by_name = {
             header.column_name: header.column_letter
@@ -727,7 +1166,7 @@ def validate_workbook(
         )
 
         # -----------------------------------------------------
-        # 5.2. Validaciones estructurales de encabezados.
+        # 5.2. VALIDACIONES ESTRUCTURALES DE ENCABEZADOS
         # -----------------------------------------------------
 
         header_issues = validate_sheet_headers(ws)
@@ -738,24 +1177,18 @@ def validate_workbook(
                     sheet=ws.title,
                     row=issue["row"],
                     column_name=issue["column_name"],
-                    value=issue["value"],
+                    value=issue.get("value"),
                     message=issue["message"],
-                    severity=issue["severity"],
+                    severity=issue.get("severity", "error"),
                 )
             )
 
-        has_invalid_headers = any(
-            "duplicado" in issue["message"].lower()
-            or "encabezado vacío" in issue["message"].lower()
-            for issue in header_issues
-        )
-
-        if has_invalid_headers:
+        if _has_invalid_headers(header_issues):
             results.append(result)
             continue
 
         # -----------------------------------------------------
-        # 5.3. Recopilar las filas como diccionarios.
+        # 5.3. RECOPILAR LAS FILAS COMO DICCIONARIOS
         # -----------------------------------------------------
 
         row_dicts: list[dict[str, object]] = []
@@ -787,7 +1220,7 @@ def validate_workbook(
             row_numbers.append(row_idx)
 
         # -----------------------------------------------------
-        # 5.4. Validaciones por celda y reglas de negocio.
+        # 5.4. VALIDACIONES POR CELDA Y REGLAS DE NEGOCIO
         # -----------------------------------------------------
 
         for row_values, row_idx in zip(
@@ -805,7 +1238,7 @@ def validate_workbook(
                 )
 
                 # ---------------------------------------------
-                # A. Obligatoriedad condicional.
+                # A. OBLIGATORIEDAD CONDICIONAL
                 # ---------------------------------------------
 
                 conditional_applies = (
@@ -818,7 +1251,7 @@ def validate_workbook(
                 )
 
                 # ---------------------------------------------
-                # B. Tipo de dato, longitud y catálogo.
+                # B. TIPO DE DATO, LONGITUD Y CATÁLOGO
                 # ---------------------------------------------
 
                 cell_issues = validate_cell(
@@ -840,7 +1273,7 @@ def validate_workbook(
                     )
 
                 # ---------------------------------------------
-                # C. Restricciones de validations.yaml.
+                # C. RESTRICCIONES DE validations.yaml
                 # ---------------------------------------------
 
                 configured_issues = (
@@ -865,7 +1298,7 @@ def validate_workbook(
                     )
 
                 # ---------------------------------------------
-                # D. Reglas de negocio por campo.
+                # D. REGLAS DE NEGOCIO POR CAMPO
                 # ---------------------------------------------
 
                 business_rule = resolve_business_rule(
@@ -882,6 +1315,7 @@ def validate_workbook(
                         "unique_in_sheet",
                     )
                 ):
+
                     business_issues = validate_business_rule(
                         business_rule["kind"],
                         business_rule,
@@ -902,20 +1336,14 @@ def validate_workbook(
                         )
 
         # -----------------------------------------------------
-        # 5.5. Consistencia entre filas.
+        # 5.5. CONSISTENCIA ENTRE FILAS
         # -----------------------------------------------------
 
-        # Construir el diccionario con el tipo de dato de cada columna.
-        # Se calcula una sola vez porque sirve para todas las reglas
-        # de consistencia y unicidad de esta hoja.
         column_types = {
             column_name: rule.datatype
             for column_name, rule in rules_by_column.items()
         }
 
-        # Relacionar cada número real de fila de Excel con sus valores.
-        # Esto permite recuperar los datos originales cuando se genera
-        # una incidencia entre filas.
         row_values_by_number = {
             number: values
             for number, values in zip(row_numbers, row_dicts)
@@ -923,10 +1351,16 @@ def validate_workbook(
 
         for col_name, business_rule in global_business_rules.items():
 
-            if business_rule.get("kind") != "cross_row_consistency_note":
+            if (
+                business_rule.get("kind")
+                != "cross_row_consistency_note"
+            ):
                 continue
 
-            check_columns = business_rule.get("check_columns", [])
+            check_columns = business_rule.get(
+                "check_columns",
+                [],
+            )
 
             if col_name not in column_letter_by_name:
                 continue
@@ -945,7 +1379,6 @@ def validate_workbook(
             if group_by and group_by not in column_letter_by_name:
                 group_by = None
 
-            # Ejecutar la validación entre filas.
             consistency_issues = check_code_consistency(
                 col_name,
                 check_columns,
@@ -955,7 +1388,6 @@ def validate_workbook(
                 group_by,
             )
 
-            # Incorporar las incidencias al resultado de la hoja.
             for cross_issue in consistency_issues:
 
                 row_values = row_values_by_number.get(
@@ -977,7 +1409,7 @@ def validate_workbook(
                 )
 
         # -----------------------------------------------------
-        # 5.6. Reglas de unicidad de cada hoja.
+        # 5.6. REGLAS DE UNICIDAD DE CADA HOJA
         # -----------------------------------------------------
 
         for col_name in column_letter_by_name:
@@ -1026,24 +1458,35 @@ def validate_workbook(
                     )
                 )
 
+        # -----------------------------------------------------
+        # 5.7. GUARDAR EL RESULTADO DE LA HOJA
+        # -----------------------------------------------------
+
+        # Todas las hojas procesadas deben quedar en results,
+        # incluso cuando no presenten incidencias.
+        results.append(result)
+
     # ---------------------------------------------------------
-    # 6. Validaciones referenciales entre hojas.
+    # 6. VALIDACIONES REFERENCIALES ENTRE HOJAS
     # ---------------------------------------------------------
 
     reference_issues = validate_sheet_references(
         workbook,
         template_name=template_name,
+        column_types_by_sheet=column_types_by_sheet,
     )
+
+    # Crear un índice para localizar rápidamente el resultado
+    # de la hoja a la que pertenece cada incidencia.
+    results_by_sheet = {
+        result.sheet_name: result
+        for result in results
+    }
 
     for issue in reference_issues:
 
-        target = next(
-            (
-                result
-                for result in results
-                if result.sheet_name == issue["sheet"]
-            ),
-            None,
+        target = results_by_sheet.get(
+            issue["sheet"]
         )
 
         if target is None:

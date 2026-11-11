@@ -205,102 +205,133 @@ def check_code_consistency(
 
     issues: list[CrossRowIssue] = []
 
-    # Diccionario que agrupa los índices de las filas
-    # según el código y, opcionalmente, una segunda columna.
-    groups: dict[Any, list[int]] = defaultdict(list)
+    def display_value(normalized: tuple[str, Any]) -> str:
+        """
+        Convierte un valor normalizado en una representación legible.
+        """
+
+        kind, value = normalized
+
+        if kind == "blank":
+            return "(vacío)"
+
+        if kind == "invalid":
+            return f"(valor inválido: '{value}')"
+
+        if kind == "text":
+            return f"'{value}'"
+
+        return str(value)
+
+    def display_group_key(group_key: Any) -> str:
+        """
+        Construye una descripción legible de la clave de agrupación.
+        """
+
+        if group_by:
+            code_value, group_value = group_key
+
+            return (
+                f"{code_column}={display_value(code_value)}, "
+                f"{group_by}={display_value(group_value)}"
+            )
+
+        return f"{code_column}={display_value(group_key)}"
 
     # ---------------------------------------------------------
     # 1. Construir los grupos según el código y group_by.
     # ---------------------------------------------------------
+
+    groups: dict[Any, list[int]] = defaultdict(list)
+
+    code_data_type = column_types.get(
+        code_column,
+        DataType.UNKNOWN,
+    )
+
     for i, row in enumerate(rows):
 
-        # Obtener el código de la fila.
         row_key = row.get(code_column)
 
         # Ignorar filas sin código.
         if _is_blank(row_key):
             continue
 
-        # Obtener el tipo configurado para el código.
-        data_config = column_types.get(
-            code_column,
-            DataType.UNKNOWN,
-        )
-
-        # Normalizar el código según su tipo.
         code_normalized = _normalize_value(
             row_key,
-            data_config,
+            code_data_type,
         )
 
-        # Si existe una columna secundaria, incluirla en la clave.
         if group_by:
 
             group_value = row.get(group_by)
 
-            configured_data_type = column_types.get(
+            group_data_type = column_types.get(
                 group_by,
                 DataType.UNKNOWN,
             )
 
             secondary_normalized = _normalize_value(
                 group_value,
-                configured_data_type,
+                group_data_type,
             )
 
-            key = (code_normalized, secondary_normalized)
+            key = (
+                code_normalized,
+                secondary_normalized,
+            )
 
         else:
-            # Si no existe group_by, utilizar únicamente el código.
             key = code_normalized
 
-        # Agregar el índice de la fila al grupo correspondiente.
         groups[key].append(i)
 
     # ---------------------------------------------------------
     # 2. Comparar los valores de las columnas configuradas.
     # ---------------------------------------------------------
+
     for group_key, indices in groups.items():
 
-        # No tiene sentido comparar grupos con una sola fila.
+        # No comparar grupos con una sola fila.
         if len(indices) < 2:
             continue
 
-        # Recorrer las columnas que deben mantener consistencia.
+        # Descripción legible de la clave del grupo.
+        displayed_group_key = display_group_key(group_key)
+
         for column in check_columns:
 
-            # Obtener el tipo configurado para la columna.
             configured_data_type = column_types.get(
                 column,
                 DataType.UNKNOWN,
             )
 
-            # Conjunto para almacenar los valores distintos.
             distinct_values = set()
 
-            # Recorrer las filas que pertenecen al grupo.
             for i in indices:
 
                 column_value = rows[i].get(column)
 
-                # Normalizar el valor según su tipo.
                 normalized_value = _normalize_value(
                     column_value,
                     configured_data_type,
                 )
 
-                # Los conjuntos eliminan valores duplicados.
                 distinct_values.add(normalized_value)
 
-            # Si existe un único valor, no hay inconsistencia.
+            # Si todas las filas tienen el mismo valor,
+            # no existe inconsistencia.
             if len(distinct_values) <= 1:
                 continue
 
-            # Preparar los valores para mostrarlos en el mensaje.
+            # Preparar valores distintos para el mensaje.
             displayed_values = sorted(
-                "(vacío)" if kind == "blank"
-                else f"{kind}: {value}"
-                for kind, value in distinct_values
+                display_value(value)
+                for value in distinct_values
+            )
+
+            values_description = ", ".join(
+                displayed_values
             )
 
             # Generar una incidencia para cada fila del grupo.
@@ -311,10 +342,9 @@ def check_code_consistency(
                         row=row_numbers[i],
                         column_name=column,
                         message=(
-                            f"Inconsistencia: filas con "
-                            f"{code_column}='{group_key}' "
-                            f"tienen valores distintos en '{column}': "
-                            f"{displayed_values}."
+                            f"Inconsistencia: los registros agrupados por "
+                            f"{displayed_group_key} tienen valores distintos "
+                            f"en '{column}': {values_description}."
                         ),
                     )
                 )

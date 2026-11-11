@@ -1,12 +1,15 @@
+
 """
 Estructuras de datos centrales del motor de validación.
 
-Todo el sistema gira alrededor de `ValidationRule`: la representación
-normalizada de lo que un comentario en lenguaje natural (o una regla de
-negocio del manual del MEN) significa para un campo determinado.
+Todo el sistema trabaja sobre ValidationRule: la representación
+normalizada de las restricciones identificadas para un campo.
 
-Ningún módulo de negocio (parser, escritor de Excel, reportes) debe
-saber "cómo se ve" un comentario; solo trabajan sobre esta estructura.
+Los módulos de interpretación, validación, generación de Excel
+y reportes deben utilizar estas estructuras como contrato común.
+
+Este módulo no interpreta comentarios ni ejecuta validaciones.
+Únicamente define las estructuras de información.
 """
 
 from __future__ import annotations
@@ -17,7 +20,32 @@ from typing import Optional
 
 
 class DataType(str, Enum):
-    TEXT = "text"                # alfabético / alfanumérico sin más precisión
+    """
+    Tipos de datos reconocidos por el motor.
+
+    TEXT:
+        Texto sin una clasificación más específica.
+
+    ALPHANUMERIC:
+        Texto que puede contener letras y números.
+
+    ALPHABETIC:
+        Texto compuesto por caracteres alfabéticos.
+
+    INTEGER:
+        Número entero.
+
+    DECIMAL:
+        Número que admite parte decimal.
+
+    DATE:
+        Fecha.
+
+    UNKNOWN:
+        Tipo de dato que todavía no pudo determinarse.
+    """
+
+    TEXT = "text"
     ALPHANUMERIC = "alphanumeric"
     ALPHABETIC = "alphabetic"
     INTEGER = "integer"
@@ -28,67 +56,152 @@ class DataType(str, Enum):
 
 @dataclass
 class AllowedValue:
-    """Un par código/descripción de una lista de valores válidos.
-
-    Ej.: '1 Sector Empresarial' -> code='1', label='Sector Empresarial'
     """
+    Representa un valor permitido dentro de un catálogo.
+
+    Ejemplo:
+
+        Código: 1
+        Descripción: Sector empresarial
+
+        code = "1"
+        label = "Sector empresarial"
+
+    El código y la descripción se almacenan como texto
+    para conservar ceros iniciales y evitar conversiones
+    numéricas que puedan alterar los identificadores.
+    """
+
     code: str
     label: str
 
     @property
     def display(self) -> str:
+        """
+        Representación legible del valor permitido.
+
+        Ejemplo:
+            "1 Sector empresarial"
+        """
+
         return f"{self.code} {self.label}".strip()
 
 
 @dataclass
 class ConditionalRequirement:
-    """Representa reglas como 'Obligatorio para fuente internacional'.
-
-    No podemos resolver automáticamente a qué columna exacta se refiere
-    ('fuente internacional') sin contexto de la hoja completa, así que
-    se guarda el texto original para que una capa posterior (o el propio
-    generador de reportes) pueda mostrarlo como advertencia al usuario.
     """
+    Representa una condición de obligatoriedad.
+
+    Ejemplo:
+
+        Obligatorio para fuente internacional.
+
+    Actualmente se conserva el texto original porque el motor
+    todavía necesita identificar las columnas relacionadas
+    y determinar cómo evaluar la condición.
+
+    Este objeto representa una condición identificada,
+    no una condición ejecutable.
+    """
+
     raw_text: str
 
 
 @dataclass
 class ValidationRule:
-    """Estructura interna de reglas para una columna.
-
-    Es la salida canónica del intérprete de comentarios y la entrada
-    canónica del constructor de validaciones de Excel.
     """
+    Representación canónica de las reglas de una columna.
+
+    Es la salida del intérprete de comentarios y la entrada
+    para los validadores y el constructor de validaciones Excel.
+
+    Importante:
+
+        required=False significa que la regla no está marcada
+        como obligatoria.
+
+        No significa necesariamente que el comentario haya
+        declarado explícitamente que el campo es opcional.
+    """
+
+    # Nombre de la columna en la plantilla.
     column_name: str
+
+    # Indica si el campo está marcado como obligatorio.
     required: bool = False
-    conditional_requirement: Optional[ConditionalRequirement] = None
+
+    # Condición que determina cuándo debe diligenciarse.
+    conditional_requirement: Optional[
+        ConditionalRequirement
+    ] = None
+
+    # Tipo de dato reconocido.
     datatype: DataType = DataType.UNKNOWN
+
+    # Longitud máxima permitida.
     max_length: Optional[int] = None
+
+    # Longitud mínima permitida.
     min_length: Optional[int] = None
+
+    # Longitud exacta requerida.
     exact_length: Optional[int] = None
-    allowed_values: list[AllowedValue] = field(default_factory=list)
-    date_formats: list[str] = field(default_factory=list)
+
+    # Valores permitidos, cuando existe una lista o catálogo.
+    allowed_values: list[AllowedValue] = field(
+        default_factory=list
+    )
+
+    # Formatos de fecha aceptados.
+    date_formats: list[str] = field(
+        default_factory=list
+    )
+
+    # Descripción o instrucciones que no fueron interpretadas
+    # como restricciones estructuradas.
     description: str = ""
+
+    # Comentario original del encabezado Excel.
     raw_comment: str = ""
-    unparsed_fragments: list[str] = field(default_factory=list)
+
+    # Fragmentos que necesitan revisión manual.
+    unparsed_fragments: list[str] = field(
+        default_factory=list
+    )
 
     @property
     def has_allowed_values(self) -> bool:
-        return len(self.allowed_values) > 0
+        """
+        Indica si la regla tiene valores permitidos.
+        """
+
+        return bool(self.allowed_values)
 
     @property
     def needs_manual_review(self) -> bool:
-        """True si algo del comentario quedó sin poder interpretarse.
-
-        Dos casos: (a) quedó un fragmento de texto que ningún reconocedor
-        entendió, o (b) no se logró determinar NINGÚN tipo de dato ni
-        lista de valores (columna efectivamente sin restricciones), lo
-        cual casi siempre significa que el comentario tiene una redacción
-        que el catálogo de patrones todavía no cubre, no que el campo en
-        verdad no tenga reglas.
         """
+        Indica si existen elementos que requieren revisión.
+
+        Se consideran dos situaciones:
+
+            1. Hay fragmentos que ningún reconocedor pudo
+               interpretar.
+
+            2. No se pudo determinar un tipo de dato ni
+               una lista de valores permitidos.
+
+        Esta propiedad es una señal general de revisión,
+        no una garantía de que todas las restricciones hayan
+        sido interpretadas correctamente.
+        """
+
         if self.unparsed_fragments:
             return True
-        if self.datatype == DataType.UNKNOWN and not self.allowed_values:
+
+        if (
+            self.datatype == DataType.UNKNOWN
+            and not self.allowed_values
+        ):
             return True
+
         return False

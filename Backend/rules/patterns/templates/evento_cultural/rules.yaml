@@ -1,0 +1,178 @@
+
+# Definición de campos de la plantilla EVENTO_CULTURAL.
+#
+# Este archivo contiene las características estructurales:
+# tipo de dato, obligatoriedad y longitud.
+#
+# Las restricciones ejecutables se encuentran en validations.yaml.
+# La lógica de negocio se encuentra en business_rules.yaml.
+
+sheets:
+
+  EVENTO_CULTURAL:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del periodo en el que se reporta el evento cultural."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      description: "Semestre del periodo reportado."
+
+    CODIGO_UNIDAD_ORGANIZACIONAL:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de la unidad organizacional."
+
+    CODIGO_EVENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 15
+      description: "Código de identificación del evento cultural."
+
+    DESCRIPCION_EVENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 200
+      description: "Descripción del evento cultural."
+
+    FECHA_INICIO:
+      datatype: date
+      required: true
+      description: "Fecha de inicio del evento."
+
+    FECHA_FINAL:
+      datatype: date
+      required: false
+      description: "Fecha de finalización del evento."
+
+    ID_FUENTE_NACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación nacional."
+
+    VLR_FINANCIACION_NACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 10
+      description: "Valor de financiación nacional."
+
+    NOMBRE_INSTITUCION:
+      datatype: alphanumeric
+      required: false
+      max_length: 200
+      description: "Nombre de la institución financiadora internacional."
+
+    ID_PAIS_FINANCIADOR:
+      datatype: integer
+      required: false
+      max_length: 3
+      description: "Identificador del país financiador."
+
+    ID_FUENTE_INTERNACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación internacional."
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 10
+      description: "Valor de financiación internacional."
+
+
+  EVENTO_CULT_REC_HUMANO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del periodo en el que se reporta el evento cultural."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      description: "Semestre del periodo reportado."
+
+    CODIGO_UNIDAD_ORGANIZACIONAL:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de la unidad organizacional."
+
+    CODIGO_EVENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 15
+      description: "Código del evento cultural al que pertenece el recurso humano."
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      description: "Tipo de documento de identificación del recurso humano."
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Número de documento del recurso humano."
+
+    DEDICACION:
+      datatype: decimal
+      required: true
+      max_length: 10
+      description: "Dedicación del recurso humano al evento cultural."
+
+
+  EVENTO_CULT_BENEFICIARIOS:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del periodo en el que se reporta el evento cultural."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      description: "Semestre del periodo reportado."
+
+    CODIGO_UNIDAD_ORGANIZACIONAL:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de la unidad organizacional."
+
+    CODIGO_EVENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 15
+      description: "Código del evento cultural al que pertenecen los beneficiarios."
+
+    ID_TIPO_BENEFICIARIO:
+      datatype: integer
+      required: true
+      max_length: 2
+      description: "Identificador del tipo de beneficiario."
+
+    TOTAL_ASISTENTES:
+      datatype: integer
+      required: true
+      max_length: 10
+      description: "Cantidad total de asistentes al evento."
+
+    VALOR_ENTRADA:
+      datatype: decimal
+      required: true
+      max_length: 10
+      description: "Valor de la entrada al evento cultural."

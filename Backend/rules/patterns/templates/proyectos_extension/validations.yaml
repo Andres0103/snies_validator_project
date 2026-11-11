@@ -1,0 +1,50 @@
+# Validaciones específicas de PROYECTOS DE EXTENSIÓN.
+# Las reglas generales de fechas, teléfono y correo se reutilizan
+# desde la configuración común del proyecto.
+
+sheets:
+
+  PROYECTOS_EXTENSION:
+
+    VALOR_PROYECTO:
+      min_value: 0
+
+  PROY_EXT_AREA_TRABAJO: {}
+
+  PROY_EXT_CICLO_VITAL: {}
+
+  PROY_EXT_ENTIDAD_NACIONAL: {}
+
+  PROY_EXT_FUENTE_NACIONAL:
+
+    ID_FUENTE_NACIONAL:
+      catalog: fuente_nacional
+
+    VALOR_FINANCIACION:
+      min_value: 0
+
+  PROY_EXT_FUENTE_INTERNACIONAL:
+
+    ID_PAIS_FINANCIADOR:
+      catalog: paises
+
+    ID_FUENTE_INTERNACIONAL:
+      catalog: fuente_internacional
+
+    VALOR_FINANCIACION:
+      min_value: 0
+
+  PROY_EXT_OTRAS_ENTIDADES:
+
+    ID_PAIS_ENTIDAD:
+      catalog: paises
+
+  PROY_EXT_POBL_CONDICION:
+
+    CANTIDAD:
+      min_value: 0
+
+  PROY_EXT_POBL_GRUPO:
+
+    CANTIDAD:
+      min_value: 0
