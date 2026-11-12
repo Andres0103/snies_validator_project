@@ -1,0 +1,143 @@
+
+# Definición de campos de la plantilla ACTIVIDAD CULTURAL.
+#
+# Este archivo contiene exclusivamente características de los campos:
+# tipo de dato, obligatoriedad, longitud y descripción.
+#
+# Las restricciones ejecutables se encuentran en validations.yaml.
+# La lógica de negocio se encuentra en business_rules.yaml.
+
+sheets:
+
+  ACTIVIDAD_CULTURAL:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del reporte de información."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+      description: "Semestre del reporte de información."
+
+    CODIGO_UNIDAD_ORGANIZACIONAL:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de la unidad organizacional."
+
+    CODIGO_ACTIVIDAD:
+      datatype: alphanumeric
+      required: true
+      max_length: 15
+      description: "Código de identificación de la actividad cultural."
+
+    DESCRIPCION_ACTIVIDAD:
+      datatype: alphanumeric
+      required: true
+      max_length: 200
+      description: "Descripción de la actividad cultural."
+
+    ID_TIPO_ACTIVIDAD_CULTURAL:
+      datatype: integer
+      required: true
+      max_length: 2
+      allowed_values: [1, 2, 3, 4, 5]
+      description: "Identificador del tipo de actividad cultural."
+
+    FECHA_INICIO:
+      datatype: date
+      required: true
+      description: "Fecha de inicio de la actividad cultural."
+
+    FECHA_FINAL:
+      datatype: date
+      required: false
+      description: "Fecha final de la actividad cultural."
+
+    ID_FUENTE_NACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación nacional."
+
+    VLR_FINANCIACION_NACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 10
+      description: "Valor de financiación nacional en pesos."
+
+    NOMBRE_INSTITUCION:
+      datatype: alphanumeric
+      required: false
+      max_length: 200
+      description: "Nombre de la institución financiadora internacional."
+
+    ID_PAIS_FINANCIADOR:
+      datatype: integer
+      required: false
+      max_length: 3
+      description: "Identificador del país financiador."
+
+    ID_FUENTE_INTERNACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación internacional."
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 10
+      description: "Valor de financiación internacional en pesos."
+
+
+  ACT_CULTURAL_REC_HUMANO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del reporte de información."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+      description: "Semestre del reporte de información."
+
+    CODIGO_UNIDAD_ORGANIZACIONAL:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de la unidad organizacional."
+
+    CODIGO_ACTIVIDAD:
+      datatype: alphanumeric
+      required: true
+      max_length: 15
+      description: "Código de identificación de la actividad cultural."
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      allowed_values: [CC, DE, CE, TI, PS, CA, PT]
+      description: "Tipo de documento del recurso humano."
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Número de documento del recurso humano."
+
+    DEDICACION:
+      datatype: decimal
+      required: true
+      max_length: 10
+      description: "Dedicación del recurso humano."

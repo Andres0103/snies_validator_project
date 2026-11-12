@@ -1,0 +1,54 @@
+
+# Validaciones de campos de la plantilla CONSULTORIA.
+#
+# Este archivo contiene restricciones ejecutables sobre campos
+# individuales: patrones, rangos, formatos y referencias a catálogos.
+#
+# Las características estructurales están en rules.yaml.
+# Las reglas que relacionan varios campos están en business_rules.yaml.
+# La definición física de los catálogos está en catalogs.yaml.
+
+sheets:
+
+  CONSULTORIA:
+
+    ID_CINE_CAMPO_DETALLADO:
+      catalog: cine_campos
+
+    ID_SECTOR_CONSULTORIA:
+      catalog: sector_consultoria
+
+    VALOR:
+      min_value: 0
+
+    FECHA_INICIO:
+      date_within_past_years: 80
+
+    # FECHA_FINAL se valida en business_rules.yaml
+    # respecto a FECHA_INICIO.
+
+    ID_FUENTE_NACIONAL:
+      catalog: fuente_nacional
+
+    VLR_FINANCIACION_NACIONAL:
+      min_value: 0
+
+    # NOMBRE_INSTITUCION tiene obligatoriedad condicional
+    # definida en business_rules.yaml.
+
+    ID_PAIS_FINANCIADOR:
+      catalog: paises
+
+    ID_FUENTE_INTERNACIONAL:
+      catalog: fuente_internacional
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      min_value: 0
+
+  CONSULTORIA_REC_HUMANO:
+
+    ID_TIPO_DOCUMENTO:
+      catalog: tipos_documento
+
+    ID_MAXIMO_NIVEL_ESTUDIO:
+      catalog: maximos_niveles_estudio

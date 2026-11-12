@@ -34,11 +34,8 @@ from rules.config_loader import (
 )
 from rules.catalog_loader import load_catalog
 from rules.interpreter import interpret_comment
-from rules.general_model import DataType, ValidationRule
-from rules.template_profiles import (
-    detect_templates,
-    load_template_profiles,
-)
+from rules.general_model import AllowedValue, DataType, ValidationRule
+from rules.template_profiles import detect_templates
 
 from validators.cross_row_validator import (
     check_code_consistency,
@@ -822,43 +819,77 @@ def _build_column_rules(
                     if message not in rule.unparsed_fragments:
                         rule.unparsed_fragments.append(message)
 
+                # ----------------------------------------------------
+        # 4. CARGAR VALORES PERMITIDOS CONFIGURADOS
         # ----------------------------------------------------
-        # 4. CARGAR CATÁLOGO CONFIGURADO
-        # ----------------------------------------------------
 
-        catalog_name = validation.get("catalog")
+        configured_allowed_values = validation.get(
+            "allowed_values"
+        )
 
-        if catalog_name:
+        if configured_allowed_values is not None:
 
-            if not isinstance(catalog_name, str):
+            if not isinstance(configured_allowed_values, list):
                 raise ValueError(
-                    f"El catálogo de '{column_name}' "
-                    "debe identificarse mediante un texto."
+                    f"'allowed_values' de '{column_name}' "
+                    f"en la hoja '{sheet_name}' debe ser una lista."
                 )
 
-            catalog_config = catalogs.get(catalog_name)
+            parsed_allowed_values: list[AllowedValue] = []
+            seen_codes: set[str] = set()
 
-            if catalog_config is None:
-                raise ValueError(
-                    f"La columna '{column_name}' de la hoja "
-                    f"'{sheet_name}' referencia el catálogo "
-                    f"'{catalog_name}', pero no está definido "
-                    "en catalogs.yaml."
+            for index, item in enumerate(configured_allowed_values):
+
+                if not isinstance(item, dict):
+                    raise ValueError(
+                        f"El elemento {index + 1} de 'allowed_values' "
+                        f"en '{column_name}' debe ser un diccionario."
+                    )
+
+                code = item.get("code")
+                label = item.get("label")
+
+                if (
+                    code is None
+                    or not isinstance(label, str)
+                    or not label.strip()
+                ):
+                    raise ValueError(
+                        f"El elemento {index + 1} de 'allowed_values' "
+                        f"en '{column_name}' debe contener "
+                        "'code' y un 'label' no vacío."
+                    )
+
+                code = str(code).strip()
+
+                if not code:
+                    raise ValueError(
+                        f"El código del elemento {index + 1} "
+                        f"de 'allowed_values' en '{column_name}' "
+                        "no puede estar vacío."
+                    )
+
+                if code in seen_codes:
+                    raise ValueError(
+                        f"El código '{code}' está duplicado en "
+                        f"'allowed_values' de '{column_name}'."
+                    )
+
+                seen_codes.add(code)
+
+                parsed_allowed_values.append(
+                    AllowedValue(
+                        code=code,
+                        label=label.strip(),
+                    )
                 )
 
-            # Si el comentario ya aportó un catálogo, se conserva.
-            # La configuración YAML complementa la regla cuando
-            # todavía no existen valores permitidos.
+            # La información explícita del comentario conserva
+            # prioridad sobre la configuración complementaria.
             if not rule.allowed_values:
-                rule.allowed_values = load_catalog(
-                    catalog_config,
-                    catalog_name,
-                )
-
-        rules_by_column[column_name] = rule
-
-    return rules_by_column, validations_by_column
-
+                rule.allowed_values = parsed_allowed_values
+            return rules_by_column, validations_by_column
+    
 
 # ============================================================
 # VALIDACIONES ESTRUCTURALES AUXILIARES
@@ -934,13 +965,14 @@ def _has_invalid_headers(
 
 def validate_workbook(
     workbook: Workbook,
+    template_name: str | None = None,
 ) -> list[SheetValidationResult]:
     """Valida todas las hojas de datos de un libro de Excel."""
 
     results: list[SheetValidationResult] = []
 
-    # ---------------------------------------------------------
-    # 1. IDENTIFICAR LA PLANTILLA DEL LIBRO
+        # ---------------------------------------------------------
+    # 1. IDENTIFICAR Y VALIDAR LA PLANTILLA
     # ---------------------------------------------------------
 
     detected_templates = detect_templates(
@@ -992,26 +1024,34 @@ def validate_workbook(
             )
         ]
 
-    template_name = detected_templates[0]
+    detected_template = detected_templates[0]
 
     # ---------------------------------------------------------
-    # 2. CARGAR LA CONFIGURACIÓN CORRESPONDIENTE
+    # 2. UTILIZAR LA PLANTILLA SELECCIONADA
     # ---------------------------------------------------------
 
-    template_directory = (
-        Path(__file__).resolve().parents[1]
-        / "rules"
-        / "patterns"
-        / "templates"
-        / template_name.lower()
+    if template_name is None:
+        # Compatibilidad temporal con scripts y pruebas antiguas.
+        template_name = detected_template
+
+    else:
+        template_name = template_name.strip().upper()
+
+        if template_name != detected_template:
+            raise ValueError(
+                f"La plantilla seleccionada '{template_name}' "
+                f"no coincide con la plantilla detectada "
+                f"en el archivo '{detected_template}'."
+            )
+
+    # ---------------------------------------------------------
+    # 3. CARGAR EXCLUSIVAMENTE LA CONFIGURACIÓN DE LA PLANTILLA
+    # ---------------------------------------------------------
+
+    configuration = load_rule_configuration(
+        template_name=template_name
     )
 
-    if template_directory.exists():
-        configuration = load_rule_configuration(
-            template_name=template_name
-        )
-    else:
-        configuration = load_rule_configuration()
 
     business_rules = configuration.business_rules
 
@@ -1023,13 +1063,9 @@ def validate_workbook(
     # 3. OBTENER EL PERFIL ESTRUCTURAL
     # ---------------------------------------------------------
 
-    profiles = load_template_profiles()
+    template_profile = configuration.template_profile
 
-    template_profile = profiles["templates"].get(
-        template_name
-    )
-
-    if template_profile is None:
+    if not template_profile:
         raise ValueError(
             f"No existe un perfil estructural para "
             f"la plantilla '{template_name}'."

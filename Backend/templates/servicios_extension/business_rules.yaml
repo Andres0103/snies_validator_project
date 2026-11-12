@@ -1,0 +1,7 @@
+
+sheets:
+  SERVICIOS_EXTENSION:
+    date_after_column:
+      - column: FECHA_FINAL
+        compare_to: FECHA_INICIO
+        strict: true

@@ -326,8 +326,15 @@ def process_workbook(
 ):
     """
     Comprueba que el libro corresponda a la plantilla seleccionada,
-    ejecuta el motor SNIES y marca las incidencias.
+    ejecuta el motor SNIES con esa plantilla y marca las incidencias.
     """
+
+    if not isinstance(template_name, str) or not template_name.strip():
+        raise ValueError(
+            "Debe especificarse una plantilla para validar el archivo."
+        )
+
+    template_name = template_name.strip().upper()
 
     detected_templates = detect_templates(
         workbook.sheetnames
@@ -347,7 +354,10 @@ def process_workbook(
             f"Plantilla detectada: {detected_description}."
         )
 
-    results = validate_workbook(workbook)
+    results = validate_workbook(
+        workbook,
+        template_name=template_name,
+    )
 
     mark_workbook(workbook, results)
 
@@ -439,33 +449,6 @@ def serialize_file_results(
         "total_advertencias": total_warnings,
     }
 
-
-# ==========================================================
-# PROCESAMIENTO COMPLETO DE UNA VALIDACIÓN
-# ==========================================================
-
-def process_validation_sync(validation_id: str):
-    """
-    Procesa todos los Excel asociados a una validación.
-
-    Esta función completa se ejecuta fuera del event loop.
-    """
-
-    validation_dir = get_validation_directory(validation_id)
-
-    if validation_dir is None:
-
-        raise RuntimeError(
-            "No se encontró el directorio de validación."
-        )
-
-    metadata_path = validation_dir / "metadata.json"
-
-    metadata = read_json(metadata_path)
-
-    manifest = read_json(
-        validation_dir / "input.json"
-    )
 
 def process_validation_sync(validation_id: str):
     """
@@ -718,7 +701,8 @@ def process_validation_sync(validation_id: str):
         metadata,
     )
     logger.warning(
-        "[SNIES] ESTADO CAMBIADO A PROCESANDO: %s",
+        "[SNIES] VALIDACIÓN FINALIZADA. Estado: %s. ID: %s",
+        final_state,
         validation_id
     )
 
@@ -728,36 +712,32 @@ def process_validation_sync(validation_id: str):
 # ==========================================================
 
 async def process_validation_job(validation_id: str):
+    """
+    Ejecuta el procesamiento de una validación en un hilo de trabajo.
+    Registra el resultado real de la tarea.
+    """
 
     logger.warning(
-        "[SNIES] INICIANDO PROCESAMIENTO SÍNCRONO: %s",
-        validation_id
-    )
-
-    logger.warning(
-        "[SNIES] TAREA INICIADA: %s",
+        "[SNIES] INICIANDO PROCESAMIENTO: %s",
         validation_id
     )
 
     try:
-
-        logger.warning(
-            "[SNIES] Enviando procesamiento al hilo de trabajo: %s",
-            validation_id
-        )
-
         await run_in_threadpool(
             process_validation_sync,
             validation_id
         )
 
+        validation = get_validation(validation_id)
+        final_state = validation.get("estado") if validation else None
+
         logger.warning(
-            "[SNIES] TAREA FINALIZADA CORRECTAMENTE: %s",
+            "[SNIES] PROCESAMIENTO FINALIZADO. Estado: %s. ID: %s",
+            final_state,
             validation_id
         )
 
     except Exception:
-
         logger.exception(
             "[SNIES] ERROR EN LA TAREA: %s",
             validation_id
@@ -769,7 +749,6 @@ async def process_validation_job(validation_id: str):
             return
 
         metadata_path = validation_dir / "metadata.json"
-
         metadata = read_json(metadata_path) or {}
 
         metadata.update({
@@ -780,7 +759,6 @@ async def process_validation_job(validation_id: str):
         })
 
         write_json(metadata_path, metadata)
-
 
 # ==========================================================
 # CONSULTAR VALIDACIONES

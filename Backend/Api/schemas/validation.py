@@ -54,6 +54,8 @@ class ValidationFileSummary(BaseModel):
 class ValidationResponse(BaseModel):
 
     id: str
+    
+    plantilla: str
 
     estado: ValidationStatus
 

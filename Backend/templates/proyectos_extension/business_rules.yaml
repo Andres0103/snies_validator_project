@@ -1,0 +1,12 @@
+
+# Reglas de negocio de PROYECTOS DE EXTENSIÓN.
+# Fuente: Manual MEN 2025, sección 11.7, página 171.
+
+sheets:
+
+  PROYECTOS_EXTENSION:
+
+    date_after_column:
+      - column: FECHA_FINAL
+        compare_to: FECHA_INICIO
+        strict: true

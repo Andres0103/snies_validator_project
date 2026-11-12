@@ -29,10 +29,9 @@ import yaml
 # CONFIGURACIÓN
 # ============================================================
 
-PROFILE_PATH = (
-    Path(__file__).resolve().parent
-    / "patterns"
-    / "template_profiles.yaml"
+TEMPLATES_DIR = (
+    Path(__file__).resolve().parent.parent
+    / "templates"
 )
 
 
@@ -349,46 +348,104 @@ def _validate_profiles(
 
 def load_template_profiles() -> dict[str, Any]:
     """
-    Carga y valida los perfiles desde template_profiles.yaml.
+    Carga y valida los perfiles estructurales independientes
+    de las plantillas SNIES.
 
-    Retorna:
-        Diccionario completo de perfiles.
+    Cada plantilla debe tener su propio archivo:
 
-    Genera:
-        FileNotFoundError si el archivo no existe.
-        ValueError si el YAML o su estructura son inválidos.
+        templates/
+            consultoria/template_profile.yaml
+            cursos/template_profile.yaml
+            ...
+
+    Retorna una estructura compatible con la arquitectura
+    anterior:
+
+        {
+            "version": "2026.1",
+            "templates": {
+                "CONSULTORIA": {...},
+                "CURSOS": {...}
+            }
+        }
+
+    No combina perfiles ni hereda configuraciones entre plantillas.
     """
 
-    if not PROFILE_PATH.exists() or not PROFILE_PATH.is_file():
+    if not TEMPLATES_DIR.exists() or not TEMPLATES_DIR.is_dir():
         raise FileNotFoundError(
-            f"No se encontró el archivo de perfiles: "
-            f"{PROFILE_PATH}"
+            f"No se encontró el directorio de plantillas: "
+            f"{TEMPLATES_DIR}"
         )
 
-    try:
-        with PROFILE_PATH.open(
-            "r",
-            encoding="utf-8",
-        ) as file:
+    profiles: dict[str, Any] = {
+        "version": "2026.1",
+        "templates": {},
+    }
 
-            profiles = yaml.safe_load(file)
+    template_directories = sorted(
+        path
+        for path in TEMPLATES_DIR.iterdir()
+        if path.is_dir()
+    )
 
-    except yaml.YAMLError as exc:
+    if not template_directories:
         raise ValueError(
-            f"El archivo '{PROFILE_PATH.name}' "
-            "contiene YAML inválido."
-        ) from exc
-
-    if not isinstance(profiles, dict):
-        raise ValueError(
-            "La configuración de perfiles debe ser "
-            "un diccionario YAML."
+            f"No existen carpetas de plantillas en: "
+            f"{TEMPLATES_DIR}"
         )
+
+    for template_directory in template_directories:
+
+        profile_path = (
+            template_directory / "template_profile.yaml"
+        )
+
+        if not profile_path.exists() or not profile_path.is_file():
+            raise FileNotFoundError(
+                f"La plantilla '{template_directory.name}' "
+                f"no tiene su archivo template_profile.yaml: "
+                f"{profile_path}"
+            )
+
+        try:
+            with profile_path.open(
+                "r",
+                encoding="utf-8",
+            ) as file:
+
+                profile = yaml.safe_load(file)
+
+        except yaml.YAMLError as exc:
+            raise ValueError(
+                f"El archivo '{profile_path}' "
+                "contiene YAML inválido."
+            ) from exc
+
+        if not isinstance(profile, dict):
+            raise ValueError(
+                f"El perfil de '{template_directory.name}' "
+                "debe contener un diccionario YAML."
+            )
+
+        template_name = template_directory.name.upper()
+
+        if template_name in profiles["templates"]:
+            raise ValueError(
+                f"Existe una configuración duplicada "
+                f"para la plantilla '{template_name}'."
+            )
+
+        _validate_profile(
+            template_name,
+            profile,
+        )
+
+        profiles["templates"][template_name] = profile
 
     _validate_profiles(profiles)
 
     return profiles
-
 
 # ============================================================
 # DETECCIÓN DE PLANTILLAS

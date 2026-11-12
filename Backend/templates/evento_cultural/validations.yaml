@@ -1,0 +1,30 @@
+
+# Validaciones específicas de la plantilla ACTIVIDAD CULTURAL.
+
+sheets:
+
+  ACTIVIDAD_CULTURAL:
+
+    FECHA_INICIO:
+      date_within_past_years: 80
+
+    VLR_FINANCIACION_NACIONAL:
+      min_value: 0
+
+    ID_FUENTE_NACIONAL:
+      catalog: fuente_nacional
+
+    ID_PAIS_FINANCIADOR:
+      catalog: paises
+
+    ID_FUENTE_INTERNACIONAL:
+      catalog: fuente_internacional
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      min_value: 0
+
+
+  ACT_CULTURAL_REC_HUMANO:
+
+    DEDICACION:
+      min_value: 0

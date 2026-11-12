@@ -1,4 +1,3 @@
-
 """
 Carga, valida y consolida las configuraciones del motor SNIES.
 
@@ -33,20 +32,21 @@ from typing import Any
 
 import yaml
 
-
 # ============================================================
 # RUTAS DE CONFIGURACIÓN
 # ============================================================
 
 RULES_DIR = Path(__file__).resolve().parent / "patterns"
 
-TEMPLATES_DIR = RULES_DIR / "templates"
+TEMPLATES_DIR = Path(__file__).resolve().parent.parent / "templates"
+
 COMMON_DIR = RULES_DIR / "common"
 
 
 # ============================================================
 # MODELO DE CONFIGURACIÓN
 # ============================================================
+
 
 @dataclass(frozen=True)
 class RuleConfiguration:
@@ -82,14 +82,13 @@ class RuleConfiguration:
     template_name: str | None = None
 
     # Configuración independiente de cada hoja.
-    sheet_configurations: dict[str, dict[str, Any]] = field(
-        default_factory=dict
-    )
+    sheet_configurations: dict[str, dict[str, Any]] = field(default_factory=dict)
 
 
 # ============================================================
 # UTILIDADES GENERALES
 # ============================================================
+
 
 def _validate_mapping(
     value: Any,
@@ -100,9 +99,7 @@ def _validate_mapping(
     """
 
     if not isinstance(value, dict):
-        raise ValueError(
-            f"La sección '{context}' debe ser un diccionario."
-        )
+        raise ValueError(f"La sección '{context}' debe ser un diccionario.")
 
     return value
 
@@ -119,30 +116,23 @@ def _validate_sheet_names(
     """
 
     if not isinstance(sheet_names, list):
-        raise ValueError(
-            f"'{context}' debe ser una lista."
-        )
+        raise ValueError(f"'{context}' debe ser una lista.")
 
     result: list[str] = []
     seen: set[str] = set()
 
     for index, sheet_name in enumerate(sheet_names):
 
-        if (
-            not isinstance(sheet_name, str)
-            or not sheet_name.strip()
-        ):
+        if not isinstance(sheet_name, str) or not sheet_name.strip():
             raise ValueError(
-                f"Nombre de hoja inválido en '{context}', "
-                f"posición {index + 1}."
+                f"Nombre de hoja inválido en '{context}', " f"posición {index + 1}."
             )
 
         normalized = sheet_name.strip().casefold()
 
         if normalized in seen:
             raise ValueError(
-                f"El nombre de hoja '{sheet_name}' está duplicado "
-                f"en '{context}'."
+                f"El nombre de hoja '{sheet_name}' está duplicado " f"en '{context}'."
             )
 
         seen.add(normalized)
@@ -168,25 +158,16 @@ def _collect_sheet_names(
 
         if not isinstance(group, (list, dict)):
             raise ValueError(
-                "La configuración de hojas debe ser una lista "
-                "o un diccionario."
+                "La configuración de hojas debe ser una lista " "o un diccionario."
             )
 
-        names = (
-            list(group.keys())
-            if isinstance(group, dict)
-            else group
-        )
+        names = list(group.keys()) if isinstance(group, dict) else group
 
         for sheet_name in names:
 
-            if (
-                not isinstance(sheet_name, str)
-                or not sheet_name.strip()
-            ):
+            if not isinstance(sheet_name, str) or not sheet_name.strip():
                 raise ValueError(
-                    "Se encontró un nombre de hoja inválido "
-                    "en la configuración."
+                    "Se encontró un nombre de hoja inválido " "en la configuración."
                 )
 
             normalized = sheet_name.strip().casefold()
@@ -201,6 +182,7 @@ def _collect_sheet_names(
 # ============================================================
 # CARGA DE ARCHIVOS YAML
 # ============================================================
+
 
 def load_yaml_file(file_path: Path) -> dict[str, Any]:
     """
@@ -220,26 +202,20 @@ def load_yaml_file(file_path: Path) -> dict[str, Any]:
         return {}
 
     if not file_path.is_file():
-        raise ValueError(
-            f"La ruta de configuración no es un archivo: {file_path}"
-        )
+        raise ValueError(f"La ruta de configuración no es un archivo: {file_path}")
 
     try:
         with file_path.open("r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
 
     except yaml.YAMLError as exc:
-        raise ValueError(
-            f"El archivo '{file_path}' contiene YAML inválido."
-        ) from exc
+        raise ValueError(f"El archivo '{file_path}' contiene YAML inválido.") from exc
 
     if data is None:
         return {}
 
     if not isinstance(data, dict):
-        raise ValueError(
-            f"El YAML debe contener un diccionario: {file_path}"
-        )
+        raise ValueError(f"El YAML debe contener un diccionario: {file_path}")
 
     return data
 
@@ -247,6 +223,7 @@ def load_yaml_file(file_path: Path) -> dict[str, Any]:
 # ============================================================
 # COMBINACIÓN DE DICCIONARIOS
 # ============================================================
+
 
 def _merge_dicts(
     base: dict[str, Any],
@@ -267,11 +244,7 @@ def _merge_dicts(
 
     for key, value in override.items():
 
-        if (
-            key in result
-            and isinstance(result[key], dict)
-            and isinstance(value, dict)
-        ):
+        if key in result and isinstance(result[key], dict) and isinstance(value, dict):
 
             result[key] = _merge_dicts(
                 result[key],
@@ -287,6 +260,7 @@ def _merge_dicts(
 # ============================================================
 # EXTRACCIÓN DE CATÁLOGOS
 # ============================================================
+
 
 def _extract_master_tables(
     catalogs: dict[str, Any],
@@ -322,6 +296,7 @@ def _extract_master_tables(
 # ============================================================
 # CONSTRUCCIÓN DE CAMPOS CONOCIDOS POR HOJA
 # ============================================================
+
 
 def _build_known_fields(
     legacy_known_fields: dict[str, Any],
@@ -407,6 +382,7 @@ def _build_known_fields(
 # CONSTRUCCIÓN DE CONFIGURACIONES POR HOJA
 # ============================================================
 
+
 def _build_sheet_configurations(
     merged_rules: dict[str, Any],
     merged_validations: dict[str, Any],
@@ -471,10 +447,7 @@ def _build_sheet_configurations(
 
             if catalog_name is not None:
 
-                if (
-                    not isinstance(catalog_name, str)
-                    or not catalog_name.strip()
-                ):
+                if not isinstance(catalog_name, str) or not catalog_name.strip():
                     raise ValueError(
                         f"El catálogo de '{column_name}' en "
                         f"'{sheet_name}' debe ser un nombre válido."
@@ -501,6 +474,7 @@ def _build_sheet_configurations(
 # CARGA DE CONFIGURACIÓN ANTERIOR
 # ============================================================
 
+
 def _load_legacy_configuration(
     directory: Path,
 ) -> RuleConfiguration:
@@ -510,17 +484,11 @@ def _load_legacy_configuration(
     Se utiliza durante la migración progresiva de las plantillas.
     """
 
-    known_fields = load_yaml_file(
-        directory / "known_fields.yaml"
-    )
+    known_fields = load_yaml_file(directory / "known_fields.yaml")
 
-    business_rules = load_yaml_file(
-        directory / "business_rules.yaml"
-    )
+    business_rules = load_yaml_file(directory / "business_rules.yaml")
 
-    validation_file = load_yaml_file(
-        directory / "validation_rules.yaml"
-    )
+    validation_file = load_yaml_file(directory / "validation_rules.yaml")
 
     validation_config = validation_file.get(
         "validation_config",
@@ -543,51 +511,45 @@ def _load_legacy_configuration(
 # CARGA DEL PERFIL DE PLANTILLA
 # ============================================================
 
+
 def _load_template_profile(
     template_name: str,
     directory: Path,
 ) -> dict[str, Any]:
     """
-    Obtiene el perfil estructural de una plantilla.
+    Carga el perfil estructural individual de una plantilla.
     """
 
-    profiles_file = load_yaml_file(
-        directory / "template_profiles.yaml"
-    )
+    profile_path = directory / "template_profile.yaml"
 
-    templates = _validate_mapping(
-        profiles_file.get("templates", {}),
-        "template_profiles.templates",
-    )
-
-    profile = templates.get(template_name)
-
-    if profile is None:
-        raise ValueError(
-            f"No existe un perfil para la plantilla "
-            f"'{template_name}'."
+    if not profile_path.is_file():
+        raise FileNotFoundError(
+            f"No se encontró el perfil estructural "
+            f"de '{template_name}': {profile_path}"
         )
 
-    profile = _validate_mapping(
-        profile,
-        f"template_profiles.templates.{template_name}",
-    )
+    profile = load_yaml_file(profile_path)
 
-    # Comprobación mínima de la estructura.
-    # La validación estructural completa corresponde
-    # a template_profiles.py.
     main_sheet = profile.get("main_sheet")
 
     if not isinstance(main_sheet, str) or not main_sheet.strip():
         raise ValueError(
-            f"El perfil de '{template_name}' no tiene "
-            "una hoja principal válida."
+            f"El perfil de '{template_name}' " "no tiene una hoja principal válida."
         )
 
-    _validate_sheet_names(
+    sheets = _validate_sheet_names(
         profile.get("sheets"),
-        f"template_profiles.{template_name}.sheets",
+        f"template_profile.{template_name}.sheets",
     )
+
+    normalized_sheets = {sheet.strip().casefold() for sheet in sheets}
+
+    if main_sheet.strip().casefold() not in normalized_sheets:
+        raise ValueError(
+            f"La hoja principal '{main_sheet}' no está "
+            f"incluida en las hojas declaradas del perfil "
+            f"de '{template_name}'."
+        )
 
     return profile
 
@@ -602,161 +564,134 @@ def _load_template_configuration(
     directory: Path,
 ) -> RuleConfiguration:
     """
-    Carga y consolida la configuración común y específica
-    de una plantilla SNIES.
+    Carga exclusivamente la configuración de una plantilla.
 
-    Las reglas compartidas se buscan primero en common/.
-    Si business_rules.yaml no existe allí, se utiliza el
-    archivo general ubicado directamente en patterns/.
+    No hereda reglas, validaciones ni reglas de negocio
+    de otras plantillas o archivos globales.
     """
 
-    common_dir = directory / "common"
-
-    template_dir = (
-        directory
-        / "templates"
-        / template_name.lower()
-    )
+    template_dir = directory / template_name.lower()
 
     if not template_dir.is_dir():
-        raise ValueError(
-            f"No existe el directorio de configuración para "
-            f"la plantilla '{template_name}': {template_dir}"
+        raise FileNotFoundError(
+            f"No existe la configuración de la plantilla "
+            f"'{template_name}': {template_dir}"
         )
 
     # --------------------------------------------------------
-    # 1. CARGAR CAMPOS CONOCIDOS GLOBALES
+    # 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
     # --------------------------------------------------------
 
-    legacy_known_fields = load_yaml_file(
-        directory / "known_fields.yaml"
-    )
 
-    # --------------------------------------------------------
-    # 2. CARGAR CONFIGURACIÓN COMÚN
-    # --------------------------------------------------------
+# --------------------------------------------------------
+# 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
+# --------------------------------------------------------
 
-    common_rules = load_yaml_file(
-        common_dir / "rules.yaml"
-    )
+required_files = [
+    "rules.yaml",
+    "validations.yaml",
+    "catalogs.yaml",
+    "template_profile.yaml",
+]
 
-    common_validations = load_yaml_file(
-        common_dir / "validations.yaml"
-    )
+for file_name in required_files:
+    file_path = template_dir / file_name
 
-    common_catalogs = load_yaml_file(
-        common_dir / "catalogs.yaml"
-    )
-
-    # Buscar primero las reglas de negocio en common/.
-    common_business_rules_path = (
-        common_dir / "business_rules.yaml"
-    )
-
-    # Mantener compatibilidad con el archivo general
-    # ubicado directamente en rules/patterns/.
-    if not common_business_rules_path.is_file():
-        common_business_rules_path = (
-            directory / "business_rules.yaml"
+    if not file_path.is_file():
+        raise FileNotFoundError(
+            f"La plantilla '{template_name}' no tiene "
+            f"el archivo obligatorio '{file_name}'."
         )
 
-    common_business_rules = load_yaml_file(
-        common_business_rules_path
-    )
+
+# --------------------------------------------------------
+# 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
+# --------------------------------------------------------
+
+required_files = [
+    "rules.yaml",
+    "validations.yaml",
+    "catalogs.yaml",
+    "template_profile.yaml",
+]
+
+for file_name in required_files:
+    file_path = template_dir / file_name
+
+    if not file_path.is_file():
+        raise FileNotFoundError(
+            f"La plantilla '{template_name}' no tiene "
+            f"el archivo obligatorio '{file_name}'."
+        )
+
+    template_rules = load_yaml_file(template_dir / "rules.yaml")
+
+    template_validations = load_yaml_file(template_dir / "validations.yaml")
+
+    template_catalogs = load_yaml_file(template_dir / "catalogs.yaml")
+
+    # Este archivo es opcional.
+    business_rules = load_yaml_file(template_dir / "business_rules.yaml")
 
     # --------------------------------------------------------
-    # 3. CARGAR CONFIGURACIÓN ESPECÍFICA
-    # --------------------------------------------------------
-
-    template_rules = load_yaml_file(
-        template_dir / "rules.yaml"
-    )
-
-    template_validations = load_yaml_file(
-        template_dir / "validations.yaml"
-    )
-
-    template_catalogs = load_yaml_file(
-        template_dir / "catalogs.yaml"
-    )
-
-    template_business_rules = load_yaml_file(
-        template_dir / "business_rules.yaml"
-    )
-
-    # --------------------------------------------------------
-    # 4. COMBINAR REGLAS Y VALIDACIONES
-    # --------------------------------------------------------
-
-    # La configuración específica prevalece sobre la común.
-    merged_rules = _merge_dicts(
-        common_rules,
-        template_rules,
-    )
-
-    merged_validations = _merge_dicts(
-        common_validations,
-        template_validations,
-    )
-
-    business_rules = _merge_dicts(
-        common_business_rules,
-        template_business_rules,
-    )
-
-    # --------------------------------------------------------
-    # 5. COMBINAR CATÁLOGOS
-    # --------------------------------------------------------
-
-    common_master_tables = _extract_master_tables(
-        common_catalogs
-    )
-
-    template_master_tables = _extract_master_tables(
-        template_catalogs
-    )
-
-    master_tables = _merge_dicts(
-        common_master_tables,
-        template_master_tables,
-    )
-
-    # --------------------------------------------------------
-    # 6. CARGAR PERFIL ESTRUCTURAL
+    # 2. CARGAR PERFIL ESTRUCTURAL
     # --------------------------------------------------------
 
     template_profile = _load_template_profile(
         template_name,
-        directory,
+        template_dir,
     )
 
     # --------------------------------------------------------
-    # 7. CONSTRUIR CAMPOS CONOCIDOS POR HOJA
+    # 3. VALIDAR ESTRUCTURA DE CONFIGURACIONES
     # --------------------------------------------------------
 
+    template_rules = _validate_mapping(
+        template_rules,
+        f"{template_name}.rules",
+    )
+
+    template_validations = _validate_mapping(
+        template_validations,
+        f"{template_name}.validations",
+    )
+
+    business_rules = _validate_mapping(
+        business_rules,
+        f"{template_name}.business_rules",
+    )
+
+    master_tables = _extract_master_tables(template_catalogs)
+
+    # --------------------------------------------------------
+    # 4. CONSTRUIR CAMPOS CONOCIDOS
+    # --------------------------------------------------------
+
+    # No se incorporan restricciones desde known_fields.yaml.
+    # Cada plantilla utiliza exclusivamente sus propias reglas.
     known_fields = _build_known_fields(
-        legacy_known_fields,
-        merged_rules,
+        {},
+        template_rules,
         template_profile,
     )
 
     # --------------------------------------------------------
-    # 8. CONSTRUIR CONFIGURACIONES INDEPENDIENTES POR HOJA
+    # 5. CONSTRUIR CONFIGURACIONES POR HOJA
     # --------------------------------------------------------
 
     sheet_configurations = _build_sheet_configurations(
-        merged_rules,
-        merged_validations,
+        template_rules,
+        template_validations,
         master_tables,
         template_profile,
     )
 
     # --------------------------------------------------------
-    # 9. MANTENER ESTRUCTURA DE COMPATIBILIDAD
+    # 6. ESTRUCTURA DE COMPATIBILIDAD
     # --------------------------------------------------------
 
     validation_config = {
-        "column_rules": merged_validations.get(
+        "column_rules": template_validations.get(
             "column_rules",
             {},
         ),
@@ -764,25 +699,25 @@ def _load_template_configuration(
     }
 
     # --------------------------------------------------------
-    # 10. DEVOLVER CONFIGURACIÓN CONSOLIDADA
+    # 7. DEVOLVER CONFIGURACIÓN
     # --------------------------------------------------------
 
     return RuleConfiguration(
         known_fields=known_fields,
         business_rules=business_rules,
         validation_config=validation_config,
-        common_rules=common_rules,
+        common_rules={},
         template_rules=template_rules,
-        common_validations=common_validations,
+        common_validations={},
         template_validations=template_validations,
         template_profile=template_profile,
         template_name=template_name,
         sheet_configurations=sheet_configurations,
     )
-
 # ============================================================
 # FUNCIÓN PÚBLICA DE CARGA
 # ============================================================
+
 
 def load_rule_configuration(
     template_name: str | None = None,
@@ -791,36 +726,28 @@ def load_rule_configuration(
     """
     Carga la configuración del motor SNIES.
 
-    Sin template_name:
-        Utiliza la configuración anterior para mantener
-        compatibilidad.
-
     Con template_name:
-        Utiliza la nueva arquitectura común + plantilla.
+        Carga exclusivamente la configuración de esa plantilla
+        desde el directorio de plantillas.
 
-    rules_dir permite indicar una ubicación alternativa
-    para las configuraciones.
+    Sin template_name:
+        Mantiene temporalmente la carga legacy.
     """
 
-    directory = (
-        Path(rules_dir)
-        if rules_dir is not None
-        else RULES_DIR
-    )
-
-    directory = directory.resolve()
-
+    # Compatibilidad temporal con la arquitectura anterior.
     if template_name is None:
-        return _load_legacy_configuration(
-            directory
-        )
+        directory = Path(rules_dir) if rules_dir is not None else RULES_DIR
+
+        return _load_legacy_configuration(directory.resolve())
 
     if not isinstance(template_name, str) or not template_name.strip():
-        raise ValueError(
-            "'template_name' debe ser un texto no vacío."
-        )
+        raise ValueError("'template_name' debe ser un texto no vacío.")
 
-    template_name = template_name.strip()
+    template_name = template_name.strip().upper()
+
+    directory = Path(rules_dir) if rules_dir is not None else TEMPLATES_DIR
+
+    directory = directory.resolve()
 
     return _load_template_configuration(
         template_name,
@@ -831,6 +758,7 @@ def load_rule_configuration(
 # ============================================================
 # ALIAS DE COMPATIBILIDAD
 # ============================================================
+
 
 def load_config(
     rules_dir: Path | str | None = None,
@@ -847,6 +775,7 @@ def load_config(
 # ============================================================
 # RESOLUCIÓN DE REGLAS DE NEGOCIO
 # ============================================================
+
 
 def resolve_business_rule(
     configuration: RuleConfiguration,
@@ -869,9 +798,7 @@ def resolve_business_rule(
     if sheet_name:
 
         if not isinstance(sheet_name, str):
-            raise ValueError(
-                "'sheet_name' debe ser un texto."
-            )
+            raise ValueError("'sheet_name' debe ser un texto.")
 
         scoped_rules = business_rules.get(
             "sheet_scoped_rules",
@@ -889,8 +816,7 @@ def resolve_business_rule(
 
             if (
                 not isinstance(configured_sheet, str)
-                or configured_sheet.strip().casefold()
-                != normalized_sheet
+                or configured_sheet.strip().casefold() != normalized_sheet
             ):
                 continue
 
@@ -918,6 +844,7 @@ def resolve_business_rule(
 # OBTENER REGLAS DE NEGOCIO GLOBALES
 # ============================================================
 
+
 def get_global_business_rules(
     configuration: RuleConfiguration,
 ) -> dict[str, dict[str, Any]]:
@@ -944,8 +871,5 @@ def get_global_business_rules(
     return {
         column_name: rule
         for column_name, rule in configuration.business_rules.items()
-        if (
-            column_name not in excluded_sections
-            and isinstance(rule, dict)
-        )
+        if (column_name not in excluded_sections and isinstance(rule, dict))
     }

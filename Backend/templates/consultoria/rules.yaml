@@ -1,0 +1,157 @@
+
+# Definición de campos de la plantilla CONSULTORIA.
+#
+# Este archivo contiene exclusivamente características de los campos:
+# tipo de dato, obligatoriedad, longitud y descripción.
+#
+# Las restricciones ejecutables se encuentran en validations.yaml.
+# La lógica de negocio se encuentra en business_rules.yaml.
+#
+# AÑO y SEMESTRE se trasladarán a common/rules.yaml cuando
+# verifiquemos que sus definiciones son compartidas.
+
+sheets:
+
+  CONSULTORIA:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del período académico reportado."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      max_length: 1
+      allowed_values:
+        - code: "1"
+          label: "Primer semestre"
+        - code: "2"
+          label: "Segundo semestre"
+      description: "Semestre del período académico reportado."
+
+    CODIGO_CONSULTORIA:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Código de identificación de la consultoría."
+
+    DESCRIPCION_CONSULTORIA:
+      datatype: alphanumeric
+      required: true
+      max_length: 200
+      description: "Descripción de la consultoría."
+
+    ID_CINE_CAMPO_DETALLADO:
+      datatype: integer
+      required: true
+      max_length: 4
+      description: "Identificador del campo detallado CINE."
+
+    NOMBRE_ENTIDAD:
+      datatype: alphanumeric
+      required: true
+      max_length: 200
+      description: "Nombre de la entidad relacionada con la consultoría."
+
+    ID_SECTOR_CONSULTORIA:
+      datatype: integer
+      required: true
+      max_length: 2
+      description: "Identificador del sector de consultoría."
+
+    VALOR:
+      datatype: decimal
+      required: true
+      max_length: 15
+      description: "Valor total de la consultoría."
+
+    FECHA_INICIO:
+      datatype: date
+      required: true
+      description: "Fecha de inicio de la consultoría."
+
+    FECHA_FINAL:
+      datatype: date
+      required: false
+      description: "Fecha de finalización de la consultoría."
+
+    ID_FUENTE_NACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación nacional."
+
+    VLR_FINANCIACION_NACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 15
+      description: "Valor de financiación nacional."
+
+    NOMBRE_INSTITUCION:
+      datatype: alphanumeric
+      required: false
+      max_length: 200
+      description: "Nombre de la institución financiadora internacional."
+
+    ID_PAIS_FINANCIADOR:
+      datatype: integer
+      required: false
+      max_length: 3
+      description: "Identificador del país financiador."
+
+    ID_FUENTE_INTERNACIONAL:
+      datatype: integer
+      required: false
+      max_length: 2
+      description: "Identificador de la fuente de financiación internacional."
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      datatype: decimal
+      required: false
+      max_length: 15
+      description: "Valor de financiación internacional."
+
+  CONSULTORIA_REC_HUMANO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+      description: "Año del período académico reportado."
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      max_length: 1
+      allowed_values:
+        - code: "1"
+          label: "Primer semestre"
+        - code: "2"
+          label: "Segundo semestre"
+      description: "Semestre del período académico reportado."
+
+    CODIGO_CONSULTORIA:
+      datatype: alphanumeric
+      required: true
+      max_length: 15
+      description: "Código de identificación de la consultoría."
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 2
+      description: "Tipo de documento de identidad del recurso humano."
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+      description: "Número de documento de identidad del recurso humano."
+
+    ID_MAXIMO_NIVEL_ESTUDIO:
+      datatype: integer
+      required: true
+      max_length: 2
+      description: "Identificador del máximo nivel de estudios del recurso humano."
