@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from rules.general_model import DataType, ValidationRule
+from backend.rules.general_model import DataType, ValidationRule
 
 import re
 
@@ -52,21 +52,18 @@ def _is_blank(value: Any) -> bool:
 
 
 def _is_alphabetic_text(value: str) -> bool:
-    """
-    Comprueba que el texto contenga letras Unicode,
-    marcas diacríticas, espacios, apóstrofos, guiones
-    o el acento grave utilizado en algunos apellidos.
-    """
+    if not isinstance(value, str) or not value:
+        return False
 
-    allowed_separators = {"'", "’", "-", " ", "`"}
+    allowed_punctuation = {" ", "-", "'", "’", "`"}
 
     for char in value:
         category = unicodedata.category(char)
 
-        if category.startswith(("L", "M")):
+        if category.startswith("L") or category.startswith("M"):
             continue
 
-        if char in allowed_separators:
+        if char in allowed_punctuation:
             continue
 
         return False
@@ -178,6 +175,7 @@ def _to_date(value: Any, formats: list[str]) -> datetime.date | None:
 # 4. VALIDACIÓN GENERAL DE CELDAS
 # ============================================================
 
+
 def validate_cell(
     rule: ValidationRule,
     value: Any,
@@ -185,14 +183,6 @@ def validate_cell(
 ) -> list[Issue]:
     """
     Valida una celda utilizando las propiedades de ValidationRule.
-
-    Comprueba:
-    - Obligatoriedad.
-    - Tipo de dato.
-    - Longitud mínima.
-    - Longitud máxima.
-    - Longitud exacta.
-    - Valores permitidos.
     """
 
     issues: list[Issue] = []
@@ -240,13 +230,8 @@ def validate_cell(
                 )
             )
 
-        # No se deben ejecutar las demás validaciones
-        # cuando el valor está vacío.
+        # Si está vacío, no se ejecutan las demás validaciones.
         return issues
-
-    # --------------------------------------------------------
-    # 4.2. Preparación del valor
-    # --------------------------------------------------------
 
     # --------------------------------------------------------
     # 4.2. Preparación del valor
@@ -254,9 +239,47 @@ def validate_cell(
 
     text_value = str(value).strip()
 
-    # Longitud utilizada para las restricciones del campo.
-    # En los enteros se cuentan los dígitos, sin incluir
-    # el signo negativo.
+    # --------------------------------------------------------
+    # 4.2.1. Validación de valores expresamente excluidos
+    # --------------------------------------------------------
+
+    is_excluded = False
+
+    if rule.excluded_values:
+
+        is_excluded = text_value in rule.excluded_values
+
+        # Comparar representaciones numéricas equivalentes.
+        # Ejemplo: 170, 170.0 y "170.0".
+        if not is_excluded and not isinstance(value, bool):
+
+            numeric_value = _to_number(value)
+
+            if numeric_value is not None:
+
+                for excluded_value in rule.excluded_values:
+
+                    numeric_excluded = _to_number(excluded_value)
+
+                    if (
+                        numeric_excluded is not None
+                        and numeric_value == numeric_excluded
+                    ):
+                        is_excluded = True
+                        break
+
+        if is_excluded:
+            issues.append(
+                Issue(
+                    f"El valor '{text_value}' no está permitido "
+                    f"para el campo '{rule.column_name}'."
+                )
+            )
+
+    # --------------------------------------------------------
+    # 4.2.2. Cálculo de longitud
+    # --------------------------------------------------------
+
     length_value = len(text_value)
 
     if rule.datatype == DataType.INTEGER:
@@ -327,9 +350,6 @@ def validate_cell(
                 )
             )
 
-    # TEXT y UNKNOWN no tienen una validación de caracteres
-    # específica en este módulo.
-
     # --------------------------------------------------------
     # 4.4. Validación de longitud máxima
     # --------------------------------------------------------
@@ -359,6 +379,7 @@ def validate_cell(
                 f"mínimo permitido: {rule.min_length}."
             )
         )
+
     # --------------------------------------------------------
     # 4.6. Validación de longitud exacta
     # --------------------------------------------------------
@@ -372,7 +393,7 @@ def validate_cell(
                 f"La longitud debe ser exactamente "
                 f"{rule.exact_length} caracteres."
             )
-    )
+        )
 
     # --------------------------------------------------------
     # 4.7. Validación de valores permitidos
@@ -382,7 +403,6 @@ def validate_cell(
 
         value_text = str(value).strip()
 
-        # Se obtienen los códigos y sus representaciones completas.
         allowed_codes = {
             str(item.code).strip()
             for item in rule.allowed_values
@@ -393,23 +413,19 @@ def validate_cell(
             for item in rule.allowed_values
         }
 
-        # Primero se comprueba la coincidencia textual exacta.
         is_valid = (
             value_text in allowed_codes
             or value_text in allowed_displays
         )
 
-        # Para campos numéricos se permite comparar
-        # representaciones numéricas equivalentes.
         if not is_valid and rule.datatype in {
             DataType.INTEGER,
             DataType.DECIMAL,
         }:
 
-           if not isinstance(value, bool):
-                
+            if not isinstance(value, bool):
+
                 allowed_numeric_codes = set()
-                #convierte el valor de la celda y lo guarda en numeric_value
                 numeric_value = _to_number(value)
 
                 for code in allowed_codes:
@@ -417,9 +433,11 @@ def validate_cell(
 
                     if numeric_code is not None:
                         allowed_numeric_codes.add(numeric_code)
-                    
-                is_valid = numeric_value is not None and numeric_value in allowed_numeric_codes
-                                    
+
+                is_valid = (
+                    numeric_value is not None
+                    and numeric_value in allowed_numeric_codes
+                )
 
         if not is_valid:
             issues.append(
@@ -427,7 +445,7 @@ def validate_cell(
                     "El valor no está dentro de los valores permitidos."
                 )
             )
-        
+
     return issues
 
 

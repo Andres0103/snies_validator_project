@@ -38,7 +38,9 @@ sheets:
   PROY_EXT_FUENTE_INTERNACIONAL:
 
     ID_PAIS_FINANCIADOR:
-      catalog: paises
+    catalog: paises
+    excluded_values:
+      - '170'
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional

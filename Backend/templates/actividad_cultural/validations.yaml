@@ -1,7 +1,5 @@
 sheets:
-
   ACTIVIDAD_CULTURAL:
-
     FECHA_INICIO:
       date_within_past_years: 80
 
@@ -12,11 +10,12 @@ sheets:
     ID_FUENTE_NACIONAL:
       catalog: fuente_nacional
 
-    NOMBRE_INSTITUCION:
-      # Su obligatoriedad depende de ID_FUENTE_INTERNACIONAL.
+    NOMBRE_INSTITUCION: {}
 
     ID_PAIS_FINANCIADOR:
-      catalog: paises
+    catalog: paises
+    excluded_values:
+      - '170'
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional
@@ -26,6 +25,5 @@ sheets:
       # La obligatoriedad depende de ID_FUENTE_INTERNACIONAL.
 
   ACT_CULTURAL_REC_HUMANO:
-
     DEDICACION:
       min_value: 0

@@ -1,40 +1,40 @@
-
-# Reglas de negocio específicas de ACTIVIDAD CULTURAL.
-# Las condiciones se evalúan sobre los valores de cada fila.
+# Reglas de negocio específicas de EVENTO CULTURAL.
 
 conditional_required_fields:
-
-  ACTIVIDAD_CULTURAL:
-
+  EVENTO_CULTURAL:
     VLR_FINANCIACION_NACIONAL:
       when:
         column: ID_FUENTE_NACIONAL
         operator: not_blank
-
     VLR_FINANCIACION_INTERNACIONAL:
       when:
         column: ID_FUENTE_INTERNACIONAL
         operator: not_blank
-
     NOMBRE_INSTITUCION:
       when:
         column: ID_FUENTE_INTERNACIONAL
         operator: not_blank
-
     ID_PAIS_FINANCIADOR:
       when:
         column: ID_FUENTE_INTERNACIONAL
         operator: not_blank
 
+CODIGO_EVENTO:
+  kind: cross_row_consistency_note
+  check_columns:
+    - DESCRIPCION_EVENTO
+    - FECHA_INICIO
+    - FECHA_FINAL
+  group_by: CODIGO_UNIDAD_ORGANIZACIONAL
+  message: >
+    Para una misma combinación de CODIGO_EVENTO y
+    CODIGO_UNIDAD_ORGANIZACIONAL, DESCRIPCION_EVENTO,
+    FECHA_INICIO y FECHA_FINAL deben conservar los mismos valores.
 
-cross_row_consistency_note:
-
-  ACTIVIDAD_CULTURAL:
-
-    CODIGO_ACTIVIDAD:
-      check_columns:
-        - DESCRIPCION_ACTIVIDAD
-        - ID_TIPO_ACTIVIDAD_CULTURAL
-        - FECHA_INICIO
-        - FECHA_FINAL
-      message: "Para una misma combinación de CODIGO_ACTIVIDAD y CODIGO_UNIDAD_ORGANIZACIONAL, los campos DESCRIPCION_ACTIVIDAD, ID_TIPO_ACTIVIDAD_CULTURAL, FECHA_INICIO y FECHA_FINAL deben conservar los mismos valores."
+FECHA_FINAL:
+  kind: date_after_column
+  after_column: FECHA_INICIO
+  strict: true
+  message: >
+    La fecha final debe ser estrictamente posterior
+    a la fecha de inicio.

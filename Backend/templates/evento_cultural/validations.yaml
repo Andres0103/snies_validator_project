@@ -1,9 +1,8 @@
-
-# Validaciones específicas de la plantilla ACTIVIDAD CULTURAL.
+# Validaciones específicas de la plantilla EVENTO CULTURAL.
 
 sheets:
 
-  ACTIVIDAD_CULTURAL:
+  EVENTO_CULTURAL:
 
     FECHA_INICIO:
       date_within_past_years: 80
@@ -14,8 +13,12 @@ sheets:
     ID_FUENTE_NACIONAL:
       catalog: fuente_nacional
 
+    NOMBRE_INSTITUCION: {}
+
     ID_PAIS_FINANCIADOR:
-      catalog: paises
+    catalog: paises
+    excluded_values:
+      - '170'
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional
@@ -24,7 +27,16 @@ sheets:
       min_value: 0
 
 
-  ACT_CULTURAL_REC_HUMANO:
+  EVENTO_CULT_REC_HUMANO:
 
     DEDICACION:
+      min_value: 0
+
+
+  EVENTO_CULT_BENEFICIARIOS:
+
+    TOTAL_ASISTENTES:
+      min_value: 0
+
+    VALOR_ENTRADA:
       min_value: 0

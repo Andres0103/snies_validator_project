@@ -26,6 +26,7 @@ def make_rule(
     allowed_values=None,
     date_formats=None,
     conditional_requirement=None,
+    excluded_values=None,
 ):
     return ValidationRule(
         column_name="CAMPO_PRUEBA",
@@ -37,6 +38,7 @@ def make_rule(
         allowed_values=allowed_values or [],
         date_formats=date_formats or [],
         conditional_requirement=conditional_requirement,
+        excluded_values=excluded_values or [],
     )
 
 
@@ -1040,3 +1042,91 @@ def test_required_field_rejects_blank_values(value):
     issues = validate_cell(rule, value)
 
     assert any(issue.severity == "error" for issue in issues)
+    
+# ============================================================
+# 14. VALORES EXPRESAMENTE EXCLUIDOS
+# ============================================================
+
+@pytest.mark.parametrize(
+    "value",
+    [
+        170,
+        170.0,
+        "170",
+        "170.0",
+        Decimal("170"),
+        Decimal("170.0"),
+    ],
+)
+def test_excluded_values_reject_numeric_equivalents(value):
+    rule = make_rule(
+        excluded_values=["170"],
+    )
+
+    issues = validate_cell(rule, value)
+
+    assert any(
+        "no está permitido" in issue.message.lower()
+        for issue in issues
+    )
+
+
+def test_excluded_values_accept_other_codes():
+    rule = make_rule(
+        excluded_values=["170"],
+    )
+
+    issues = validate_cell(rule, "169")
+
+    assert not any(
+        "no está permitido" in issue.message.lower()
+        for issue in issues
+    )
+
+
+def test_excluded_values_do_not_affect_allowed_catalog_values():
+    rule = make_rule(
+        allowed_values=[
+            AllowedValue(code="170", label="Colombia"),
+            AllowedValue(code="169", label="Otro país"),
+        ],
+    )
+
+    issues = validate_cell(rule, "170")
+
+    assert issues == []
+
+
+def test_excluded_values_reject_value_even_when_it_exists_in_catalog():
+    rule = make_rule(
+        allowed_values=[
+            AllowedValue(code="170", label="Colombia"),
+            AllowedValue(code="169", label="Otro país"),
+        ],
+        excluded_values=["170"],
+    )
+
+    issues = validate_cell(rule, "170")
+
+    assert any(
+        "no está permitido" in issue.message.lower()
+        for issue in issues
+    )
+
+
+@pytest.mark.parametrize(
+    "value",
+    [None, "", "   "],
+)
+def test_excluded_values_do_not_change_empty_value_behavior(value):
+    rule = make_rule(
+        required=True,
+        excluded_values=["170"],
+    )
+
+    issues = validate_cell(rule, value)
+
+    assert any(
+        "obligatorio" in issue.message.lower()
+        for issue in issues
+    )

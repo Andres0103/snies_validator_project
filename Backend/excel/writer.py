@@ -63,7 +63,7 @@ from rules.general_model import DataType, ValidationRule
 
 # Última fila hasta la que se aplicarán las validaciones nativas.
 # La fila 1 contiene los encabezados y los datos comienzan en la 2.
-DATA_ROWS_TO_COVER = 2000
+DATA_ROWS_TO_COVER = 1048576
 
 
 # Reglas de negocio que tienen un constructor de validación

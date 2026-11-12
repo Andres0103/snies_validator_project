@@ -151,6 +151,11 @@ class ValidationRule:
     allowed_values: list[AllowedValue] = field(
         default_factory=list
     )
+    
+    # Valores expresamente excluidos para esta columna.
+    excluded_values: list[str] = field(
+        default_factory=list
+    )
 
     # Formatos de fecha aceptados.
     date_formats: list[str] = field(

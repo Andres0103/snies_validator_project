@@ -579,62 +579,48 @@ def _load_template_configuration(
         )
 
     # --------------------------------------------------------
-    # 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
+    # 1. COMPROBAR ARCHIVOS OBLIGATORIOS
     # --------------------------------------------------------
 
+    required_files = [
+        "rules.yaml",
+        "validations.yaml",
+        "catalogs.yaml",
+        "template_profile.yaml",
+    ]
 
-# --------------------------------------------------------
-# 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
-# --------------------------------------------------------
+    for file_name in required_files:
+        file_path = template_dir / file_name
 
-required_files = [
-    "rules.yaml",
-    "validations.yaml",
-    "catalogs.yaml",
-    "template_profile.yaml",
-]
+        if not file_path.is_file():
+            raise FileNotFoundError(
+                f"La plantilla '{template_name}' no tiene "
+                f"el archivo obligatorio '{file_name}'."
+            )
 
-for file_name in required_files:
-    file_path = template_dir / file_name
+    # --------------------------------------------------------
+    # 2. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
+    # --------------------------------------------------------
 
-    if not file_path.is_file():
-        raise FileNotFoundError(
-            f"La plantilla '{template_name}' no tiene "
-            f"el archivo obligatorio '{file_name}'."
-        )
+    template_rules = load_yaml_file(
+        template_dir / "rules.yaml"
+    )
 
+    template_validations = load_yaml_file(
+        template_dir / "validations.yaml"
+    )
 
-# --------------------------------------------------------
-# 1. CARGAR CONFIGURACIÓN PROPIA DE LA PLANTILLA
-# --------------------------------------------------------
-
-required_files = [
-    "rules.yaml",
-    "validations.yaml",
-    "catalogs.yaml",
-    "template_profile.yaml",
-]
-
-for file_name in required_files:
-    file_path = template_dir / file_name
-
-    if not file_path.is_file():
-        raise FileNotFoundError(
-            f"La plantilla '{template_name}' no tiene "
-            f"el archivo obligatorio '{file_name}'."
-        )
-
-    template_rules = load_yaml_file(template_dir / "rules.yaml")
-
-    template_validations = load_yaml_file(template_dir / "validations.yaml")
-
-    template_catalogs = load_yaml_file(template_dir / "catalogs.yaml")
+    template_catalogs = load_yaml_file(
+        template_dir / "catalogs.yaml"
+    )
 
     # Este archivo es opcional.
-    business_rules = load_yaml_file(template_dir / "business_rules.yaml")
+    business_rules = load_yaml_file(
+        template_dir / "business_rules.yaml"
+    )
 
     # --------------------------------------------------------
-    # 2. CARGAR PERFIL ESTRUCTURAL
+    # 3. CARGAR PERFIL ESTRUCTURAL
     # --------------------------------------------------------
 
     template_profile = _load_template_profile(
@@ -643,7 +629,7 @@ for file_name in required_files:
     )
 
     # --------------------------------------------------------
-    # 3. VALIDAR ESTRUCTURA DE CONFIGURACIONES
+    # 4. VALIDAR ESTRUCTURA DE CONFIGURACIONES
     # --------------------------------------------------------
 
     template_rules = _validate_mapping(
@@ -661,13 +647,14 @@ for file_name in required_files:
         f"{template_name}.business_rules",
     )
 
-    master_tables = _extract_master_tables(template_catalogs)
+    master_tables = _extract_master_tables(
+        template_catalogs
+    )
 
     # --------------------------------------------------------
-    # 4. CONSTRUIR CAMPOS CONOCIDOS
+    # 5. CONSTRUIR CAMPOS CONOCIDOS
     # --------------------------------------------------------
 
-    # No se incorporan restricciones desde known_fields.yaml.
     # Cada plantilla utiliza exclusivamente sus propias reglas.
     known_fields = _build_known_fields(
         {},
@@ -676,7 +663,7 @@ for file_name in required_files:
     )
 
     # --------------------------------------------------------
-    # 5. CONSTRUIR CONFIGURACIONES POR HOJA
+    # 6. CONSTRUIR CONFIGURACIONES POR HOJA
     # --------------------------------------------------------
 
     sheet_configurations = _build_sheet_configurations(
@@ -687,7 +674,7 @@ for file_name in required_files:
     )
 
     # --------------------------------------------------------
-    # 6. ESTRUCTURA DE COMPATIBILIDAD
+    # 7. ESTRUCTURA DE COMPATIBILIDAD
     # --------------------------------------------------------
 
     validation_config = {
@@ -699,7 +686,7 @@ for file_name in required_files:
     }
 
     # --------------------------------------------------------
-    # 7. DEVOLVER CONFIGURACIÓN
+    # 8. DEVOLVER CONFIGURACIÓN
     # --------------------------------------------------------
 
     return RuleConfiguration(
@@ -714,6 +701,7 @@ for file_name in required_files:
         template_name=template_name,
         sheet_configurations=sheet_configurations,
     )
+
 # ============================================================
 # FUNCIÓN PÚBLICA DE CARGA
 # ============================================================
