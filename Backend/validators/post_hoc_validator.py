@@ -1657,6 +1657,7 @@ def validate_workbook(
         ):
 
             for col_name, value in row_values.items():
+                rule = rules_by_column[col_name]
 
                 validation = validations_by_column.get(
                     col_name,
