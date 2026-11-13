@@ -3,6 +3,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { API_BASE_URL } from '../config/api.config';
+
 import {
   ValidationResponse,
   ValidationErrorsResponse,
@@ -25,7 +27,7 @@ export class ValidationApiService {
   private http = inject(HttpClient);
 
   private readonly apiUrl =
-    'http://127.0.0.1:8000/api/validaciones';
+  `${API_BASE_URL}/validaciones`;
 
   /**
    * Envía los archivos Excel y la plantilla seleccionada.

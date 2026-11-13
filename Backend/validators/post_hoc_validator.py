@@ -875,35 +875,39 @@ def _build_column_rules(
         column_name = header.column_name
 
         # 1. Interpretar el comentario de Excel.
-        
-        # DEBUG TEMPORAL: revisar configuración de known_fields.
-        print("\n========== DEBUG KNOWN_FIELDS ==========")
-        print("Hoja:", sheet_name)
-        print("Tipo de configuración:", type(configuration.known_fields))
 
-        known_fields = configuration.known_fields
-
-        if isinstance(known_fields, dict):
-            print("Definición global de SEMESTRE:")
-            print(known_fields.get("SEMESTRE"))
-
-            sheets = known_fields.get("sheets", {})
-
-            if isinstance(sheets, dict):
-                sheet_rules = sheets.get(sheet_name, {})
-
-                if isinstance(sheet_rules, dict):
-                    print("Definición por hoja de SEMESTRE:")
-                    print(sheet_rules.get("SEMESTRE"))
-
-        print("========================================\n")
-
+    
         rule = interpret_comment(
             column_name,
             header.comment_text,
             known_fields=configuration.known_fields,
             sheet_name=sheet_name,
         )
+
+        # Las reglas explícitas de rules.yaml prevalecen
+        # sobre el tipo inferido desde el comentario de Excel.
+        configured_rules = sheet_configuration.get("rules", {})
+        configured_rule = configured_rules.get(column_name, {})
+
+        if isinstance(configured_rule, dict):
+            configured_datatype = configured_rule.get("datatype")
+
+            if isinstance(configured_datatype, str):
+                configured_datatype = configured_datatype.strip().lower()
+
+                datatype_map = {
+                    "alphabetic": DataType.ALPHABETIC,
+                    "alphanumeric": DataType.ALPHANUMERIC,
+                    "integer": DataType.INTEGER,
+                    "decimal": DataType.DECIMAL,
+                    "date": DataType.DATE,
+                    "text": DataType.TEXT,
+                }
+
+                if configured_datatype in datatype_map:
+                    rule.datatype = datatype_map[configured_datatype]
+
+
 
         # 2. Obtener las validaciones configuradas.
 
@@ -1496,6 +1500,12 @@ def validate_workbook(
             sheet_configuration,
             configuration,
         )
+        
+
+
+        column_types_by_sheet[ws.title] = {
+            column_name: rule.datatype for column_name, rule in rules_by_column.items()
+        }
 
         column_types_by_sheet[ws.title] = {
             column_name: rule.datatype for column_name, rule in rules_by_column.items()
@@ -1647,8 +1657,6 @@ def validate_workbook(
         ):
 
             for col_name, value in row_values.items():
-
-                rule = rules_by_column[col_name]
 
                 validation = validations_by_column.get(
                     col_name,

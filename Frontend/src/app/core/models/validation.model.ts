@@ -22,6 +22,7 @@ export interface ValidationFileSummary {
 
 export interface ValidationResponse {
   id: string;
+  plantilla: string;
   estado: ValidationStatus;
   progreso: number;
   mensaje: string;

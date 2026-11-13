@@ -1,4 +1,3 @@
-
 # Validaciones específicas de SERVICIOS DE EXTENSIÓN.
 # Fuente principal: Manual MEN 2025, sección 11.6, páginas 163-170.
 # Los tipos de datos, longitudes y obligatoriedad están definidos
@@ -7,9 +6,7 @@
 # Los catálogos externos se consultan mediante catalogs.yaml.
 
 sheets:
-
   SERVICIOS_EXTENSION:
-
     VALOR_SERVICIO:
       min_value: 0
 
@@ -31,7 +28,6 @@ sheets:
       pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
 
   SERV_EXT_FUENTE_NACIONAL:
-
     ID_FUENTE_NACIONAL:
       catalog: fuente_nacional
 
@@ -39,11 +35,10 @@ sheets:
       min_value: 0
 
   SERV_EXT_FUENTE_INTERNACIONAL:
-
     ID_PAIS_FINANCIADOR:
     catalog: paises
     excluded_values:
-      - '170'
+      - "170"
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional
@@ -52,16 +47,13 @@ sheets:
       min_value: 0
 
   SERV_EXT_OTRAS_ENTIDADES:
-
     ID_PAIS_ENTIDAD:
       catalog: paises
 
   SERV_EXT_POBL_CONDICION:
-
     CANTIDAD:
       min_value: 0
 
   SERV_EXT_POBL_GRUPO:
-
     CANTIDAD:
       min_value: 0

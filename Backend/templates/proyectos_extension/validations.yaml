@@ -1,13 +1,10 @@
-
 # Validaciones específicas de PROYECTOS DE EXTENSIÓN.
 # Fuente principal: Manual MEN 2025, sección 11.7, páginas 171-177.
 # Las restricciones estructurales y los valores permitidos están en rules.yaml.
 # Las reglas entre columnas están en business_rules.yaml.
 
 sheets:
-
   PROYECTOS_EXTENSION:
-
     VALOR_PROYECTO:
       min_value: 0
 
@@ -28,19 +25,15 @@ sheets:
     EMAIL_CONTACTO:
       pattern: "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
 
-
   PROY_EXT_FUENTE_NACIONAL:
-
     VALOR_FINANCIACION:
       min_value: 0
 
-
   PROY_EXT_FUENTE_INTERNACIONAL:
-
     ID_PAIS_FINANCIADOR:
     catalog: paises
     excluded_values:
-      - '170'
+      - "170"
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional
@@ -48,20 +41,14 @@ sheets:
     VALOR_FINANCIACION:
       min_value: 0
 
-
   PROY_EXT_OTRAS_ENTIDADES:
-
     ID_PAIS_ENTIDAD:
       catalog: paises
 
-
   PROY_EXT_POBL_CONDICION:
-
     CANTIDAD:
       min_value: 0
 
-
   PROY_EXT_POBL_GRUPO:
-
     CANTIDAD:
       min_value: 0

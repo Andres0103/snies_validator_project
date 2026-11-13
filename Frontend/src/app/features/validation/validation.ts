@@ -6,8 +6,8 @@ import {
   inject
 } from '@angular/core';
 
-import { Subscription, timer } from 'rxjs';
-import { switchMap, takeWhile } from 'rxjs/operators';
+import { EMPTY, Subscription, timer } from 'rxjs';
+import { catchError, switchMap, takeWhile } from 'rxjs/operators';
 
 import {
   ValidationApiService,
@@ -286,7 +286,16 @@ export class Validation implements OnDestroy {
     this.pollingSubscription = timer(0, 2000)
       .pipe(
         switchMap(() =>
-          this.validationApi.getValidation(validationId)
+          this.validationApi.getValidation(validationId).pipe(
+            catchError(error => {
+              console.error(
+                '[FRONT] Error temporal consultando validación:',
+                error
+              );
+
+              return EMPTY;
+            })
+          )
         ),
         takeWhile(
           response => !finalStates.includes(response.estado),
@@ -294,7 +303,6 @@ export class Validation implements OnDestroy {
         )
       )
       .subscribe({
-
         next: response => {
 
           console.log('[FRONT] Estado recibido:', response.estado);

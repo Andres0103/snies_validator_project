@@ -1,0 +1,23 @@
+{
+  "id": "34ae5410-6602-41af-a401-c36382b4ee23",
+  "plantilla": "CONSULTORIA",
+  "estado": "FALLIDO",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-13T20:22:52.737030+00:00",
+  "iniciado_en": "2026-11-13T20:22:52.836742+00:00",
+  "finalizado_en": "2026-11-13T20:22:53.084540+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 0,
+  "total_archivos_fallidos": 1,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [],
+  "archivos_rechazados": [
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "motivo": "No fue posible procesar el archivo. Revisa los registros del servidor."
+    }
+  ]
+}
