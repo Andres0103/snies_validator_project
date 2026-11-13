@@ -55,6 +55,10 @@ def test_unexpected_sheet_is_reported():
     ws.append(["CODIGO_CONSULTORIA"])
     ws.append(["A" * 30])
 
+    # Se agregan las hojas obligatorias de la plantilla.
+    wb.create_sheet("CONSULTORIA_REC_HUMANO")
+
+    # Se agrega una hoja que no pertenece a la plantilla.
     other = wb.create_sheet("HOJA_INESPERADA")
     other.append(["CAMPO"])
     other.append(["valor"])

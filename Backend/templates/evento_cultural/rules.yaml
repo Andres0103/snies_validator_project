@@ -20,8 +20,11 @@ sheets:
       datatype: integer
       required: true
       exact_length: 1
-      allowed_values: [1, 2]
-      description: "Semestre del reporte de información."
+      allowed_values:
+        - code: "1"
+          label: "Periodo anual"
+        - code: "2"
+          label: "Periodo semestral"
 
     CODIGO_UNIDAD_ORGANIZACIONAL:
       datatype: alphanumeric
@@ -99,7 +102,11 @@ sheets:
       datatype: integer
       required: true
       exact_length: 1
-      allowed_values: [1, 2]
+      allowed_values:
+        - code: "1"
+          label: "Periodo anual"
+        - code: "2"
+          label: "Periodo semestral"
 
     CODIGO_UNIDAD_ORGANIZACIONAL:
       datatype: alphanumeric
@@ -139,7 +146,11 @@ sheets:
       datatype: integer
       required: true
       exact_length: 1
-      allowed_values: [1, 2]
+      allowed_values:
+        - code: "1"
+          label: "Periodo anual"
+        - code: "2"
+          label: "Periodo semestral"
 
     CODIGO_UNIDAD_ORGANIZACIONAL:
       datatype: alphanumeric

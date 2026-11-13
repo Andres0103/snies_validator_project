@@ -1503,12 +1503,6 @@ master_tables:
       ALFA-2: SS
       FECHA_INICIAL: 09/07/2011
       FECHA_FINAL: null
-    - ID_PAIS: '0'
-      DESC_PAIS: Sin información
-      ALFA-3: null
-      ALFA-2: null
-      FECHA_INICIAL: 01/01/1900
-      FECHA_FINAL: null
     - ID_PAIS: '87'
       DESC_PAIS: BELGICA
       ALFA-3: BEL

@@ -248,6 +248,12 @@ def _load_paises() -> list[AllowedValue]:
     code_column="ID_PAIS",
     label_column="DESC_PAIS",
     catalog_name="paises",
+    additional_values=[
+        AllowedValue(
+            code="0",
+            label="No Aplica (Organismo Multilateral)",
+        )
+    ],
 )
 
 # ============================================================
@@ -278,11 +284,11 @@ def _load_cine_campo_detallado() -> list[AllowedValue]:
         )
 
     return _build_allowed_values(
-        records=records,
-        code_column="codigo",
-        label_column="descripcion",
-        catalog_name="cine_campo_detallado",
-    )
+    records=records,
+    code_column="codigo",
+    label_column="descripcion",
+    catalog_name="cine_campo_detallado",
+)
 
 
 # ============================================================

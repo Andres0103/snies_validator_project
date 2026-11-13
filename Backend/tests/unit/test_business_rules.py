@@ -1,4 +1,4 @@
-from backend.validators.row_validator import validate_business_rule
+from validators.row_validator import validate_business_rule
 
 def test_non_negative_does_not_validate_numeric_type():
     issues = validate_business_rule(

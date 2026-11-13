@@ -16,9 +16,9 @@ sheets:
     NOMBRE_INSTITUCION: {}
 
     ID_PAIS_FINANCIADOR:
-    catalog: paises
-    excluded_values:
-      - '170'
+      catalog: paises
+      excluded_values:
+        - '170'
 
     ID_FUENTE_INTERNACIONAL:
       catalog: fuente_internacional

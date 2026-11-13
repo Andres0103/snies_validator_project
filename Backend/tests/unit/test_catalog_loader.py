@@ -4,7 +4,7 @@ import yaml
 from datetime import date, datetime
 from pathlib import Path
 
-from backend.rules.catalog_loader import (
+from rules.catalog_loader import (
     _read_yaml,
     _resolve_records,
     _parse_date,
@@ -14,12 +14,12 @@ from backend.rules.catalog_loader import (
     _load_catalog_cached,
     load_catalog,
 )
-from backend.rules.general_model import AllowedValue
+from rules.general_model import AllowedValue
 
 
 @pytest.fixture
 def catalog_environment(tmp_path, monkeypatch):
-    import backend.rules.catalog_loader as loader
+    import rules.catalog_loader as loader
 
     monkeypatch.setattr(loader, "PROJECT_DIR", tmp_path)
     loader._load_catalog_cached.cache_clear()

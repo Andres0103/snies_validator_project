@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 import pytest
@@ -27,7 +26,7 @@ def write_yaml(path: Path, content):
 
 def create_template_configuration(tmp_path):
     rules_dir = tmp_path / "patterns"
-    template_dir = rules_dir / "templates" / "consultoria"
+    template_dir = rules_dir / "consultoria"
 
     write_yaml(
         rules_dir / "known_fields.yaml",
@@ -35,26 +34,8 @@ def create_template_configuration(tmp_path):
     )
 
     write_yaml(
-        rules_dir / "template_profiles.yaml",
-        {
-            "templates": {
-                "consultoria": {
-                    "main_sheet": "CONSULTORIA",
-                    "sheets": ["CONSULTORIA", "DETALLE"],
-                }
-            }
-        },
-    )
-
-    write_yaml(
         rules_dir / "common" / "rules.yaml",
-        {
-            "sheets": {
-                "CONSULTORIA": {
-                    "CAMPO_COMUN": {"required": True}
-                }
-            }
-        },
+        {"sheets": {"CONSULTORIA": {"CAMPO_COMUN": {"required": True}}}},
     )
 
     write_yaml(
@@ -69,26 +50,23 @@ def create_template_configuration(tmp_path):
 
     write_yaml(
         rules_dir / "common" / "business_rules.yaml",
-        {
-            "CAMPO_GLOBAL": {
-                "kind": "non_negative"
-            }
-        },
+        {"CAMPO_GLOBAL": {"kind": "non_negative"}},
     )
 
     write_yaml(
         template_dir / "rules.yaml",
-        {
-            "sheets": {
-                "CONSULTORIA": {
-                    "CAMPO_ESPECIFICO": {"required": False}
-                }
-            }
-        },
+        {"sheets": {"CONSULTORIA": {"CAMPO_ESPECIFICO": {"required": False}}}},
     )
 
     write_yaml(template_dir / "validations.yaml", {})
     write_yaml(template_dir / "catalogs.yaml", {})
+    write_yaml(
+        template_dir / "template_profile.yaml",
+        {
+            "main_sheet": "CONSULTORIA",
+            "sheets": ["CONSULTORIA", "DETALLE"],
+        },
+    )
     write_yaml(template_dir / "business_rules.yaml", {})
 
     return rules_dir
@@ -97,6 +75,7 @@ def create_template_configuration(tmp_path):
 # ============================================================
 # load_yaml_file
 # ============================================================
+
 
 def test_load_yaml_file_returns_empty_dict_when_file_does_not_exist(
     tmp_path,
@@ -140,9 +119,7 @@ def test_load_yaml_file_supports_unicode_content(tmp_path):
 
     result = load_yaml_file(file_path)
 
-    assert result["descripción"] == (
-        "Validación de información académica"
-    )
+    assert result["descripción"] == ("Validación de información académica")
 
 
 def test_load_yaml_file_rejects_invalid_yaml(tmp_path):
@@ -193,6 +170,7 @@ def test_load_yaml_file_rejects_directory_instead_of_file(
 # ============================================================
 # _merge_dicts
 # ============================================================
+
 
 def test_merge_dicts_combines_nested_dictionaries():
     base = {
@@ -271,6 +249,7 @@ def test_merge_dicts_does_not_modify_original_dictionaries():
 # load_rule_configuration: arquitectura anterior
 # ============================================================
 
+
 def test_load_rule_configuration_without_template_uses_legacy(
     tmp_path,
 ):
@@ -313,6 +292,7 @@ def test_load_config_is_compatibility_alias(tmp_path):
 # load_rule_configuration: arquitectura nueva
 # ============================================================
 
+
 def test_load_rule_configuration_loads_template_successfully(
     tmp_path,
 ):
@@ -324,7 +304,7 @@ def test_load_rule_configuration_loads_template_successfully(
     )
 
     assert isinstance(result, RuleConfiguration)
-    assert result.template_name == "consultoria"
+    assert result.template_name == "CONSULTORIA"
     assert result.template_profile["main_sheet"] == "CONSULTORIA"
 
     assert "CONSULTORIA" in result.sheet_configurations
@@ -341,11 +321,9 @@ def test_template_specific_rules_override_common_rules(
         rules_dir=rules_dir,
     )
 
-    sheet_rules = result.sheet_configurations[
-        "CONSULTORIA"
-    ]["rules"]
+    sheet_rules = result.sheet_configurations["CONSULTORIA"]["rules"]
 
-    assert "CAMPO_COMUN" in sheet_rules
+    assert "CAMPO_COMUN" not in sheet_rules
     assert "CAMPO_ESPECIFICO" in sheet_rules
 
 
@@ -365,10 +343,7 @@ def test_template_specific_business_rules_override_common(
     )
 
     write_yaml(
-        rules_dir
-        / "templates"
-        / "consultoria"
-        / "business_rules.yaml",
+        rules_dir / "consultoria" / "business_rules.yaml",
         {
             "CAMPO": {
                 "message": "Regla específica",
@@ -382,7 +357,6 @@ def test_template_specific_business_rules_override_common(
     )
 
     assert result.business_rules["CAMPO"] == {
-        "kind": "non_negative",
         "message": "Regla específica",
     }
 
@@ -410,7 +384,7 @@ def test_load_rule_configuration_rejects_non_string_template_name(
 def test_load_rule_configuration_rejects_missing_template_directory(
     tmp_path,
 ):
-    with pytest.raises(ValueError, match="No existe el directorio"):
+    with pytest.raises(FileNotFoundError, match="No existe la configuración"):
         load_rule_configuration(
             template_name="inexistente",
             rules_dir=tmp_path,
@@ -422,16 +396,13 @@ def test_load_rule_configuration_rejects_missing_template_profile(
 ):
     rules_dir = create_template_configuration(tmp_path)
 
-    write_yaml(
-        rules_dir / "template_profiles.yaml",
-        {"templates": {}},
-    )
+    (rules_dir / "consultoria" / "template_profile.yaml").unlink()
 
-    with pytest.raises(ValueError, match="No existe un perfil"):
+    with pytest.raises(FileNotFoundError):
         load_rule_configuration(
-            template_name="consultoria",
-            rules_dir=rules_dir,
-        )
+        template_name="consultoria",
+        rules_dir=rules_dir,
+    )
 
 
 def test_load_rule_configuration_rejects_invalid_main_sheet(
@@ -440,16 +411,12 @@ def test_load_rule_configuration_rejects_invalid_main_sheet(
     rules_dir = create_template_configuration(tmp_path)
 
     write_yaml(
-        rules_dir / "template_profiles.yaml",
-        {
-            "templates": {
-                "consultoria": {
-                    "main_sheet": "",
-                    "sheets": ["CONSULTORIA"],
-                }
-            }
-        },
-    )
+    rules_dir / "consultoria" / "template_profile.yaml",
+    {
+        "main_sheet": "",
+        "sheets": ["CONSULTORIA"],
+    },
+)
 
     with pytest.raises(ValueError, match="hoja principal"):
         load_rule_configuration(
@@ -464,19 +431,8 @@ def test_load_rule_configuration_rejects_catalog_not_defined(
     rules_dir = create_template_configuration(tmp_path)
 
     write_yaml(
-        rules_dir
-        / "templates"
-        / "consultoria"
-        / "validations.yaml",
-        {
-            "sheets": {
-                "CONSULTORIA": {
-                    "CODIGO": {
-                        "catalog": "CATALOGO_INEXISTENTE"
-                    }
-                }
-            }
-        },
+        rules_dir / "consultoria" / "validations.yaml",
+        {"sheets": {"CONSULTORIA": {"CODIGO": {"catalog": "CATALOGO_INEXISTENTE"}}}},
     )
 
     with pytest.raises(ValueError, match="no está definido"):

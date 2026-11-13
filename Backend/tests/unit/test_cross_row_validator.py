@@ -2,8 +2,8 @@ import pytest
 from datetime import date, datetime
 from decimal import Decimal
 
-from backend.rules.general_model import DataType
-from backend.validators.cross_row_validator import (
+from rules.general_model import DataType
+from validators.cross_row_validator import (
     CrossRowIssue,
     _is_blank,
     _normalize_value,

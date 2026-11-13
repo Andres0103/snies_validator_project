@@ -1,7 +1,7 @@
 
 from openpyxl import Workbook
 
-from backend.rules.general_model import DataType
+from rules.general_model import DataType
 from validators.cross_sheet_validator import (
     validate_sheet_references,
     _normalize_key_value,

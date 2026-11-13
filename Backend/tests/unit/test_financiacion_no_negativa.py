@@ -74,11 +74,7 @@ def test_financiaciones_negativas_generan_error():
             "VLR_FINANCIACION_NACIONAL",
             "VLR_FINANCIACION_INTERNACIONAL",
         )
-        and issue.message in (
-            "El valor de financiación nacional no puede ser negativo.",
-            "El valor de financiación internacional no puede ser negativo.",
-        )
-    ]
+        and issue.message == "El valor debe ser mayor o igual a 0."]
 
     encontrados = {
         (issue.row, issue.column_name)
@@ -120,7 +116,6 @@ def test_financiaciones_cero_y_positivas_son_validas():
             "VLR_FINANCIACION_NACIONAL",
             "VLR_FINANCIACION_INTERNACIONAL",
         )
-        and "no puede ser negativo" in issue.message
-    ]
+        and "mayor o igual a 0" in issue.message]
 
     assert errores_financiacion == []

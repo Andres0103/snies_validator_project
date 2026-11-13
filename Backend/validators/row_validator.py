@@ -22,7 +22,7 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from backend.rules.general_model import DataType, ValidationRule
+from rules.general_model import DataType, ValidationRule
 
 import re
 

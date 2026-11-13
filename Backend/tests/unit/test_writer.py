@@ -5,9 +5,9 @@ import pytest
 from openpyxl import Workbook
 from openpyxl.worksheet.datavalidation import DataValidation
 
-from backend.excel import writer
-from backend.excel.reader import HeaderCell
-from backend.rules.general_model import (
+from excel import writer
+from excel.reader import HeaderCell
+from rules.general_model import (
     AllowedValue,
     DataType,
     ValidationRule,
@@ -62,91 +62,6 @@ def make_header(
 # CONFIGURACIÓN DE ARQUITECTURA
 # ============================================================
 
-class TestHasNewConfiguration:
-
-    def test_returns_false_when_template_directory_does_not_exist(
-        self, monkeypatch, tmp_path
-    ):
-        monkeypatch.setattr(
-            writer.Path,
-            "resolve",
-            lambda self: tmp_path / "writer.py",
-        )
-
-        assert writer._has_new_configuration("consultoria") is False
-
-    def test_returns_false_when_template_directory_is_empty(
-        self, monkeypatch, tmp_path
-    ):
-        patterns = tmp_path / "rules" / "patterns"
-        template = patterns / "templates" / "consultoria"
-        template.mkdir(parents=True)
-
-        monkeypatch.setattr(
-            writer.Path,
-            "resolve",
-            lambda self: tmp_path / "excel" / "writer.py",
-        )
-
-        assert writer._has_new_configuration("consultoria") is False
-
-    @pytest.mark.parametrize(
-        "filename",
-        writer.CONFIG_FILES,
-    )
-    def test_detects_configuration_in_template_directory(
-        self, monkeypatch, tmp_path, filename
-    ):
-        patterns = tmp_path / "rules" / "patterns"
-        template = patterns / "templates" / "consultoria"
-        template.mkdir(parents=True)
-
-        (template / filename).write_text("{}", encoding="utf-8")
-
-        monkeypatch.setattr(
-            writer.Path,
-            "resolve",
-            lambda self: tmp_path / "excel" / "writer.py",
-        )
-
-        assert writer._has_new_configuration("consultoria") is True
-
-    def test_detects_configuration_in_common_directory(
-        self, monkeypatch, tmp_path
-    ):
-        patterns = tmp_path / "rules" / "patterns"
-        template = patterns / "templates" / "consultoria"
-        common = patterns / "common"
-
-        template.mkdir(parents=True)
-        common.mkdir(parents=True)
-
-        (common / "rules.yaml").write_text("{}", encoding="utf-8")
-
-        monkeypatch.setattr(
-            writer.Path,
-            "resolve",
-            lambda self: tmp_path / "excel" / "writer.py",
-        )
-
-        assert writer._has_new_configuration("consultoria") is True
-
-    def test_ignores_unrecognized_configuration_files(
-        self, monkeypatch, tmp_path
-    ):
-        patterns = tmp_path / "rules" / "patterns"
-        template = patterns / "templates" / "consultoria"
-        template.mkdir(parents=True)
-
-        (template / "other.yaml").write_text("{}", encoding="utf-8")
-
-        monkeypatch.setattr(
-            writer.Path,
-            "resolve",
-            lambda self: tmp_path / "excel" / "writer.py",
-        )
-
-        assert writer._has_new_configuration("consultoria") is False
 
 
 # ============================================================
@@ -209,40 +124,38 @@ class TestGetSheetConfiguration:
 
         assert result["rules"] == {"A": {}}
 
-    def test_uses_legacy_configuration_when_sheet_is_not_found(self):
+    def test_raises_when_sheet_configuration_is_not_found(self):
         config = SimpleNamespace(
-            sheet_configurations={},
-            known_fields={"CODIGO": {}},
-            validation_config={
-                "column_rules": {"CODIGO": {"pattern": ".*"}},
-                "master_tables": {"estados": {}},
+            sheet_configurations={
+                "PROYECTOS": {
+                    "rules": {},
+                    "validations": {},
+                    "catalogs": {},
+                },
             },
         )
 
-        result = writer._get_sheet_configuration(
-            config,
-            "CONSULTORIA",
-        )
+        with pytest.raises(
+            ValueError,
+            match="No existe una configuración para la hoja 'CONSULTORIA'",
+        ):
+            writer._get_sheet_configuration(
+                config,
+                "CONSULTORIA",
+            )
 
-        assert result["rules"] == {"CODIGO": {}}
-        assert result["validations"] == {
-            "CODIGO": {"pattern": ".*"}
-        }
-        assert result["catalogs"] == {"estados": {}}
-
-    def test_uses_empty_defaults_when_configuration_is_missing(self):
+    def test_raises_when_configuration_is_missing(self):
         config = SimpleNamespace()
 
-        result = writer._get_sheet_configuration(
-            config,
-            "CONSULTORIA",
-        )
+        with pytest.raises(
+            ValueError,
+            match="No existe una configuración para la hoja 'CONSULTORIA'",
+        ):
+            writer._get_sheet_configuration(
+                config,
+                "CONSULTORIA",
+            )
 
-        assert result == {
-            "rules": {},
-            "validations": {},
-            "catalogs": {},
-        }
 
 
 # ============================================================
@@ -272,8 +185,8 @@ class TestApplyConfiguredCatalog:
         writer._apply_configured_catalog(
             rule,
             "CONSULTORIA",
-            {"CODIGO": {"catalog": "estados"}},
-            {"estados": {}},
+            {"CODIGO": {}},
+            {},
         )
 
         assert rule.allowed_values is original
@@ -824,21 +737,18 @@ class TestProcessWorkbook:
         ):
             return rules_by_column[(sheet_name, column_name)]
 
+        
         monkeypatch.setattr(
             writer,
             "detect_templates",
-            lambda names: [],
-        )
-        monkeypatch.setattr(
-            writer,
-            "_has_new_configuration",
-            lambda name: False,
+            lambda names: ["consultoria"],
         )
         monkeypatch.setattr(
             writer,
             "load_rule_configuration",
-            lambda: configuration,
+            lambda template_name: configuration,
         )
+
         monkeypatch.setattr(
             writer,
             "build_helper_sheet",
@@ -942,7 +852,7 @@ class TestProcessWorkbook:
         validations = workbook["CONSULTORIA"].data_validations.dataValidation
 
         assert len(validations) == 1
-        assert "A2:A2000" in str(validations[0].sqref)
+        assert "A2:A1048576" in str(validations[0].sqref)
 
     def test_skips_control_sheets(self, monkeypatch):
         wb = Workbook()
@@ -1008,7 +918,8 @@ class TestProcessWorkbook:
         with pytest.raises(ValueError, match="varias plantillas SNIES"):
             writer.process_workbook(workbook)
 
-    def test_uses_new_configuration_when_available(
+    
+    def test_loads_configuration_for_detected_template(
         self, monkeypatch, workbook
     ):
         configuration = SimpleNamespace(
@@ -1020,7 +931,6 @@ class TestProcessWorkbook:
                     "catalogs": {},
                 },
             },
-            validation_config={},
         )
 
         loader = Mock(return_value=configuration)
@@ -1029,11 +939,6 @@ class TestProcessWorkbook:
             writer,
             "detect_templates",
             lambda names: ["consultoria"],
-        )
-        monkeypatch.setattr(
-            writer,
-            "_has_new_configuration",
-            lambda name: True,
         )
         monkeypatch.setattr(
             writer,
@@ -1067,56 +972,6 @@ class TestProcessWorkbook:
             template_name="consultoria",
         )
 
-    def test_uses_legacy_configuration_when_new_configuration_is_absent(
-        self, monkeypatch, workbook
-    ):
-        configuration = SimpleNamespace(
-            known_fields={},
-            sheet_configurations={},
-            validation_config={},
-        )
-
-        loader = Mock(return_value=configuration)
-
-        monkeypatch.setattr(
-            writer,
-            "detect_templates",
-            lambda names: ["consultoria"],
-        )
-        monkeypatch.setattr(
-            writer,
-            "_has_new_configuration",
-            lambda name: False,
-        )
-        monkeypatch.setattr(
-            writer,
-            "load_rule_configuration",
-            loader,
-        )
-        monkeypatch.setattr(
-            writer,
-            "build_helper_sheet",
-            lambda wb, rules: {},
-        )
-        monkeypatch.setattr(
-            writer,
-            "interpret_comment",
-            lambda column_name, comment_text, known_fields, sheet_name: (
-                ValidationRule(
-                    column_name=column_name,
-                    datatype=DataType.TEXT,
-                )
-            ),
-        )
-        monkeypatch.setattr(
-            writer,
-            "resolve_business_rule",
-            lambda *args, **kwargs: None,
-        )
-
-        writer.process_workbook(workbook)
-
-        loader.assert_called_once_with()
 
     def test_applies_list_validation_with_priority_over_type(
         self, monkeypatch, workbook
@@ -1276,8 +1131,7 @@ class TestProcessWorkbook:
             .data_validations.dataValidation[0]
         )
 
-        assert "A1" not in str(validation.sqref)
-        assert "A2:A2000" in str(validation.sqref)
+        assert str(validation.sqref) == "A2:A1048576"
 
     def test_returns_empty_report_when_workbook_has_no_data_headers(
         self, monkeypatch

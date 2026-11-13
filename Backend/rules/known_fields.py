@@ -179,6 +179,7 @@ def _validate_required(
     return value
 
 
+
 def _load_allowed_values(
     values: Any,
     column_name: str,
@@ -186,9 +187,20 @@ def _load_allowed_values(
     """
     Convierte los valores permitidos del YAML en AllowedValue.
 
-    Cada elemento debe contener:
-        - code
-        - label
+    Admite dos formatos:
+
+    1. Valores simples:
+       allowed_values: [1, 2]
+
+       Se utiliza el propio código como etiqueta.
+
+    2. Diccionarios:
+       allowed_values:
+         - code: "1"
+           label: "Periodo anual"
+
+    Los códigos se normalizan a texto y se rechazan
+    los valores vacíos o duplicados.
     """
 
     if not isinstance(values, list):
@@ -198,26 +210,64 @@ def _load_allowed_values(
         )
 
     allowed_values: list[AllowedValue] = []
-
     seen_codes: set[str] = set()
 
     for index, value in enumerate(values):
 
-        if not isinstance(value, dict):
+        # Formato 1: diccionario con código y etiqueta.
+        if isinstance(value, dict):
+
+            if "code" not in value or "label" not in value:
+                raise ValueError(
+                    f"Cada elemento de 'allowed_values' del campo "
+                    f"'{column_name}' debe contener 'code' y 'label'."
+                )
+
+            raw_code = value["code"]
+            raw_label = value["label"]
+
+            if (
+                isinstance(raw_code, bool)
+                or not isinstance(raw_code, (str, int, float))
+            ):
+                raise ValueError(
+                    f"El código del elemento {index + 1} de "
+                    f"'allowed_values' del campo '{column_name}' "
+                    "debe ser texto o numérico."
+                )
+
+            if not isinstance(raw_label, str):
+                raise ValueError(
+                    f"La etiqueta del elemento {index + 1} de "
+                    f"'allowed_values' del campo '{column_name}' "
+                    "debe ser un texto."
+                )
+
+            code = str(raw_code).strip()
+            label = raw_label.strip()
+
+            if not label:
+                raise ValueError(
+                    f"La etiqueta del elemento {index + 1} de "
+                    f"'allowed_values' del campo '{column_name}' "
+                    "no puede estar vacía."
+                )
+
+        # Formato 2: valor simple.
+        elif (
+            isinstance(value, (str, int, float))
+            and not isinstance(value, bool)
+        ):
+
+            code = str(value).strip()
+            label = code
+
+        else:
             raise ValueError(
                 f"El elemento {index + 1} de 'allowed_values' "
-                f"del campo '{column_name}' debe ser "
-                "un diccionario."
+                f"del campo '{column_name}' debe ser un valor "
+                "simple o un diccionario con 'code' y 'label'."
             )
-
-        if "code" not in value or "label" not in value:
-            raise ValueError(
-                f"Cada elemento de 'allowed_values' del campo "
-                f"'{column_name}' debe contener 'code' y 'label'."
-            )
-
-        code = str(value["code"]).strip()
-        label = str(value["label"]).strip()
 
         if not code:
             raise ValueError(
@@ -396,9 +446,6 @@ def apply_known_field_fallback(
     # 3. COMPLETAR RESTRICCIONES DE LONGITUD
     # --------------------------------------------------------
 
-        # --------------------------------------------------------
-    # 3. COMPLETAR RESTRICCIONES DE LONGITUD
-    # --------------------------------------------------------
 
     # Las restricciones explícitas de la configuración YAML
     # tienen prioridad sobre las longitudes interpretadas

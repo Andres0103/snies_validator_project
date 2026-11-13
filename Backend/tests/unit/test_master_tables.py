@@ -3,13 +3,13 @@ import yaml
 
 from pathlib import Path
 
-from backend.rules.general_model import (
+from rules.general_model import (
     AllowedValue,
     DataType,
     ValidationRule,
 )
 
-import backend.rules.master_tables as master_tables
+import rules.master_tables as master_tables
 
 
 @pytest.fixture

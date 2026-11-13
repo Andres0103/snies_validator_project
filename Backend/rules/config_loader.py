@@ -520,7 +520,7 @@ def _load_template_profile(
     Carga el perfil estructural individual de una plantilla.
     """
 
-    profile_path = directory / "template_profile.yaml"
+    profile_path = directory /  "template_profile.yaml"
 
     if not profile_path.is_file():
         raise FileNotFoundError(

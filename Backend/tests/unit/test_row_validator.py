@@ -4,13 +4,13 @@ from decimal import Decimal
 
 import pytest
 
-from backend.rules.general_model import (
+from rules.general_model import (
     AllowedValue,
     ConditionalRequirement,
     DataType,
     ValidationRule,
 )
-from backend.validators.row_validator import validate_cell
+from validators.row_validator import validate_cell
 
 
 # ============================================================
@@ -646,7 +646,7 @@ from decimal import Decimal
 
 import pytest
 
-from backend.rules.general_model import (
+from rules.general_model import (
     DataType,
     ValidationRule,
 )

@@ -1,7 +1,7 @@
 import pytest
 from openpyxl import Workbook
 
-from backend.excel.reader import (
+from excel.reader import (
     CONTROL_SHEET_NAMES,
     HEADER_ROW,
     HeaderCell,
