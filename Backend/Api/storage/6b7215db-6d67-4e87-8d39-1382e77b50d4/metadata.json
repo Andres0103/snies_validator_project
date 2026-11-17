@@ -1,0 +1,30 @@
+{
+  "id": "6b7215db-6d67-4e87-8d39-1382e77b50d4",
+  "plantilla": "CURSOS",
+  "plantillas": [
+    "CURSOS"
+  ],
+  "estado": "COMPLETADO",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T14:41:07.786184+00:00",
+  "iniciado_en": "2026-11-17T14:41:07.818284+00:00",
+  "finalizado_en": "2026-11-17T14:41:07.920532+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "CURSOS_VALIDOS.xlsx",
+      "plantilla": "CURSOS",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CURSOS_VALIDOS_marcado.xlsx",
+      "total_errores": 0,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

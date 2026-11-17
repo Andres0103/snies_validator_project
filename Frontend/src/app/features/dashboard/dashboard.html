@@ -1,16 +1,17 @@
-
 <div class="dashboard">
+  <!-- =====================================================
+       ENCABEZADO DEL DASHBOARD
+  ====================================================== -->
 
-  <!-- Encabezado del dashboard -->
   <section class="welcome-section">
     <div class="welcome-content">
-      <span class="section-eyebrow">PANEL GENERAL</span>
+      <span class="section-eyebrow"> PANEL GENERAL </span>
 
       <h1>Bienvenido al sistema SNIES</h1>
 
       <p>
-        Gestiona y valida la información del Sistema Nacional
-        de Información de la Educación Superior.
+        Gestiona y valida la información del Sistema Nacional de Información de la Educación
+        Superior.
       </p>
     </div>
 
@@ -20,11 +21,23 @@
     </a>
   </section>
 
-  <!-- Indicadores principales -->
+  <!-- =====================================================
+       MENSAJE DE ERROR
+  ====================================================== -->
+
+  @if (errorMessage) {
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  }
+
+  <!-- =====================================================
+       INDICADORES PRINCIPALES
+  ====================================================== -->
+
   <section class="metrics-section" aria-label="Resumen de procesos">
-
     <div class="row g-3">
-
+      <!-- Total de procesos -->
       <div class="col-12 col-md-4">
         <article class="metric-card">
           <div class="metric-icon">
@@ -32,15 +45,18 @@
           </div>
 
           <div class="metric-information">
-            <span class="metric-label">Procesos realizados</span>
-            <strong class="metric-value">0</strong>
-            <span class="metric-description">
-              Total de procesos registrados
-            </span>
+            <span class="metric-label"> Procesos realizados </span>
+
+            <strong class="metric-value">
+              {{ isLoading ? '—' : totalProcesses }}
+            </strong>
+
+            <span class="metric-description"> Total de procesos registrados </span>
           </div>
         </article>
       </div>
 
+      <!-- Procesos completados -->
       <div class="col-12 col-md-4">
         <article class="metric-card">
           <div class="metric-icon success">
@@ -48,15 +64,18 @@
           </div>
 
           <div class="metric-information">
-            <span class="metric-label">Procesos completados</span>
-            <strong class="metric-value">0</strong>
-            <span class="metric-description">
-              Procesos finalizados correctamente
-            </span>
+            <span class="metric-label"> Procesos completados </span>
+
+            <strong class="metric-value">
+              {{ isLoading ? '—' : completedProcesses }}
+            </strong>
+
+            <span class="metric-description"> Procesos finalizados correctamente </span>
           </div>
         </article>
       </div>
 
+      <!-- Procesos con observaciones -->
       <div class="col-12 col-md-4">
         <article class="metric-card">
           <div class="metric-icon warning">
@@ -64,24 +83,28 @@
           </div>
 
           <div class="metric-information">
-            <span class="metric-label">Con observaciones</span>
-            <strong class="metric-value">0</strong>
-            <span class="metric-description">
-              Procesos que requieren revisión
-            </span>
+            <span class="metric-label"> Con observaciones </span>
+
+            <strong class="metric-value">
+              {{ isLoading ? '—' : processesWithObservations }}
+            </strong>
+
+            <span class="metric-description"> Procesos que requieren revisión </span>
           </div>
         </article>
       </div>
-
     </div>
   </section>
 
-  <!-- Actividad reciente -->
-  <section class="activity-section">
+  <!-- =====================================================
+       ACTIVIDAD RECIENTE
+  ====================================================== -->
 
+  <section class="activity-section">
     <div class="section-heading">
       <div>
         <h2>Actividad reciente</h2>
+
         <p>Consulta los últimos procesos ejecutados en el sistema.</p>
       </div>
 
@@ -92,27 +115,122 @@
     </div>
 
     <div class="activity-card">
+      <!-- Estado de carga -->
+      @if (isLoading) {
+        <div class="empty-state">
+          <div class="spinner-border text-success"></div>
 
-      <div class="empty-state">
-        <div class="empty-state-icon">
-          <i class="bi bi-folder2-open"></i>
+          <h3 class="mt-3">Consultando actividad...</h3>
+
+          <p>Recuperando los procesos almacenados localmente.</p>
+        </div>
+      } @else if (validations.length === 0) {
+        <!-- No existen validaciones -->
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <i class="bi bi-folder2-open"></i>
+          </div>
+
+          <h3>Aún no hay actividad registrada</h3>
+
+          <p>
+            Cuando ejecutes tu primera validación, podrás consultar aquí el resumen de tus procesos
+            recientes.
+          </p>
+
+          <a routerLink="/validation" class="btn btn-outline-primary">
+            <i class="bi bi-upload me-2"></i>
+            Comenzar una validación
+          </a>
+        </div>
+      } @else {
+        <!-- =================================================
+             LISTA DE ÚLTIMAS VALIDACIONES
+        ================================================== -->
+
+        <div class="recent-activity-list">
+          @for (validation of recentValidations; track validation.id) {
+            <a
+              class="recent-activity-item"
+              [routerLink]="['/history']"
+              [queryParams]="{ id: validation.id }"
+              [attr.aria-label]="'Consultar historial de la validación ' + validation.id"
+            >
+              <!-- Icono según estado -->
+              <div
+                class="recent-activity-icon"
+                [class.success]="validation.estado === 'COMPLETADO'"
+                [class.warning]="
+                  validation.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
+                  validation.estado === 'COMPLETADO_PARCIAL'
+                "
+                [class.danger]="validation.estado === 'FALLIDO'"
+              >
+                @if (validation.estado === 'COMPLETADO') {
+                  <i class="bi bi-check-circle"></i>
+                } @else if (
+                  validation.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
+                  validation.estado === 'COMPLETADO_PARCIAL'
+                ) {
+                  <i class="bi bi-exclamation-triangle"></i>
+                } @else if (validation.estado === 'FALLIDO') {
+                  <i class="bi bi-x-circle"></i>
+                } @else {
+                  <i class="bi bi-clock"></i>
+                }
+              </div>
+
+              <!-- Información de la validación -->
+              <div class="recent-activity-information">
+                <strong> Validación de información </strong>
+
+                <span>
+                  {{ validation.total_archivos_procesados }}
+                  de
+                  {{ validation.total_archivos }}
+                  archivos procesados
+                </span>
+
+                <small>
+                  {{ formatDate(validation.savedAt) }}
+                </small>
+              </div>
+
+              <!-- Resultado de la validación -->
+              <div class="recent-activity-result">
+                <span
+                  class="badge"
+                  [class.text-bg-success]="validation.estado === 'COMPLETADO'"
+                  [class.text-bg-warning]="
+                    validation.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
+                    validation.estado === 'COMPLETADO_PARCIAL'
+                  "
+                  [class.text-bg-danger]="validation.estado === 'FALLIDO'"
+                  [class.text-bg-secondary]="
+                    validation.estado === 'PENDIENTE' || validation.estado === 'PROCESANDO'
+                  "
+                >
+                  {{ getStatusLabel(validation.estado) }}
+                </span>
+
+                <span class="activity-errors">
+                  {{ validation.total_errores }} errores |
+
+                  {{ validation.total_advertencias }} advertencias
+                </span>
+              </div>
+            </a>
+          }
         </div>
 
-        <h3>Aún no hay actividad registrada</h3>
-
-        <p>
-          Cuando ejecutes tu primera validación, podrás consultar
-          aquí el resumen de tus procesos recientes.
-        </p>
-
-        <a routerLink="/validation" class="btn btn-outline-primary">
-          <i class="bi bi-upload me-2"></i>
-          Comenzar una validación
-        </a>
-      </div>
-
+        <!-- Enlace al historial completo -->
+        <div class="recent-activity-footer">
+          <a routerLink="/history">
+            Consultar todas las validaciones
+            <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      }
     </div>
-
   </section>
-
 </div>

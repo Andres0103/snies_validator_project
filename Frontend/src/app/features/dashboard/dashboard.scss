@@ -1,84 +1,127 @@
 
+/* =========================================================
+   DASHBOARD - ESTILOS GENERALES
+========================================================= */
+
 :host {
   display: block;
-}
-
-.dashboard {
   width: 100%;
 }
 
-/* =========================================
-   ENCABEZADO
-   ========================================= */
+.dashboard {
+  --dashboard-primary: #176b49;
+  --dashboard-primary-dark: #10563b;
+  --dashboard-primary-light: #e8f4ed;
+  --dashboard-text: #172b3d;
+  --dashboard-secondary: #657b91;
+  --dashboard-border: #dce5ed;
+  --dashboard-background: #f4f7f5;
+
+  width: 100%;
+  padding: 28px 32px 40px;
+  color: var(--dashboard-text);
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ENCABEZADO DE BIENVENIDA
+========================================================= */
 
 .welcome-section {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 24px;
   margin-bottom: 28px;
 }
 
+.welcome-content {
+  min-width: 0;
+}
+
 .section-eyebrow {
-  display: inline-block;
-  margin-bottom: 9px;
-  color: var(--color-primary);
-  font-size: 11px;
+  display: block;
+  margin-bottom: 10px;
+  color: var(--dashboard-primary);
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.1px;
+  letter-spacing: 1px;
 }
 
 .welcome-content h1 {
   margin: 0 0 8px;
-  font-size: clamp(22px, 2vw, 27px);
-  font-weight: 650;
-  letter-spacing: -0.6px;
+  color: var(--dashboard-text);
+  font-size: clamp(24px, 2.3vw, 30px);
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .welcome-content p {
-  max-width: 650px;
   margin: 0;
-  color: var(--color-text-secondary);
-  font-size: 14px;
+  color: var(--dashboard-secondary);
+  font-size: 13px;
   line-height: 1.6;
 }
 
 .welcome-action {
+  display: inline-flex;
   flex-shrink: 0;
-  padding: 11px 17px;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--dashboard-primary);
+  border-radius: 8px;
+  background: var(--dashboard-primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-/* =========================================
-   INDICADORES
-   ========================================= */
+.welcome-action:hover {
+  background: var(--dashboard-primary-dark);
+  border-color: var(--dashboard-primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   INDICADORES PRINCIPALES
+========================================================= */
 
 .metrics-section {
-  margin-bottom: 32px;
+  margin-bottom: 34px;
+}
+
+.metrics-section > .row {
+  align-items: stretch;
+}
+
+.metrics-section [class*="col-"] {
+  display: flex;
 }
 
 .metric-card {
   display: flex;
   align-items: flex-start;
-  gap: 17px;
-  height: 100%;
+  gap: 16px;
+  width: 100%;
   min-height: 142px;
   padding: 22px;
-
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  background: #fff;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(26, 50, 70, 0.045);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .metric-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(23, 107, 69, 0.25);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(26, 50, 70, 0.08);
 }
 
 .metric-icon {
@@ -86,117 +129,124 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-
-  width: 46px;
-  height: 46px;
-
-  color: var(--color-primary);
-  background: var(--color-primary-light);
-  border-radius: 11px;
-
-  font-size: 21px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--dashboard-primary-light);
+  color: var(--dashboard-primary);
+  font-size: 22px;
 }
 
 .metric-icon.success {
-  color: #198754;
   background: #e8f4ed;
+  color: #198754;
 }
 
 .metric-icon.warning {
-  color: #b7791f;
-  background: #fff4df;
+  background: #fff3df;
+  color: #c17b16;
 }
 
 .metric-information {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  gap: 5px;
 }
 
 .metric-label {
-  margin-bottom: 5px;
-  color: var(--color-text-secondary);
+  color: var(--dashboard-secondary);
   font-size: 12px;
   font-weight: 500;
 }
 
 .metric-value {
-  color: var(--color-text);
+  color: var(--dashboard-text);
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 750;
   line-height: 1.2;
-  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
 }
 
 .metric-description {
-  margin-top: 6px;
-  color: #84909d;
+  color: #8795a3;
   font-size: 11px;
+  line-height: 1.5;
 }
 
-/* =========================================
-   ACTIVIDAD RECIENTE
-   ========================================= */
+
+/* =========================================================
+   SECCIÓN DE ACTIVIDAD RECIENTE
+========================================================= */
 
 .activity-section {
-  margin-bottom: 24px;
+  margin-top: 4px;
 }
 
 .section-heading {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
   margin-bottom: 15px;
 }
 
 .section-heading h2 {
   margin: 0 0 5px;
-  font-size: 17px;
-  font-weight: 650;
+  color: var(--dashboard-text);
+  font-size: 19px;
+  font-weight: 700;
 }
 
 .section-heading p {
   margin: 0;
-  color: var(--color-text-secondary);
+  color: var(--dashboard-secondary);
   font-size: 12px;
 }
 
 .history-link {
+  display: inline-flex;
   flex-shrink: 0;
-  color: var(--color-primary);
+  align-items: center;
+  gap: 5px;
+  color: var(--dashboard-primary);
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
 }
 
 .history-link:hover {
-  color: var(--color-primary-dark);
+  color: var(--dashboard-primary-dark);
   text-decoration: underline;
 }
 
-.activity-card {
-  min-height: 290px;
-  overflow: hidden;
 
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+/* =========================================================
+   CONTENEDOR DE ACTIVIDAD
+========================================================= */
+
+.activity-card {
+  overflow: hidden;
+  width: 100%;
+  min-height: 180px;
+  background: #fff;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 13px;
+  box-shadow: 0 3px 12px rgba(26, 50, 70, 0.045);
 }
 
-/* =========================================
+
+/* =========================================================
    ESTADO VACÍO
-   ========================================= */
+========================================================= */
 
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  min-height: 290px;
-  padding: 35px 24px;
+  min-height: 240px;
+  padding: 35px 20px;
   text-align: center;
 }
 
@@ -204,68 +254,279 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 58px;
   height: 58px;
-  margin-bottom: 17px;
-
-  color: var(--color-primary);
-  background: var(--color-primary-light);
+  margin-bottom: 16px;
   border-radius: 16px;
-
+  background: var(--dashboard-primary-light);
+  color: var(--dashboard-primary);
   font-size: 25px;
 }
 
 .empty-state h3 {
-  margin-bottom: 8px;
+  margin: 0 0 8px;
+  color: var(--dashboard-text);
   font-size: 15px;
-  font-weight: 650;
+  font-weight: 700;
 }
 
 .empty-state p {
-  max-width: 390px;
-  margin-bottom: 19px;
-  color: var(--color-text-secondary);
+  max-width: 430px;
+  margin: 0 0 17px;
+  color: var(--dashboard-secondary);
   font-size: 12px;
   line-height: 1.7;
 }
 
 .empty-state .btn {
-  padding: 9px 15px;
+  border-radius: 7px;
   font-size: 12px;
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
 
-@media (max-width: 768px) {
+/* =========================================================
+   LISTA DE ACTIVIDAD RECIENTE
+========================================================= */
+
+.recent-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 17px 22px;
+  border-bottom: 1px solid #edf0f2;
+  transition: background-color 0.2s ease;
+}
+
+.recent-activity-item:hover {
+  background: #f8faf9;
+}
+
+.recent-activity-item:last-child {
+  border-bottom: none;
+}
+
+
+/* Iconos según estado */
+
+.recent-activity-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: var(--dashboard-primary-light);
+  color: var(--dashboard-primary);
+  font-size: 19px;
+}
+
+.recent-activity-icon.success {
+  background: #e8f4ed;
+  color: #198754;
+}
+
+.recent-activity-icon.warning {
+  background: #fff3df;
+  color: #b7791f;
+}
+
+.recent-activity-icon.danger {
+  background: #fcebec;
+  color: #dc3545;
+}
+
+
+/* Información del proceso */
+
+.recent-activity-information {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: 4px;
+}
+
+.recent-activity-information strong {
+  color: var(--dashboard-text);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.recent-activity-information span {
+  color: var(--dashboard-secondary);
+  font-size: 12px;
+}
+
+.recent-activity-information small {
+  color: #8795a3;
+  font-size: 11px;
+}
+
+
+/* Resultado del proceso */
+
+.recent-activity-result {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.recent-activity-result .badge {
+  padding: 6px 9px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.activity-errors {
+  color: var(--dashboard-secondary);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+
+/* Pie de actividad */
+
+.recent-activity-footer {
+  display: flex;
+  justify-content: center;
+  padding: 14px;
+  border-top: 1px solid #edf0f2;
+  background: #fcfdfc;
+}
+
+.recent-activity-footer a {
+  color: var(--dashboard-primary);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.recent-activity-footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   MENSAJES Y ESTADOS
+========================================================= */
+
+.dashboard .alert {
+  margin-bottom: 20px;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 992px) {
+
+  .dashboard {
+    padding: 24px 22px 35px;
+  }
+
+  .metric-card {
+    padding: 18px;
+  }
+
+  .metric-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .dashboard {
+    padding: 20px 15px 30px;
+  }
+
   .welcome-section {
     align-items: flex-start;
     flex-direction: column;
-    gap: 16px;
   }
 
   .welcome-action {
     width: 100%;
   }
 
-  .metric-card {
-    min-height: 115px;
-    padding: 18px;
-  }
-
   .section-heading {
     align-items: flex-start;
   }
+
+  .recent-activity-item {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .recent-activity-information {
+    flex-basis: calc(100% - 60px);
+  }
+
+  .recent-activity-result {
+    width: 100%;
+    padding-left: 58px;
+    align-items: flex-start;
+  }
+
+  .activity-errors {
+    white-space: normal;
+  }
+
+  .recent-activity-footer {
+    padding: 13px;
+  }
+
 }
 
-@media (max-width: 420px) {
-  .section-heading {
-    flex-direction: column;
-  }
 
-  .metric-card {
-    gap: 13px;
-  }
+/* Las actividades recientes funcionan como enlaces */
+.recent-activity-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 17px 22px;
+  border-bottom: 1px solid #edf0f2;
+
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+.recent-activity-item:hover {
+  background-color: #f0f7f3;
+  padding-left: 27px;
+}
+
+.recent-activity-item:focus-visible {
+  outline: 2px solid #176b49;
+  outline-offset: -3px;
+}
+
+.recent-activity-item:last-child {
+  border-bottom: none;
 }

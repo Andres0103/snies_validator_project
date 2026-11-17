@@ -1,0 +1,370 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.container-fluid {
+  padding-bottom: 2rem;
+}
+
+/* Encabezado */
+h2 {
+  font-weight: 600;
+  color: #212529;
+}
+
+.text-secondary {
+  color: #6c757d !important;
+}
+
+/* Tarjetas */
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem 1.25rem;
+}
+
+/* Tabla */
+.table {
+  margin-bottom: 0;
+
+  thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 1rem;
+  }
+
+  tbody td {
+    padding: 0.9rem 1rem;
+    vertical-align: middle;
+    font-size: 0.9rem;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+/* Identificador de validación */
+td small {
+  color: #6c757d;
+  font-family: monospace;
+  overflow-wrap: anywhere;
+}
+
+/* Estados */
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.4rem;
+}
+
+/* Botones */
+.btn {
+  border-radius: 0.45rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-success:hover,
+.btn-outline-danger:hover {
+  transform: translateY(-1px);
+}
+
+/* Estado vacío */
+.text-center.py-5 {
+  padding: 3.5rem 1rem !important;
+
+  i {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+
+  h5 {
+    font-weight: 600;
+  }
+}
+
+/* Detalle de la validación */
+.card-body {
+  h6 {
+    font-weight: 600;
+    color: #343a40;
+  }
+}
+
+/* Incidencias */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-sm {
+  thead th,
+  tbody td {
+    padding: 0.7rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Adaptación a dispositivos móviles */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .d-flex.justify-content-between.align-items-center.mb-4 {
+    align-items: flex-start !important;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .card-header {
+    padding: 0.85rem;
+  }
+
+  .table {
+    min-width: 750px;
+  }
+}
+
+
+/* =========================================================
+   ENCABEZADO Y BUSCADOR
+========================================================= */
+
+.history-container {
+  padding-bottom: 30px;
+}
+
+.history-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.history-heading h2 {
+  margin-bottom: 8px;
+}
+
+.history-filters {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.date-filter {
+  min-width: 190px;
+}
+
+.date-filter .form-label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.date-filter input {
+  min-height: 38px;
+}
+
+
+/* =========================================================
+   TABLA DEL HISTORIAL
+========================================================= */
+
+.history-card,
+.history-detail-card {
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.history-table {
+  min-width: 850px;
+}
+
+.history-table thead th {
+  white-space: nowrap;
+  background-color: #f8f9fa;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.history-table tbody td {
+  vertical-align: middle;
+  font-size: 13px;
+}
+
+.validation-id {
+  display: inline-block;
+  max-width: 190px;
+  overflow-wrap: anywhere;
+  color: #526b85;
+}
+
+
+/* =========================================================
+   FILA SELECCIONADA
+========================================================= */
+
+.history-table tbody tr.history-row-selected > td {
+  background-color: #e5f3ec !important;
+}
+
+.history-table tbody tr.history-row-selected {
+  box-shadow: inset 4px 0 0 #198754;
+}
+
+.history-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+
+/* =========================================================
+   BOTONES DE ACCIÓN
+========================================================= */
+
+.history-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.history-actions .btn {
+  min-height: 36px;
+}
+
+
+/* =========================================================
+   PANEL DE DETALLE
+========================================================= */
+
+.history-detail-card {
+  scroll-margin-top: 20px;
+}
+
+.history-detail-card .card-header {
+  padding: 16px 20px;
+  background-color: #fff;
+}
+
+.detail-information {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.detail-label {
+  display: block;
+  color: #6c757d;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.detail-section {
+  margin-top: 25px;
+}
+
+.detail-section h6 {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+
+/* =========================================================
+   ARCHIVOS DEL HISTORIAL
+========================================================= */
+
+.file-history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 14px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.file-history-item strong {
+  overflow-wrap: anywhere;
+}
+
+.file-history-item .btn {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   TABLA DE INCIDENCIAS
+========================================================= */
+
+.issues-table {
+  min-width: 850px;
+}
+
+.issues-table thead th {
+  background-color: #f8f9fa;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.issues-table tbody td {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .history-toolbar {
+    align-items: stretch;
+  }
+
+  .history-filters {
+    width: 100%;
+  }
+
+  .date-filter {
+    flex: 1;
+  }
+
+  .detail-information {
+    grid-template-columns: 1fr;
+  }
+
+  .file-history-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}

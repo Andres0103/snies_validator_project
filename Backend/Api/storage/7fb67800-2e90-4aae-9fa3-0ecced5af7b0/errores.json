@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "EVENTO_CULTURAL_VALIDOS.xlsx",
+      "hoja": "EVENTO_CULTURAL",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio para fuente internacional.",
+      "severidad": "error"
+    }
+  ]
+}
