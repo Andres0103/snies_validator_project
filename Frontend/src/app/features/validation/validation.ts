@@ -1,23 +1,8 @@
+import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 
-import {
-  Component,
-  OnDestroy,
-  ChangeDetectorRef,
-  inject
-} from '@angular/core';
+import { EMPTY, Subscription, timer, firstValueFrom } from 'rxjs';
 
-import {
-  EMPTY,
-  Subscription,
-  timer,
-  firstValueFrom
-} from 'rxjs';
-
-import {
-  catchError,
-  switchMap,
-  takeWhile
-} from 'rxjs/operators';
+import { catchError, switchMap, takeWhile } from 'rxjs/operators';
 
 // Servicio que se comunica con el backend.
 import { ValidationApiService } from '../../core/services/validation-api.service';
@@ -26,27 +11,24 @@ import { ValidationApiService } from '../../core/services/validation-api.service
 import { ValidationHistoryService } from '../../core/services/validation-history.service';
 
 // Modelos de las respuestas del backend.
-import {
-  ValidationResponse,
-  ValidationIssue
-} from '../../core/models/validation.model';
+import { ValidationResponse, ValidationIssue } from '../../core/models/validation.model';
 
 // Modelos del historial local.
 import {
   LocalValidationRecord,
-  StoredValidationFile
+  StoredValidationFile,
 } from '../../core/models/validation-history.model';
 
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-validation',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './validation.html',
-  styleUrl: './validation.scss'
+  styleUrl: './validation.scss',
 })
 export class Validation implements OnDestroy {
-
   // =====================================================
   // DEPENDENCIAS
   // =====================================================
@@ -67,6 +49,8 @@ export class Validation implements OnDestroy {
   // el estado de una validación.
   private pollingSubscription?: Subscription;
 
+  // Indica si la consulta de incidencias terminó correctamente.
+  private issuesLoadedSuccessfully = false;
 
   // =====================================================
   // ESTADO DEL COMPONENTE
@@ -80,6 +64,115 @@ export class Validation implements OnDestroy {
 
   // Errores y advertencias encontrados.
   issues: ValidationIssue[] = [];
+
+
+  // =====================================================
+  // FILTROS DE INCIDENCIAS
+  // =====================================================
+
+  // Texto que se utilizará para buscar incidencias.
+  issueSearch = '';
+
+  // Severidad seleccionada: todas, error o advertencia.
+  issueSeverity = 'all';
+
+  // Archivo seleccionado para filtrar.
+  issueFile = '';
+
+  // Columna seleccionada para filtrar.
+  issueColumn = '';
+
+  /**
+   * Obtiene los nombres de los archivos que tienen incidencias.
+   * Se utiliza para construir el selector de archivos.
+   */
+  get issueFiles(): string[] {
+    return [...new Set(this.issues.map((issue) => issue.nombre_archivo).filter(Boolean))].sort(
+      (a, b) => a.localeCompare(b),
+    );
+  }
+
+  /**
+   * Obtiene las columnas que aparecen en las incidencias.
+   */
+  get issueColumns(): string[] {
+    return [...new Set(this.issues.map((issue) => issue.columna).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b),
+    );
+  }
+
+  /**
+   * Clasifica una incidencia como error o advertencia.
+   *
+   * No modifica el valor original que entrega el backend.
+   */
+  private getIssueType(severity: string): 'error' | 'warning' | 'other' {
+    const normalized = (severity ?? '').trim().toLowerCase();
+
+    if (normalized.includes('error')) {
+      return 'error';
+    }
+
+    if (normalized.includes('advertencia') || normalized.includes('warning')) {
+      return 'warning';
+    }
+
+    return 'other';
+  }
+
+  /**
+   * Filtra las incidencias según los criterios seleccionados.
+   *
+   * Todos los filtros se aplican simultáneamente.
+   */
+  get filteredIssues(): ValidationIssue[] {
+    const search = this.issueSearch.trim().toLowerCase();
+
+    return this.issues.filter((issue) => {
+      // 1. Búsqueda general.
+      const matchesSearch =
+        !search ||
+        [
+          issue.nombre_archivo,
+          issue.hoja,
+          issue.columna,
+          issue.valor ?? '',
+          issue.mensaje,
+          String(issue.fila),
+        ].some((value) => String(value).toLowerCase().includes(search));
+
+      // 2. Filtro por severidad.
+      const type = this.getIssueType(issue.severidad);
+
+      const matchesSeverity = this.issueSeverity === 'all' || type === this.issueSeverity;
+
+      // 3. Filtro por archivo.
+      const matchesFile = !this.issueFile || issue.nombre_archivo === this.issueFile;
+
+      // 4. Filtro por columna.
+      const matchesColumn = !this.issueColumn || issue.columna === this.issueColumn;
+
+      return matchesSearch && matchesSeverity && matchesFile && matchesColumn;
+    });
+  }
+
+  /**
+   * Limpia todos los filtros y muestra nuevamente
+   * todas las incidencias de la validación.
+   */
+  clearIssueFilters(): void {
+    this.issueSearch = '';
+    this.issueSeverity = 'all';
+    this.issueFile = '';
+    this.issueColumn = '';
+  }
+
+  /**
+   * Devuelve la cantidad de incidencias de una severidad.
+   */
+  countIssues(type: 'error' | 'warning'): number {
+    return this.issues.filter((issue) => this.getIssueType(issue.severidad) === type).length;
+  }
 
   // Mensaje que se muestra cuando ocurre un error.
   errorMessage = '';
@@ -106,13 +199,11 @@ export class Validation implements OnDestroy {
   // Es importante porque selectedFiles se limpia al finalizar.
   private originalFilesForCurrentValidation: File[] = [];
 
-
   // =====================================================
   // SELECCIÓN DE ARCHIVOS MEDIANTE EL EXPLORADOR
   // =====================================================
 
   onFilesSelected(event: Event): void {
-
     const input = event.target as HTMLInputElement;
 
     // Si el usuario no seleccionó archivos, no hacemos nada.
@@ -129,20 +220,16 @@ export class Validation implements OnDestroy {
     input.value = '';
   }
 
-
   // =====================================================
   // AGREGAR Y VALIDAR ARCHIVOS
   // =====================================================
 
   private addFiles(files: FileList | File[]): void {
-
     // Convertimos FileList en un arreglo.
     const receivedFiles = Array.from(files);
 
     // Solo aceptamos archivos con extensión .xlsx.
-    const validFiles = receivedFiles.filter(file =>
-      file.name.toLowerCase().endsWith('.xlsx')
-    );
+    const validFiles = receivedFiles.filter((file) => file.name.toLowerCase().endsWith('.xlsx'));
 
     // Ocultamos el mensaje de éxito anterior.
     this.showSuccessMessage = false;
@@ -150,22 +237,18 @@ export class Validation implements OnDestroy {
     // Informamos si se intentaron agregar archivos
     // con extensiones diferentes de .xlsx.
     if (validFiles.length !== receivedFiles.length) {
-
-      this.errorMessage =
-        'Solo se permiten archivos Excel con extensión .xlsx.';
-
+      this.errorMessage = 'Solo se permiten archivos Excel con extensión .xlsx.';
     } else {
-
       this.errorMessage = '';
     }
 
     // Agregamos los archivos válidos evitando duplicados.
     for (const file of validFiles) {
-
-      const exists = this.selectedFiles.some(selected =>
-        selected.name === file.name &&
-        selected.size === file.size &&
-        selected.lastModified === file.lastModified
+      const exists = this.selectedFiles.some(
+        (selected) =>
+          selected.name === file.name &&
+          selected.size === file.size &&
+          selected.lastModified === file.lastModified,
       );
 
       if (!exists) {
@@ -177,13 +260,11 @@ export class Validation implements OnDestroy {
     this.cdr.detectChanges();
   }
 
-
   // =====================================================
   // DRAG & DROP: ARRASTRAR ARCHIVOS
   // =====================================================
 
   onDragOver(event: DragEvent): void {
-
     // Evita que el navegador intente abrir el archivo
     // cuando se arrastra sobre la zona de carga.
     event.preventDefault();
@@ -199,13 +280,11 @@ export class Validation implements OnDestroy {
     this.isDragging = true;
   }
 
-
   // =====================================================
   // DRAG & DROP: SALIR DE LA ZONA DE CARGA
   // =====================================================
 
   onDragLeave(event: DragEvent): void {
-
     event.preventDefault();
     event.stopPropagation();
 
@@ -213,13 +292,11 @@ export class Validation implements OnDestroy {
     this.isDragging = false;
   }
 
-
   // =====================================================
   // DRAG & DROP: SOLTAR ARCHIVOS
   // =====================================================
 
   onDrop(event: DragEvent): void {
-
     // Evitamos el comportamiento predeterminado.
     event.preventDefault();
     event.stopPropagation();
@@ -244,13 +321,11 @@ export class Validation implements OnDestroy {
     this.addFiles(files);
   }
 
-
   // =====================================================
   // ELIMINAR ARCHIVO SELECCIONADO
   // =====================================================
 
   removeFile(index: number): void {
-
     // No permitimos eliminar archivos durante
     // el envío o procesamiento.
     if (this.isUploading || this.isProcessing) {
@@ -261,18 +336,14 @@ export class Validation implements OnDestroy {
     this.selectedFiles.splice(index, 1);
   }
 
-
   // =====================================================
   // ENVIAR ARCHIVOS PARA VALIDACIÓN
   // =====================================================
 
   validateFiles(): void {
-
     // Comprobamos que exista al menos un archivo.
     if (this.selectedFiles.length === 0) {
-
-      this.errorMessage =
-        'Debes seleccionar al menos un archivo Excel.';
+      this.errorMessage = 'Debes seleccionar al menos un archivo Excel.';
 
       return;
     }
@@ -286,6 +357,7 @@ export class Validation implements OnDestroy {
     // Limpiamos los mensajes y resultados anteriores.
     this.errorMessage = '';
     this.issues = [];
+    this.issuesLoadedSuccessfully = false;
     this.validationResult = null;
     this.showSuccessMessage = false;
 
@@ -293,9 +365,7 @@ export class Validation implements OnDestroy {
     // Los necesitaremos para guardar el historial local.
     // No debemos depender de selectedFiles porque se limpia
     // cuando termina el procesamiento.
-    this.originalFilesForCurrentValidation = [
-      ...this.selectedFiles
-    ];
+    this.originalFilesForCurrentValidation = [...this.selectedFiles];
 
     // Activamos el estado de envío.
     this.isUploading = true;
@@ -306,9 +376,7 @@ export class Validation implements OnDestroy {
     // Enviamos únicamente los archivos.
     // El backend detecta automáticamente sus plantillas.
     this.validationApi.uploadFiles(this.selectedFiles).subscribe({
-
-      next: response => {
-
+      next: (response) => {
         console.log('[FRONT] Archivos enviados:', response);
 
         this.isUploading = false;
@@ -323,8 +391,7 @@ export class Validation implements OnDestroy {
         this.startPolling(response.id);
       },
 
-      error: error => {
-
+      error: (error) => {
         this.isUploading = false;
         this.isProcessing = false;
 
@@ -341,28 +408,24 @@ export class Validation implements OnDestroy {
         this.errorMessage =
           typeof detail === 'string'
             ? detail
-            : detail?.mensaje ||
-              'No fue posible enviar los archivos al servidor.';
+            : detail?.mensaje || 'No fue posible enviar los archivos al servidor.';
 
         this.cdr.detectChanges();
-      }
-
+      },
     });
   }
-
 
   // =====================================================
   // CONSULTAR PROGRESO DE LA VALIDACIÓN
   // =====================================================
 
   private startPolling(validationId: string): void {
-
     // Estados que indican que el backend terminó.
     const finalStates = [
       'COMPLETADO',
       'COMPLETADO_CON_OBSERVACIONES',
       'COMPLETADO_PARCIAL',
-      'FALLIDO'
+      'FALLIDO',
     ];
 
     this.isProcessing = true;
@@ -378,42 +441,26 @@ export class Validation implements OnDestroy {
     // repetimos la consulta cada dos segundos.
     this.pollingSubscription = timer(0, 2000)
       .pipe(
-
         switchMap(() =>
           this.validationApi.getValidation(validationId).pipe(
-
             // Si ocurre un error temporal consultando el estado,
             // evitamos interrumpir inmediatamente el polling.
-            catchError(error => {
-
-              console.error(
-                '[FRONT] Error temporal consultando validación:',
-                error
-              );
+            catchError((error) => {
+              console.error('[FRONT] Error temporal consultando validación:', error);
 
               return EMPTY;
-            })
-
-          )
+            }),
+          ),
         ),
 
         // Continuamos consultando mientras el estado
         // no sea uno de los estados finales.
         // El true permite recibir también la respuesta final.
-        takeWhile(
-          response => !finalStates.includes(response.estado),
-          true
-        )
-
+        takeWhile((response) => !finalStates.includes(response.estado), true),
       )
       .subscribe({
-
-        next: response => {
-
-          console.log(
-            '[FRONT] Estado recibido:',
-            response.estado
-          );
+        next: (response) => {
+          console.log('[FRONT] Estado recibido:', response.estado);
 
           // Actualizamos los datos recibidos del backend.
           this.validationResult = response;
@@ -425,15 +472,13 @@ export class Validation implements OnDestroy {
           // =============================================
 
           if (finalStates.includes(response.estado)) {
-
             console.log('[FRONT] Validación finalizada');
 
             this.isProcessing = false;
 
             // Mostramos éxito siempre que el proceso
             // no haya terminado en estado FALLIDO.
-            this.showSuccessMessage =
-              response.estado !== 'FALLIDO';
+            this.showSuccessMessage = response.estado !== 'FALLIDO';
 
             // Limpiamos los archivos seleccionados para
             // permitir iniciar una nueva validación.
@@ -456,123 +501,97 @@ export class Validation implements OnDestroy {
             window.setTimeout(() => {
               this.scrollToResults();
             }, 200);
-
           } else {
-
             // Mientras continúa el procesamiento,
             // actualizamos la vista sin desplazarnos.
             this.cdr.detectChanges();
           }
-
         },
 
-        error: error => {
-
-          console.error(
-            '[FRONT] Error consultando validación:',
-            error
-          );
+        error: (error) => {
+          console.error('[FRONT] Error consultando validación:', error);
 
           this.isUploading = false;
           this.isProcessing = false;
 
-          this.errorMessage =
-            'No fue posible consultar el estado de la validación.';
+          this.errorMessage = 'No fue posible consultar el estado de la validación.';
 
           this.cdr.detectChanges();
         },
 
         complete: () => {
-
-          console.log(
-            '[FRONT] Consulta de estado finalizada'
-          );
+          console.log('[FRONT] Consulta de estado finalizada');
 
           this.isUploading = false;
           this.isProcessing = false;
 
           this.cdr.detectChanges();
-        }
-
+        },
       });
   }
-
 
   // =====================================================
   // CONSULTAR ERRORES Y ADVERTENCIAS
   // =====================================================
 
   private loadIssues(validationId: string): void {
-
-    console.log(
-      '[FRONT] Iniciando consulta de incidencias:',
-      validationId
-    );
+    console.log('[FRONT] Iniciando consulta de incidencias:', validationId);
 
     this.isLoadingIssues = true;
+    this.issuesLoadedSuccessfully = false;
 
     this.cdr.detectChanges();
 
-    this.validationApi
-      .getValidationErrors(validationId)
-      .subscribe({
+    this.validationApi.getValidationErrors(validationId).subscribe({
+      next: (response) => {
+        console.log('[FRONT] Respuesta de incidencias:', response);
 
-        next: response => {
+        // Guardamos las incidencias recibidas.
+        // Si el backend devuelve una lista vacía,
+        // significa que la consulta fue exitosa y no encontró incidencias.
+        this.issues = response.items ?? [];
 
-          console.log(
-            '[FRONT] Respuesta de incidencias:',
-            response
-          );
+        // La consulta terminó correctamente.
+        this.issuesLoadedSuccessfully = true;
 
-          // Guardamos las incidencias recibidas.
-          this.issues = response.items ?? [];
+        this.isLoadingIssues = false;
 
-          this.isLoadingIssues = false;
+        console.log('[FRONT] Total de incidencias:', this.issues.length);
 
-          console.log(
-            '[FRONT] Total de incidencias:',
-            this.issues.length
-          );
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
+        // Una vez recuperadas las incidencias,
+        // guardamos la validación completa localmente.
+        void this.saveValidationToHistory(validationId);
+      },
 
-          // Una vez recuperadas las incidencias,
-          // guardamos la validación completa localmente.
-          void this.saveValidationToHistory(validationId);
-        },
+      error: (error) => {
+        console.error('[FRONT] Error consultando incidencias:', error);
 
-        error: error => {
+        this.isLoadingIssues = false;
+        this.issues = [];
 
-          console.error(
-            '[FRONT] Error consultando incidencias:',
-            error
-          );
+        // La consulta falló.
+        // No podemos afirmar que la validación no tenga incidencias.
+        this.issuesLoadedSuccessfully = false;
 
-          this.isLoadingIssues = false;
-          this.issues = [];
+        this.errorMessage =
+          'La validación terminó, pero no fue posible consultar sus incidencias. Se guardará el historial sin ellas.';
 
-          this.errorMessage =
-            'La validación terminó, pero no fue posible consultar sus incidencias. Se guardará el historial sin ellas.';
+        this.cdr.detectChanges();
 
-          this.cdr.detectChanges();
-
-          // Aunque falle la consulta de incidencias,
-          // intentamos guardar el resumen y los archivos.
-          void this.saveValidationToHistory(validationId);
-        }
-
-      });
+        // Aunque falle la consulta de incidencias,
+        // intentamos guardar el resumen y los archivos.
+        void this.saveValidationToHistory(validationId);
+      },
+    });
   }
-
 
   // =====================================================
   // GUARDAR VALIDACIÓN COMPLETA EN INDEXEDDB
   // =====================================================
 
-  private async saveValidationToHistory(
-    validationId: string
-  ): Promise<void> {
-
+  private async saveValidationToHistory(validationId: string): Promise<void> {
     // Recuperamos el resultado de la validación actual.
     const validation = this.validationResult;
 
@@ -590,31 +609,24 @@ export class Validation implements OnDestroy {
 
     this.cdr.detectChanges();
 
-    console.log(
-      '[FRONT] Iniciando almacenamiento local:',
-      validationId
-    );
+    console.log('[FRONT] Iniciando almacenamiento local:', validationId);
 
     try {
-
       // ===============================================
       // 1. GUARDAR ARCHIVOS ORIGINALES
       // ===============================================
 
       // Los archivos originales siguen disponibles
       // gracias a la copia realizada antes del envío.
-      const originalFiles: StoredValidationFile[] =
-        this.originalFilesForCurrentValidation.map(file => ({
-
+      const originalFiles: StoredValidationFile[] = this.originalFilesForCurrentValidation.map(
+        (file) => ({
           name: file.name,
 
-          type: file.type ||
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          type: file.type || 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 
-          blob: file
-
-        }));
-
+          blob: file,
+        }),
+      );
 
       // ===============================================
       // 2. RECUPERAR EXCEL MARCADOS
@@ -623,55 +635,42 @@ export class Validation implements OnDestroy {
       // Descargamos los archivos generados por el backend
       // para conservarlos localmente.
       const generatedFiles = await Promise.all(
-
         validation.archivos
-          .filter(file => !!file.archivo_marcado)
-          .map(async file => {
-
+          .filter((file) => !!file.archivo_marcado)
+          .map(async (file) => {
             try {
-
               const filename = file.archivo_marcado!;
 
               const blob = await firstValueFrom(
-                this.validationApi.downloadMarkedFile(
-                  validationId,
-                  filename
-                )
+                this.validationApi.downloadMarkedFile(validationId, filename),
               );
 
               return {
-
                 name: filename,
 
-                type: blob.type ||
-                  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                type:
+                  blob.type || 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 
-                blob
-
+                blob,
               } as StoredValidationFile;
-
             } catch (error) {
-
               // Un archivo marcado puede fallar individualmente.
               // Esto no debe impedir guardar los demás.
               console.error(
                 '[FRONT] No fue posible recuperar el Excel marcado:',
                 file.archivo_marcado,
-                error
+                error,
               );
 
               return null;
             }
-
-          })
-
+          }),
       );
 
       // Conservamos únicamente los archivos recuperados.
       const availableGeneratedFiles = generatedFiles.filter(
-        (file): file is StoredValidationFile => file !== null
+        (file): file is StoredValidationFile => file !== null,
       );
-
 
       // ===============================================
       // 3. RECUPERAR REPORTE CONSOLIDADO
@@ -682,44 +681,28 @@ export class Validation implements OnDestroy {
       // Si el proceso terminó completamente fallido,
       // no intentamos descargar un reporte.
       if (validation.estado !== 'FALLIDO') {
-
         try {
-
-          const blob = await firstValueFrom(
-            this.validationApi.downloadReport(validationId)
-          );
+          const blob = await firstValueFrom(this.validationApi.downloadReport(validationId));
 
           report = {
-
             name: `reporte_validacion_${validationId}.xlsx`,
 
-            type: blob.type ||
-              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            type: blob.type || 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 
-            blob
-
+            blob,
           };
-
         } catch (error) {
-
           // El historial puede conservarse aunque
           // no esté disponible el reporte consolidado.
-          console.warn(
-            '[FRONT] No fue posible recuperar el reporte:',
-            error
-          );
-
+          console.warn('[FRONT] No fue posible recuperar el reporte:', error);
         }
-
       }
-
 
       // ===============================================
       // 4. CONSTRUIR EL REGISTRO LOCAL
       // ===============================================
 
       const record: LocalValidationRecord = {
-
         // Conservamos todos los datos que devuelve el backend.
         ...validation,
 
@@ -736,10 +719,12 @@ export class Validation implements OnDestroy {
         report,
 
         // Incidencias de la validación.
-        issues: [...this.issues]
+        issues: [...this.issues],
 
+        // Indica si la consulta de incidencias fue exitosa.
+        // Se conserva incluso cuando no se encontraron incidencias.
+        issuesLoadedSuccessfully: this.issuesLoadedSuccessfully,
       };
-
 
       // ===============================================
       // 5. GUARDAR EN INDEXEDDB
@@ -747,60 +732,43 @@ export class Validation implements OnDestroy {
 
       await this.historyService.save(record);
 
-      console.log(
-        '[FRONT] Validación guardada correctamente:',
-        validationId
-      );
+      console.log('[FRONT] Validación guardada correctamente:', validationId);
 
       // Liberamos la copia temporal porque IndexedDB
       // ya conserva los archivos originales.
       this.originalFilesForCurrentValidation = [];
-
     } catch (error) {
+      console.error('[FRONT] Error guardando historial local:', error);
 
-      console.error(
-        '[FRONT] Error guardando historial local:',
-        error
-      );
-
-      this.errorMessage =
-        'La validación terminó, pero no fue posible guardar el historial local.';
+      this.errorMessage = 'La validación terminó, pero no fue posible guardar el historial local.';
 
       // Conservamos la copia temporal de los archivos
       // si el almacenamiento falla, para no perderla
       // antes de que termine la sesión del componente.
     } finally {
-
       this.isSavingHistory = false;
 
       this.cdr.detectChanges();
     }
-
   }
-
 
   // =====================================================
   // DESPLAZARSE AUTOMÁTICAMENTE A LOS RESULTADOS
   // =====================================================
 
   scrollToResults(): void {
-
     // Buscamos el contenedor de resultados en el HTML.
-    document
-      .getElementById('validation-results')
-      ?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+    document.getElementById('validation-results')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
-
 
   // =====================================================
   // DESCARGAR REPORTE CONSOLIDADO
   // =====================================================
 
   downloadReport(): void {
-
     // Recuperamos el identificador de la validación actual.
     const validationId = this.validationResult?.id;
 
@@ -808,77 +776,50 @@ export class Validation implements OnDestroy {
       return;
     }
 
-    this.validationApi
-      .downloadReport(validationId)
-      .subscribe({
+    this.validationApi.downloadReport(validationId).subscribe({
+      next: (blob) => {
+        // Guardamos el reporte descargado en el equipo.
+        this.saveBlob(blob, `reporte_validacion_${validationId}.xlsx`);
+      },
 
-        next: blob => {
+      error: (error) => {
+        console.error('Error descargando reporte:', error);
 
-          // Guardamos el reporte descargado en el equipo.
-          this.saveBlob(
-            blob,
-            `reporte_validacion_${validationId}.xlsx`
-          );
-        },
-
-        error: error => {
-
-          console.error(
-            'Error descargando reporte:',
-            error
-          );
-
-          this.errorMessage =
-            'No fue posible descargar el reporte consolidado.';
-        }
-
-      });
+        this.errorMessage = 'No fue posible descargar el reporte consolidado.';
+      },
+    });
   }
-
 
   // =====================================================
   // DESCARGAR EXCEL MARCADO
   // =====================================================
 
   downloadMarkedFile(filename: string): void {
-
     const validationId = this.validationResult?.id;
 
     if (!validationId || !filename) {
       return;
     }
 
-    this.validationApi
-      .downloadMarkedFile(validationId, filename)
-      .subscribe({
+    this.validationApi.downloadMarkedFile(validationId, filename).subscribe({
+      next: (blob) => {
+        // Guardamos el Excel marcado en el equipo.
+        this.saveBlob(blob, filename);
+      },
 
-        next: blob => {
+      error: (error) => {
+        console.error('Error descargando Excel marcado:', error);
 
-          // Guardamos el Excel marcado en el equipo.
-          this.saveBlob(blob, filename);
-        },
-
-        error: error => {
-
-          console.error(
-            'Error descargando Excel marcado:',
-            error
-          );
-
-          this.errorMessage =
-            'No fue posible descargar el Excel marcado.';
-        }
-
-      });
+        this.errorMessage = 'No fue posible descargar el Excel marcado.';
+      },
+    });
   }
-
 
   // =====================================================
   // GUARDAR ARCHIVO DESCARGADO
   // =====================================================
 
   private saveBlob(blob: Blob, filename: string): void {
-
     // Creamos una URL temporal para el archivo.
     const url = window.URL.createObjectURL(blob);
 
@@ -901,16 +842,13 @@ export class Validation implements OnDestroy {
     }, 1000);
   }
 
-
   // =====================================================
   // DESTRUIR SUSCRIPCIONES
   // =====================================================
 
   ngOnDestroy(): void {
-
     // Cancelamos las consultas pendientes cuando
     // el usuario abandona el componente.
     this.pollingSubscription?.unsubscribe();
   }
-
 }

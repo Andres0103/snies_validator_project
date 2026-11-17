@@ -1,0 +1,447 @@
+
+<div class="issues-page">
+
+  <!-- ENCABEZADO -->
+  <div class="issues-heading">
+    <div>
+      <h2>Consulta de incidencias</h2>
+      <p>
+        Consulta y analiza los errores y advertencias de tus procesos de validación.
+      </p>
+    </div>
+  </div>
+
+  <!-- BUSCADOR PRINCIPAL -->
+  <div class="card search-card mb-4">
+    <div class="card-body">
+
+      <label for="validationId" class="form-label">
+        Identificador de validación
+      </label>
+
+      <div class="search-main">
+
+        <div class="input-group">
+          <span class="input-group-text">
+            <i class="bi bi-fingerprint"></i>
+          </span>
+
+          <input
+            id="validationId"
+            type="text"
+            class="form-control"
+            placeholder="Pega aquí el identificador de la validación..."
+            [(ngModel)]="validationId"
+            (keyup.enter)="searchValidation()"
+            [disabled]="isLoading"
+          />
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="searchValidation()"
+          [disabled]="isLoading || !validationId.trim()"
+        >
+          @if (isLoading) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Consultando...
+          } @else {
+            <i class="bi bi-search me-2"></i>
+            Consultar
+          }
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="clearSearch()"
+          [disabled]="
+            isLoading ||
+            (!validation && !validationId.trim() && !errorMessage)
+          "
+          title="Limpiar consulta"
+        >
+          <i class="bi bi-x-circle"></i>
+        </button>
+
+      </div>
+
+      <small class="text-secondary d-block mt-2">
+        Puedes copiar el identificador desde la tabla del Historial de validaciones.
+      </small>
+
+      @if (errorMessage) {
+        <div class="alert alert-danger mt-3 mb-0">
+          <i class="bi bi-exclamation-circle me-2"></i>
+          {{ errorMessage }}
+        </div>
+      }
+
+    </div>
+  </div>
+
+  <!-- ESTADO DE CARGA -->
+  @if (isLoading) {
+
+    <div class="card">
+      <div class="card-body text-center py-5">
+        <div class="spinner-border text-success"></div>
+        <p class="mt-3 mb-0">
+          Recuperando información de IndexedDB...
+        </p>
+      </div>
+    </div>
+
+  }
+
+  <!-- VALIDACIÓN ENCONTRADA -->
+  @if (!isLoading && validation) {
+
+    <!-- INFORMACIÓN DEL PROCESO -->
+    <div class="card validation-information mb-4">
+
+      <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+          <div>
+            <span class="information-label">Identificador</span>
+            <div class="validation-identifier">
+              {{ validation.id }}
+            </div>
+          </div>
+
+          <span
+            class="badge"
+            [class.text-bg-success]="validation.estado === 'COMPLETADO'"
+            [class.text-bg-warning]="
+              validation.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
+              validation.estado === 'COMPLETADO_PARCIAL'
+            "
+            [class.text-bg-danger]="validation.estado === 'FALLIDO'"
+            [class.text-bg-secondary]="
+              validation.estado === 'PENDIENTE' ||
+              validation.estado === 'PROCESANDO' ||
+              ![
+                'COMPLETADO',
+                'COMPLETADO_CON_OBSERVACIONES',
+                'COMPLETADO_PARCIAL',
+                'FALLIDO',
+                'PENDIENTE',
+                'PROCESANDO'
+              ].includes(validation.estado)
+            "
+          >
+            {{ validation.estado }}
+          </span>
+
+        </div>
+
+        <div class="validation-metadata mt-3">
+
+          <div>
+            <span class="information-label">Fecha de ejecución</span>
+            <strong>{{ validation.creado_en | date:'short' }}</strong>
+          </div>
+
+          <div>
+            <span class="information-label">Fecha de almacenamiento</span>
+            <strong>{{ validation.savedAt | date:'short' }}</strong>
+          </div>
+
+          <div>
+            <span class="information-label">Archivos procesados</span>
+            <strong>
+              {{ validation.total_archivos_procesados }}/{{ validation.total_archivos }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RESULTADOS DE LA CONSULTA -->
+    @if (validation.issuesLoadedSuccessfully) {
+
+      <!-- RESUMEN DE INCIDENCIAS -->
+      <div class="issue-summary mb-4">
+
+        <div class="issue-summary-card">
+          <span>Total de incidencias</span>
+          <strong>{{ issues.length }}</strong>
+        </div>
+
+        <div class="issue-summary-card error">
+          <span>Errores</span>
+          <strong>{{ totalErrors }}</strong>
+        </div>
+
+        <div class="issue-summary-card warning">
+          <span>Advertencias</span>
+          <strong>{{ totalWarnings }}</strong>
+        </div>
+
+      </div>
+
+      <!-- CONSULTA EXITOSA SIN INCIDENCIAS -->
+      @if (issues.length === 0) {
+
+        <div class="card">
+          <div class="card-body">
+
+            <div class="empty-issues">
+              <i class="bi bi-check-circle"></i>
+
+              <h6>No se encontraron incidencias</h6>
+
+              <p>
+                La consulta se realizó correctamente y no se encontraron
+                errores ni advertencias en esta validación.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      } @else {
+
+        <!-- DETALLE DE INCIDENCIAS -->
+        <div class="card issues-results-card">
+
+          <div class="card-header">
+            <div>
+              <h5 class="mb-1">Detalle de incidencias</h5>
+              <small class="text-secondary">
+                Filtra y consulta los resultados de la validación.
+              </small>
+            </div>
+
+            <span class="badge text-bg-secondary">
+              {{ filteredIssues.length }} resultados
+            </span>
+          </div>
+
+          <div class="card-body">
+
+            <!-- FILTROS -->
+            <div class="issue-filters">
+
+              <!-- BÚSQUEDA -->
+              <div class="issue-search">
+                <label for="issueSearch">Buscar incidencia</label>
+
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-search"></i>
+                  </span>
+
+                  <input
+                    id="issueSearch"
+                    type="search"
+                    class="form-control"
+                    placeholder="Archivo, mensaje, valor, hoja o columna..."
+                    [(ngModel)]="issueSearch"
+                  />
+                </div>
+              </div>
+
+              <!-- SEVERIDAD -->
+              <div class="issue-filter-field">
+                <label for="issueSeverity">Severidad</label>
+
+                <select
+                  id="issueSeverity"
+                  class="form-select"
+                  [(ngModel)]="issueSeverity"
+                >
+                  <option value="all">Todas</option>
+                  <option value="error">Errores</option>
+                  <option value="warning">Advertencias</option>
+                </select>
+              </div>
+
+              <!-- ARCHIVO -->
+              <div class="issue-filter-field">
+                <label for="issueFile">Archivo</label>
+
+                <select
+                  id="issueFile"
+                  class="form-select"
+                  [(ngModel)]="issueFile"
+                >
+                  <option value="">Todos los archivos</option>
+
+                  @for (file of issueFiles; track file) {
+                    <option [value]="file">{{ file }}</option>
+                  }
+
+                </select>
+              </div>
+
+              <!-- COLUMNA -->
+              <div class="issue-filter-field">
+                <label for="issueColumn">Columna</label>
+
+                <select
+                  id="issueColumn"
+                  class="form-select"
+                  [(ngModel)]="issueColumn"
+                >
+                  <option value="">Todas las columnas</option>
+
+                  @for (column of issueColumns; track column) {
+                    <option [value]="column">{{ column }}</option>
+                  }
+
+                </select>
+              </div>
+
+              <!-- LIMPIAR FILTROS -->
+              <button
+                type="button"
+                class="btn btn-outline-secondary issue-clear-button"
+                (click)="clearIssueFilters()"
+                [disabled]="
+                  !issueSearch.trim() &&
+                  issueSeverity === 'all' &&
+                  !issueFile &&
+                  !issueColumn
+                "
+              >
+                <i class="bi bi-x-circle me-1"></i>
+                Limpiar filtros
+              </button>
+
+            </div>
+
+            <!-- RESULTADOS -->
+            <div class="issue-results-label">
+              Mostrando
+              <strong>{{ filteredIssues.length }}</strong>
+              de
+              <strong>{{ issues.length }}</strong>
+              incidencias
+            </div>
+
+            @if (filteredIssues.length === 0) {
+
+              <div class="alert alert-light text-center">
+                No se encontraron incidencias con los filtros seleccionados.
+              </div>
+
+            } @else {
+
+              <div class="table-responsive">
+
+                <table class="table table-hover align-middle issues-table">
+
+                  <thead>
+                    <tr>
+                      <th>Archivo</th>
+                      <th>Hoja</th>
+                      <th>Fila</th>
+                      <th>Columna</th>
+                      <th>Valor</th>
+                      <th>Severidad</th>
+                      <th>Mensaje</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    @for (issue of filteredIssues; track $index) {
+
+                      <tr>
+                        <td>{{ issue.nombre_archivo }}</td>
+                        <td>{{ issue.hoja }}</td>
+                        <td>{{ issue.fila }}</td>
+                        <td>{{ issue.columna }}</td>
+                        <td>{{ issue.valor ?? '—' }}</td>
+
+                        <td>
+                          <span
+                            class="badge"
+                            [class.text-bg-danger]="isError(issue)"
+                            [class.text-bg-warning]="isWarning(issue)"
+                            [class.text-bg-secondary]="
+                              !isError(issue) && !isWarning(issue)
+                            "
+                          >
+                            {{ issue.severidad }}
+                          </span>
+                        </td>
+
+                        <td>{{ issue.mensaje }}</td>
+                      </tr>
+
+                    }
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            }
+
+          </div>
+        </div>
+
+      }
+
+    } @else {
+
+      <!-- CONSULTA DE INCIDENCIAS FALLIDA -->
+      <div class="card">
+        <div class="card-body">
+
+          <div class="empty-issues">
+
+            <i
+              class="bi bi-exclamation-triangle text-warning"
+            ></i>
+
+            <h6>No fue posible recuperar las incidencias</h6>
+
+            <p>
+              La información general de esta validación está almacenada,
+              pero la consulta de errores y advertencias no terminó
+              correctamente.
+            </p>
+
+            <p class="text-secondary mb-0">
+              Esto no significa que la validación no tenga incidencias.
+              No es posible confirmar el resultado de la consulta.
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+
+    }
+
+  }
+
+  <!-- ESTADO INICIAL -->
+  @if (!isLoading && !validation && !hasSearched && !errorMessage) {
+
+    <div class="card initial-state">
+      <div class="card-body text-center py-5">
+
+        <i class="bi bi-search"></i>
+
+        <h5 class="mt-3">Consulta una validación</h5>
+
+        <p class="text-secondary mb-0">
+          Introduce el identificador de un proceso para consultar sus incidencias.
+        </p>
+
+      </div>
+    </div>
+
+  }
+
+</div>

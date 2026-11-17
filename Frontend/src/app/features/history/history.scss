@@ -368,3 +368,202 @@ td small {
   }
 
 }
+
+
+/* =========================================================
+   RESUMEN DE INCIDENCIAS
+========================================================= */
+
+.issue-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.issue-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 15px 17px;
+  background: #f5f7f8;
+  border: 1px solid #e2e7eb;
+  border-radius: 9px;
+}
+
+.issue-summary-card span {
+  color: #647487;
+  font-size: 12px;
+}
+
+.issue-summary-card strong {
+  color: #26394a;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.issue-summary-card.error {
+  background: #fff7f7;
+  border-color: #f1dada;
+}
+
+.issue-summary-card.error strong {
+  color: #c03939;
+}
+
+.issue-summary-card.warning {
+  background: #fffaf0;
+  border-color: #f0e4c8;
+}
+
+.issue-summary-card.warning strong {
+  color: #ad751b;
+}
+
+
+/* =========================================================
+   FILTROS DE INCIDENCIAS
+========================================================= */
+
+.issue-filters {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) repeat(2, minmax(140px, 1fr)) auto;
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.issue-search,
+.issue-filter-field {
+  min-width: 0;
+}
+
+.issue-search label,
+.issue-filter-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: #526477;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.issue-search .input-group-text {
+  background: #f8fafb;
+  color: #647487;
+}
+
+.issue-search .form-control,
+.issue-filter-field .form-select {
+  min-height: 39px;
+  font-size: 12px;
+}
+
+.issue-clear-button {
+  min-height: 39px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESULTADOS DE INCIDENCIAS
+========================================================= */
+
+.issue-results-label {
+  margin-bottom: 12px;
+  color: #718096;
+  font-size: 12px;
+}
+
+.issue-results-label strong {
+  color: #26394a;
+}
+
+.issues-table {
+  min-width: 850px;
+}
+
+.issues-table thead th {
+  background: #f5f7f8;
+  color: #526477;
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.issues-table tbody td {
+  max-width: 300px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.issues-table tbody td:last-child {
+  min-width: 250px;
+  line-height: 1.5;
+}
+
+.issue-filters .btn:disabled {
+  opacity: 0.5;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .issue-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .issue-search {
+    grid-column: 1 / -1;
+  }
+
+  .issue-clear-button {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .issue-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-summary-card {
+    padding: 12px 15px;
+  }
+
+  .issue-summary-card strong {
+    font-size: 21px;
+  }
+
+  .issue-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .issue-search {
+    grid-column: auto;
+  }
+
+}
+
+
+.history-file-names {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 150px;
+  max-width: 250px;
+}
+
+.history-file-name {
+  display: block;
+  font-size: 0.82rem;
+  color: #344054;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}

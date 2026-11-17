@@ -224,12 +224,22 @@
         </div>
 
         <!-- Enlace al historial completo -->
-        <div class="recent-activity-footer">
-          <a routerLink="/history">
-            Consultar todas las validaciones
-            <i class="bi bi-arrow-right ms-1"></i>
-          </a>
-        </div>
+        <!-- CARGAR MÁS VALIDACIONES -->
+        @if (hasMoreValidations) {
+          <div class="recent-activity-footer">
+            <button type="button" class="load-more-button" (click)="loadMoreValidations()">
+              Cargar más validaciones
+              <i class="bi bi-arrow-down-circle ms-1"></i>
+            </button>
+          </div>
+        } @else if (validations.length > 5) {
+          <div class="recent-activity-footer">
+            <span class="text-secondary">
+              <i class="bi bi-check-circle me-1"></i>
+              Has consultado todas las validaciones registradas.
+            </span>
+          </div>
+        }
       }
     </div>
   </section>

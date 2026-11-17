@@ -1,10 +1,4 @@
-
-import {
-  Component,
-  OnInit,
-  inject,
-  ChangeDetectorRef
-} from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 
 import { RouterLink } from '@angular/router';
 
@@ -17,10 +11,9 @@ import { LocalValidationRecord } from '../../core/models/validation-history.mode
   standalone: true,
   imports: [RouterLink],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss'
+  styleUrl: './dashboard.scss',
 })
 export class Dashboard implements OnInit {
-
   // =========================================================
   // SERVICIOS
   // =========================================================
@@ -31,7 +24,6 @@ export class Dashboard implements OnInit {
   // Permite actualizar la vista después de recuperar los registros.
   private cdr = inject(ChangeDetectorRef);
 
-
   // =========================================================
   // DATOS DEL DASHBOARD
   // =========================================================
@@ -39,12 +31,14 @@ export class Dashboard implements OnInit {
   // Todas las validaciones almacenadas localmente.
   validations: LocalValidationRecord[] = [];
 
+  // Cantidad de validaciones que se muestran inicialmente.
+  visibleValidationsCount = 5;
+
   // Indica si se están cargando los datos.
   isLoading = false;
 
   // Mensaje de error para la interfaz.
   errorMessage = '';
-
 
   // =========================================================
   // INDICADORES
@@ -64,10 +58,7 @@ export class Dashboard implements OnInit {
    * Cantidad de procesos completados correctamente.
    */
   get completedProcesses(): number {
-
-    return this.validations.filter(
-      validation => validation.estado === 'COMPLETADO'
-    ).length;
+    return this.validations.filter((validation) => validation.estado === 'COMPLETADO').length;
   }
 
   /**
@@ -77,14 +68,12 @@ export class Dashboard implements OnInit {
    * y procesos completados parcialmente.
    */
   get processesWithObservations(): number {
-
     return this.validations.filter(
-      validation =>
+      (validation) =>
         validation.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
-        validation.estado === 'COMPLETADO_PARCIAL'
+        validation.estado === 'COMPLETADO_PARCIAL',
     ).length;
   }
-
 
   // =========================================================
   // ACTIVIDAD RECIENTE
@@ -96,20 +85,47 @@ export class Dashboard implements OnInit {
    * Se ordenan utilizando savedAt, que representa
    * la fecha en que cada registro fue guardado localmente.
    */
-  get recentValidations(): LocalValidationRecord[] {
 
+  /**
+   * Devuelve las validaciones que deben mostrarse en el dashboard.
+   *
+   * Se ordenan desde la más reciente hasta la más antigua.
+   * Inicialmente muestra cinco y permite ampliar la cantidad.
+   */
+  get recentValidations(): LocalValidationRecord[] {
     return [...this.validations]
       .sort((a, b) => {
-
         const dateA = new Date(a.savedAt).getTime();
         const dateB = new Date(b.savedAt).getTime();
 
         return dateB - dateA;
-
       })
-      .slice(0, 5);
+      .slice(0, this.visibleValidationsCount);
   }
 
+  /**
+   * Indica si todavía existen validaciones por mostrar.
+   */
+  get hasMoreValidations(): boolean {
+    return this.visibleValidationsCount < this.validations.length;
+  }
+
+  /**
+   * Muestra cinco validaciones adicionales.
+   */
+  loadMoreValidations(): void {
+    this.visibleValidationsCount = Math.min(
+      this.visibleValidationsCount + 5,
+      this.validations.length,
+    );
+
+    console.log(
+      '[DASHBOARD] Validaciones visibles:',
+      this.recentValidations.length,
+      'de',
+      this.validations.length,
+    );
+  }
 
   // =========================================================
   // INICIALIZACIÓN
@@ -121,10 +137,8 @@ export class Dashboard implements OnInit {
    * Recuperamos los datos del historial local.
    */
   ngOnInit(): void {
-
     void this.loadDashboard();
   }
-
 
   // =========================================================
   // CARGA DE INFORMACIÓN
@@ -136,7 +150,6 @@ export class Dashboard implements OnInit {
    * No realiza peticiones al backend.
    */
   async loadDashboard(): Promise<void> {
-
     this.isLoading = true;
 
     this.errorMessage = '';
@@ -144,43 +157,24 @@ export class Dashboard implements OnInit {
     this.cdr.detectChanges();
 
     try {
-
       // Recuperamos los registros almacenados localmente.
       this.validations = await this.historyService.getAll();
 
-      console.log(
-        '[DASHBOARD] Validaciones recuperadas:',
-        this.validations.length
-      );
+      console.log('[DASHBOARD] Validaciones recuperadas:', this.validations.length);
 
-      console.log(
-        '[DASHBOARD] Procesos completados:',
-        this.completedProcesses
-      );
+      console.log('[DASHBOARD] Procesos completados:', this.completedProcesses);
 
-      console.log(
-        '[DASHBOARD] Procesos con observaciones:',
-        this.processesWithObservations
-      );
-
+      console.log('[DASHBOARD] Procesos con observaciones:', this.processesWithObservations);
     } catch (error) {
+      console.error('[DASHBOARD] Error recuperando las validaciones:', error);
 
-      console.error(
-        '[DASHBOARD] Error recuperando las validaciones:',
-        error
-      );
-
-      this.errorMessage =
-        'No fue posible recuperar la información del panel principal.';
-
+      this.errorMessage = 'No fue posible recuperar la información del panel principal.';
     } finally {
-
       this.isLoading = false;
 
       this.cdr.detectChanges();
     }
   }
-
 
   // =========================================================
   // FORMATO DE FECHAS
@@ -190,7 +184,6 @@ export class Dashboard implements OnInit {
    * Convierte una fecha en un formato legible.
    */
   formatDate(value: string): string {
-
     if (!value) {
       return 'Fecha no disponible';
     }
@@ -203,10 +196,9 @@ export class Dashboard implements OnInit {
 
     return date.toLocaleString('es-CO', {
       dateStyle: 'short',
-      timeStyle: 'short'
+      timeStyle: 'short',
     });
   }
-
 
   // =========================================================
   // FORMATO DE ESTADOS
@@ -216,17 +208,15 @@ export class Dashboard implements OnInit {
    * Devuelve el texto que se mostrará para cada estado.
    */
   getStatusLabel(status: string): string {
-
     const labels: Record<string, string> = {
       PENDIENTE: 'Pendiente',
       PROCESANDO: 'Procesando',
       COMPLETADO: 'Completado',
       COMPLETADO_CON_OBSERVACIONES: 'Con observaciones',
       COMPLETADO_PARCIAL: 'Completado parcialmente',
-      FALLIDO: 'Fallido'
+      FALLIDO: 'Fallido',
     };
 
     return labels[status] ?? status;
   }
-
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ValidationHistoryService } from '../../core/services/validation-history.service';
 
@@ -11,10 +11,11 @@ import {
 
 import { ValidationIssue } from '../../core/models/validation.model';
 
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './history.html',
   styleUrl: './history.scss',
 })
@@ -32,6 +33,8 @@ export class History implements OnInit {
   // Permite recuperar el identificador enviado desde Dashboard.
   private route = inject(ActivatedRoute);
 
+  private router = inject(Router);
+
   // =========================================================
   // PROPIEDADES DEL HISTORIAL
   // =========================================================
@@ -44,6 +47,137 @@ export class History implements OnInit {
 
   // Incidencias del registro seleccionado.
   issues: ValidationIssue[] = [];
+
+
+  // =========================================================
+  // FILTROS DE INCIDENCIAS DEL HISTORIAL
+  // =========================================================
+
+  issueSearch = '';
+
+  issueSeverity = 'all';
+
+  issueFile = '';
+
+  issueColumn = '';
+
+  /**
+   * Archivos disponibles en las incidencias del registro.
+   */
+  get issueFiles(): string[] {
+    return [
+      ...new Set(
+        this.issues.map(issue => issue.nombre_archivo).filter(Boolean)
+      )
+    ].sort((a, b) => a.localeCompare(b));
+  }
+
+  /**
+   * Columnas disponibles en las incidencias del registro.
+   */
+  get issueColumns(): string[] {
+    return [
+      ...new Set(
+        this.issues.map(issue => issue.columna).filter(Boolean)
+      )
+    ].sort((a, b) => a.localeCompare(b));
+  }
+
+
+/**
+ * Abre la pantalla de consulta de incidencias
+ * enviando el identificador de la validación seleccionada.
+ */
+goToIssues(validation: LocalValidationRecord): void {
+
+  void this.router.navigate(['/issues'], {
+    queryParams: {
+      id: validation.id
+    }
+  });
+
+}
+
+
+  /**
+   * Clasifica la severidad sin modificar el dato original.
+   */
+  private getIssueType(severity: string): 'error' | 'warning' | 'other' {
+    const normalized = (severity ?? '').trim().toLowerCase();
+
+    if (normalized.includes('error')) {
+      return 'error';
+    }
+
+    if (
+      normalized.includes('advertencia') ||
+      normalized.includes('warning')
+    ) {
+      return 'warning';
+    }
+
+    return 'other';
+  }
+
+  /**
+   * Devuelve las incidencias que cumplen todos los filtros.
+   */
+  get filteredIssues(): ValidationIssue[] {
+    const search = this.issueSearch.trim().toLowerCase();
+
+    return this.issues.filter(issue => {
+
+      const matchesSearch = !search || [
+        issue.nombre_archivo,
+        issue.hoja,
+        issue.columna,
+        issue.valor ?? '',
+        issue.mensaje,
+        String(issue.fila)
+      ].some(value => String(value).toLowerCase().includes(search));
+
+      const type = this.getIssueType(issue.severidad);
+
+      const matchesSeverity =
+        this.issueSeverity === 'all' ||
+        type === this.issueSeverity;
+
+      const matchesFile =
+        !this.issueFile ||
+        issue.nombre_archivo === this.issueFile;
+
+      const matchesColumn =
+        !this.issueColumn ||
+        issue.columna === this.issueColumn;
+
+      return (
+        matchesSearch &&
+        matchesSeverity &&
+        matchesFile &&
+        matchesColumn
+      );
+    });
+  }
+
+  /**
+   * Limpia los filtros del registro seleccionado.
+   */
+  clearIssueFilters(): void {
+    this.issueSearch = '';
+    this.issueSeverity = 'all';
+    this.issueFile = '';
+    this.issueColumn = '';
+  }
+
+  /**
+   * Cuenta errores o advertencias del registro completo.
+   */
+  countIssues(type: 'error' | 'warning'): number {
+    return this.issues.filter(
+      issue => this.getIssueType(issue.severidad) === type
+    ).length;
+  }
+
 
   // Fecha seleccionada en el buscador.
   // Formato: YYYY-MM-DD.
@@ -214,21 +348,23 @@ export class History implements OnInit {
    * Las incidencias ya están almacenadas dentro del registro,
    * por lo que no necesitamos consultarlas nuevamente al backend.
    */
+  
   viewDetails(validation: LocalValidationRecord): void {
-    // Guardamos el registro seleccionado.
+
     this.selectedValidation = validation;
 
-    // Recuperamos las incidencias almacenadas.
     this.issues = validation.issues ?? [];
 
-    // No necesitamos una consulta adicional.
     this.isLoadingIssues = false;
 
-    // Limpiamos mensajes anteriores.
     this.errorMessage = '';
+
+    // Cada registro comienza con sus filtros limpios.
+    this.clearIssueFilters();
 
     console.log('[HISTORY] Detalle consultado:', validation.id);
   }
+
 
   /**
    * Cierra el panel de detalle.

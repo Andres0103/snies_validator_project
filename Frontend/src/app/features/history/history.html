@@ -1,12 +1,9 @@
-
 <div class="container-fluid history-container">
-
   <!-- =====================================================
-       ENCABEZADO Y BUSCADOR
+       ENCABEZADO Y FILTROS
   ====================================================== -->
 
   <div class="history-toolbar mb-4">
-
     <div class="history-heading">
       <h2>Historial de validaciones</h2>
 
@@ -16,13 +13,9 @@
     </div>
 
     <div class="history-filters">
-
-      <!-- Buscador por fecha -->
+      <!-- Filtro por fecha -->
       <div class="date-filter">
-
-        <label for="searchDate" class="form-label">
-          Buscar por fecha
-        </label>
+        <label for="searchDate" class="form-label"> Buscar por fecha </label>
 
         <input
           id="searchDate"
@@ -31,7 +24,6 @@
           [value]="searchDate"
           (input)="onDateChange($event)"
         />
-
       </div>
 
       <!-- Limpiar filtro -->
@@ -56,120 +48,84 @@
         <i class="bi bi-arrow-clockwise me-2"></i>
         Actualizar
       </button>
-
     </div>
-
   </div>
 
-
   <!-- =====================================================
-       MENSAJES
+       MENSAJES DE ERROR
   ====================================================== -->
 
   @if (errorMessage) {
-
     <div class="alert alert-danger">
+      <i class="bi bi-exclamation-circle me-2"></i>
       {{ errorMessage }}
     </div>
-
   }
-
 
   <!-- =====================================================
        ESTADO DE CARGA
   ====================================================== -->
 
   @if (isLoading) {
-
     <div class="card">
       <div class="card-body text-center py-5">
-
         <div class="spinner-border text-success"></div>
 
-        <p class="mt-3 mb-0">
-          Consultando historial local...
-        </p>
-
+        <p class="mt-3 mb-0">Consultando historial local...</p>
       </div>
     </div>
-
   } @else if (validations.length === 0) {
-
     <!-- =====================================================
          HISTORIAL VACÍO
     ====================================================== -->
 
     <div class="card">
       <div class="card-body text-center py-5">
-
         <i class="bi bi-clock-history fs-1 text-secondary"></i>
 
-        <h5 class="mt-3">
-          No hay validaciones registradas
-        </h5>
+        <h5 class="mt-3">No hay validaciones registradas</h5>
 
-        <p class="text-secondary mb-0">
-          Cuando ejecutes una validación, aparecerá aquí.
-        </p>
-
+        <p class="text-secondary mb-0">Cuando ejecutes una validación, aparecerá aquí.</p>
       </div>
     </div>
-
   } @else {
-
     <!-- =====================================================
          TABLA DEL HISTORIAL
     ====================================================== -->
 
     <div class="card history-card">
-
       <div class="card-header d-flex justify-content-between align-items-center">
-
         <strong>Procesos registrados</strong>
 
         <span class="badge text-bg-secondary">
           {{ filteredValidations.length }}
         </span>
-
       </div>
 
       <div class="card-body p-0">
-
         @if (filteredValidations.length === 0) {
-
-          <!-- No hay coincidencias con la fecha -->
+          <!-- Sin coincidencias -->
           <div class="text-center py-5">
-
             <i class="bi bi-calendar-x fs-1 text-secondary"></i>
 
-            <h5 class="mt-3">
-              No se encontraron resultados
-            </h5>
+            <h5 class="mt-3">No se encontraron resultados</h5>
 
             <p class="text-secondary">
               No existen validaciones guardadas para la fecha seleccionada.
             </p>
 
-            <button
-              type="button"
-              class="btn btn-outline-success"
-              (click)="clearDateFilter()"
-            >
+            <button type="button" class="btn btn-outline-success" (click)="clearDateFilter()">
               Mostrar todas las validaciones
             </button>
-
           </div>
-
         } @else {
-
           <div class="table-responsive">
-
             <table class="table table-hover align-middle mb-0 history-table">
-
               <thead>
                 <tr>
                   <th>Fecha de guardado</th>
                   <th>Identificador</th>
+                  <th>Nombre del archivo</th>
                   <th>Estado</th>
                   <th>Archivos</th>
                   <th>Errores</th>
@@ -179,16 +135,8 @@
               </thead>
 
               <tbody>
-
-                @for (
-                  validation of filteredValidations;
-                  track validation.id
-                ) {
-
-                  <tr
-                    [class.history-row-selected]="selectedValidation?.id === validation.id"
-                  >
-
+                @for (validation of filteredValidations; track validation.id) {
+                  <tr [class.history-row-selected]="selectedValidation?.id === validation.id">
                     <!-- Fecha -->
                     <td>
                       {{ formatDate(validation.savedAt) }}
@@ -201,9 +149,31 @@
                       </small>
                     </td>
 
+                    <!-- Nombre de los archivos originales -->
+                    <td>
+                      <div class="history-file-names">
+                        @if (validation.originalFiles?.length) {
+                          @for (file of validation.originalFiles; track $index) {
+                            <div class="history-file-name" [title]="file.name">
+                              <i class="bi bi-file-earmark-excel text-success me-1"></i>
+                              {{ file.name }}
+                            </div>
+                          }
+                        } @else if (validation.archivos?.length) {
+                          @for (file of validation.archivos; track $index) {
+                            <div class="history-file-name" [title]="file.nombre_archivo">
+                              <i class="bi bi-file-earmark-excel text-success me-1"></i>
+                              {{ file.nombre_archivo }}
+                            </div>
+                          }
+                        } @else {
+                          <span class="text-secondary small"> Sin archivos registrados </span>
+                        }
+                      </div>
+                    </td>
+
                     <!-- Estado -->
                     <td>
-
                       <span
                         class="badge"
                         [class.text-bg-success]="validation.estado === 'COMPLETADO'"
@@ -213,13 +183,11 @@
                         "
                         [class.text-bg-danger]="validation.estado === 'FALLIDO'"
                         [class.text-bg-secondary]="
-                          validation.estado === 'PENDIENTE' ||
-                          validation.estado === 'PROCESANDO'
+                          validation.estado === 'PENDIENTE' || validation.estado === 'PROCESANDO'
                         "
                       >
                         {{ validation.estado }}
                       </span>
-
                     </td>
 
                     <!-- Cantidad de archivos -->
@@ -239,10 +207,8 @@
 
                     <!-- Acciones -->
                     <td>
-
                       <div class="history-actions">
-
-                        <!-- Ver detalle -->
+                        <!-- Consultar detalle -->
                         <button
                           type="button"
                           class="btn btn-sm btn-outline-primary"
@@ -254,9 +220,18 @@
                           Ver
                         </button>
 
+                        <!-- Consultar incidencias -->
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-outline-success"
+                          (click)="goToIssues(validation)"
+                          title="Consultar incidencias"
+                        >
+                          <i class="bi bi-exclamation-triangle"></i>
+                        </button>
+
                         <!-- Descargar reporte -->
                         @if (validation.report?.blob) {
-
                           <button
                             type="button"
                             class="btn btn-sm btn-outline-success"
@@ -265,10 +240,9 @@
                           >
                             <i class="bi bi-download"></i>
                           </button>
-
                         }
 
-                        <!-- Eliminar -->
+                        <!-- Eliminar registro -->
                         <button
                           type="button"
                           class="btn btn-sm btn-outline-danger"
@@ -277,66 +251,46 @@
                         >
                           <i class="bi bi-trash"></i>
                         </button>
-
                       </div>
-
                     </td>
-
                   </tr>
-
                 }
-
               </tbody>
-
             </table>
-
           </div>
-
         }
-
       </div>
-
     </div>
-
 
     <!-- =====================================================
          DETALLE DE LA VALIDACIÓN SELECCIONADA
     ====================================================== -->
 
     @if (selectedValidation) {
-
       <div class="card history-detail-card mt-4">
-
-        <!-- Encabezado del detalle -->
+        <!-- Encabezado -->
         <div class="card-header d-flex justify-content-between align-items-center">
-
           <div>
             <strong>Detalle de la validación</strong>
 
-            <div class="text-secondary small">
-              Información almacenada localmente
-            </div>
+            <div class="text-secondary small">Información almacenada localmente</div>
           </div>
 
-          <button
-            type="button"
-            class="btn btn-sm btn-outline-secondary"
-            (click)="closeDetails()"
-          >
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="closeDetails()">
             <i class="bi bi-x-lg me-1"></i>
             Cerrar
           </button>
-
         </div>
 
-
+        <!-- Cuerpo -->
         <div class="card-body">
+          <!-- =================================================
+               INFORMACIÓN GENERAL
+          ================================================== -->
 
-          <!-- Información general -->
           <div class="detail-information">
-
             <div>
-              <span class="detail-label">Identificador</span>
+              <span class="detail-label"> Identificador </span>
 
               <div class="detail-value">
                 {{ selectedValidation.id }}
@@ -344,7 +298,7 @@
             </div>
 
             <div>
-              <span class="detail-label">Estado</span>
+              <span class="detail-label"> Estado </span>
 
               <div class="detail-value">
                 {{ selectedValidation.estado }}
@@ -352,7 +306,7 @@
             </div>
 
             <div>
-              <span class="detail-label">Fecha de ejecución</span>
+              <span class="detail-label"> Fecha de ejecución </span>
 
               <div class="detail-value">
                 {{ formatDate(selectedValidation.creado_en) }}
@@ -360,48 +314,33 @@
             </div>
 
             <div>
-              <span class="detail-label">Fecha de almacenamiento</span>
+              <span class="detail-label"> Fecha de almacenamiento </span>
 
               <div class="detail-value">
                 {{ formatDate(selectedValidation.savedAt) }}
               </div>
             </div>
-
           </div>
-
 
           <!-- =================================================
                ARCHIVOS ORIGINALES
           ================================================== -->
 
           <div class="detail-section">
-
             <h6>
               <i class="bi bi-file-earmark-excel me-2"></i>
               Archivos originales
             </h6>
 
             @if (selectedValidation.originalFiles.length === 0) {
-
-              <p class="text-secondary">
-                No hay archivos originales almacenados.
-              </p>
-
+              <p class="text-secondary">No hay archivos originales almacenados.</p>
             } @else {
-
-              @for (
-                file of selectedValidation.originalFiles;
-                track file.name
-              ) {
-
+              @for (file of selectedValidation.originalFiles; track $index) {
                 <div class="file-history-item">
-
                   <div>
                     <strong>{{ file.name }}</strong>
 
-                    <div class="text-secondary small">
-                      Archivo original
-                    </div>
+                    <div class="text-secondary small">Archivo original</div>
                   </div>
 
                   <button
@@ -412,92 +351,73 @@
                     <i class="bi bi-download me-1"></i>
                     Descargar
                   </button>
-
                 </div>
-
               }
-
             }
-
           </div>
-
 
           <!-- =================================================
                ARCHIVOS PROCESADOS
           ================================================== -->
 
           <div class="detail-section">
-
             <h6>
               <i class="bi bi-file-earmark-check me-2"></i>
               Archivos procesados
             </h6>
 
-            @for (
-              file of selectedValidation.archivos;
-              track file.nombre_archivo
-            ) {
+            @if (selectedValidation.archivos.length === 0) {
+              <p class="text-secondary">No hay archivos procesados registrados.</p>
+            } @else {
+              @for (file of selectedValidation.archivos; track $index) {
+                <div class="file-history-item">
+                  <div>
+                    <strong>
+                      {{ file.nombre_archivo }}
+                    </strong>
 
-              <div class="file-history-item">
+                    <div class="text-secondary small">
+                      Plantilla: {{ file.plantilla ?? 'No identificada' }}
+                    </div>
 
-                <div>
-
-                  <strong>{{ file.nombre_archivo }}</strong>
-
-                  <div class="text-secondary small">
-                    Plantilla: {{ file.plantilla ?? 'No identificada' }}
+                    <div class="text-secondary small">
+                      {{ file.total_errores }} errores | {{ file.total_advertencias }} advertencias
+                    </div>
                   </div>
 
-                  <div class="text-secondary small">
-                    {{ file.total_errores }} errores |
-                    {{ file.total_advertencias }} advertencias
-                  </div>
-
+                  @if (file.archivo_marcado) {
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-success"
+                      (click)="downloadMarkedFile(selectedValidation, file.archivo_marcado)"
+                    >
+                      <i class="bi bi-download me-1"></i>
+                      Excel marcado
+                    </button>
+                  }
                 </div>
-
-                @if (file.archivo_marcado) {
-
-                  <button
-                    type="button"
-                    class="btn btn-sm btn-outline-success"
-                    (click)="downloadMarkedFile(selectedValidation, file.archivo_marcado)"
-                  >
-                    <i class="bi bi-download me-1"></i>
-                    Excel marcado
-                  </button>
-
-                }
-
-              </div>
-
+              }
             }
-
           </div>
-
 
           <!-- =================================================
                REPORTE CONSOLIDADO
           ================================================== -->
 
           <div class="detail-section">
-
             <h6>
               <i class="bi bi-file-earmark-bar-graph me-2"></i>
               Reporte consolidado
             </h6>
 
             @if (selectedValidation.report) {
-
               <div class="file-history-item">
-
                 <div>
                   <strong>
                     {{ selectedValidation.report.name }}
                   </strong>
 
-                  <div class="text-secondary small">
-                    Reporte de resultados de la validación
-                  </div>
+                  <div class="text-secondary small">Reporte de resultados de la validación</div>
                 </div>
 
                 <button
@@ -508,95 +428,49 @@
                   <i class="bi bi-download me-1"></i>
                   Descargar
                 </button>
-
               </div>
-
             } @else {
-
               <p class="text-secondary">
                 No se almacenó un reporte consolidado para esta validación.
               </p>
-
             }
-
           </div>
 
-
           <!-- =================================================
-               INCIDENCIAS
+               ACCESO A CONSULTA DE INCIDENCIAS
           ================================================== -->
 
           <div class="detail-section">
-
             <h6>
               <i class="bi bi-exclamation-triangle me-2"></i>
-              Incidencias
-
-              <span class="badge text-bg-secondary ms-2">
-                {{ issues.length }}
-              </span>
+              Análisis de incidencias
             </h6>
 
-            @if (isLoadingIssues) {
+            <p class="text-secondary">
+              Consulta los errores y advertencias de esta validación en la pantalla especializada de
+              incidencias.
+            </p>
 
-              <p>Consultando incidencias...</p>
-
-            } @else if (issues.length === 0) {
-
-              <div class="alert alert-success">
-                No hay incidencias registradas.
+            <div class="d-flex align-items-center flex-wrap gap-3">
+              <div class="text-secondary small">
+                <strong>{{ selectedValidation.total_errores }}</strong>
+                errores y
+                <strong>{{ selectedValidation.total_advertencias }}</strong>
+                advertencias registradas.
               </div>
 
-            } @else {
-
-              <div class="table-responsive">
-
-                <table class="table table-sm table-hover align-middle issues-table">
-
-                  <thead>
-                    <tr>
-                      <th>Archivo</th>
-                      <th>Hoja</th>
-                      <th>Fila</th>
-                      <th>Columna</th>
-                      <th>Valor</th>
-                      <th>Severidad</th>
-                      <th>Mensaje</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-
-                    @for (issue of issues; track $index) {
-
-                      <tr>
-                        <td>{{ issue.nombre_archivo }}</td>
-                        <td>{{ issue.hoja }}</td>
-                        <td>{{ issue.fila }}</td>
-                        <td>{{ issue.columna }}</td>
-                        <td>{{ issue.valor ?? '—' }}</td>
-                        <td>{{ issue.severidad }}</td>
-                        <td>{{ issue.mensaje }}</td>
-                      </tr>
-
-                    }
-
-                  </tbody>
-
-                </table>
-
-              </div>
-
-            }
-
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                (click)="goToIssues(selectedValidation)"
+              >
+                <i class="bi bi-search me-2"></i>
+                Consultar incidencias
+              </button>
+            </div>
           </div>
-
         </div>
-
       </div>
-
     }
-
   }
-
 </div>

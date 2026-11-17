@@ -6,6 +6,7 @@ import { MainLayout } from './layout/main-layout/main-layout';
 import { Dashboard } from './features/dashboard/dashboard';
 import { Validation } from './features/validation/validation';
 import { History } from './features/history/history';
+import { Issues } from './features/issues/issues';
 
 export const routes: Routes = [
   {
@@ -38,7 +39,16 @@ export const routes: Routes = [
           headerTitle: 'Historial de procesos',
           headerDescription: 'Consulta los procesos de validación ejecutados'
         }
-      }
+      },
+      {
+        path: 'issues',
+        component: Issues,
+        title: 'Consulta de incidencias | SNIES',
+        data: {
+          headerTitle: 'Consulta de incidencias',
+          headerDescription: 'Consulta y análisis de errores y advertencias de validación'
+        }
+      },
     ]
   },
   {

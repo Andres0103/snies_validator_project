@@ -1,7 +1,10 @@
 
 <div class="validation-page">
 
-  <!-- ENCABEZADO -->
+  <!-- =====================================================
+       ENCABEZADO
+  ====================================================== -->
+
   <div class="page-heading">
     <div>
       <h2>Validación de archivos</h2>
@@ -11,12 +14,17 @@
     </div>
   </div>
 
-  <!-- INFORMACIÓN DEL PROCESO -->
+
+  <!-- =====================================================
+       INFORMACIÓN DEL PROCESO
+  ====================================================== -->
+
   <div class="alert alert-info d-flex align-items-start gap-2">
     <i class="bi bi-info-circle mt-1"></i>
 
     <div>
       <strong>Información del proceso</strong>
+
       <p class="mb-0 mt-1">
         Carga uno o varios archivos Excel. El sistema identificará automáticamente la plantilla
         SNIES correspondiente a cada archivo.
@@ -24,17 +32,24 @@
     </div>
   </div>
 
-  <!-- AVISO DE VALIDACIÓN FINALIZADA -->
+
+  <!-- =====================================================
+       AVISO DE VALIDACIÓN FINALIZADA
+  ====================================================== -->
+
   @if (showSuccessMessage && validationResult) {
+
     <div class="alert alert-success d-flex align-items-start gap-2 mt-3">
+
       <i class="bi bi-check-circle-fill mt-1"></i>
 
       <div class="flex-grow-1">
+
         <strong>¡Validación finalizada!</strong>
 
         <p class="mb-2 mt-1">
-          El proceso terminó correctamente. Ya puedes consultar las incidencias y descargar los
-          archivos generados.
+          El proceso terminó correctamente. Puedes consultar las incidencias
+          desde el Historial y descargar los archivos generados.
         </p>
 
         <button
@@ -45,21 +60,35 @@
           <i class="bi bi-arrow-down-circle me-2"></i>
           Consultar resultados
         </button>
+
       </div>
+
     </div>
+
   }
 
-  <!-- SELECCIÓN DE ARCHIVOS -->
+
+  <!-- =====================================================
+       SELECCIÓN DE ARCHIVOS
+  ====================================================== -->
+
   <div class="card upload-card">
+
     <div class="card-body">
 
       <div class="upload-heading">
+
         <i class="bi bi-file-earmark-check"></i>
+
         <h5>Seleccionar archivos para validar</h5>
+
         <p>Puedes seleccionar uno o varios archivos Excel.</p>
+
       </div>
 
+
       <!-- ZONA DE CARGA: SELECCIÓN Y DRAG & DROP -->
+
       <label
         class="upload-area"
         for="validationFiles"
@@ -70,6 +99,7 @@
         (dragleave)="onDragLeave($event)"
         (drop)="onDrop($event)"
       >
+
         <i class="bi bi-cloud-arrow-up upload-icon"></i>
 
         <span class="upload-title">
@@ -88,9 +118,12 @@
           <i class="bi bi-folder2-open me-2"></i>
           Buscar archivos
         </span>
+
       </label>
 
-      <!-- INPUT OCULTO PARA ABRIR EL EXPLORADOR DE ARCHIVOS -->
+
+      <!-- INPUT OCULTO -->
+
       <input
         id="validationFiles"
         type="file"
@@ -101,21 +134,34 @@
         (change)="onFilesSelected($event)"
       />
 
+
       <!-- MENSAJE DE ERROR -->
+
       @if (errorMessage) {
+
         <div class="alert alert-danger mt-3 mb-0">
+
           <i class="bi bi-exclamation-circle me-2"></i>
+
           {{ errorMessage }}
+
         </div>
+
       }
 
     </div>
+
   </div>
 
-  <!-- ARCHIVOS SELECCIONADOS -->
+
+  <!-- =====================================================
+       ARCHIVOS SELECCIONADOS
+  ====================================================== -->
+
   <div class="card files-card mt-4">
 
     <div class="card-header">
+
       <div>
         <h5>Archivos seleccionados</h5>
         <span>Archivos preparados para la validación</span>
@@ -124,19 +170,29 @@
       <span class="badge text-bg-secondary">
         {{ selectedFiles.length }} archivos
       </span>
+
     </div>
+
 
     <div class="card-body">
 
       @if (selectedFiles.length === 0) {
 
+        <!-- ESTADO SIN ARCHIVOS -->
+
         <div class="empty-files">
+
           <i class="bi bi-inbox"></i>
+
           <h6>No hay archivos seleccionados</h6>
+
           <p>Los archivos que selecciones aparecerán aquí.</p>
+
         </div>
 
       } @else {
+
+        <!-- LISTADO DE ARCHIVOS -->
 
         <div class="file-list">
 
@@ -161,7 +217,11 @@
                   </span>
 
                 </div>
+
               </div>
+
+
+              <!-- ELIMINAR ARCHIVO SELECCIONADO -->
 
               <button
                 type="button"
@@ -182,9 +242,14 @@
       }
 
     </div>
+
   </div>
 
-  <!-- BOTÓN DE VALIDACIÓN -->
+
+  <!-- =====================================================
+       BOTÓN DE VALIDACIÓN
+  ====================================================== -->
+
   <div class="validation-actions">
 
     <button
@@ -197,16 +262,19 @@
       @if (isUploading && !validationResult) {
 
         <span class="spinner-border spinner-border-sm me-2"></span>
+
         Enviando archivos...
 
       } @else if (isProcessing) {
 
         <span class="spinner-border spinner-border-sm me-2"></span>
+
         Validando...
 
       } @else {
 
         <i class="bi bi-shield-check me-2"></i>
+
         Validar archivos
 
       }
@@ -215,7 +283,11 @@
 
   </div>
 
-  <!-- RESULTADOS DE LA VALIDACIÓN -->
+
+  <!-- =====================================================
+       RESULTADOS DE LA VALIDACIÓN
+  ====================================================== -->
+
   @if (validationResult) {
 
     <div class="card mt-4" id="validation-results">
@@ -224,7 +296,9 @@
 
         <h5 class="mb-3">Resultado de la validación</h5>
 
-        <!-- ESTADO -->
+
+        <!-- ESTADO DEL PROCESO -->
+
         <div class="d-flex justify-content-between align-items-center mb-2">
 
           <strong>
@@ -237,7 +311,9 @@
 
         </div>
 
+
         <!-- BARRA DE PROGRESO -->
+
         <div
           class="progress mb-3"
           role="progressbar"
@@ -256,42 +332,68 @@
 
         </div>
 
+
+        <!-- MENSAJE DEL BACKEND -->
+
         <p>{{ validationResult.mensaje }}</p>
 
-        <!-- RESUMEN NUMÉRICO -->
+
+        <!-- =================================================
+             RESUMEN NUMÉRICO
+        ================================================== -->
+
         <div class="row text-center mt-4">
 
           <div class="col-6 col-md-3 mb-3">
+
             <h4>
               {{ validationResult.total_archivos_procesados }}
             </h4>
+
             <small>Procesados</small>
+
           </div>
 
+
           <div class="col-6 col-md-3 mb-3">
+
             <h4>
               {{ validationResult.total_archivos_fallidos }}
             </h4>
+
             <small>Fallidos</small>
+
           </div>
 
+
           <div class="col-6 col-md-3 mb-3">
+
             <h4 class="text-danger">
               {{ validationResult.total_errores }}
             </h4>
+
             <small>Errores</small>
+
           </div>
 
+
           <div class="col-6 col-md-3 mb-3">
+
             <h4 class="text-warning">
               {{ validationResult.total_advertencias }}
             </h4>
+
             <small>Advertencias</small>
+
           </div>
 
         </div>
 
-        <!-- ARCHIVOS PROCESADOS -->
+
+        <!-- =================================================
+             ARCHIVOS PROCESADOS
+        ================================================== -->
+
         <div class="mt-4">
 
           <h6>Archivos procesados</h6>
@@ -304,7 +406,10 @@
 
           } @else {
 
-            @for (file of validationResult.archivos; track file.nombre_archivo) {
+            @for (
+              file of validationResult.archivos;
+              track file.nombre_archivo
+            ) {
 
               <div class="file-item mt-2">
 
@@ -314,6 +419,7 @@
                     <i class="bi bi-file-earmark-excel"></i>
                   </div>
 
+
                   <div class="file-details">
 
                     <span class="file-name">
@@ -321,20 +427,29 @@
                     </span>
 
                     <span class="file-size">
+
                       Plantilla detectada:
+
                       <strong>
                         {{ file.plantilla || 'No identificada' }}
                       </strong>
+
                     </span>
 
                     <span class="file-size">
+
                       {{ file.total_errores }} errores |
+
                       {{ file.total_advertencias }} advertencias
+
                     </span>
 
                   </div>
 
                 </div>
+
+
+                <!-- DESCARGAR EXCEL MARCADO -->
 
                 @if (file.archivo_marcado && !isProcessing) {
 
@@ -343,8 +458,11 @@
                     class="btn btn-outline-success btn-sm"
                     (click)="downloadMarkedFile(file.archivo_marcado)"
                   >
+
                     <i class="bi bi-download me-1"></i>
+
                     Excel marcado
+
                   </button>
 
                 }
@@ -357,7 +475,11 @@
 
         </div>
 
-        <!-- ARCHIVOS RECHAZADOS -->
+
+        <!-- =================================================
+             ARCHIVOS RECHAZADOS
+        ================================================== -->
+
         @if (validationResult.archivos_rechazados?.length) {
 
           <div class="mt-4">
@@ -387,7 +509,11 @@
 
         }
 
-        <!-- DESCARGAR REPORTE -->
+
+        <!-- =================================================
+             DESCARGAR REPORTE CONSOLIDADO
+        ================================================== -->
+
         @if (
           !isProcessing &&
           validationResult.estado !== 'FALLIDO' &&
@@ -400,103 +526,20 @@
             class="btn btn-outline-success mt-4"
             (click)="downloadReport()"
           >
+
             <i class="bi bi-file-earmark-arrow-down me-2"></i>
+
             Descargar reporte consolidado
+
           </button>
 
         }
 
       </div>
+
     </div>
-
-    <!-- DETALLE DE INCIDENCIAS -->
-    @if (
-      validationResult.estado !== 'PENDIENTE' &&
-      validationResult.estado !== 'PROCESANDO' &&
-      validationResult.estado !== 'FALLIDO'
-    ) {
-
-      <div class="card mt-4">
-
-        <div class="card-header">
-          <h5 class="mb-0">Detalle de errores y advertencias</h5>
-        </div>
-
-        <div class="card-body">
-
-          @if (isLoadingIssues) {
-
-            <div class="d-flex align-items-center gap-2">
-              <span class="spinner-border spinner-border-sm"></span>
-              <span>Consultando incidencias...</span>
-            </div>
-
-          } @else if (issues.length === 0) {
-
-            <div class="alert alert-success mb-0">
-              No se encontraron incidencias.
-            </div>
-
-          } @else {
-
-            <div class="table-responsive">
-
-              <table class="table table-hover align-middle">
-
-                <thead>
-                  <tr>
-                    <th>Archivo</th>
-                    <th>Hoja</th>
-                    <th>Fila</th>
-                    <th>Columna</th>
-                    <th>Valor</th>
-                    <th>Severidad</th>
-                    <th>Mensaje</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-
-                  @for (issue of issues; track $index) {
-
-                    <tr>
-                      <td>{{ issue.nombre_archivo }}</td>
-                      <td>{{ issue.hoja }}</td>
-                      <td>{{ issue.fila }}</td>
-                      <td>{{ issue.columna }}</td>
-                      <td>{{ issue.valor ?? '—' }}</td>
-
-                      <td>
-                        <span
-                          class="badge"
-                          [class.text-bg-danger]="issue.severidad.toLowerCase() === 'error'"
-                          [class.text-bg-warning]="
-                            issue.severidad.toLowerCase() === 'warning' ||
-                            issue.severidad.toLowerCase() === 'advertencia'
-                          "
-                        >
-                          {{ issue.severidad }}
-                        </span>
-                      </td>
-
-                      <td>{{ issue.mensaje }}</td>
-                    </tr>
-
-                  }
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-          }
-
-        </div>
-      </div>
-
-    }
 
   }
 
 </div>
+<!-- FIN DE VALIDATION PAGE -->

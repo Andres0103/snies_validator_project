@@ -36,4 +36,12 @@ export interface LocalValidationRecord extends ValidationResponse {
 
   // Errores y advertencias de la validación.
   issues: ValidationIssue[];
+
+  /**
+   * Indica si la consulta de incidencias terminó correctamente.
+   *
+   * true: la consulta fue exitosa, incluso si no encontró incidencias.
+   * false: la consulta falló y no podemos asegurar que no existan incidencias.
+   */
+  issuesLoadedSuccessfully: boolean;
 }

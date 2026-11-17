@@ -530,3 +530,26 @@
 .recent-activity-item:last-child {
   border-bottom: none;
 }
+
+
+.load-more-button {
+  background: transparent;
+  border: none;
+  color: #087f65;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.load-more-button:hover {
+  color: #065f4b;
+  text-decoration: underline;
+}
+
+.load-more-button:focus-visible {
+  outline: 2px solid #087f65;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
