@@ -2,11 +2,7 @@
 import { Routes } from '@angular/router';
 
 import { MainLayout } from './layout/main-layout/main-layout';
-
 import { Dashboard } from './features/dashboard/dashboard';
-import { Validation } from './features/validation/validation';
-import { History } from './features/history/history';
-import { Issues } from './features/issues/issues';
 
 export const routes: Routes = [
   {
@@ -24,7 +20,9 @@ export const routes: Routes = [
       },
       {
         path: 'validation',
-        component: Validation,
+        loadComponent: () =>
+          import('./features/validation/validation')
+            .then(m => m.Validation),
         title: 'Validación | SNIES',
         data: {
           headerTitle: 'Validación de información',
@@ -33,7 +31,9 @@ export const routes: Routes = [
       },
       {
         path: 'history',
-        component: History,
+        loadComponent: () =>
+          import('./features/history/history')
+            .then(m => m.History),
         title: 'Historial | SNIES',
         data: {
           headerTitle: 'Historial de procesos',
@@ -42,7 +42,9 @@ export const routes: Routes = [
       },
       {
         path: 'issues',
-        component: Issues,
+        loadComponent: () =>
+          import('./features/issues/issues')
+            .then(m => m.Issues),
         title: 'Consulta de incidencias | SNIES',
         data: {
           headerTitle: 'Consulta de incidencias',

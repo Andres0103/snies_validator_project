@@ -5,6 +5,7 @@
   width: var(--sidebar-width);
   height: 100%;
   min-height: 0;
+  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
   transition: width 0.25s ease;
 }
 
@@ -17,7 +18,7 @@
   height: 100%;
   min-height: 0;
 
-  padding: 24px 13px 16px;
+  padding: 27px 13px 17px;
 
   color: #ffffff;
   background: var(--color-primary-dark);
@@ -33,11 +34,11 @@
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
 
   min-height: 58px;
   padding: 0 9px;
-  margin-bottom: 36px;
+  margin-bottom: 43px;
 }
 
 .brand-icon {
@@ -45,16 +46,21 @@
   align-items: center;
   justify-content: center;
 
-  width: 42px;
-  height: 42px;
+  width: 43px;
+  height: 43px;
   flex-shrink: 0;
 
   color: var(--color-primary-dark);
   background: #ffffff;
 
-  border-radius: 11px;
-  font-size: 21px;
-  font-weight: 750;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.brand-icon span {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -1px;
 }
 
 .brand-info {
@@ -62,12 +68,13 @@
 }
 
 .brand-info h2 {
-  margin: 0 0 3px;
+  margin: 0 0 4px;
 
   color: #ffffff;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
 }
 
 .brand-info span {
@@ -75,6 +82,8 @@
 
   color: rgba(255, 255, 255, 0.72);
   font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15px;
   white-space: nowrap;
 }
 
@@ -89,13 +98,15 @@
 .section-title {
   display: block;
 
-  padding: 0 11px;
-  margin-bottom: 12px;
+  padding: 0 12px;
+  margin-bottom: 17px;
 
-  color: rgba(255, 255, 255, 0.57);
+  color: rgba(255, 255, 255, 0.58);
+
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1.1px;
+  font-weight: 650;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
 }
 
 /* =========================================
@@ -105,7 +116,7 @@
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
 }
 
 .nav-item {
@@ -115,20 +126,25 @@
   align-items: center;
   gap: 13px;
 
-  min-height: 45px;
-  padding: 0 12px;
+  min-height: 46px;
+  padding: 0 13px;
 
-  color: rgba(255, 255, 255, 0.83);
+  color: rgba(255, 255, 255, 0.78);
   text-decoration: none;
 
-  border-radius: 8px;
+  border: 1px solid transparent;
+  border-radius: 9px;
 
+  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
+  letter-spacing: 0;
 
   transition:
     background-color 0.2s ease,
-    color 0.2s ease;
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-item i {
@@ -136,35 +152,63 @@
   align-items: center;
   justify-content: center;
 
-  width: 20px;
+  width: 21px;
   flex-shrink: 0;
 
   font-size: 17px;
+  opacity: 0.9;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-item span {
+  line-height: 1.4;
 }
 
 .nav-item:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(255, 255, 255, 0.045);
+}
+
+.nav-item:hover i {
+  opacity: 1;
+  transform: translateX(1px);
 }
 
 .nav-item.active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.07);
+
   font-weight: 600;
+
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.025);
+}
+
+.nav-item.active i {
+  opacity: 1;
 }
 
 .nav-item.active::before {
   content: "";
 
   position: absolute;
-  left: 0;
-  top: 9px;
-  bottom: 9px;
+  left: -1px;
+  top: 10px;
+  bottom: 10px;
 
   width: 3px;
 
-  background: #ffffff;
+  background: #c6ead5;
   border-radius: 0 4px 4px 0;
+}
+
+.nav-item:focus-visible {
+  outline: 2px solid #c6ead5;
+  outline-offset: 2px;
 }
 
 /* =========================================
@@ -176,10 +220,10 @@
   align-items: flex-start;
   gap: 10px;
 
-  padding: 17px 9px 4px;
+  padding: 18px 9px 5px;
   margin-top: 24px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
 }
 
 .footer-indicator {
@@ -191,6 +235,8 @@
 
   background: #a7d8b9;
   border-radius: 50%;
+
+  box-shadow: 0 0 7px rgba(167, 216, 185, 0.25);
 }
 
 .footer-info {
@@ -200,14 +246,15 @@
 }
 
 .footer-title {
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .footer-subtitle {
-  color: rgba(255, 255, 255, 0.57);
+  color: rgba(255, 255, 255, 0.58);
   font-size: 9px;
+  font-weight: 400;
 }
 
 /* =========================================
@@ -219,8 +266,12 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.18);
   border-radius: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* =========================================
@@ -240,11 +291,18 @@
   }
 
   .brand-info h2 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .brand-info span {
     font-size: 9px;
+  }
+
+  .nav-item {
+    gap: 10px;
+    padding-right: 9px;
+    padding-left: 10px;
+    font-size: 12px;
   }
 }
 

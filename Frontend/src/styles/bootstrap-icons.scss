@@ -1,0 +1,61 @@
+
+@font-face {
+  font-family: 'bootstrap-icons';
+  src:
+    url('../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2')
+      format('woff2'),
+    url('../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff')
+      format('woff');
+}
+
+.bi::before,
+[class^='bi-']::before,
+[class*=' bi-']::before {
+  display: inline-block;
+  font-family: 'bootstrap-icons' !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bi-arrow-clockwise::before { content: '\f116'; }
+.bi-arrow-down-circle::before { content: '\f119'; }
+.bi-arrow-repeat::before { content: '\f130'; }
+.bi-arrow-right::before { content: '\f138'; }
+.bi-bank::before { content: '\f62e'; }
+.bi-calendar-x::before { content: '\f1f5'; }
+.bi-check-circle::before { content: '\f26b'; }
+.bi-check-circle-fill::before { content: '\f26a'; }
+.bi-clock::before { content: '\f293'; }
+.bi-clock-history::before { content: '\f292'; }
+.bi-cloud-arrow-up::before { content: '\f297'; }
+.bi-download::before { content: '\f30a'; }
+.bi-exclamation-circle::before { content: '\f333'; }
+.bi-exclamation-circle-fill::before { content: '\f332'; }
+.bi-exclamation-diamond::before { content: '\f335'; }
+.bi-exclamation-triangle::before { content: '\f33b'; }
+.bi-exclamation-triangle-fill::before { content: '\f33a'; }
+.bi-eye::before { content: '\f341'; }
+.bi-file-earmark-bar-graph::before { content: '\f35a'; }
+.bi-file-earmark-check::before { content: '\f360'; }
+.bi-file-earmark-excel::before { content: '\f368'; }
+.bi-file-earmark-spreadsheet::before { content: '\f389'; }
+.bi-file-earmark-x::before { content: '\f38f'; }
+.bi-fingerprint::before { content: '\f671'; }
+.bi-folder2-open::before { content: '\f3d8'; }
+.bi-grid-1x2::before { content: '\f3f4'; }
+.bi-inbox::before { content: '\f42d'; }
+.bi-info-circle::before { content: '\f431'; }
+.bi-plus-lg::before { content: '\f64d'; }
+.bi-search::before { content: '\f52a'; }
+.bi-shield-check::before { content: '\f52f'; }
+.bi-trash::before { content: '\f5de'; }
+.bi-upload::before { content: '\f603'; }
+.bi-x-circle::before { content: '\f623'; }
+.bi-x-circle-fill::before { content: '\f622'; }
+.bi-x-lg::before { content: '\f659'; }
