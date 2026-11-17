@@ -567,3 +567,36 @@ td small {
   overflow-wrap: anywhere;
   line-height: 1.4;
 }
+
+/* NAVEGACIÓN ENTRE HISTORIAL Y DETALLE */
+
+.history-toolbar {
+  scroll-margin-top: 20px;
+}
+
+.history-detail-card {
+  scroll-margin-top: 20px;
+}
+
+.history-detail-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 576px) {
+  .history-detail-card .card-header {
+    align-items: flex-start !important;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .history-detail-actions {
+    width: 100%;
+
+    button {
+      flex: 1;
+    }
+  }
+}

@@ -1,7 +1,10 @@
 
 <div class="validation-page">
 
-  <!-- ENCABEZADO -->
+  <!-- =====================================================
+       ENCABEZADO
+  ====================================================== -->
+
   <div class="page-heading">
     <div>
       <h2>Validación de archivos</h2>
@@ -11,29 +14,42 @@
     </div>
   </div>
 
-  <!-- INFORMACIÓN DEL PROCESO -->
+
+  <!-- =====================================================
+       INFORMACIÓN DEL PROCESO
+  ====================================================== -->
+
   <div class="alert alert-info d-flex align-items-start gap-2">
     <i class="bi bi-info-circle mt-1"></i>
+
     <div>
       <strong>Información del proceso</strong>
+
       <p class="mb-0 mt-1">
-        Carga uno o varios archivos Excel. Nebula identificará automáticamente
-        la plantilla correspondiente a cada archivo.
+        Carga uno o varios archivos Excel. El sistema identificará automáticamente la plantilla
+        SNIES correspondiente a cada archivo.
       </p>
     </div>
   </div>
 
-  <!-- AVISO DE VALIDACIÓN FINALIZADA -->
+
+  <!-- =====================================================
+       AVISO DE VALIDACIÓN FINALIZADA
+  ====================================================== -->
+
   @if (showSuccessMessage && validationResult) {
+
     <div class="alert alert-success d-flex align-items-start gap-2 mt-3">
+
       <i class="bi bi-check-circle-fill mt-1"></i>
 
       <div class="flex-grow-1">
+
         <strong>¡Validación finalizada!</strong>
 
         <p class="mb-2 mt-1">
-          El proceso terminó. Puedes consultar las incidencias desde el
-          Historial y descargar los archivos generados.
+          El proceso terminó correctamente. Puedes consultar las incidencias
+          desde el Historial y descargar los archivos generados.
         </p>
 
         <button
@@ -44,21 +60,35 @@
           <i class="bi bi-arrow-down-circle me-2"></i>
           Consultar resultados
         </button>
+
       </div>
+
     </div>
+
   }
 
-  <!-- SELECCIÓN DE ARCHIVOS -->
+
+  <!-- =====================================================
+       SELECCIÓN DE ARCHIVOS
+  ====================================================== -->
+
   <div class="card upload-card">
+
     <div class="card-body">
 
       <div class="upload-heading">
+
         <i class="bi bi-file-earmark-check"></i>
+
         <h5>Seleccionar archivos para validar</h5>
+
         <p>Puedes seleccionar uno o varios archivos Excel.</p>
+
       </div>
 
-      <!-- ZONA DRAG & DROP -->
+
+      <!-- ZONA DE CARGA: SELECCIÓN Y DRAG & DROP -->
+
       <label
         class="upload-area"
         for="validationFiles"
@@ -69,6 +99,7 @@
         (dragleave)="onDragLeave($event)"
         (drop)="onDrop($event)"
       >
+
         <i class="bi bi-cloud-arrow-up upload-icon"></i>
 
         <span class="upload-title">
@@ -87,9 +118,12 @@
           <i class="bi bi-folder2-open me-2"></i>
           Buscar archivos
         </span>
+
       </label>
 
+
       <!-- INPUT OCULTO -->
+
       <input
         id="validationFiles"
         type="file"
@@ -100,21 +134,34 @@
         (change)="onFilesSelected($event)"
       />
 
+
       <!-- MENSAJE DE ERROR -->
+
       @if (errorMessage) {
+
         <div class="alert alert-danger mt-3 mb-0">
+
           <i class="bi bi-exclamation-circle me-2"></i>
+
           {{ errorMessage }}
+
         </div>
+
       }
 
     </div>
+
   </div>
 
-  <!-- ARCHIVOS SELECCIONADOS -->
+
+  <!-- =====================================================
+       ARCHIVOS SELECCIONADOS
+  ====================================================== -->
+
   <div class="card files-card mt-4">
 
     <div class="card-header">
+
       <div>
         <h5>Archivos seleccionados</h5>
         <span>Archivos preparados para la validación</span>
@@ -123,29 +170,44 @@
       <span class="badge text-bg-secondary">
         {{ selectedFiles.length }} archivos
       </span>
+
     </div>
+
 
     <div class="card-body">
 
       @if (selectedFiles.length === 0) {
+
+        <!-- ESTADO SIN ARCHIVOS -->
+
         <div class="empty-files">
+
           <i class="bi bi-inbox"></i>
+
           <h6>No hay archivos seleccionados</h6>
+
           <p>Los archivos que selecciones aparecerán aquí.</p>
+
         </div>
+
       } @else {
+
+        <!-- LISTADO DE ARCHIVOS -->
 
         <div class="file-list">
 
           @for (file of selectedFiles; track file.name + file.lastModified) {
+
             <div class="file-item">
 
               <div class="file-information">
+
                 <div class="file-icon">
                   <i class="bi bi-file-earmark-excel"></i>
                 </div>
 
                 <div class="file-details">
+
                   <span class="file-name">
                     {{ file.name }}
                   </span>
@@ -153,8 +215,13 @@
                   <span class="file-size">
                     {{ (file.size / 1024 / 1024).toFixed(2) }} MB
                   </span>
+
                 </div>
+
               </div>
+
+
+              <!-- ELIMINAR ARCHIVO SELECCIONADO -->
 
               <button
                 type="button"
@@ -167,15 +234,22 @@
               </button>
 
             </div>
+
           }
 
         </div>
+
       }
 
     </div>
+
   </div>
 
-  <!-- BOTÓN DE VALIDACIÓN -->
+
+  <!-- =====================================================
+       BOTÓN DE VALIDACIÓN
+  ====================================================== -->
+
   <div class="validation-actions">
 
     <button
@@ -184,269 +258,248 @@
       [disabled]="selectedFiles.length === 0 || isUploading || isProcessing"
       (click)="validateFiles()"
     >
+
       @if (isUploading && !validationResult) {
+
         <span class="spinner-border spinner-border-sm me-2"></span>
+
         Enviando archivos...
+
       } @else if (isProcessing) {
+
         <span class="spinner-border spinner-border-sm me-2"></span>
+
         Validando...
+
       } @else {
+
         <i class="bi bi-shield-check me-2"></i>
+
         Validar archivos
+
       }
+
     </button>
 
   </div>
 
-  <!-- RESULTADOS DE LA VALIDACIÓN -->
+
+  <!-- =====================================================
+       RESULTADOS DE LA VALIDACIÓN
+  ====================================================== -->
+
   @if (validationResult) {
 
-    <section class="validation-results mt-4" id="validation-results">
+    <div class="card mt-4" id="validation-results">
 
-      <!-- ENCABEZADO DE RESULTADOS -->
-      <div class="result-header">
+      <div class="card-body">
 
-        <div>
-          <span class="result-eyebrow">RESUMEN DEL PROCESO</span>
+        <h5 class="mb-3">Resultado de la validación</h5>
 
-          <h5>Resultado de la validación</h5>
 
-          <p>
-            Consulta el estado y los resultados del procesamiento de tus archivos.
-          </p>
-        </div>
+        <!-- ESTADO DEL PROCESO -->
 
-        <span
-          class="result-status"
-          [class.status-success]="validationResult.estado === 'COMPLETADO'"
-          [class.status-warning]="
-            validationResult.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
-            validationResult.estado === 'COMPLETADO_PARCIAL'
-          "
-          [class.status-danger]="validationResult.estado === 'FALLIDO'"
-        >
+        <div class="d-flex justify-content-between align-items-center mb-2">
 
-          @if (validationResult.estado === 'COMPLETADO') {
-            <i class="bi bi-check-circle-fill"></i>
-          } @else if (
-            validationResult.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
-            validationResult.estado === 'COMPLETADO_PARCIAL'
-          ) {
-            <i class="bi bi-exclamation-triangle-fill"></i>
-          } @else if (validationResult.estado === 'FALLIDO') {
-            <i class="bi bi-x-circle-fill"></i>
-          } @else {
-            <i class="bi bi-arrow-repeat"></i>
-          }
+          <strong>
+            {{ validationResult.estado }}
+          </strong>
 
-          {{ validationResult.estado }}
-
-        </span>
-
-      </div>
-
-      <!-- PROGRESO -->
-      <div class="result-progress-card">
-
-        <div class="progress-information">
-
-          <div>
-            <strong>
-              @if (isUploading) {
-                Enviando archivos
-              } @else if (isProcessing) {
-                Validando información
-              } @else {
-                Proceso finalizado
-              }
-            </strong>
-
-            <p>{{ validationResult.mensaje }}</p>
-          </div>
-
-          <strong class="progress-percentage">
+          <strong>
             {{ validationResult.progreso }}%
           </strong>
 
         </div>
 
+
+        <!-- BARRA DE PROGRESO -->
+
         <div
-          class="progress"
+          class="progress mb-3"
           role="progressbar"
           [attr.aria-valuenow]="validationResult.progreso"
           aria-valuemin="0"
           aria-valuemax="100"
-          aria-label="Progreso de validación"
         >
+
           <div
             class="progress-bar"
-            [class.bg-success]="validationResult.estado === 'COMPLETADO'"
-            [class.bg-warning]="
-              validationResult.estado === 'COMPLETADO_CON_OBSERVACIONES' ||
-              validationResult.estado === 'COMPLETADO_PARCIAL'
-            "
-            [class.bg-danger]="validationResult.estado === 'FALLIDO'"
-            [class.progress-bar-striped]="isProcessing || isUploading"
-            [class.progress-bar-animated]="isProcessing || isUploading"
+            [class.bg-success]="!isProcessing"
+            [class.progress-bar-striped]="isProcessing"
+            [class.progress-bar-animated]="isProcessing"
             [style.width.%]="validationResult.progreso"
           ></div>
+
         </div>
 
-      </div>
 
-      <!-- INDICADORES -->
-      <div class="result-stats">
+        <!-- MENSAJE DEL BACKEND -->
 
-        <div class="result-stat">
-          <div class="stat-icon stat-neutral">
-            <i class="bi bi-file-earmark-check"></i>
+        <p>{{ validationResult.mensaje }}</p>
+
+
+        <!-- =================================================
+             RESUMEN NUMÉRICO
+        ================================================== -->
+
+        <div class="row text-center mt-4">
+
+          <div class="col-6 col-md-3 mb-3">
+
+            <h4>
+              {{ validationResult.total_archivos_procesados }}
+            </h4>
+
+            <small>Procesados</small>
+
           </div>
 
-          <div>
-            <span>Archivos procesados</span>
-            <strong>{{ validationResult.total_archivos_procesados }}</strong>
-          </div>
-        </div>
 
-        <div class="result-stat">
-          <div class="stat-icon stat-neutral">
-            <i class="bi bi-file-earmark-x"></i>
-          </div>
+          <div class="col-6 col-md-3 mb-3">
 
-          <div>
-            <span>Archivos fallidos</span>
-            <strong>{{ validationResult.total_archivos_fallidos }}</strong>
-          </div>
-        </div>
+            <h4>
+              {{ validationResult.total_archivos_fallidos }}
+            </h4>
 
-        <div class="result-stat">
-          <div class="stat-icon stat-error">
-            <i class="bi bi-x-circle"></i>
+            <small>Fallidos</small>
+
           </div>
 
-          <div>
-            <span>Errores encontrados</span>
-            <strong>{{ validationResult.total_errores }}</strong>
+
+          <div class="col-6 col-md-3 mb-3">
+
+            <h4 class="text-danger">
+              {{ validationResult.total_errores }}
+            </h4>
+
+            <small>Errores</small>
+
           </div>
-        </div>
 
-        <div class="result-stat">
-          <div class="stat-icon stat-warning">
-            <i class="bi bi-exclamation-triangle"></i>
-          </div>
 
-          <div>
-            <span>Advertencias</span>
-            <strong>{{ validationResult.total_advertencias }}</strong>
-          </div>
-        </div>
+          <div class="col-6 col-md-3 mb-3">
 
-      </div>
+            <h4 class="text-warning">
+              {{ validationResult.total_advertencias }}
+            </h4>
 
-      <!-- OPERACIONES POSTERIORES -->
-      @if (isLoadingIssues || isSavingHistory) {
+            <small>Advertencias</small>
 
-        <div class="result-processing-info">
-
-          <span class="spinner-border spinner-border-sm"></span>
-
-          <div>
-            @if (isLoadingIssues) {
-              <strong>Consultando incidencias</strong>
-              <p>
-                Estamos recuperando los errores y advertencias encontrados.
-              </p>
-            } @else {
-              <strong>Guardando resultados</strong>
-              <p>
-                Estamos almacenando la información del proceso en el historial.
-              </p>
-            }
           </div>
 
         </div>
 
-      }
 
-      <!-- ARCHIVOS PROCESADOS -->
-      <div class="result-files-section">
+        <!-- =================================================
+             ARCHIVOS PROCESADOS
+        ================================================== -->
 
-        <div class="result-section-heading">
+        <div class="mt-4">
 
-          <div>
-            <h6>Archivos procesados</h6>
-            <p>Detalle de la validación realizada sobre cada archivo.</p>
-          </div>
+          <h6>Archivos procesados</h6>
 
-          <span class="result-count">
-            {{ validationResult.archivos.length }} archivos
-          </span>
+          @if (validationResult.archivos.length === 0) {
 
-        </div>
+            <p class="text-muted">
+              Todavía no hay archivos procesados para mostrar.
+            </p>
 
-        @if (validationResult.archivos.length === 0) {
-
-          <div class="result-empty">
-            <i class="bi bi-inbox"></i>
-            <span>Todavía no hay archivos procesados para mostrar.</span>
-          </div>
-
-        } @else {
-
-          <div class="result-file-list">
+          } @else {
 
             @for (
               file of validationResult.archivos;
               track file.nombre_archivo
             ) {
 
-              <div class="result-file-item">
+              <div class="file-item mt-2">
 
-                <div class="result-file-main">
+                <div class="file-information">
 
-                  <div class="result-file-icon">
+                  <div class="file-icon">
                     <i class="bi bi-file-earmark-excel"></i>
                   </div>
 
-                  <div class="result-file-details">
 
-                    <strong>{{ file.nombre_archivo }}</strong>
+                  <div class="file-details">
 
-                    <span>
-                      Plantilla:
-                      <b>{{ file.plantilla || 'No identificada' }}</b>
+                    <span class="file-name">
+                      {{ file.nombre_archivo }}
                     </span>
 
-                    <div class="result-file-metrics">
+                    <span class="file-size">
 
-                      <span class="file-error-count">
-                        <i class="bi bi-x-circle"></i>
-                        {{ file.total_errores }} errores
-                      </span>
+                      Plantilla detectada:
 
-                      <span class="file-warning-count">
-                        <i class="bi bi-exclamation-triangle"></i>
-                        {{ file.total_advertencias }} advertencias
-                      </span>
+                      <strong>
+                        {{ file.plantilla || 'No identificada' }}
+                      </strong>
 
-                    </div>
+                    </span>
+
+                    <span class="file-size">
+
+                      {{ file.total_errores }} errores |
+
+                      {{ file.total_advertencias }} advertencias
+
+                    </span>
 
                   </div>
 
                 </div>
 
+
+                <!-- DESCARGAR EXCEL MARCADO -->
+
                 @if (file.archivo_marcado && !isProcessing) {
 
                   <button
                     type="button"
-                    class="result-download-button"
+                    class="btn btn-outline-success btn-sm"
                     (click)="downloadMarkedFile(file.archivo_marcado)"
                   >
-                    <i class="bi bi-download"></i>
-                    <span>Descargar Excel</span>
+
+                    <i class="bi bi-download me-1"></i>
+
+                    Excel marcado
+
                   </button>
 
                 }
+
+              </div>
+
+            }
+
+          }
+
+        </div>
+
+
+        <!-- =================================================
+             ARCHIVOS RECHAZADOS
+        ================================================== -->
+
+        @if (validationResult.archivos_rechazados?.length) {
+
+          <div class="mt-4">
+
+            <h6 class="text-danger">Archivos rechazados</h6>
+
+            @for (
+              file of validationResult.archivos_rechazados;
+              track file.nombre_archivo
+            ) {
+
+              <div class="alert alert-danger mt-2 mb-2">
+
+                <strong>
+                  {{ file.nombre_archivo }}
+                </strong>
+
+                <p class="mb-0 mt-1">
+                  {{ file.motivo }}
+                </p>
 
               </div>
 
@@ -456,84 +509,37 @@
 
         }
 
-      </div>
 
-      <!-- ARCHIVOS RECHAZADOS -->
-      @if (validationResult.archivos_rechazados?.length) {
+        <!-- =================================================
+             DESCARGAR REPORTE CONSOLIDADO
+        ================================================== -->
 
-        <div class="result-rejected-section">
-
-          <div class="result-section-heading">
-
-            <div>
-              <h6>Archivos rechazados</h6>
-              <p>Estos archivos no pudieron procesarse.</p>
-            </div>
-
-            <span class="result-rejected-count">
-              {{ validationResult.archivos_rechazados.length }}
-            </span>
-
-          </div>
-
-          @for (
-            file of validationResult.archivos_rechazados;
-            track file.nombre_archivo
-          ) {
-
-            <div class="result-rejected-item">
-
-              <i class="bi bi-exclamation-circle-fill"></i>
-
-              <div>
-                <strong>{{ file.nombre_archivo }}</strong>
-                <p>{{ file.motivo }}</p>
-              </div>
-
-            </div>
-
-          }
-
-        </div>
-
-      }
-
-      <!-- DESCARGA DEL REPORTE -->
-      @if (
-        !isProcessing &&
-        validationResult.estado !== 'FALLIDO' &&
-        validationResult.estado !== 'PENDIENTE' &&
-        validationResult.estado !== 'PROCESANDO'
-      ) {
-
-        <div class="result-download-section">
-
-          <div>
-            <i class="bi bi-file-earmark-spreadsheet"></i>
-
-            <div>
-              <strong>Reporte consolidado</strong>
-              <p>
-                Descarga el resumen general de los resultados.
-              </p>
-            </div>
-          </div>
+        @if (
+          !isProcessing &&
+          validationResult.estado !== 'FALLIDO' &&
+          validationResult.estado !== 'PENDIENTE' &&
+          validationResult.estado !== 'PROCESANDO'
+        ) {
 
           <button
             type="button"
-            class="result-report-button"
+            class="btn btn-outline-success mt-4"
             (click)="downloadReport()"
           >
-            <i class="bi bi-download"></i>
-            Descargar reporte
+
+            <i class="bi bi-file-earmark-arrow-down me-2"></i>
+
+            Descargar reporte consolidado
+
           </button>
 
-        </div>
+        }
 
-      }
+      </div>
 
-    </section>
+    </div>
 
   }
 
 </div>
+<!-- FIN DE VALIDATION PAGE -->

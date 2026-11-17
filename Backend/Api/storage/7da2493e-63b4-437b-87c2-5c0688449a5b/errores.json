@@ -1,0 +1,193 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_VALIDOS.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio para fuente internacional.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "SEDE QUE GESTIONA LA CONSULTORÍA",
+      "valor": "Medellín",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "AÑO",
+      "valor": "20X5",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "SEMESTRE",
+      "valor": "9",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "9999",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "VALOR",
+      "valor": "-100",
+      "mensaje": "El valor debe ser mayor o igual a 0.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "FECHA_FINAL",
+      "valor": "2024-01-01 00:00:00",
+      "mensaje": "La fecha final debe ser estrictamente posterior a la fecha de inicio.\n",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "ID_FUENTE_NACIONAL",
+      "valor": "99",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_NACIONAL",
+      "valor": "-10",
+      "mensaje": "El valor debe ser mayor o igual a 0.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "ID_PAIS_FINANCIADOR",
+      "valor": "170",
+      "mensaje": "El valor '170' no está permitido para el campo 'ID_PAIS_FINANCIADOR'.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio si es fuente internacional.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "SEDE QUE GESTIONA LA CONSULTORÍA",
+      "valor": "Medellín",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "AÑO",
+      "valor": "20X5",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "SEMESTRE",
+      "valor": "9",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "ID_MAXIMO_NIVEL_ESTUDIO",
+      "valor": "99",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 3,
+      "columna": "SEDE QUE GESTIONA LA CONSULTORÍA",
+      "valor": "Medellín",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 3,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CODIGO-SIN-PADRE",
+      "mensaje": "La longitud es de 16 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 3,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CODIGO-SIN-PADRE",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2025 | SEMESTRE=1 | CODIGO_CONSULTORIA=CODIGO-SIN-PADRE.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_VALIDOS.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "SEDE QUE GESTIONA LA CONSULTORÍA",
+      "valor": "Medellín",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_VALIDOS.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio si es fuente internacional.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_VALIDOS.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "SEDE QUE GESTIONA LA CONSULTORÍA",
+      "valor": "Medellín",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    }
+  ]
+}

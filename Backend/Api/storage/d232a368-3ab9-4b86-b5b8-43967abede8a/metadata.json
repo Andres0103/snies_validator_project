@@ -1,0 +1,24 @@
+{
+  "id": "d232a368-3ab9-4b86-b5b8-43967abede8a",
+  "plantilla": null,
+  "plantillas": [],
+  "estado": "FALLIDO",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T20:35:56.066519+00:00",
+  "iniciado_en": "2026-11-17T20:35:56.103634+00:00",
+  "finalizado_en": "2026-11-17T20:35:56.274340+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 0,
+  "total_archivos_fallidos": 1,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [],
+  "archivos_rechazados": [
+    {
+      "nombre_archivo": "SERVICIOS_EXTENSION_ERRORES_INTENCIONALES.xlsx",
+      "motivo": "No fue posible procesar el archivo. Revisa los registros del servidor."
+    }
+  ]
+}

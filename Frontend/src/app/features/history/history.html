@@ -3,7 +3,7 @@
        ENCABEZADO Y FILTROS
   ====================================================== -->
 
-  <div class="history-toolbar mb-4">
+  <div class="history-toolbar mb-4" #historyTop>
     <div class="history-heading">
       <h2>Historial de validaciones</h2>
 
@@ -267,19 +267,36 @@
     ====================================================== -->
 
     @if (selectedValidation) {
-      <div class="card history-detail-card mt-4">
+      <div class="card history-detail-card mt-4" #historyDetail>
+        <!-- Encabezado -->
         <!-- Encabezado -->
         <div class="card-header d-flex justify-content-between align-items-center">
           <div>
             <strong>Detalle de la validación</strong>
-
             <div class="text-secondary small">Información almacenada localmente</div>
           </div>
 
-          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="closeDetails()">
-            <i class="bi bi-x-lg me-1"></i>
-            Cerrar
-          </button>
+          <div class="history-detail-actions">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-success"
+              (click)="scrollToHistoryTop()"
+              title="Volver al buscador"
+            >
+              <i class="bi bi-arrow-up me-1"></i>
+              Volver al historial
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="closeDetails()"
+              title="Cerrar detalle"
+            >
+              <i class="bi bi-x-lg me-1"></i>
+              Cerrar
+            </button>
+          </div>
         </div>
 
         <!-- Cuerpo -->
