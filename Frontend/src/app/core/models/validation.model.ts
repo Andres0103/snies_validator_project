@@ -14,6 +14,7 @@ export interface RejectedFile {
 
 export interface ValidationFileSummary {
   nombre_archivo: string;
+  plantilla: string | null;
   estado: string;
   archivo_marcado: string | null;
   total_errores: number;
@@ -22,7 +23,8 @@ export interface ValidationFileSummary {
 
 export interface ValidationResponse {
   id: string;
-  plantilla: string;
+  plantilla?: string | null;
+  plantillas?: string[];
   estado: ValidationStatus;
   progreso: number;
   mensaje: string;

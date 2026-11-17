@@ -1,37 +1,159 @@
+
 :host {
   display: block;
   flex-shrink: 0;
+  width: 100%;
 }
 
 .header {
-  height: var(--header-height);
-  min-height: var(--header-height);
-  width: 100%;
-
-  background-color: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  width: 100%;
+  min-height: 70px;
   padding: 0 30px;
+
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* =========================================
+   TÍTULO DE LA PÁGINA
+   ========================================= */
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.header-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.header-indicator {
+  width: 4px;
+  height: 19px;
+  flex-shrink: 0;
+
+  background-color: var(--color-primary);
+  border-radius: 4px;
 }
 
 .header-title h1 {
-  font-size: 19px;
-  font-weight: 600;
-  margin-bottom: 0;
+  margin: 0;
+
+  color: var(--color-text);
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
 }
 
 .header-title p {
-  margin-top: 4px;
-  margin-bottom: 0;
-  font-size: 12px;
+  margin: 0;
+  padding-left: 13px;
+
   color: var(--color-text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
 }
 
-.institution-label {
-  font-size: 13px;
+/* =========================================
+   IDENTIDAD INSTITUCIONAL
+   ========================================= */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.institution-info {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding-left: 20px;
+  border-left: 1px solid var(--color-border);
+}
+
+.institution-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  border-radius: 9px;
+
+  font-size: 17px;
+}
+
+.institution-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.institution-name {
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.institution-caption {
   color: var(--color-text-secondary);
+  font-size: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .header {
+    min-height: 66px;
+    padding: 0 20px;
+  }
+
+  .institution-caption {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 0 15px;
+  }
+
+  .header-title h1 {
+    font-size: 15px;
+  }
+
+  .header-title p {
+    max-width: 210px;
+    font-size: 10px;
+  }
+
+  .institution-info {
+    padding-left: 12px;
+    gap: 7px;
+  }
+
+  .institution-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .institution-name {
+    max-width: 105px;
+    font-size: 10px;
+  }
 }

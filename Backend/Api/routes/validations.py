@@ -1,11 +1,12 @@
 
 from typing import Annotated
 
+from typing import Annotated
+
 from fastapi import (
     APIRouter,
     BackgroundTasks,
     File,
-    Form,
     HTTPException,
     UploadFile,
 )
@@ -42,16 +43,19 @@ router = APIRouter(
     status_code=202,
     response_model=ValidationResponse,
 )
+
+@router.post(
+    "",
+    status_code=202,
+    response_model=ValidationResponse,
+)
+@router.post(
+    "",
+    status_code=202,
+    response_model=ValidationResponse,
+)
 async def upload_files(
     background_tasks: BackgroundTasks,
-    plantilla: Annotated[
-        str,
-        Form(
-            description=(
-                "Nombre de la plantilla SNIES seleccionada."
-            )
-        ),
-    ],
     archivos: Annotated[
         list[UploadFile],
         File(
@@ -60,15 +64,9 @@ async def upload_files(
     ],
 ):
     """
-    Recibe la plantilla seleccionada y uno o varios archivos Excel.
-    Programa su validación en segundo plano.
+    Recibe varios Excel sin solicitar una plantilla.
+    El motor identifica automáticamente cada archivo.
     """
-
-    if not plantilla or not plantilla.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Debes seleccionar una plantilla SNIES.",
-        )
 
     if not archivos:
         raise HTTPException(
@@ -78,7 +76,6 @@ async def upload_files(
 
     validation = await create_validation_job(
         uploads=archivos,
-        template_name=plantilla.strip(),
     )
 
     background_tasks.add_task(
@@ -87,8 +84,6 @@ async def upload_files(
     )
 
     return validation
-
-
 # ==========================================================
 # CONSULTAR HISTORIAL
 # ==========================================================

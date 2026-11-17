@@ -1,0 +1,35 @@
+{
+  "id": "25c49765-6fe2-4dbf-9cd9-3a5dfe62def0",
+  "plantilla": "CURSOS",
+  "plantillas": [
+    "CURSOS"
+  ],
+  "estado": "COMPLETADO_PARCIAL",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T13:29:11.721375+00:00",
+  "iniciado_en": "2026-11-17T13:29:11.782252+00:00",
+  "finalizado_en": "2026-11-17T13:29:12.134496+00:00",
+  "total_archivos": 2,
+  "total_archivos_validos": 2,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 1,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "CURSOS_VALIDOS.xlsx",
+      "plantilla": "CURSOS",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CURSOS_VALIDOS_marcado.xlsx",
+      "total_errores": 0,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "motivo": "No fue posible procesar el archivo. Revisa los registros del servidor."
+    }
+  ]
+}

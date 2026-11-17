@@ -1,87 +1,118 @@
+
 <div class="dashboard">
 
-  <div class="welcome-section">
-    <h2>Bienvenido al sistema SNIES</h2>
+  <!-- Encabezado del dashboard -->
+  <section class="welcome-section">
+    <div class="welcome-content">
+      <span class="section-eyebrow">PANEL GENERAL</span>
 
-    <p>
-      Sistema de gestión y validación de información
-      del Sistema Nacional de Información de la Educación Superior.
-    </p>
-  </div>
+      <h1>Bienvenido al sistema SNIES</h1>
 
-  <!-- Indicadores -->
-  <div class="row g-4 mt-2">
+      <p>
+        Gestiona y valida la información del Sistema Nacional
+        de Información de la Educación Superior.
+      </p>
+    </div>
 
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card dashboard-card">
-        <div class="card-body">
+    <a routerLink="/validation" class="btn btn-primary welcome-action">
+      <i class="bi bi-plus-lg me-2"></i>
+      Nueva validación
+    </a>
+  </section>
 
-          <div class="card-icon">
+  <!-- Indicadores principales -->
+  <section class="metrics-section" aria-label="Resumen de procesos">
+
+    <div class="row g-3">
+
+      <div class="col-12 col-md-4">
+        <article class="metric-card">
+          <div class="metric-icon">
             <i class="bi bi-file-earmark-spreadsheet"></i>
           </div>
 
-          <h3>0</h3>
-          <p>Procesos realizados</p>
-
-        </div>
+          <div class="metric-information">
+            <span class="metric-label">Procesos realizados</span>
+            <strong class="metric-value">0</strong>
+            <span class="metric-description">
+              Total de procesos registrados
+            </span>
+          </div>
+        </article>
       </div>
-    </div>
 
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card dashboard-card">
-        <div class="card-body">
-
-          <div class="card-icon success">
+      <div class="col-12 col-md-4">
+        <article class="metric-card">
+          <div class="metric-icon success">
             <i class="bi bi-check-circle"></i>
           </div>
 
-          <h3>0</h3>
-          <p>Procesos completados</p>
-
-        </div>
+          <div class="metric-information">
+            <span class="metric-label">Procesos completados</span>
+            <strong class="metric-value">0</strong>
+            <span class="metric-description">
+              Procesos finalizados correctamente
+            </span>
+          </div>
+        </article>
       </div>
-    </div>
 
-    <div class="col-12 col-md-6 col-xl-4">
-      <div class="card dashboard-card">
-        <div class="card-body">
-
-          <div class="card-icon warning">
+      <div class="col-12 col-md-4">
+        <article class="metric-card">
+          <div class="metric-icon warning">
             <i class="bi bi-exclamation-triangle"></i>
           </div>
 
-          <h3>0</h3>
-          <p>Procesos con observaciones</p>
-
-        </div>
+          <div class="metric-information">
+            <span class="metric-label">Con observaciones</span>
+            <strong class="metric-value">0</strong>
+            <span class="metric-description">
+              Procesos que requieren revisión
+            </span>
+          </div>
+        </article>
       </div>
-    </div>
 
-  </div>
+    </div>
+  </section>
 
   <!-- Actividad reciente -->
-  <div class="card activity-card mt-4">
+  <section class="activity-section">
 
-    <div class="card-header">
-      <h5>Actividad reciente</h5>
-      <span>Últimos procesos ejecutados</span>
+    <div class="section-heading">
+      <div>
+        <h2>Actividad reciente</h2>
+        <p>Consulta los últimos procesos ejecutados en el sistema.</p>
+      </div>
+
+      <a routerLink="/history" class="history-link">
+        Ver historial
+        <i class="bi bi-arrow-right ms-1"></i>
+      </a>
     </div>
 
-    <div class="card-body">
+    <div class="activity-card">
 
       <div class="empty-state">
-        <i class="bi bi-inbox"></i>
+        <div class="empty-state-icon">
+          <i class="bi bi-folder2-open"></i>
+        </div>
 
-        <h6>No hay procesos registrados</h6>
+        <h3>Aún no hay actividad registrada</h3>
 
         <p>
-          Cuando ejecutes una generación o validación,
-          podrás consultar aquí la actividad reciente.
+          Cuando ejecutes tu primera validación, podrás consultar
+          aquí el resumen de tus procesos recientes.
         </p>
+
+        <a routerLink="/validation" class="btn btn-outline-primary">
+          <i class="bi bi-upload me-2"></i>
+          Comenzar una validación
+        </a>
       </div>
 
     </div>
 
-  </div>
+  </section>
 
 </div>

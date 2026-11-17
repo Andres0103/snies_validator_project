@@ -1,51 +1,176 @@
-/* Variables globales de la aplicación */
+
+/* =====================================================
+   IDENTIDAD VISUAL INSTITUCIONAL
+   ===================================================== */
+
 :root {
+  /* Colores institucionales */
   --color-primary: #176b45;
   --color-primary-dark: #105437;
-  --color-background: #f5f7f9;
+  --color-primary-light: #e8f3ed;
+
+  /* Colores de interfaz */
+  --color-background: #f4f7f5;
   --color-surface: #ffffff;
   --color-text: #263238;
   --color-text-secondary: #64748b;
   --color-border: #e2e8f0;
 
-  --sidebar-width: 250px;
-  --header-height: 70px;
+  /* Estados */
+  --color-success: #198754;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-info: #0dcaf0;
+
+  /* Dimensiones */
+  --sidebar-width: 230px;
+  --header-height: 76px;
+
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.06);
+
+  /* Bordes */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
-/* Configuración general */
-* {
-  margin: 0;
-  padding: 0;
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+   ===================================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
   color: var(--color-text);
   background-color: var(--color-background);
-}
 
-button,
-input {
-  font: inherit;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-  margin: 0;
-}
-
-body {
-  min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 app-root {
   display: block;
-  width: 100%;
   min-height: 100vh;
+}
+
+/* =====================================================
+   ELEMENTOS GENERALES
+   ===================================================== */
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+p {
+  color: var(--color-text-secondary);
+}
+
+/* =====================================================
+   PERSONALIZACIÓN DE BOOTSTRAP
+   ===================================================== */
+
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  padding: 0.55rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary-dark);
+  --bs-btn-hover-border-color: var(--color-primary-dark);
+  --bs-btn-active-bg: var(--color-primary-dark);
+  --bs-btn-active-border-color: var(--color-primary-dark);
+}
+
+.form-control,
+.form-select {
+  min-height: 42px;
+  border-radius: var(--radius-sm);
+  border-color: var(--color-border);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.2rem rgba(23, 107, 69, 0.12);
+}
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* =====================================================
+   UTILIDADES DE INTERFAZ
+   ===================================================== */
+
+.text-primary-institutional {
+  color: var(--color-primary) !important;
+}
+
+.bg-primary-institutional {
+  background-color: var(--color-primary) !important;
+}
+
+.surface-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 576px) {
+  html {
+    font-size: 13px;
+  }
 }

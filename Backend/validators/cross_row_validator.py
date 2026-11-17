@@ -1,4 +1,3 @@
-
 """Reglas que comparan valores ENTRE filas distintas."""
 
 from __future__ import annotations
@@ -37,11 +36,13 @@ def _normalize_value(
     """
     Normaliza valores para compararlos según su tipo configurado.
 
-    - Vacíos: se representan como una misma categoría.
-    - Fechas: se convierten a fecha ISO.
+    Reglas:
+    - Vacíos: se representan con la categoría "blank".
+    - Fechas: se convierten a una representación ISO.
     - Números: se comparan mediante Decimal.
-    - Textos: se eliminan espacios externos.
+    - Textos: se eliminan los espacios externos.
     - Tipos desconocidos: se tratan como texto.
+    - Valores que no pueden convertirse: se identifican como "invalid".
     """
 
     # Los valores vacíos se identifican antes de cualquier conversión.
@@ -59,8 +60,7 @@ def _normalize_value(
         return ("text", text_value)
 
     # Normalización de enteros y decimales.
-    # Decimal permite comparar valores numéricos sin depender
-    # de las imprecisiones propias de los números float.
+    # Decimal evita imprecisiones propias de los números float.
     if data_type in {DataType.INTEGER, DataType.DECIMAL}:
         try:
             number = Decimal(str(value))
@@ -70,7 +70,7 @@ def _normalize_value(
 
             return ("invalid", str(value))
 
-        except InvalidOperation:
+        except (InvalidOperation, ValueError):
             return ("invalid", str(value))
 
     # Normalización de fechas.
@@ -97,7 +97,7 @@ def _normalize_value(
         return ("invalid", str(value))
 
     # Si desconocemos el tipo, tratamos el valor como texto.
-    # No intentamos inferir números o fechas a partir del contenido.
+    # No inferimos números o fechas a partir de su contenido.
     if data_type == DataType.UNKNOWN:
         text_value = str(value).strip()
         return ("text", text_value)
@@ -123,12 +123,11 @@ def check_uniqueness(
 
     issues: list[CrossRowIssue] = []
 
-    # Diccionario que agrupa los índices de las filas
-    # según el valor normalizado de la columna.
+    # Diccionario que agrupa los índices de las filas según el valor
+    # normalizado de la columna.
     seen: dict[tuple[str, Any], list[int]] = defaultdict(list)
 
-    # Obtener el tipo configurado para la columna.
-    # Si no existe configuración, utilizar UNKNOWN.
+    # Obtener el tipo configurado. Si no existe, utilizar UNKNOWN.
     configured = column_types.get(column_name, DataType.UNKNOWN)
 
     # Recorrer las filas y agrupar los valores equivalentes.
@@ -200,15 +199,17 @@ def check_code_consistency(
     para cada código y, opcionalmente, grupo adicional.
 
     Los valores vacíos también se comparan:
-    vacío y diligenciado representan valores diferentes.
+    un valor vacío y uno diligenciado representan valores diferentes.
+
+    La comparación respeta el tipo de dato configurado para cada columna.
+    Cuando se utiliza group_by, la agrupación se realiza por la combinación
+    del código y el valor de la columna secundaria.
     """
 
     issues: list[CrossRowIssue] = []
 
     def display_value(normalized: tuple[str, Any]) -> str:
-        """
-        Convierte un valor normalizado en una representación legible.
-        """
+        """Convierte un valor normalizado en una representación legible."""
 
         kind, value = normalized
 
@@ -216,17 +217,21 @@ def check_code_consistency(
             return "(vacío)"
 
         if kind == "invalid":
-            return f"(valor inválido: '{value}')"
+            return f"(valor inválido: {value!r})"
 
         if kind == "text":
-            return f"'{value}'"
+            return repr(value)
 
-        return str(value)
+        if kind == "number":
+            return str(value)
+
+        if kind == "date":
+            return str(value)
+
+        return repr(value)
 
     def display_group_key(group_key: Any) -> str:
-        """
-        Construye una descripción legible de la clave de agrupación.
-        """
+        """Construye una descripción legible de la clave de agrupación."""
 
         if group_by:
             code_value, group_value = group_key
@@ -244,6 +249,7 @@ def check_code_consistency(
 
     groups: dict[Any, list[int]] = defaultdict(list)
 
+    # Obtener el tipo de dato configurado para la columna del código.
     code_data_type = column_types.get(
         code_column,
         DataType.UNKNOWN,
@@ -253,10 +259,12 @@ def check_code_consistency(
 
         row_key = row.get(code_column)
 
-        # Ignorar filas sin código.
+        # Ignorar filas sin código: no es posible determinar su grupo.
         if _is_blank(row_key):
             continue
 
+        # Normalizar el código para que su comparación respete
+        # el tipo de dato configurado.
         code_normalized = _normalize_value(
             row_key,
             code_data_type,
@@ -264,6 +272,9 @@ def check_code_consistency(
 
         if group_by:
 
+            # Obtener y normalizar la columna secundaria.
+            # A diferencia del código, un valor vacío en group_by
+            # no se descarta: forma parte de un grupo propio.
             group_value = row.get(group_by)
 
             group_data_type = column_types.get(
@@ -276,37 +287,45 @@ def check_code_consistency(
                 group_data_type,
             )
 
+            # La clave compuesta identifica código + grupo secundario.
             key = (
                 code_normalized,
                 secondary_normalized,
             )
 
         else:
+            # Si no hay group_by, el código es la clave del grupo.
             key = code_normalized
 
         groups[key].append(i)
 
     # ---------------------------------------------------------
-    # 2. Comparar los valores de las columnas configuradas.
+    # 2. Comparar las columnas configuradas dentro de cada grupo.
     # ---------------------------------------------------------
 
     for group_key, indices in groups.items():
 
-        # No comparar grupos con una sola fila.
+        # No existe comparación posible si el grupo tiene una sola fila.
         if len(indices) < 2:
             continue
 
-        # Descripción legible de la clave del grupo.
+        # Convertir la clave interna en un texto comprensible
+        # para incluirlo en el mensaje de inconsistencia.
         displayed_group_key = display_group_key(group_key)
 
         for column in check_columns:
 
+            # Obtener el tipo de dato configurado para la columna
+            # que se está validando.
             configured_data_type = column_types.get(
                 column,
                 DataType.UNKNOWN,
             )
 
-            distinct_values = set()
+            # Un set permite identificar los valores diferentes.
+            # La tupla (tipo, valor) evita mezclar, por ejemplo,
+            # un texto con un número que tenga la misma representación.
+            distinct_values: set[tuple[str, Any]] = set()
 
             for i in indices:
 
@@ -319,33 +338,40 @@ def check_code_consistency(
 
                 distinct_values.add(normalized_value)
 
-            # Si todas las filas tienen el mismo valor,
-            # no existe inconsistencia.
+            # Si todas las filas tienen el mismo valor normalizado,
+            # no existe inconsistencia para esta columna.
             if len(distinct_values) <= 1:
                 continue
 
-            # Preparar valores distintos para el mensaje.
+            # Preparar los valores diferentes para el mensaje.
+            # Se ordenan por su representación textual para que
+            # el resultado sea estable y fácil de leer.
             displayed_values = sorted(
                 display_value(value)
                 for value in distinct_values
             )
 
-            values_description = ", ".join(
-                displayed_values
+            values_description = ", ".join(displayed_values)
+
+            # Construir un mensaje que identifique:
+            # - la clave del grupo;
+            # - la columna inconsistente;
+            # - los valores diferentes encontrados.
+            message = (
+                f"Inconsistencia: los registros agrupados por "
+                f"{displayed_group_key} tienen valores distintos "
+                f"en '{column}': {values_description}."
             )
 
             # Generar una incidencia para cada fila del grupo.
+            # Así, cada registro involucrado queda señalado.
             for i in indices:
 
                 issues.append(
                     CrossRowIssue(
                         row=row_numbers[i],
                         column_name=column,
-                        message=(
-                            f"Inconsistencia: los registros agrupados por "
-                            f"{displayed_group_key} tienen valores distintos "
-                            f"en '{column}': {values_description}."
-                        ),
+                        message=message,
                     )
                 )
 

@@ -1,5 +1,7 @@
+
 <aside class="sidebar">
 
+  <!-- Identidad institucional -->
   <div class="sidebar-brand">
     <div class="brand-icon">
       <span>S</span>
@@ -7,23 +9,25 @@
 
     <div class="brand-info">
       <h2>SNIES</h2>
-      <span>Universidad de Antioquía</span>
+      <span>Universidad de Antioquia</span>
     </div>
   </div>
 
+  <!-- Navegación -->
   <div class="sidebar-section">
 
-    <span class="section-title">MENÚ PRINCIPAL</span>
+    <span class="section-title">GENERAL</span>
 
-    <nav class="navigation">
+    <nav class="navigation" aria-label="Navegación principal">
 
       <a
         class="nav-item"
         routerLink="/"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        title="Inicio"
       >
-        <i class="bi bi-house-door"></i>
+        <i class="bi bi-grid-1x2"></i>
         <span>Inicio</span>
       </a>
 
@@ -31,6 +35,7 @@
         class="nav-item"
         routerLink="/validation"
         routerLinkActive="active"
+        title="Validación"
       >
         <i class="bi bi-file-earmark-check"></i>
         <span>Validación</span>
@@ -40,6 +45,7 @@
         class="nav-item"
         routerLink="/history"
         routerLinkActive="active"
+        title="Historial"
       >
         <i class="bi bi-clock-history"></i>
         <span>Historial</span>
@@ -49,9 +55,14 @@
 
   </div>
 
+  <!-- Pie del menú -->
   <div class="sidebar-footer">
-    <span>Sistema de gestión SNIES</span>
-    <span>Universidad de Antioquia</span>
+    <div class="footer-indicator"></div>
+
+    <div class="footer-info">
+      <span class="footer-title">Sistema de gestión SNIES</span>
+      <span class="footer-subtitle">Universidad de Antioquia</span>
+    </div>
   </div>
 
 </aside>

@@ -1,14 +1,38 @@
+
 <header class="header">
 
+  <!-- Información de la página -->
   <div class="header-title">
-    <h1>Panel principal</h1>
-    <p>Sistema de gestión y validación de información SNIES</p>
+    <div class="header-heading">
+      <span class="header-indicator"></span>
+
+      <h1>{{ pageTitle() }}</h1>
+    </div>
+
+    <p>{{ pageDescription() }}</p>
   </div>
 
+  <!-- Identidad institucional -->
   <div class="header-actions">
-    <span class="institution-label">
-      Universidad de Antioquia
-    </span>
+
+    <div class="institution-info">
+
+      <div class="institution-icon">
+        <i class="bi bi-bank"></i>
+      </div>
+
+      <div class="institution-text">
+        <span class="institution-name">
+          Universidad de Antioquia
+        </span>
+
+        <span class="institution-caption">
+          Institución de educación superior
+        </span>
+      </div>
+
+    </div>
+
   </div>
 
 </header>

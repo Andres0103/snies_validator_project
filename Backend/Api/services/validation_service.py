@@ -1,3 +1,4 @@
+
 import json
 import logging
 import re
@@ -14,10 +15,8 @@ from starlette.concurrency import run_in_threadpool
 from validators.post_hoc_validator import validate_workbook
 from excel.post_hoc_marker import mark_workbook
 from reports.post_hoc_report import build_post_hoc_report
-from rules.template_profiles import (
-    detect_templates,
-    load_template_profiles,
-)
+from rules.template_profiles import detect_templates
+
 
 logger = logging.getLogger(__name__)
 
@@ -31,12 +30,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 STORAGE_DIR = PROJECT_ROOT / "api" / "storage"
 
 
-
 # ==========================================================
 # UTILIDADES
 # ==========================================================
 
 def current_datetime():
+    """Obtiene la fecha y hora actual en formato ISO."""
+
     return datetime.now(timezone.utc).isoformat()
 
 
@@ -48,14 +48,13 @@ def normalize_validation_id(validation_id: str) -> str | None:
 
     try:
         return str(UUID(validation_id))
+
     except (ValueError, TypeError, AttributeError):
         return None
 
 
 def get_validation_directory(validation_id: str) -> Path | None:
-    """
-    Obtiene el directorio de una validación existente.
-    """
+    """Obtiene el directorio de una validación existente."""
 
     safe_id = normalize_validation_id(validation_id)
 
@@ -72,8 +71,8 @@ def get_validation_directory(validation_id: str) -> Path | None:
 
 def write_json(path: Path, data: dict):
     """
-    Guarda información JSON de forma segura mediante
-    un archivo temporal y posterior reemplazo.
+    Guarda información JSON mediante un archivo temporal
+    y posterior reemplazo.
     """
 
     path.parent.mkdir(
@@ -96,9 +95,7 @@ def write_json(path: Path, data: dict):
 
 
 def read_json(path: Path):
-    """
-    Lee un archivo JSON.
-    """
+    """Lee un archivo JSON si existe."""
 
     if not path.is_file():
         return None
@@ -109,9 +106,7 @@ def read_json(path: Path):
 
 
 def safe_filename(filename: str | None) -> str:
-    """
-    Limpia el nombre del archivo recibido.
-    """
+    """Limpia el nombre del archivo recibido."""
 
     original = Path(filename or "archivo.xlsx").name
 
@@ -130,38 +125,13 @@ def safe_filename(filename: str | None) -> str:
 
 async def create_validation_job(
     uploads: list[UploadFile],
-    template_name: str,
 ):
     """
-    Recibe archivos Excel y la plantilla SNIES seleccionada.
-    Los almacena y registra una nueva validación pendiente.
+    Recibe varios archivos Excel sin exigir una plantilla.
+
+    Cada archivo será identificado individualmente durante
+    el procesamiento.
     """
-
-    if not isinstance(template_name, str) or not template_name.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Debes seleccionar una plantilla SNIES.",
-        )
-
-    # Verificar que la plantilla seleccionada exista.
-    profiles = load_template_profiles()
-
-    templates = profiles.get("templates", {})
-
-    selected_template = next(
-        (
-            name
-            for name in templates
-            if name.casefold() == template_name.strip().casefold()
-        ),
-        None,
-    )
-
-    if selected_template is None:
-        raise HTTPException(
-            status_code=400,
-            detail=f"La plantilla '{template_name}' no está soportada.",
-        )
 
     if not uploads:
         raise HTTPException(
@@ -187,6 +157,7 @@ async def create_validation_job(
 
         filename = safe_filename(upload.filename)
 
+        # Solo se permiten archivos Excel .xlsx.
         if Path(filename).suffix.lower() != ".xlsx":
 
             rejected_files.append({
@@ -197,6 +168,8 @@ async def create_validation_job(
             await upload.close()
             continue
 
+        # Evitar que dos archivos con el mismo nombre
+        # sobrescriban su contenido.
         stem = Path(filename).stem
         suffix = Path(filename).suffix
 
@@ -214,6 +187,8 @@ async def create_validation_job(
 
         try:
 
+            # Guardar el archivo por bloques para no cargar
+            # todo su contenido en memoria.
             with destination.open("wb") as output:
 
                 while True:
@@ -259,6 +234,8 @@ async def create_validation_job(
         finally:
             await upload.close()
 
+    # Si ningún archivo pudo almacenarse, no se crea
+    # una validación pendiente.
     if not accepted_files:
 
         raise HTTPException(
@@ -269,9 +246,11 @@ async def create_validation_job(
             },
         )
 
+    # Crear un resumen inicial para cada archivo.
     file_summaries = [
         {
             "nombre_archivo": item["nombre_archivo"],
+            "plantilla": None,
             "estado": "PENDIENTE",
             "archivo_marcado": None,
             "total_errores": 0,
@@ -280,25 +259,42 @@ async def create_validation_job(
         for item in accepted_files
     ]
 
+    # Metadatos generales de la operación.
     validation = {
         "id": validation_id,
-        "plantilla": selected_template,
+
+        # Compatibilidad con registros anteriores.
+        # En una carga con varias plantillas queda en None.
+        "plantilla": None,
+
+        # Aquí se almacenarán las plantillas detectadas.
+        "plantillas": [],
+
         "estado": "PENDIENTE",
         "progreso": 0,
-        "mensaje": "Archivos recibidos. Validación pendiente.",
+
+        "mensaje": (
+            "Archivos recibidos. "
+            "Identificación de plantillas pendiente."
+        ),
+
         "creado_en": current_datetime(),
         "iniciado_en": None,
         "finalizado_en": None,
+
         "total_archivos": len(uploads),
         "total_archivos_validos": len(accepted_files),
         "total_archivos_procesados": 0,
         "total_archivos_fallidos": len(rejected_files),
+
         "total_errores": 0,
         "total_advertencias": 0,
+
         "archivos": file_summaries,
         "archivos_rechazados": rejected_files,
     }
 
+    # Guardar los metadatos y el manifiesto de archivos.
     write_json(
         validation_dir / "metadata.json",
         validation,
@@ -316,98 +312,98 @@ async def create_validation_job(
 
     return validation
 
+
 # ==========================================================
 # PROCESAMIENTO DE EXCEL
 # ==========================================================
 
-def process_workbook(
-    workbook,
-    template_name: str,
-):
+def process_workbook(workbook):
     """
-    Comprueba que el libro corresponda a la plantilla seleccionada,
-    ejecuta el motor SNIES con esa plantilla y marca las incidencias.
+    Detecta automáticamente la plantilla del libro Excel
+    y ejecuta el motor de validación.
+
+    La detección se realiza individualmente para cada libro.
+
+    Si no se reconoce una plantilla o se encuentran varias,
+    el motor devuelve la incidencia estructural correspondiente.
     """
-
-    if not isinstance(template_name, str) or not template_name.strip():
-        raise ValueError(
-            "Debe especificarse una plantilla para validar el archivo."
-        )
-
-    template_name = template_name.strip().upper()
 
     detected_templates = detect_templates(
         workbook.sheetnames
     )
 
-    if detected_templates != [template_name]:
+    # Solo asignamos una plantilla cuando la detección
+    # identifica exactamente una.
+    template_name = (
+        detected_templates[0]
+        if len(detected_templates) == 1
+        else None
+    )
 
-        detected_description = (
-            ", ".join(detected_templates)
-            if detected_templates
-            else "ninguna plantilla reconocida"
-        )
-
-        raise ValueError(
-            f"El archivo no corresponde a la plantilla "
-            f"seleccionada '{template_name}'. "
-            f"Plantilla detectada: {detected_description}."
-        )
-
+    # El propio motor comprueba la estructura del libro.
+    # Si template_name es None, detecta y reporta los casos
+    # sin plantilla o con varias plantillas.
     results = validate_workbook(
         workbook,
         template_name=template_name,
     )
 
-    mark_workbook(workbook, results)
+    # Marca las incidencias en el Excel.
+    mark_workbook(
+        workbook,
+        results,
+    )
 
-    return results
+    return results, template_name
+
 
 def process_excel_file(
     input_path: Path,
     output_path: Path,
-    template_name: str,
 ):
     """
-    Abre un Excel, ejecuta la validación correspondiente
-    a la plantilla seleccionada y guarda el archivo marcado.
+    Abre un Excel, detecta su plantilla, ejecuta las reglas
+    correspondientes y guarda el archivo marcado.
     """
 
-    workbook = openpyxl.load_workbook(input_path)
+    # data_only=False conserva las fórmulas del libro.
+    workbook = openpyxl.load_workbook(
+        input_path,
+        data_only=False,
+    )
 
     try:
 
-        results = process_workbook(
+        results, template_name = process_workbook(
             workbook,
-            template_name,
         )
 
         workbook.save(output_path)
 
-        return results
+        return results, template_name
 
     finally:
         workbook.close()
-        
+
+
 # ==========================================================
 # SERIALIZACIÓN DE INCIDENCIAS
 # ==========================================================
 
 def serialize_issue(issue):
-    """
-    Convierte una incidencia del motor SNIES
-    en un diccionario compatible con la API.
-    """
+    """Convierte una incidencia del motor en un diccionario."""
 
     return {
         "hoja": issue.sheet,
         "fila": issue.row,
         "columna": issue.column_name,
+
         "valor": (
             None
             if issue.value is None
             else str(issue.value)
         ),
+
         "mensaje": issue.message,
         "severidad": issue.severity,
     }
@@ -420,10 +416,14 @@ def serialize_issue(issue):
 def serialize_file_results(
     filename: str,
     marked_filename: str,
+    template_name: str | None,
     results: list,
 ):
     """
     Construye el resumen de resultados de un archivo.
+
+    La plantilla puede ser None cuando no se identifica
+    una única plantilla.
     """
 
     total_errors = 0
@@ -438,11 +438,12 @@ def serialize_file_results(
             if severity == "error":
                 total_errors += 1
 
-            elif severity == "warning":
+            elif severity in ("warning", "advertencia"):
                 total_warnings += 1
 
     return {
         "nombre_archivo": filename,
+        "plantilla": template_name,
         "estado": "COMPLETADO",
         "archivo_marcado": marked_filename,
         "total_errores": total_errors,
@@ -450,11 +451,17 @@ def serialize_file_results(
     }
 
 
+# ==========================================================
+# PROCESAMIENTO GENERAL DE UNA VALIDACIÓN
+# ==========================================================
+
 def process_validation_sync(validation_id: str):
     """
-    Procesa todos los Excel asociados a una validación.
+    Procesa todos los archivos Excel de una operación.
 
-    Esta función completa se ejecuta fuera del event loop.
+    Cada archivo se identifica y valida individualmente.
+    Los errores de un archivo no detienen el procesamiento
+    de los demás.
     """
 
     validation_dir = get_validation_directory(validation_id)
@@ -478,12 +485,12 @@ def process_validation_sync(validation_id: str):
         raise RuntimeError(
             "No se encontró la información de la validación."
         )
-    
-    template_name = metadata.get("plantilla") 
 
-    if not template_name:
+    files = manifest.get("archivos", [])
+
+    if not files:
         raise RuntimeError(
-            "La validación no tiene una plantilla SNIES registrada."
+            "La validación no contiene archivos para procesar."
         )
 
     # ----------------------------------------------
@@ -514,27 +521,24 @@ def process_validation_sync(validation_id: str):
     )
 
     all_results = {}
-
     all_issues = []
-
     file_summaries = []
 
+    # Incorporar archivos que fueron rechazados durante
+    # la recepción, por ejemplo, por extensión incorrecta.
     failed_files = list(
         metadata.get("archivos_rechazados", [])
     )
 
-    files = manifest["archivos"]
-
     total_files = len(files)
 
     # ----------------------------------------------
-    # Procesar cada archivo
+    # Procesar cada archivo individualmente
     # ----------------------------------------------
 
     for index, item in enumerate(files, start=1):
 
         filename = item["nombre_archivo"]
-
         input_path = Path(item["ruta"])
 
         marked_filename = (
@@ -545,25 +549,25 @@ def process_validation_sync(validation_id: str):
 
         try:
 
-            # Ejecutar motor SNIES.
-            results = process_excel_file(
+            # El motor identifica automáticamente la plantilla.
+            results, template_name = process_excel_file(
                 input_path,
                 output_path,
-                template_name,
             )
 
             all_results[filename] = results
 
-            # Crear resumen del archivo.
+            # Resumen individual.
             file_summary = serialize_file_results(
                 filename,
                 marked_filename,
+                template_name,
                 results,
             )
 
             file_summaries.append(file_summary)
 
-            # Recopilar incidencias.
+            # Recopilar incidencias de todas las hojas.
             for sheet in results:
 
                 for issue in sheet.issues:
@@ -600,10 +604,15 @@ def process_validation_sync(validation_id: str):
 
         metadata.update({
             "progreso": progress,
+
             "total_archivos_procesados": len(file_summaries),
+
             "total_archivos_fallidos": len(failed_files),
+
             "archivos": file_summaries,
+
             "archivos_rechazados": failed_files,
+
             "mensaje": (
                 f"Procesados {index} de {total_files} archivos."
             ),
@@ -613,6 +622,16 @@ def process_validation_sync(validation_id: str):
             metadata_path,
             metadata,
         )
+
+    # ----------------------------------------------
+    # Consolidar plantillas detectadas
+    # ----------------------------------------------
+
+    detected_templates = sorted({
+        item["plantilla"]
+        for item in file_summaries
+        if item.get("plantilla") is not None
+    })
 
     # ----------------------------------------------
     # Generar reporte consolidado
@@ -680,7 +699,7 @@ def process_validation_sync(validation_id: str):
         final_state = "COMPLETADO"
 
     # ----------------------------------------------
-    # Actualizar información final
+    # Actualizar metadatos finales
     # ----------------------------------------------
 
     metadata.update({
@@ -688,22 +707,38 @@ def process_validation_sync(validation_id: str):
         "progreso": 100,
         "mensaje": "Validación finalizada.",
         "finalizado_en": current_datetime(),
+
         "total_archivos_procesados": len(file_summaries),
         "total_archivos_fallidos": total_failed,
+
         "total_errores": total_errors,
         "total_advertencias": total_warnings,
+
         "archivos": file_summaries,
         "archivos_rechazados": failed_files,
+
+        # Compatibilidad con el campo anterior:
+        # solo tiene valor si todos los archivos procesados
+        # corresponden a una misma plantilla.
+        "plantilla": (
+            detected_templates[0]
+            if len(detected_templates) == 1
+            else None
+        ),
+
+        # Lista de plantillas identificadas en la operación.
+        "plantillas": detected_templates,
     })
 
     write_json(
         metadata_path,
         metadata,
     )
+
     logger.warning(
         "[SNIES] VALIDACIÓN FINALIZADA. Estado: %s. ID: %s",
         final_state,
-        validation_id
+        validation_id,
     )
 
 
@@ -713,34 +748,41 @@ def process_validation_sync(validation_id: str):
 
 async def process_validation_job(validation_id: str):
     """
-    Ejecuta el procesamiento de una validación en un hilo de trabajo.
-    Registra el resultado real de la tarea.
+    Ejecuta el procesamiento de una validación en un hilo
+    de trabajo para no bloquear el event loop de FastAPI.
     """
 
     logger.warning(
         "[SNIES] INICIANDO PROCESAMIENTO: %s",
-        validation_id
+        validation_id,
     )
 
     try:
+
         await run_in_threadpool(
             process_validation_sync,
-            validation_id
+            validation_id,
         )
 
         validation = get_validation(validation_id)
-        final_state = validation.get("estado") if validation else None
+
+        final_state = (
+            validation.get("estado")
+            if validation
+            else None
+        )
 
         logger.warning(
             "[SNIES] PROCESAMIENTO FINALIZADO. Estado: %s. ID: %s",
             final_state,
-            validation_id
+            validation_id,
         )
 
     except Exception:
+
         logger.exception(
             "[SNIES] ERROR EN LA TAREA: %s",
-            validation_id
+            validation_id,
         )
 
         validation_dir = get_validation_directory(validation_id)
@@ -749,6 +791,7 @@ async def process_validation_job(validation_id: str):
             return
 
         metadata_path = validation_dir / "metadata.json"
+
         metadata = read_json(metadata_path) or {}
 
         metadata.update({
@@ -758,16 +801,18 @@ async def process_validation_job(validation_id: str):
             "finalizado_en": current_datetime(),
         })
 
-        write_json(metadata_path, metadata)
+        write_json(
+            metadata_path,
+            metadata,
+        )
+
 
 # ==========================================================
 # CONSULTAR VALIDACIONES
 # ==========================================================
 
 def get_validation(validation_id: str):
-    """
-    Obtiene el resumen de una validación.
-    """
+    """Obtiene el resumen de una validación."""
 
     directory = get_validation_directory(validation_id)
 
@@ -780,9 +825,7 @@ def get_validation(validation_id: str):
 
 
 def list_validations():
-    """
-    Obtiene el historial de validaciones.
-    """
+    """Obtiene el historial de validaciones."""
 
     if not STORAGE_DIR.exists():
         return []
@@ -816,9 +859,7 @@ def list_validations():
 # ==========================================================
 
 def get_validation_errors(validation_id: str):
-    """
-    Obtiene los errores y advertencias de una validación.
-    """
+    """Obtiene los errores y advertencias de una validación."""
 
     directory = get_validation_directory(validation_id)
 
@@ -840,6 +881,9 @@ def get_artifact_path(
 ):
     """
     Obtiene la ruta de un reporte o archivo marcado.
+
+    Solo permite acceder a los artefactos generados
+    dentro del directorio de la validación.
     """
 
     directory = get_validation_directory(validation_id)

@@ -349,3 +349,29 @@
     align-items: flex-start;
   }
 }
+
+/* Transiciones suaves de la zona de carga */
+.upload-area {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Apariencia cuando el usuario arrastra archivos */
+.upload-area.dragging {
+  border: 2px dashed #198754;
+  background-color: rgba(25, 135, 84, 0.08);
+  transform: scale(1.01);
+}
+
+/* Resaltar el texto durante el arrastre */
+.upload-area.dragging .upload-title {
+  color: #198754;
+}
+
+/* Evitar interacciones durante el procesamiento */
+.upload-area.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

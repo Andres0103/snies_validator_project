@@ -1,58 +1,86 @@
+
 :host {
   display: block;
   flex: 0 0 var(--sidebar-width);
   width: var(--sidebar-width);
-  height: 100vh;
+  height: 100%;
+  min-height: 0;
+  transition: width 0.25s ease;
 }
 
 .sidebar {
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-
-  background-color: var(--color-primary-dark);
-  color: white;
-
+  position: relative;
   display: flex;
   flex-direction: column;
 
-  padding: 24px 16px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  padding: 24px 13px 16px;
+
+  color: #ffffff;
+  background: var(--color-primary-dark);
+
   overflow-y: auto;
+  overflow-x: hidden;
 }
+
+/* =========================================
+   IDENTIDAD INSTITUCIONAL
+   ========================================= */
 
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 8px 32px;
+  gap: 11px;
+
+  min-height: 58px;
+  padding: 0 9px;
+  margin-bottom: 36px;
 }
 
 .brand-icon {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  border-radius: 10px;
-
-  background-color: white;
-  color: var(--color-primary-dark);
-
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 22px;
-  font-weight: bold;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+
+  color: var(--color-primary-dark);
+  background: #ffffff;
+
+  border-radius: 11px;
+  font-size: 21px;
+  font-weight: 750;
+}
+
+.brand-info {
+  min-width: 0;
 }
 
 .brand-info h2 {
-  font-size: 19px;
-  margin-bottom: 0;
+  margin: 0 0 3px;
+
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .brand-info span {
-  font-size: 11px;
-  opacity: 0.8;
+  display: block;
+
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 10px;
+  white-space: nowrap;
 }
+
+/* =========================================
+   SECCIONES
+   ========================================= */
 
 .sidebar-section {
   flex: 1;
@@ -60,57 +88,213 @@
 
 .section-title {
   display: block;
-  padding: 0 10px;
+
+  padding: 0 11px;
   margin-bottom: 12px;
 
+  color: rgba(255, 255, 255, 0.57);
   font-size: 10px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  opacity: 0.7;
+  font-weight: 700;
+  letter-spacing: 1.1px;
 }
+
+/* =========================================
+   NAVEGACIÓN
+   ========================================= */
 
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .nav-item {
+  position: relative;
+
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 
-  padding: 12px;
-  border-radius: 7px;
+  min-height: 45px;
+  padding: 0 12px;
 
-  color: white;
+  color: rgba(255, 255, 255, 0.83);
   text-decoration: none;
-  font-size: 14px;
 
-  transition: background-color 0.2s;
+  border-radius: 8px;
 
-  &:hover,
-  &.active {
-    background-color: rgba(255, 255, 255, 0.16);
-  }
+  font-size: 13px;
+  font-weight: 500;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-item i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 20px;
+  flex-shrink: 0;
+
   font-size: 17px;
-  text-align: center;
 }
 
+.nav-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.nav-item.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.nav-item.active::before {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  top: 9px;
+  bottom: 9px;
+
+  width: 3px;
+
+  background: #ffffff;
+  border-radius: 0 4px 4px 0;
+}
+
+/* =========================================
+   PIE DEL MENÚ
+   ========================================= */
+
 .sidebar-footer {
-  margin-top: auto;
-  padding: 16px 8px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
 
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 17px 9px 4px;
+  margin-top: 24px;
 
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.footer-indicator {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  margin-top: 4px;
+
+  background: #a7d8b9;
+  border-radius: 50%;
+}
+
+.footer-info {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
 
+.footer-title {
+  color: rgba(255, 255, 255, 0.88);
   font-size: 10px;
-  opacity: 0.8;
+  font-weight: 600;
+}
+
+.footer-subtitle {
+  color: rgba(255, 255, 255, 0.57);
+  font-size: 9px;
+}
+
+/* =========================================
+   SCROLL
+   ========================================= */
+
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .sidebar-brand {
+    gap: 9px;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .brand-info h2 {
+    font-size: 16px;
+  }
+
+  .brand-info span {
+    font-size: 9px;
+  }
+}
+
+/* =========================================
+   MÓVILES
+   ========================================= */
+
+@media (max-width: 576px) {
+  :host {
+    flex-basis: 66px;
+    width: 66px;
+  }
+
+  .sidebar {
+    align-items: center;
+    padding: 18px 6px 12px;
+  }
+
+  .sidebar-brand {
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 30px;
+  }
+
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand-info,
+  .section-title,
+  .nav-item span,
+  .sidebar-footer {
+    display: none;
+  }
+
+  .navigation {
+    width: 100%;
+  }
+
+  .nav-item {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-item i {
+    font-size: 19px;
+  }
+
+  .nav-item.active::before {
+    left: -6px;
+  }
 }
