@@ -1,4 +1,3 @@
-
 export type ValidationStatus =
   | 'PENDIENTE'
   | 'PROCESANDO'
@@ -39,6 +38,8 @@ export interface ValidationResponse {
   total_advertencias: number;
   archivos: ValidationFileSummary[];
   archivos_rechazados: RejectedFile[];
+  reporte_disponible: boolean;
+  advertencia_reporte: string | null;
 }
 
 export interface ValidationIssue {

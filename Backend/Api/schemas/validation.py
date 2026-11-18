@@ -1,13 +1,12 @@
-
 from enum import Enum
 from typing import Optional
 
 from pydantic import BaseModel, Field
 
-
 # ==========================================================
 # ESTADOS DE UNA VALIDACIÓN
 # ==========================================================
+
 
 class ValidationStatus(str, Enum):
 
@@ -27,6 +26,7 @@ class ValidationStatus(str, Enum):
 # ==========================================================
 # INFORMACIÓN DE ARCHIVOS
 # ==========================================================
+
 
 class RejectedFile(BaseModel):
 
@@ -56,6 +56,7 @@ class ValidationFileSummary(BaseModel):
 # RESUMEN DE VALIDACIÓN
 # ==========================================================
 
+
 class ValidationResponse(BaseModel):
 
     id: str
@@ -65,9 +66,7 @@ class ValidationResponse(BaseModel):
     plantilla: Optional[str] = None
 
     # Plantillas detectadas en los archivos de la operación.
-    plantillas: list[str] = Field(
-        default_factory=list
-    )
+    plantillas: list[str] = Field(default_factory=list)
 
     estado: ValidationStatus
 
@@ -78,6 +77,12 @@ class ValidationResponse(BaseModel):
     )
 
     mensaje: str
+
+    # Disponibilidad del reporte consolidado.
+    reporte_disponible: bool = False
+
+    # Explica por qué no se generó el reporte, si ocurrió un fallo.
+    advertencia_reporte: Optional[str] = None
 
     creado_en: str
 
@@ -97,18 +102,15 @@ class ValidationResponse(BaseModel):
 
     total_advertencias: int = 0
 
-    archivos: list[ValidationFileSummary] = Field(
-        default_factory=list
-    )
+    archivos: list[ValidationFileSummary] = Field(default_factory=list)
 
-    archivos_rechazados: list[RejectedFile] = Field(
-        default_factory=list
-    )
+    archivos_rechazados: list[RejectedFile] = Field(default_factory=list)
 
 
 # ==========================================================
 # INCIDENCIAS DE VALIDACIÓN
 # ==========================================================
+
 
 class ValidationIssue(BaseModel):
 
@@ -129,17 +131,14 @@ class ValidationIssue(BaseModel):
 
 class ValidationErrorsResponse(BaseModel):
 
-    items: list[ValidationIssue] = Field(
-        default_factory=list
-    )
+    items: list[ValidationIssue] = Field(default_factory=list)
 
 
 # ==========================================================
 # HISTORIAL
 # ==========================================================
 
+
 class ValidationHistoryResponse(BaseModel):
 
-    items: list[ValidationResponse] = Field(
-        default_factory=list
-    )
+    items: list[ValidationResponse] = Field(default_factory=list)

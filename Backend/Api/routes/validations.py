@@ -1,7 +1,5 @@
-
 from typing import Annotated
 
-from typing import Annotated
 
 from fastapi import (
     APIRouter,
@@ -27,7 +25,6 @@ from api.schemas.validation import (
     ValidationErrorsResponse,
 )
 
-
 router = APIRouter(
     prefix="/validaciones",
     tags=["Validaciones"],
@@ -38,17 +35,7 @@ router = APIRouter(
 # CREAR VALIDACIÓN
 # ==========================================================
 
-@router.post(
-    "",
-    status_code=202,
-    response_model=ValidationResponse,
-)
 
-@router.post(
-    "",
-    status_code=202,
-    response_model=ValidationResponse,
-)
 @router.post(
     "",
     status_code=202,
@@ -58,9 +45,7 @@ async def upload_files(
     background_tasks: BackgroundTasks,
     archivos: Annotated[
         list[UploadFile],
-        File(
-            description="Selecciona uno o varios archivos Excel .xlsx."
-        ),
+        File(description="Selecciona uno o varios archivos Excel .xlsx."),
     ],
 ):
     """
@@ -84,9 +69,12 @@ async def upload_files(
     )
 
     return validation
+
+
 # ==========================================================
 # CONSULTAR HISTORIAL
 # ==========================================================
+
 
 @router.get(
     "",
@@ -105,6 +93,7 @@ async def get_history():
 # ==========================================================
 # CONSULTAR ESTADO DE VALIDACIÓN
 # ==========================================================
+
 
 @router.get(
     "/{validation_id}",
@@ -130,6 +119,7 @@ async def get_validation_status(validation_id: str):
 # CONSULTAR ERRORES Y ADVERTENCIAS
 # ==========================================================
 
+
 @router.get(
     "/{validation_id}/errores",
     response_model=ValidationErrorsResponse,
@@ -154,6 +144,7 @@ async def get_validation_issues(validation_id: str):
 # DESCARGAR REPORTE
 # ==========================================================
 
+
 @router.get(
     "/{validation_id}/reporte",
 )
@@ -177,8 +168,7 @@ async def download_validation_report(validation_id: str):
         path=path,
         filename=f"reporte_validacion_{validation_id}.xlsx",
         media_type=(
-            "application/vnd.openxmlformats-officedocument."
-            "spreadsheetml.sheet"
+            "application/vnd.openxmlformats-officedocument." "spreadsheetml.sheet"
         ),
     )
 
@@ -186,6 +176,7 @@ async def download_validation_report(validation_id: str):
 # ==========================================================
 # DESCARGAR EXCEL MARCADO
 # ==========================================================
+
 
 @router.get("/{validation_id}/archivos/{filename}")
 async def download_marked_file(
@@ -211,7 +202,6 @@ async def download_marked_file(
         path=path,
         filename=filename,
         media_type=(
-            "application/vnd.openxmlformats-officedocument."
-            "spreadsheetml.sheet"
+            "application/vnd.openxmlformats-officedocument." "spreadsheetml.sheet"
         ),
     )

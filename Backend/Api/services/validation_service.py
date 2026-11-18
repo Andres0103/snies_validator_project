@@ -1,4 +1,3 @@
-
 import json
 import logging
 import re
@@ -17,7 +16,6 @@ from excel.post_hoc_marker import mark_workbook
 from reports.post_hoc_report import build_post_hoc_report
 from rules.template_profiles import detect_templates
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -33,6 +31,7 @@ STORAGE_DIR = PROJECT_ROOT / "api" / "storage"
 # ==========================================================
 # UTILIDADES
 # ==========================================================
+
 
 def current_datetime():
     """Obtiene la fecha y hora actual en formato ISO."""
@@ -100,9 +99,7 @@ def read_json(path: Path):
     if not path.is_file():
         return None
 
-    return json.loads(
-        path.read_text(encoding="utf-8")
-    )
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def safe_filename(filename: str | None) -> str:
@@ -122,6 +119,7 @@ def safe_filename(filename: str | None) -> str:
 # ==========================================================
 # RECEPCIÓN DE ARCHIVOS
 # ==========================================================
+
 
 async def create_validation_job(
     uploads: list[UploadFile],
@@ -160,10 +158,12 @@ async def create_validation_job(
         # Solo se permiten archivos Excel .xlsx.
         if Path(filename).suffix.lower() != ".xlsx":
 
-            rejected_files.append({
-                "nombre_archivo": filename,
-                "motivo": "Solo se permiten archivos .xlsx.",
-            })
+            rejected_files.append(
+                {
+                    "nombre_archivo": filename,
+                    "motivo": "Solo se permiten archivos .xlsx.",
+                }
+            )
 
             await upload.close()
             continue
@@ -203,19 +203,23 @@ async def create_validation_job(
             if destination.stat().st_size == 0:
                 raise ValueError("El archivo está vacío.")
 
-            accepted_files.append({
-                "nombre_archivo": unique_filename,
-                "ruta": str(destination),
-            })
+            accepted_files.append(
+                {
+                    "nombre_archivo": unique_filename,
+                    "ruta": str(destination),
+                }
+            )
 
         except ValueError as error:
 
             destination.unlink(missing_ok=True)
 
-            rejected_files.append({
-                "nombre_archivo": unique_filename,
-                "motivo": str(error),
-            })
+            rejected_files.append(
+                {
+                    "nombre_archivo": unique_filename,
+                    "motivo": str(error),
+                }
+            )
 
         except OSError:
 
@@ -226,10 +230,12 @@ async def create_validation_job(
                 unique_filename,
             )
 
-            rejected_files.append({
-                "nombre_archivo": unique_filename,
-                "motivo": "No fue posible almacenar el archivo.",
-            })
+            rejected_files.append(
+                {
+                    "nombre_archivo": unique_filename,
+                    "motivo": "No fue posible almacenar el archivo.",
+                }
+            )
 
         finally:
             await upload.close()
@@ -262,36 +268,27 @@ async def create_validation_job(
     # Metadatos generales de la operación.
     validation = {
         "id": validation_id,
-
         # Compatibilidad con registros anteriores.
         # En una carga con varias plantillas queda en None.
         "plantilla": None,
-
         # Aquí se almacenarán las plantillas detectadas.
         "plantillas": [],
-
         "estado": "PENDIENTE",
         "progreso": 0,
-
-        "mensaje": (
-            "Archivos recibidos. "
-            "Identificación de plantillas pendiente."
-        ),
-
+        "mensaje": ("Archivos recibidos. " "Identificación de plantillas pendiente."),
         "creado_en": current_datetime(),
         "iniciado_en": None,
         "finalizado_en": None,
-
         "total_archivos": len(uploads),
         "total_archivos_validos": len(accepted_files),
         "total_archivos_procesados": 0,
         "total_archivos_fallidos": len(rejected_files),
-
         "total_errores": 0,
         "total_advertencias": 0,
-
         "archivos": file_summaries,
         "archivos_rechazados": rejected_files,
+        "reporte_disponible": False,
+        "advertencia_reporte": None,
     }
 
     # Guardar los metadatos y el manifiesto de archivos.
@@ -317,6 +314,7 @@ async def create_validation_job(
 # PROCESAMIENTO DE EXCEL
 # ==========================================================
 
+
 def process_workbook(workbook):
     """
     Detecta automáticamente la plantilla del libro Excel
@@ -328,17 +326,11 @@ def process_workbook(workbook):
     el motor devuelve la incidencia estructural correspondiente.
     """
 
-    detected_templates = detect_templates(
-        workbook.sheetnames
-    )
+    detected_templates = detect_templates(workbook.sheetnames)
 
     # Solo asignamos una plantilla cuando la detección
     # identifica exactamente una.
-    template_name = (
-        detected_templates[0]
-        if len(detected_templates) == 1
-        else None
-    )
+    template_name = detected_templates[0] if len(detected_templates) == 1 else None
 
     # El propio motor comprueba la estructura del libro.
     # Si template_name es None, detecta y reporta los casos
@@ -390,6 +382,7 @@ def process_excel_file(
 # SERIALIZACIÓN DE INCIDENCIAS
 # ==========================================================
 
+
 def serialize_issue(issue):
     """Convierte una incidencia del motor en un diccionario."""
 
@@ -397,13 +390,7 @@ def serialize_issue(issue):
         "hoja": issue.sheet,
         "fila": issue.row,
         "columna": issue.column_name,
-
-        "valor": (
-            None
-            if issue.value is None
-            else str(issue.value)
-        ),
-
+        "valor": (None if issue.value is None else str(issue.value)),
         "mensaje": issue.message,
         "severidad": issue.severity,
     }
@@ -412,6 +399,7 @@ def serialize_issue(issue):
 # ==========================================================
 # RESUMEN DE RESULTADOS POR ARCHIVO
 # ==========================================================
+
 
 def serialize_file_results(
     filename: str,
@@ -455,6 +443,7 @@ def serialize_file_results(
 # PROCESAMIENTO GENERAL DE UNA VALIDACIÓN
 # ==========================================================
 
+
 def process_validation_sync(validation_id: str):
     """
     Procesa todos los archivos Excel de una operación.
@@ -468,41 +457,35 @@ def process_validation_sync(validation_id: str):
 
     if validation_dir is None:
 
-        raise RuntimeError(
-            "No se encontró el directorio de validación."
-        )
+        raise RuntimeError("No se encontró el directorio de validación.")
 
     metadata_path = validation_dir / "metadata.json"
 
     metadata = read_json(metadata_path)
 
-    manifest = read_json(
-        validation_dir / "input.json"
-    )
+    manifest = read_json(validation_dir / "input.json")
 
     if metadata is None or manifest is None:
 
-        raise RuntimeError(
-            "No se encontró la información de la validación."
-        )
+        raise RuntimeError("No se encontró la información de la validación.")
 
     files = manifest.get("archivos", [])
 
     if not files:
-        raise RuntimeError(
-            "La validación no contiene archivos para procesar."
-        )
+        raise RuntimeError("La validación no contiene archivos para procesar.")
 
     # ----------------------------------------------
     # Cambiar estado a PROCESANDO
     # ----------------------------------------------
 
-    metadata.update({
-        "estado": "PROCESANDO",
-        "progreso": 5,
-        "mensaje": "Iniciando validación de archivos.",
-        "iniciado_en": current_datetime(),
-    })
+    metadata.update(
+        {
+            "estado": "PROCESANDO",
+            "progreso": 5,
+            "mensaje": "Iniciando validación de archivos.",
+            "iniciado_en": current_datetime(),
+        }
+    )
 
     write_json(
         metadata_path,
@@ -526,9 +509,7 @@ def process_validation_sync(validation_id: str):
 
     # Incorporar archivos que fueron rechazados durante
     # la recepción, por ejemplo, por extensión incorrecta.
-    failed_files = list(
-        metadata.get("archivos_rechazados", [])
-    )
+    failed_files = list(metadata.get("archivos_rechazados", []))
 
     total_files = len(files)
 
@@ -541,9 +522,7 @@ def process_validation_sync(validation_id: str):
         filename = item["nombre_archivo"]
         input_path = Path(item["ruta"])
 
-        marked_filename = (
-            f"{Path(filename).stem}_marcado.xlsx"
-        )
+        marked_filename = f"{Path(filename).stem}_marcado.xlsx"
 
         output_path = marked_dir / marked_filename
 
@@ -572,10 +551,12 @@ def process_validation_sync(validation_id: str):
 
                 for issue in sheet.issues:
 
-                    all_issues.append({
-                        "nombre_archivo": filename,
-                        **serialize_issue(issue),
-                    })
+                    all_issues.append(
+                        {
+                            "nombre_archivo": filename,
+                            **serialize_issue(issue),
+                        }
+                    )
 
         except Exception:
 
@@ -584,39 +565,40 @@ def process_validation_sync(validation_id: str):
                 filename,
             )
 
-            output_path.unlink(missing_ok=True)
+            try:
+                output_path.unlink(missing_ok=True)
+            except OSError:
+                logger.exception(
+                    "No fue posible eliminar el archivo marcado de %s",
+                    filename,
+                )
 
-            failed_files.append({
-                "nombre_archivo": filename,
-                "motivo": (
-                    "No fue posible procesar el archivo. "
-                    "Revisa los registros del servidor."
-                ),
-            })
+            failed_files.append(
+                {
+                    "nombre_archivo": filename,
+                    "motivo": (
+                        "No fue posible procesar el archivo. "
+                        "Revisa los registros del servidor."
+                    ),
+                }
+            )
 
         # ------------------------------------------
         # Actualizar progreso
         # ------------------------------------------
 
-        progress = 5 + int(
-            index / total_files * 85
+        progress = 5 + int(index / total_files * 85)
+
+        metadata.update(
+            {
+                "progreso": progress,
+                "total_archivos_procesados": len(file_summaries),
+                "total_archivos_fallidos": len(failed_files),
+                "archivos": file_summaries,
+                "archivos_rechazados": failed_files,
+                "mensaje": (f"Procesados {index} de {total_files} archivos."),
+            }
         )
-
-        metadata.update({
-            "progreso": progress,
-
-            "total_archivos_procesados": len(file_summaries),
-
-            "total_archivos_fallidos": len(failed_files),
-
-            "archivos": file_summaries,
-
-            "archivos_rechazados": failed_files,
-
-            "mensaje": (
-                f"Procesados {index} de {total_files} archivos."
-            ),
-        })
 
         write_json(
             metadata_path,
@@ -627,31 +609,62 @@ def process_validation_sync(validation_id: str):
     # Consolidar plantillas detectadas
     # ----------------------------------------------
 
-    detected_templates = sorted({
-        item["plantilla"]
-        for item in file_summaries
-        if item.get("plantilla") is not None
-    })
+    detected_templates = sorted(
+        {
+            item["plantilla"]
+            for item in file_summaries
+            if item.get("plantilla") is not None
+        }
+    )
 
     # ----------------------------------------------
-    # Generar reporte consolidado
+    # Generar reporte consolidado (opcional)
     # ----------------------------------------------
+
+    report_available = False
+    report_warning = None
+    report_path = validation_dir / "reporte_validacion.xlsx"
 
     if all_results:
-
-        report_workbook = build_post_hoc_report(
-            all_results
-        )
+        report_workbook = None
 
         try:
+            report_workbook = build_post_hoc_report(all_results)
+            report_workbook.save(report_path)
 
-            report_workbook.save(
-                validation_dir / "reporte_validacion.xlsx"
+            # Solo se considera disponible después de guardarlo.
+            report_available = True
+
+        except Exception:
+            logger.exception(
+                "No fue posible generar el reporte de la validación %s",
+                validation_id,
             )
 
-        finally:
+            report_warning = (
+                "Los archivos fueron validados, pero no fue posible "
+                "generar el reporte consolidado."
+            )
 
-            report_workbook.close()
+            # Intentar eliminar un reporte incompleto o anterior.
+            # Un fallo de limpieza no debe invalidar la validación.
+            try:
+                report_path.unlink(missing_ok=True)
+            except OSError:
+                logger.exception(
+                    "No fue posible eliminar el reporte incompleto de la validación %s",
+                    validation_id,
+                )
+
+        finally:
+            if report_workbook is not None:
+                try:
+                    report_workbook.close()
+                except Exception:
+                    logger.exception(
+                        "No fue posible cerrar el libro del reporte de la validación %s",
+                        validation_id,
+                    )
 
     # ----------------------------------------------
     # Guardar todas las incidencias
@@ -666,15 +679,9 @@ def process_validation_sync(validation_id: str):
     # Calcular totales generales
     # ----------------------------------------------
 
-    total_errors = sum(
-        item["total_errores"]
-        for item in file_summaries
-    )
+    total_errors = sum(item["total_errores"] for item in file_summaries)
 
-    total_warnings = sum(
-        item["total_advertencias"]
-        for item in file_summaries
-    )
+    total_warnings = sum(item["total_advertencias"] for item in file_summaries)
 
     total_failed = len(failed_files)
 
@@ -690,7 +697,7 @@ def process_validation_sync(validation_id: str):
 
         final_state = "COMPLETADO_PARCIAL"
 
-    elif total_errors or total_warnings:
+    elif total_errors or total_warnings or report_warning:
 
         final_state = "COMPLETADO_CON_OBSERVACIONES"
 
@@ -702,33 +709,30 @@ def process_validation_sync(validation_id: str):
     # Actualizar metadatos finales
     # ----------------------------------------------
 
-    metadata.update({
-        "estado": final_state,
-        "progreso": 100,
-        "mensaje": "Validación finalizada.",
-        "finalizado_en": current_datetime(),
-
-        "total_archivos_procesados": len(file_summaries),
-        "total_archivos_fallidos": total_failed,
-
-        "total_errores": total_errors,
-        "total_advertencias": total_warnings,
-
-        "archivos": file_summaries,
-        "archivos_rechazados": failed_files,
-
-        # Compatibilidad con el campo anterior:
-        # solo tiene valor si todos los archivos procesados
-        # corresponden a una misma plantilla.
-        "plantilla": (
-            detected_templates[0]
-            if len(detected_templates) == 1
-            else None
-        ),
-
-        # Lista de plantillas identificadas en la operación.
-        "plantillas": detected_templates,
-    })
+    metadata.update(
+        {
+            "estado": final_state,
+            "progreso": 100,
+            "mensaje": "Validación finalizada.",
+            "finalizado_en": current_datetime(),
+            "total_archivos_procesados": len(file_summaries),
+            "total_archivos_fallidos": total_failed,
+            "total_errores": total_errors,
+            "total_advertencias": total_warnings,
+            "archivos": file_summaries,
+            "archivos_rechazados": failed_files,
+            "reporte_disponible": report_available,
+            "advertencia_reporte": report_warning,
+            # Compatibilidad con el campo anterior:
+            # solo tiene valor si todos los archivos procesados
+            # corresponden a una misma plantilla.
+            "plantilla": (
+                detected_templates[0] if len(detected_templates) == 1 else None
+            ),
+            # Lista de plantillas identificadas en la operación.
+            "plantillas": detected_templates,
+        }
+    )
 
     write_json(
         metadata_path,
@@ -745,6 +749,7 @@ def process_validation_sync(validation_id: str):
 # ==========================================================
 # TAREA ASÍNCRONA
 # ==========================================================
+
 
 async def process_validation_job(validation_id: str):
     """
@@ -766,11 +771,7 @@ async def process_validation_job(validation_id: str):
 
         validation = get_validation(validation_id)
 
-        final_state = (
-            validation.get("estado")
-            if validation
-            else None
-        )
+        final_state = validation.get("estado") if validation else None
 
         logger.warning(
             "[SNIES] PROCESAMIENTO FINALIZADO. Estado: %s. ID: %s",
@@ -779,37 +780,57 @@ async def process_validation_job(validation_id: str):
         )
 
     except Exception:
-
         logger.exception(
             "[SNIES] ERROR EN LA TAREA: %s",
             validation_id,
         )
 
-        validation_dir = get_validation_directory(validation_id)
+        try:
+            validation_dir = get_validation_directory(validation_id)
 
-        if validation_dir is None:
-            return
+            if validation_dir is None:
+                logger.error(
+                    "[SNIES] No se encontró el directorio para registrar "
+                    "el fallo de la validación: %s",
+                    validation_id,
+                )
+                return
 
-        metadata_path = validation_dir / "metadata.json"
+            metadata_path = validation_dir / "metadata.json"
+            metadata = read_json(metadata_path)
 
-        metadata = read_json(metadata_path) or {}
+            if metadata is None:
+                logger.error(
+                    "[SNIES] No se encontraron metadatos para la validación: %s",
+                    validation_id,
+                )
+                return
 
-        metadata.update({
-            "estado": "FALLIDO",
-            "progreso": 100,
-            "mensaje": "Error interno durante la validación.",
-            "finalizado_en": current_datetime(),
-        })
+            metadata.update(
+                {
+                    "estado": "FALLIDO",
+                    "progreso": 100,
+                    "mensaje": "Error interno durante la validación.",
+                    "finalizado_en": current_datetime(),
+                    "reporte_disponible": False,
+                    "advertencia_reporte": None,
+                }
+            )
 
-        write_json(
-            metadata_path,
-            metadata,
-        )
+            write_json(metadata_path, metadata)
+
+        except Exception:
+            logger.exception(
+                "[SNIES] No fue posible actualizar el estado de fallo "
+                "de la validación: %s",
+                validation_id,
+            )
 
 
 # ==========================================================
 # CONSULTAR VALIDACIONES
 # ==========================================================
+
 
 def get_validation(validation_id: str):
     """Obtiene el resumen de una validación."""
@@ -819,9 +840,7 @@ def get_validation(validation_id: str):
     if directory is None:
         return None
 
-    return read_json(
-        directory / "metadata.json"
-    )
+    return read_json(directory / "metadata.json")
 
 
 def list_validations():
@@ -840,9 +859,7 @@ def list_validations():
         if normalize_validation_id(directory.name) is None:
             continue
 
-        metadata = read_json(
-            directory / "metadata.json"
-        )
+        metadata = read_json(directory / "metadata.json")
 
         if metadata is not None:
             validations.append(metadata)
@@ -858,6 +875,7 @@ def list_validations():
 # CONSULTAR ERRORES
 # ==========================================================
 
+
 def get_validation_errors(validation_id: str):
     """Obtiene los errores y advertencias de una validación."""
 
@@ -866,14 +884,13 @@ def get_validation_errors(validation_id: str):
     if directory is None:
         return None
 
-    return read_json(
-        directory / "errores.json"
-    )
+    return read_json(directory / "errores.json")
 
 
 # ==========================================================
 # OBTENER ARCHIVOS GENERADOS
 # ==========================================================
+
 
 def get_artifact_path(
     validation_id: str,
