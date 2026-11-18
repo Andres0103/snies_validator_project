@@ -12,7 +12,7 @@ export const routes: Routes = [
       {
         path: '',
         component: Dashboard,
-        title: 'Inicio | SNIES',
+        title: 'Inicio | NEBULA',
         data: {
           headerTitle: 'Panel principal',
           headerDescription: 'Sistema de gestión y validación de información SNIES'
@@ -45,7 +45,7 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/issues/issues')
             .then(m => m.Issues),
-        title: 'Consulta de incidencias | SNIES',
+        title: 'Consulta de incidencias | NEBULA',
         data: {
           headerTitle: 'Consulta de incidencias',
           headerDescription: 'Consulta y análisis de errores y advertencias de validación'
