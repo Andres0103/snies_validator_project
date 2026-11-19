@@ -145,3 +145,97 @@ def test_post_hoc_integration():
 
 if __name__ == "__main__":
     test_post_hoc_integration()
+
+def test_empty_header_does_not_block_cross_row_consistency():
+    wb = Workbook()
+
+    ws = wb.active
+    ws.title = "CONSULTORIA"
+
+    add_headers(ws)
+
+    # Agregar una columna con encabezado vacío, pero con datos.
+    ws.cell(row=1, column=17, value=None)
+    ws.cell(row=2, column=17, value="dato sin encabezado")
+    ws.cell(row=3, column=17, value="otro dato")
+
+    # Dos registros con el mismo código, pero con inconsistencias.
+    ws.append([
+        2026,
+        1,
+        "TEST-001",
+        "Descripción de consultoría A",
+        613,
+        "Universidad de prueba",
+        1,
+        1000,
+        "2026-01-15",
+        "2026-02-15",
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    ])
+
+    ws.append([
+        2026,
+        2,
+        "TEST-001",
+        "Descripción de consultoría B",
+        614,
+        "Universidad de prueba",
+        1,
+        1000,
+        "2026-01-15",
+        "2026-02-15",
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+    ])
+
+    # Crear la hoja secundaria requerida por la plantilla.
+    rh = wb.create_sheet("CONSULTORIA_REC_HUMANO")
+    rh.append([
+        "AÑO",
+        "SEMESTRE",
+        "CODIGO_CONSULTORIA",
+        "ID_TIPO_DOCUMENTO",
+        "NUM_DOCUMENTO",
+        "ID_MAXIMO_NIVEL_ESTUDIO",
+    ])
+
+    results = validate_workbook(wb)
+
+    consultoria = next(
+        result for result in results
+        if result.sheet_name == "CONSULTORIA"
+    )
+
+    # Buscar las inconsistencias entre los registros con código TEST-001.
+    consistency_issues = [
+        issue for issue in consultoria.issues
+        if "TEST-001" in str(issue.value)
+        or "consistencia" in issue.message.lower()
+        or "mismo código" in issue.message.lower()
+        or "mismo codigo" in issue.message.lower()
+    ]
+
+    # La hoja debe reportar el encabezado vacío.
+    empty_header_issues = [
+        issue for issue in consultoria.issues
+        if issue.column_name == "__ENCABEZADO_VACIO__"
+    ]
+
+    assert empty_header_issues, (
+        "No se reportó el encabezado vacío con datos."
+    )
+
+    assert consistency_issues, (
+        "No se detectaron las inconsistencias entre registros "
+        "con el mismo CODIGO_CONSULTORIA."
+    )

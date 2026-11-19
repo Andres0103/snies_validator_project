@@ -1,0 +1,18 @@
+# Validaciones específicas de Educación Continua.
+# Fuente: Manual MEN v8.12, sección 11.2, páginas 145-146.
+
+sheets:
+
+  EDUCACION_CONTINUA:
+
+    NUM_HORAS:
+      min_value: 0
+
+    VALOR_CURSO:
+      min_value: 0
+
+
+  EDUCAC_CONTINUA_BENEFICIARIOS:
+
+    CANTIDAD_BENEFICIARIOS:
+      min_value: 0

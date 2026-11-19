@@ -24,6 +24,8 @@ from typing import Any
 
 from rules.general_model import DataType, ValidationRule
 
+from validators.blank_utils import is_blank
+
 import re
 
 
@@ -43,12 +45,7 @@ class Issue:
 # 3. FUNCIONES AUXILIARES
 # ============================================================
 
-def _is_blank(value: Any) -> bool:
-    """Determina si un valor está vacío."""
 
-    return value is None or (
-        isinstance(value, str) and value.strip() == ""
-    )
 
 
 def _is_alphabetic_text(value: str) -> bool:
@@ -133,7 +130,7 @@ def _to_number(value: Any) -> Decimal | None:
 def _to_date(value: Any, formats: list[str]) -> datetime.date | None:
 
     # 1. Comprobar si está vacío.
-    if _is_blank(value):
+    if is_blank(value):
         return None
 
     # 2. Si es datetime, obtener únicamente la fecha.
@@ -191,7 +188,7 @@ def validate_cell(
     # 4.1. Validación de obligatoriedad
     # --------------------------------------------------------
 
-    if _is_blank(value):
+    if is_blank(value):
 
         if rule.required:
             issues.append(
@@ -398,6 +395,19 @@ def validate_cell(
     # --------------------------------------------------------
     # 4.7. Validación de valores permitidos
     # --------------------------------------------------------
+    
+    if rule.column_name == "ID_TIPO_DOCUMENTO" and str(value).strip() == "TI":
+        print("\n--- DEBUG ID_TIPO_DOCUMENTO ---")
+        print("Valor recibido:", repr(value))
+        print("Datatype:", rule.datatype)
+        print("Allowed values:", rule.allowed_values)
+        print("Allowed codes:", [
+            item.code for item in rule.allowed_values
+        ])
+        print("Allowed displays:", [
+            item.display for item in rule.allowed_values
+        ])
+        print("------------------------------\n")
 
     if rule.allowed_values:
 
@@ -470,7 +480,7 @@ def validate_business_rule(
     # 5.1. Comprobación de valores vacíos
     # --------------------------------------------------------
 
-    if _is_blank(value):
+    if is_blank(value):
         return issues
 
     # --------------------------------------------------------

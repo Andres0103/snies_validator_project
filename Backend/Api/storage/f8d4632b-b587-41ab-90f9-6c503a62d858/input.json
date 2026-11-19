@@ -1,0 +1,16 @@
+{
+  "archivos": [
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\f8d4632b-b587-41ab-90f9-6c503a62d858\\originales\\CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026.xlsx"
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\f8d4632b-b587-41ab-90f9-6c503a62d858\\originales\\CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026.xlsx"
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_18122025.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\f8d4632b-b587-41ab-90f9-6c503a62d858\\originales\\CONSULTOR_A_VRE_18122025.xlsx"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+main_sheet: EDUCACION_CONTINUA
+
+sheets:
+  - EDUCACION_CONTINUA
+  - EDUCACION_CONTINUA_DOCENTES
+  - EDUCAC_CONTINUA_BENEFICIARIOS
+
+record_key:
+  - AÑO
+  - SEMESTRE
+  - CODIGO_CURSO
+  - COHORTE
+
+references:
+  - child_sheet: EDUCACION_CONTINUA_DOCENTES
+    parent_sheet: EDUCACION_CONTINUA
+    key:
+      - AÑO
+      - SEMESTRE
+      - CODIGO_CURSO
+      - COHORTE
+
+  - child_sheet: EDUCAC_CONTINUA_BENEFICIARIOS
+    parent_sheet: EDUCACION_CONTINUA
+    key:
+      - AÑO
+      - SEMESTRE
+      - CODIGO_CURSO
+      - COHORTE

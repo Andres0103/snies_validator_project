@@ -77,6 +77,8 @@ from validators.row_validator import (
 
 from validators.structure_validator import validate_sheet_headers
 
+from validators.blank_utils import is_blank
+
 HEADER_ROW = 1
 
 
@@ -115,12 +117,6 @@ class SheetValidationResult:
 # FUNCIONES AUXILIARES
 
 # ============================================================
-
-
-def _is_blank(value: Any) -> bool:
-    """Determina si un valor está vacío."""
-
-    return value is None or (isinstance(value, str) and value.strip() == "")
 
 
 def _to_decimal(value: Any) -> Decimal | None:
@@ -354,7 +350,7 @@ def _condition_matches(
 
     value = row_values.get(column)
 
-    blank = _is_blank(value)
+    blank = is_blank(value)
 
     if operator == "not_blank":
 
@@ -566,7 +562,7 @@ def _validate_configured_constraints(
 
     issues: list[tuple[str, str]] = []
 
-    if _is_blank(value):
+    if is_blank(value):
 
         return issues
 
@@ -829,15 +825,10 @@ def _build_column_rules(
     dict[str, dict[str, Any]],
 ]:
     """
-
     Construye las reglas interpretadas de las columnas.
 
-
-
     Integra comentarios de Excel, reglas conocidas,
-
-    validations.yaml y catálogos de catalogs.yaml.
-
+    rules.yaml, validations.yaml y catálogos.
     """
 
     rules_by_column: dict[str, ValidationRule] = {}
@@ -853,30 +844,27 @@ def _build_column_rules(
     )
 
     if not isinstance(validations_by_column, dict):
-
         raise ValueError(
             f"Las validaciones de la hoja '{sheet_name}' " "deben ser un diccionario."
         )
 
     if not isinstance(catalogs, dict):
-
         raise ValueError(
             f"Los catálogos de la hoja '{sheet_name}' " "deben ser un diccionario."
         )
 
     # --------------------------------------------------------
-
     # PROCESAR CADA COLUMNA
-
     # --------------------------------------------------------
 
     for header in headers:
 
         column_name = header.column_name
 
-        # 1. Interpretar el comentario de Excel.
+        # ----------------------------------------------------
+        # 1. INTERPRETAR EL COMENTARIO DE EXCEL
+        # ----------------------------------------------------
 
-    
         rule = interpret_comment(
             column_name,
             header.comment_text,
@@ -884,15 +872,37 @@ def _build_column_rules(
             sheet_name=sheet_name,
         )
 
-        # Las reglas explícitas de rules.yaml prevalecen
-        # sobre el tipo inferido desde el comentario de Excel.
-        configured_rules = sheet_configuration.get("rules", {})
-        configured_rule = configured_rules.get(column_name, {})
+        # ----------------------------------------------------
+        # 2. APLICAR REGLAS EXPLICITAS DE rules.yaml
+        # ----------------------------------------------------
+
+        configured_rules = sheet_configuration.get(
+            "rules",
+            {},
+        )
+
+        configured_rule = configured_rules.get(
+            column_name,
+            {},
+        )
 
         if isinstance(configured_rule, dict):
+
             configured_datatype = configured_rule.get("datatype")
 
+            configured_required = configured_rule.get("required")
+
+            configured_allowed_values = configured_rule.get("allowed_values")
+
+            # A. OBLIGATORIEDAD
+
+            if isinstance(configured_required, bool):
+                rule.required = configured_required
+
+            # B. TIPO DE DATO
+
             if isinstance(configured_datatype, str):
+
                 configured_datatype = configured_datatype.strip().lower()
 
                 datatype_map = {
@@ -907,9 +917,91 @@ def _build_column_rules(
                 if configured_datatype in datatype_map:
                     rule.datatype = datatype_map[configured_datatype]
 
+            # C. VALORES PERMITIDOS
+
+            if configured_allowed_values is not None:
+
+                if not isinstance(
+                    configured_allowed_values,
+                    list,
+                ):
+                    raise ValueError(
+                        f"'allowed_values' de '{column_name}' "
+                        f"en la hoja '{sheet_name}' "
+                        "debe ser una lista."
+                    )
+
+            parsed_configured_values = []
+            seen_codes = set()
+
+            for index, item in enumerate(configured_allowed_values):
+
+                # Se admiten catálogos simples (1, "texto") y
+                # estructurados ({code, label}).
+                if isinstance(item, dict):
+                    code = item.get("code")
+                    label = item.get("label")
+
+                    if (
+                        code is None
+                        or not isinstance(label, str)
+                        or not label.strip()
+                    ):
+                        raise ValueError(
+                            f"El elemento {index + 1} de "
+                            f"'allowed_values' de '{column_name}' "
+                            "debe contener 'code' y un 'label' no vacío."
+                        )
+
+                    code = str(code).strip()
+                    label = label.strip()
+
+                elif isinstance(item, bool) or not isinstance(
+                    item,
+                    (str, int, float),
+                ):
+                    raise ValueError(
+                        f"Los valores de 'allowed_values' "
+                        f"de '{column_name}' deben ser "
+                        "texto, numéricos o diccionarios con code y label."
+                    )
+
+                else:
+                    code = str(item).strip()
+                    label = code
+
+                if not code:
+                    raise ValueError(
+                        f"'allowed_values' de "
+                        f"'{column_name}' no puede contener "
+                        "códigos vacíos."
+                    )
+
+                if code in seen_codes:
+                    raise ValueError(
+                        f"El código '{code}' está duplicado "
+                        f"en 'allowed_values' de "
+                        f"'{column_name}'."
+                    )
+
+                seen_codes.add(code)
+
+                parsed_configured_values.append(
+                    AllowedValue(
+                        code=code,
+                        label=label,
+                    )
+                )
+
+            # La configuración explícita de rules.yaml
+            # prevalece sobre la inferida del comentario.
+
+            rule.allowed_values = parsed_configured_values    
 
 
-        # 2. Obtener las validaciones configuradas.
+        # ----------------------------------------------------
+        # 3. OBTENER VALIDACIONES DE validations.yaml
+        # ----------------------------------------------------
 
         validation = validations_by_column.get(
             column_name,
@@ -917,7 +1009,6 @@ def _build_column_rules(
         )
 
         if not isinstance(validation, dict):
-
             raise ValueError(
                 f"La validación de '{column_name}' "
                 f"en la hoja '{sheet_name}' debe ser "
@@ -925,9 +1016,7 @@ def _build_column_rules(
             )
 
         # ----------------------------------------------------
-
-        # 3. Cargar valores expresamente excluidos.
-
+        # 4. CARGAR VALORES EXPRESAMENTE EXCLUIDOS
         # ----------------------------------------------------
 
         configured_excluded_values = validation.get(
@@ -935,38 +1024,44 @@ def _build_column_rules(
             [],
         )
 
-        if not isinstance(configured_excluded_values, list):
-
+        if not isinstance(
+            configured_excluded_values,
+            list,
+        ):
             raise ValueError(
                 f"'excluded_values' de '{column_name}' "
-                f"en la hoja '{sheet_name}' debe ser una lista."
+                f"en la hoja '{sheet_name}' debe ser "
+                "una lista."
             )
 
         parsed_excluded_values: list[str] = []
 
         for index, item in enumerate(configured_excluded_values):
 
-            if isinstance(item, bool) or not isinstance(item, (str, int, float)):
-
+            if isinstance(item, bool) or not isinstance(
+                item,
+                (str, int, float),
+            ):
                 raise ValueError(
-                    f"El elemento {index + 1} de 'excluded_values' "
-                    f"en '{column_name}' debe ser texto o numérico."
+                    f"El elemento {index + 1} de "
+                    f"'excluded_values' en '{column_name}' "
+                    "debe ser texto o numérico."
                 )
 
             excluded_value = str(item).strip()
 
             if not excluded_value:
-
                 raise ValueError(
-                    f"El elemento {index + 1} de 'excluded_values' "
-                    f"en '{column_name}' no puede estar vacío."
+                    f"El elemento {index + 1} de "
+                    f"'excluded_values' en '{column_name}' "
+                    "no puede estar vacío."
                 )
 
             if excluded_value in parsed_excluded_values:
-
                 raise ValueError(
-                    f"El valor '{excluded_value}' está duplicado "
-                    f"en 'excluded_values' de '{column_name}'."
+                    f"El valor '{excluded_value}' está "
+                    "duplicado en 'excluded_values' de "
+                    f"'{column_name}'."
                 )
 
             parsed_excluded_values.append(excluded_value)
@@ -974,9 +1069,7 @@ def _build_column_rules(
         rule.excluded_values = parsed_excluded_values
 
         # ----------------------------------------------------
-
-        # 4. Complementar el tipo y los formatos de fecha.
-
+        # 5. COMPLEMENTAR TIPO Y FORMATOS DE FECHA
         # ----------------------------------------------------
 
         if "format" in validation:
@@ -987,10 +1080,10 @@ def _build_column_rules(
                 not isinstance(item, str) or not item.strip()
                 for item in configured_formats
             ):
-
                 raise ValueError(
-                    f"'format' de '{column_name}' debe contener "
-                    "uno o varios formatos de fecha válidos."
+                    f"'format' de '{column_name}' debe "
+                    "contener uno o varios formatos "
+                    "de fecha válidos."
                 )
 
             if rule.datatype == DataType.UNKNOWN:
@@ -1000,12 +1093,12 @@ def _build_column_rules(
             elif rule.datatype != DataType.DATE:
 
                 message = (
-                    "La configuración de formato de fecha entra "
-                    "en conflicto con el tipo de dato interpretado."
+                    "La configuración de formato de fecha "
+                    "entra en conflicto con el tipo de dato "
+                    "interpretado."
                 )
 
                 if message not in rule.unparsed_fragments:
-
                     rule.unparsed_fragments.append(message)
 
             if rule.datatype == DataType.DATE:
@@ -1017,72 +1110,73 @@ def _build_column_rules(
                 elif set(rule.date_formats) != set(configured_formats):
 
                     message = (
-                        "Los formatos de fecha del comentario "
-                        "no coinciden con los configurados "
-                        "en validations.yaml."
+                        "Los formatos de fecha del "
+                        "comentario no coinciden con "
+                        "los configurados en "
+                        "validations.yaml."
                     )
 
                     if message not in rule.unparsed_fragments:
-
                         rule.unparsed_fragments.append(message)
 
         # ----------------------------------------------------
-
-        # 5. Cargar valores permitidos definidos directamente.
-
+        # 6. CARGAR allowed_values DE validations.yaml
         # ----------------------------------------------------
 
-        configured_allowed_values = validation.get("allowed_values")
+        configured_validation_allowed_values = validation.get("allowed_values")
 
-        if configured_allowed_values is not None:
+        if configured_validation_allowed_values is not None:
 
-            if not isinstance(configured_allowed_values, list):
-
+            if not isinstance(
+                configured_validation_allowed_values,
+                list,
+            ):
                 raise ValueError(
-                    f"'allowed_values' de '{column_name}' "
-                    f"en la hoja '{sheet_name}' debe ser una lista."
+                    f"'allowed_values' de "
+                    f"'{column_name}' en la hoja "
+                    f"'{sheet_name}' debe ser una lista."
                 )
 
             parsed_allowed_values: list[AllowedValue] = []
 
             seen_codes: set[str] = set()
 
-            for index, item in enumerate(configured_allowed_values):
+            for index, item in enumerate(configured_validation_allowed_values):
 
                 if not isinstance(item, dict):
-
                     raise ValueError(
-                        f"El elemento {index + 1} de 'allowed_values' "
-                        f"en '{column_name}' debe ser un diccionario."
+                        f"El elemento {index + 1} de "
+                        "'allowed_values' en "
+                        f"'{column_name}' debe ser "
+                        "un diccionario."
                     )
 
                 code = item.get("code")
-
                 label = item.get("label")
 
                 if code is None or not isinstance(label, str) or not label.strip():
-
                     raise ValueError(
-                        f"El elemento {index + 1} de 'allowed_values' "
-                        f"en '{column_name}' debe contener "
+                        f"El elemento {index + 1} de "
+                        "'allowed_values' en "
+                        f"'{column_name}' debe contener "
                         "'code' y un 'label' no vacío."
                     )
 
                 code = str(code).strip()
 
                 if not code:
-
                     raise ValueError(
-                        f"El código del elemento {index + 1} "
-                        f"de 'allowed_values' en '{column_name}' "
+                        f"El código del elemento "
+                        f"{index + 1} de 'allowed_values' "
+                        f"en '{column_name}' "
                         "no puede estar vacío."
                     )
 
                 if code in seen_codes:
-
                     raise ValueError(
-                        f"El código '{code}' está duplicado en "
-                        f"'allowed_values' de '{column_name}'."
+                        f"El código '{code}' está "
+                        "duplicado en 'allowed_values' "
+                        f"de '{column_name}'."
                     )
 
                 seen_codes.add(code)
@@ -1094,14 +1188,15 @@ def _build_column_rules(
                     )
                 )
 
-            if not rule.allowed_values:
+            # No sobrescribir los valores que ya fueron
+            # definidos explícitamente en rules.yaml
+            # o inferidos desde el comentario.
 
+            if not rule.allowed_values:
                 rule.allowed_values = parsed_allowed_values
 
         # ----------------------------------------------------
-
-        # 6. Cargar el catálogo configurado para la columna.
-
+        # 7. CARGAR CATÁLOGO CONFIGURADO
         # ----------------------------------------------------
 
         catalog_name = validation.get("catalog")
@@ -1109,20 +1204,19 @@ def _build_column_rules(
         if catalog_name is not None:
 
             if not isinstance(catalog_name, str) or not catalog_name.strip():
-
                 raise ValueError(
                     f"El catálogo de '{column_name}' "
-                    f"en la hoja '{sheet_name}' debe tener "
-                    "un nombre válido."
+                    f"en la hoja '{sheet_name}' "
+                    "debe tener un nombre válido."
                 )
 
             catalog_name = catalog_name.strip()
 
             if catalog_name not in catalogs:
-
                 raise ValueError(
-                    f"No existe la configuración del catálogo "
-                    f"'{catalog_name}' para la hoja '{sheet_name}'."
+                    f"No existe la configuración del "
+                    f"catálogo '{catalog_name}' para "
+                    f"la hoja '{sheet_name}'."
                 )
 
             rule.allowed_values = load_catalog(
@@ -1131,18 +1225,19 @@ def _build_column_rules(
             )
 
         # ----------------------------------------------------
-
-        # 7. Guardar la regla de esta columna.
-
+        # 8. REGISTRAR LA REGLA DE LA COLUMNA
         # ----------------------------------------------------
 
         rules_by_column[column_name] = rule
 
     # --------------------------------------------------------
-
-    # RETORNAR LAS REGLAS DE TODAS LAS COLUMNAS
-
+    # RETORNAR REGLAS Y VALIDACIONES
     # --------------------------------------------------------
+
+    return (
+        rules_by_column,
+        validations_by_column,
+    )
 
     return rules_by_column, validations_by_column
 
@@ -1204,21 +1299,16 @@ def _has_invalid_headers(
     header_issues: list[dict[str, Any]],
 ) -> bool:
     """
+    Determina si existen encabezados duplicados que impiden
+    interpretar de forma segura las columnas de la hoja.
 
-    Determina si existen encabezados que impiden validar las filas.
-
-
-
-    No depende exclusivamente del texto del mensaje.
-
+    Los encabezados vacíos se reportan como errores estructurales,
+    pero no impiden validar las columnas que sí tienen nombre.
     """
 
     return any(
         issue.get("severity") == "error"
-        and (
-            "duplicado" in issue.get("message", "").lower()
-            or issue.get("column_name") == "__ENCABEZADO_VACIO__"
-        )
+        and "duplicado" in issue.get("message", "").lower()
         for issue in header_issues
     )
 
@@ -1500,8 +1590,6 @@ def validate_workbook(
             sheet_configuration,
             configuration,
         )
-        
-
 
         column_types_by_sheet[ws.title] = {
             column_name: rule.datatype for column_name, rule in rules_by_column.items()
@@ -1633,7 +1721,7 @@ def validate_workbook(
 
                 row_values[header.column_name] = cell.value
 
-                if not _is_blank(cell.value):
+                if not is_blank(cell.value):
 
                     is_empty_row = False
 

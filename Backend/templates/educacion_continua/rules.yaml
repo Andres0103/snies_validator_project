@@ -1,0 +1,112 @@
+# Educación Continua
+# Fuente: Manual MEN v8.12, sección 11.2, páginas 145-146.
+
+sheets:
+
+  EDUCACION_CONTINUA:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    CODIGO_CURSO:
+      datatype: alphanumeric
+      required: true
+      max_length: 20
+
+    NUM_HORAS:
+      datatype: integer
+      required: true
+      max_length: 5
+
+    ID_TIPO_CURSO_EXTENSION:
+      datatype: integer
+      required: true
+      max_length: 2
+      allowed_values: [1, 2, 3, 4, 5]
+
+    VALOR_CURSO:
+      datatype: integer
+      required: true
+      max_length: 9
+
+
+  EDUCACION_CONTINUA_DOCENTES:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    CODIGO_CURSO:
+      datatype: alphanumeric
+      required: true
+      max_length: 20
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 2
+      allowed_values: [CC, DE, CE, PS, CA, PT]
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+
+    FECHA_NACIMIENTO:
+      datatype: date
+      required: false
+
+    PAIS NACIMIENTO:
+      datatype: integer
+      required: false
+      max_length: 3
+
+    MUNICIPIO NACIMIENTO:
+      datatype: integer
+      required: false
+      max_length: 5
+
+
+  EDUCAC_CONTINUA_BENEFICIARIOS:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    CODIGO_CURSO:
+      datatype: alphanumeric
+      required: true
+      max_length: 20
+
+    ID_TIPO_BENEF_EXTENSION:
+      datatype: integer
+      required: true
+      max_length: 2
+      allowed_values: [1, 2, 3, 4, 5]
+
+    CANTIDAD_BENEFICIARIOS:
+      datatype: integer
+      required: true
+      max_length: 10

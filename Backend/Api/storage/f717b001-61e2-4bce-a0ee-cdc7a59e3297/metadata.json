@@ -1,0 +1,32 @@
+{
+  "id": "f717b001-61e2-4bce-a0ee-cdc7a59e3297",
+  "plantilla": "EDUCACION_CONTINUA",
+  "plantillas": [
+    "EDUCACION_CONTINUA"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-19T16:41:19.435380+00:00",
+  "iniciado_en": "2026-11-19T16:41:19.507400+00:00",
+  "finalizado_en": "2026-11-19T16:41:53.349215+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 3476,
+  "total_advertencias": 2648,
+  "archivos": [
+    {
+      "nombre_archivo": "Educacion_continua_2025-2.xlsx",
+      "plantilla": "EDUCACION_CONTINUA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Educacion_continua_2025-2_marcado.xlsx",
+      "total_errores": 3476,
+      "total_advertencias": 2648
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

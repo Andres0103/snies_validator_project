@@ -40,7 +40,7 @@ sheets:
     DESCRIPCION_CONSULTORIA:
       datatype: alphanumeric
       required: true
-      max_length: 200
+      max_length: 400
       description: "Descripción de la consultoría."
 
     ID_CINE_CAMPO_DETALLADO:
