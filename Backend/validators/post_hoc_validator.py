@@ -931,73 +931,71 @@ def _build_column_rules(
                         "debe ser una lista."
                     )
 
-            parsed_configured_values = []
-            seen_codes = set()
+                parsed_configured_values = []
+                seen_codes = set()
 
-            for index, item in enumerate(configured_allowed_values):
+                for index, item in enumerate(configured_allowed_values):
 
-                # Se admiten catálogos simples (1, "texto") y
-                # estructurados ({code, label}).
-                if isinstance(item, dict):
-                    code = item.get("code")
-                    label = item.get("label")
+                    # Se admiten catálogos simples (1, "texto") y
+                    # estructurados ({code, label}).
+                    if isinstance(item, dict):
+                        code = item.get("code")
+                        label = item.get("label")
 
-                    if (
-                        code is None
-                        or not isinstance(label, str)
-                        or not label.strip()
+                        if (
+                            code is None
+                            or not isinstance(label, str)
+                            or not label.strip()
+                        ):
+                            raise ValueError(
+                                f"El elemento {index + 1} de "
+                                f"'allowed_values' de '{column_name}' "
+                                "debe contener 'code' y un 'label' no vacío."
+                            )
+
+                        code = str(code).strip()
+                        label = label.strip()
+
+                    elif isinstance(item, bool) or not isinstance(
+                        item,
+                        (str, int, float),
                     ):
                         raise ValueError(
-                            f"El elemento {index + 1} de "
-                            f"'allowed_values' de '{column_name}' "
-                            "debe contener 'code' y un 'label' no vacío."
+                            f"Los valores de 'allowed_values' "
+                            f"de '{column_name}' deben ser "
+                            "texto, numéricos o diccionarios con code y label."
                         )
 
-                    code = str(code).strip()
-                    label = label.strip()
+                    else:
+                        code = str(item).strip()
+                        label = code
 
-                elif isinstance(item, bool) or not isinstance(
-                    item,
-                    (str, int, float),
-                ):
-                    raise ValueError(
-                        f"Los valores de 'allowed_values' "
-                        f"de '{column_name}' deben ser "
-                        "texto, numéricos o diccionarios con code y label."
+                    if not code:
+                        raise ValueError(
+                            f"'allowed_values' de "
+                            f"'{column_name}' no puede contener "
+                            "códigos vacíos."
+                        )
+
+                    if code in seen_codes:
+                        raise ValueError(
+                            f"El código '{code}' está duplicado "
+                            f"en 'allowed_values' de "
+                            f"'{column_name}'."
+                        )
+
+                    seen_codes.add(code)
+
+                    parsed_configured_values.append(
+                        AllowedValue(
+                            code=code,
+                            label=label,
+                        )
                     )
 
-                else:
-                    code = str(item).strip()
-                    label = code
-
-                if not code:
-                    raise ValueError(
-                        f"'allowed_values' de "
-                        f"'{column_name}' no puede contener "
-                        "códigos vacíos."
-                    )
-
-                if code in seen_codes:
-                    raise ValueError(
-                        f"El código '{code}' está duplicado "
-                        f"en 'allowed_values' de "
-                        f"'{column_name}'."
-                    )
-
-                seen_codes.add(code)
-
-                parsed_configured_values.append(
-                    AllowedValue(
-                        code=code,
-                        label=label,
-                    )
-                )
-
-            # La configuración explícita de rules.yaml
-            # prevalece sobre la inferida del comentario.
-
-            rule.allowed_values = parsed_configured_values    
-
+                # La configuración explícita de rules.yaml
+                # prevalece sobre la inferida del comentario.
+                rule.allowed_values = parsed_configured_values
 
         # ----------------------------------------------------
         # 3. OBTENER VALIDACIONES DE validations.yaml
