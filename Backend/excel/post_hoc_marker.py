@@ -8,6 +8,7 @@ from collections import defaultdict
 from openpyxl.comments import Comment
 from openpyxl.styles import PatternFill
 from openpyxl.workbook.workbook import Workbook
+from openpyxl.cell.cell import MergedCell
 
 from excel.reader import read_headers
 from validators.post_hoc_validator import SheetValidationResult
@@ -35,6 +36,54 @@ def mark_workbook(
     Los errores tienen prioridad sobre las advertencias cuando
     una misma celda presenta ambas incidencias.
     """
+    
+        # --------------------------------------------------------
+    # LIMPIAR MARCAS DE VALIDACIONES ANTERIORES
+    # --------------------------------------------------------
+
+    generated_fill_colors = {
+        "FCE4E4",  # Error
+        "FFF2CC",  # Advertencia
+    }
+
+    for ws in workbook.worksheets:
+
+        for row in ws.iter_rows():
+
+            for cell in row:
+
+                # Limpiar únicamente los colores que utiliza
+                # este marcador para errores y advertencias.
+                if cell.fill.fill_type == "solid":
+
+                    color = cell.fill.fgColor
+
+                    if color.type == "rgb" and color.rgb:
+
+                        rgb = color.rgb[-6:].upper()
+
+                        if rgb in generated_fill_colors:
+                            cell.fill = PatternFill(fill_type=None)
+
+                # Retirar exclusivamente la sección generada
+                # por el validador de comentarios existentes.
+                if cell.comment and MARKER_COMMENT in cell.comment.text:
+
+                    previous_text = cell.comment.text.split(
+                        MARKER_COMMENT,
+                        1,
+                    )[0].strip()
+
+                    if previous_text:
+
+                        cell.comment = Comment(
+                            previous_text,
+                            cell.comment.author or "Usuario",
+                        )
+
+                    else:
+
+                        cell.comment = None
 
     for sheet_result in results:
 
@@ -72,6 +121,11 @@ def mark_workbook(
         for coordinate, issues in issues_by_cell.items():
 
             cell = ws[coordinate]
+
+            # Las celdas secundarias de rangos combinados
+            # no permiten asignar comentarios.
+            if isinstance(cell, MergedCell):
+                continue
 
             has_error = any(
                 issue.severity.lower() == "error"
