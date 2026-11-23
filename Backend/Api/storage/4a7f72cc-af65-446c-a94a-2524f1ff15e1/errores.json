@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 51,
+      "columna": "NOMBRE_CURSO",
+      "valor": "Introducción al lenguaje y al pensamiento matemático grado 4° y 5°",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 218,
+      "columna": "NOMBRE_CURSO",
+      "valor": "54° Simposio Internacional, Odontología adhesiva: innovación y precisión restaurativa",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 283,
+      "columna": "NOMBRE_CURSO",
+      "valor": "Programa Multilingua -2025-2 / Tarde de juegos + Conversación en Italiano",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 285,
+      "columna": "NOMBRE_CURSO",
+      "valor": "Programa Multilingua -2025-2 / Tarde de juegos en Italiano + Conversación",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 351,
+      "columna": "NOMBRE_CURSO",
+      "valor": "Fisiología y prescripción del ejercicio Fitness +",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 431,
+      "columna": "NOMBRE_CURSO",
+      "valor": "Análisis y Visualización de Datos con Power BI + Excel (Power Pivot)",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 643,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "#N/D",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2_marcado_1_.xlsx",
+      "hoja": "CURSO",
+      "fila": 643,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "#N/D",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    }
+  ]
+}

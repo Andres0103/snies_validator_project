@@ -1,0 +1,20 @@
+{
+  "archivos": [
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\a64d1854-afea-4a67-9968-93817f90e4a8\\originales\\CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026.xlsx"
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\a64d1854-afea-4a67-9968-93817f90e4a8\\originales\\CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026.xlsx"
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_18122025.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\a64d1854-afea-4a67-9968-93817f90e4a8\\originales\\CONSULTOR_A_VRE_18122025.xlsx"
+    },
+    {
+      "nombre_archivo": "Cursos_2025-2.xlsx",
+      "ruta": "C:\\Users\\c.diaz3\\Documents\\snies_validator_project\\backend\\api\\storage\\a64d1854-afea-4a67-9968-93817f90e4a8\\originales\\Cursos_2025-2.xlsx"
+    }
+  ]
+}

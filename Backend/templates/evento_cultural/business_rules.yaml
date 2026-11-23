@@ -34,7 +34,7 @@ CODIGO_EVENTO:
 FECHA_FINAL:
   kind: date_after_column
   after_column: FECHA_INICIO
-  strict: true
+  strict: false
   message: >
     La fecha final debe ser estrictamente posterior
-    a la fecha de inicio.
+    la fecha de inicio.

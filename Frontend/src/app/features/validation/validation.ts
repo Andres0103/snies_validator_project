@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, inject, HostListener } from '@angular/core';
 
 import { EMPTY, Subscription, timer, firstValueFrom } from 'rxjs';
 
@@ -65,6 +65,9 @@ export class Validation implements OnDestroy {
   // Errores y advertencias encontrados.
   issues: ValidationIssue[] = [];
 
+  // Indica si el usuario se ha desplazado
+  // lo suficiente para mostrar el botón de subir.
+  showScrollTopButton = false;
 
   // =====================================================
   // FILTROS DE INCIDENCIAS
@@ -389,6 +392,11 @@ export class Validation implements OnDestroy {
 
         // Comenzamos a consultar el progreso.
         this.startPolling(response.id);
+
+        // Nos desplazamos a la sección del proceso.
+        window.setTimeout(() => {
+          this.scrollToResults();
+        }, 100);
       },
 
       error: (error) => {
