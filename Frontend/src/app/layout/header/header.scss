@@ -1,13 +1,14 @@
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 24px;
+  gap: 32px;
 
   width: 100%;
-  min-height: 70px;
-  padding: 0 30px;
+  min-height: 76px;
+  padding: 14px 30px;
 
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
@@ -16,10 +17,43 @@
 .header-title {
   display: flex;
   flex-direction: column;
-  gap: 5px;
 
   min-width: 0;
-  flex: 1;
+  gap: 4px;
+}
+
+.header-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-indicator {
+  width: 4px;
+  height: 24px;
+  flex-shrink: 0;
+
+  background-color: var(--color-primary);
+  border-radius: 4px;
+}
+
+.header-title h1 {
+  margin: 0;
+
+  color: var(--color-text);
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.header-title p {
+  margin: 0;
+  padding-left: 14px;
+
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .header-actions {
@@ -32,25 +66,101 @@
 .institution-info {
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 12px;
 
-  min-width: 0;
+  padding-left: 0;
+  border-left: none;
+}
 
-  padding-left: 20px;
-  border-left: 1px solid var(--color-border);
+.institution-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+
+  border-radius: 11px;
+
+  font-size: 17px;
 }
 
 .institution-text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
 
+  gap: 4px;
   min-width: 0;
 }
 
-.institution-name,
+.institution-name {
+  color: var(--color-text);
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
 .institution-caption {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: var(--color-text-secondary);
+
+  font-size: 10px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 768px) {
+  .header {
+    min-height: 70px;
+    padding: 12px 20px;
+    gap: 20px;
+  }
+
+  .header-title h1 {
+    font-size: 21px;
+  }
+
+  .institution-caption {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 12px 15px;
+    gap: 12px;
+  }
+
+  .header-title h1 {
+    font-size: 18px;
+  }
+
+  .header-title p {
+    max-width: 220px;
+
+    font-size: 10px;
+  }
+
+  .institution-info {
+    gap: 8px;
+  }
+
+  .institution-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+    font-size: 14px;
+  }
+
+  .institution-name {
+    max-width: 115px;
+
+    font-size: 10px;
+  }
 }

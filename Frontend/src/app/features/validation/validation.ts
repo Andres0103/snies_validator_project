@@ -795,8 +795,33 @@ export class Validation implements OnDestroy, AfterViewInit {
   // DESPLAZARSE A LA CARGA DE ARCHIVOS
   // =====================================================
 
+  /*scrollToUpload(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }*/
+
   scrollToUpload(): void {
-    this.scrollToElement('upload-section', 'center');
+    const uploadSection = document.getElementById('upload-section');
+    const scrollContainer = document.querySelector('.page-content') as HTMLElement;
+
+    if (!uploadSection || !scrollContainer) {
+      console.warn('[FRONT] No se encontró la sección de carga o el contenedor.');
+      return;
+    }
+
+    const containerRect = scrollContainer.getBoundingClientRect();
+    const elementRect = uploadSection.getBoundingClientRect();
+
+    const offset = 380;
+
+    const targetPosition = scrollContainer.scrollTop + elementRect.top - containerRect.top - offset;
+
+    scrollContainer.scrollTo({
+      top: Math.max(0, targetPosition),
+      behavior: 'smooth',
+    });
   }
 
   // Desplazamos explícitamente el contenedor .page-content,

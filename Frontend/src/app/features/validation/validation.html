@@ -121,6 +121,10 @@
        ARCHIVOS SELECCIONADOS
   ====================================================== -->
 
+  <!-- =====================================================
+     ARCHIVOS SELECCIONADOS
+====================================================== -->
+
   <div class="card files-card mt-4">
     <div class="card-header">
       <div>
@@ -128,7 +132,10 @@
         <span>Archivos preparados para la validación</span>
       </div>
 
-      <span class="badge text-bg-secondary"> {{ selectedFiles.length }} archivos </span>
+      <span class="badge text-bg-secondary">
+        {{ selectedFiles.length }}
+        {{ selectedFiles.length === 1 ? 'archivo' : 'archivos' }}
+      </span>
     </div>
 
     <div class="card-body">
@@ -148,31 +155,37 @@
         <div class="file-list">
           @for (file of selectedFiles; track file.name + file.lastModified) {
             <div class="file-item">
-              <div class="file-information">
+              <!-- PARTE SUPERIOR -->
+              <div class="file-item-top">
                 <div class="file-icon">
                   <i class="bi bi-file-earmark-excel"></i>
                 </div>
 
-                <div class="file-details">
-                  <span class="file-name">
-                    {{ file.name }}
-                  </span>
-
-                  <span class="file-size"> {{ (file.size / 1024 / 1024).toFixed(2) }} MB </span>
-                </div>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  [disabled]="isUploading || isProcessing"
+                  (click)="removeFile($index)"
+                  aria-label="Eliminar archivo"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
               </div>
 
-              <!-- ELIMINAR ARCHIVO SELECCIONADO -->
+              <!-- INFORMACIÓN -->
+              <div class="file-details">
+                <span class="file-name">
+                  {{ file.name }}
+                </span>
 
-              <button
-                type="button"
-                class="btn btn-sm btn-outline-danger"
-                [disabled]="isUploading || isProcessing"
-                (click)="removeFile($index)"
-                aria-label="Eliminar archivo"
-              >
-                <i class="bi bi-trash"></i>
-              </button>
+                <span class="file-size"> {{ (file.size / 1024 / 1024).toFixed(2) }} MB </span>
+              </div>
+
+              <!-- ESTADO -->
+              <div class="file-status">
+                <i class="bi bi-check-circle"></i>
+                <span>Archivo preparado</span>
+              </div>
             </div>
           }
         </div>
@@ -294,55 +307,59 @@
         </div>
 
         <!-- =================================================
-             ARCHIVOS PROCESADOS
-        ================================================== -->
+     ARCHIVOS PROCESADOS
+================================================== -->
 
         <div class="mt-4">
-          <h6>Archivos procesados</h6>
+          <h6 class="results-section-title">Archivos procesados</h6>
 
           @if (validationResult.archivos.length === 0) {
             <p class="text-muted">Todavía no hay archivos procesados para mostrar.</p>
           } @else {
             @for (file of validationResult.archivos; track file.nombre_archivo) {
-              <div class="file-item mt-2">
-                <div class="file-information">
-                  <div class="file-icon">
+              <div class="file-result-card mt-3">
+                <!-- INFORMACIÓN DEL ARCHIVO -->
+                <div class="file-result-information">
+                  <div class="file-result-icon">
                     <i class="bi bi-file-earmark-excel"></i>
                   </div>
 
-                  <div class="file-details">
-                    <span class="file-name">
+                  <div class="file-result-details">
+                    <span class="file-result-name">
                       {{ file.nombre_archivo }}
                     </span>
 
-                    <span class="file-size">
+                    <span class="file-result-template">
                       Plantilla detectada:
-
                       <strong>
                         {{ file.plantilla || 'No identificada' }}
                       </strong>
                     </span>
 
-                    <span class="file-size">
-                      {{ file.total_errores }} errores |
+                    <div class="file-result-summary">
+                      <span class="file-result-errors"> {{ file.total_errores }} errores </span>
 
-                      {{ file.total_advertencias }} advertencias
-                    </span>
+                      <span class="file-result-separator">|</span>
+
+                      <span class="file-result-warnings">
+                        {{ file.total_advertencias }} advertencias
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <!-- DESCARGAR EXCEL MARCADO -->
-
+                <!-- DESCARGA -->
                 @if (file.archivo_marcado && !isProcessing) {
-                  <button
-                    type="button"
-                    class="btn btn-outline-success btn-sm"
-                    (click)="downloadMarkedFile(file.archivo_marcado)"
-                  >
-                    <i class="bi bi-download me-1"></i>
-
-                    Excel marcado
-                  </button>
+                  <div class="file-result-actions">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success btn-sm"
+                      (click)="downloadMarkedFile(file.archivo_marcado)"
+                    >
+                      <i class="bi bi-download me-2"></i>
+                      Excel marcado
+                    </button>
+                  </div>
                 }
               </div>
             }
@@ -371,26 +388,27 @@
           </div>
         }
 
-        <!-- =================================================
-             DESCARGAR REPORTE CONSOLIDADO
+        <!-- ================================================= 
+              ACCIONES DE RESULTADOS
         ================================================== -->
 
-        @if (!isProcessing && validationResult.reporte_disponible) {
-          <button type="button" class="btn btn-outline-success mt-4" (click)="downloadReport()">
-            <i class="bi bi-file-earmark-arrow-down me-2"></i>
-
-            Descargar reporte consolidado
-          </button>
-
-          <!-- VOLVER A LA ZONA DE CARGA -->
-
-          <div class="mt-4">
-            <button type="button" class="btn btn-outline-success" (click)="scrollToUpload()">
-              <i class="bi bi-arrow-up-circle me-2"></i>
-              Volver a cargar archivos
+        <div class="validation-result-actions mt-4">
+          <!-- DESCARGAR REPORTE -->
+          @if (!isProcessing && validationResult.reporte_disponible) {
+            <button type="button" class="btn btn-result-primary" (click)="downloadReport()">
+              <i class="bi bi-file-earmark-arrow-down"></i>
+              <span>Descargar reporte consolidado</span>
             </button>
-          </div>
-        }
+          }
+
+          <!-- VOLVER A CARGAR -->
+          <button type="button" class="btn btn-result-secondary" (click)="scrollToUpload()">
+            <i class="bi bi-arrow-up-circle"></i>
+            <span>Volver a cargar archivos</span>
+          </button>
+        </div>
+
+        <!-- FIN DE VALIDATION PAGE -->
       </div>
     </div>
   }
