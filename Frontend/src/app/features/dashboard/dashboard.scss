@@ -90,51 +90,72 @@
 
 
 /* =========================================================
-   INDICADORES PRINCIPALES
+   REDISEÑO NEBULA — TARJETAS DE MÉTRICAS
 ========================================================= */
 
 .metrics-section {
-  margin-bottom: 34px;
+  margin-bottom: 36px;
 }
 
 .metrics-section > .row {
   align-items: stretch;
 }
 
-.metrics-section [class*="col-"] {
+.metrics-section [class*='col-'] {
   display: flex;
 }
 
 .metric-card {
+  position: relative;
+
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
+  align-items: center;
+  gap: 18px;
+
   width: 100%;
-  min-height: 142px;
-  padding: 22px;
-  background: #fff;
-  border: 1px solid var(--dashboard-border);
-  border-radius: 13px;
-  box-shadow: 0 3px 12px rgba(26, 50, 70, 0.045);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 138px;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e3ebe6;
+  border-radius: 16px;
+
+  box-shadow: 0 2px 8px rgba(23, 43, 61, 0.025);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .metric-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(26, 50, 70, 0.08);
+  transform: translateY(-3px);
+
+  border-color: #cbded2;
+
+  box-shadow: 0 8px 22px rgba(23, 43, 61, 0.06);
 }
+
+/* ICONOS */
 
 .metric-icon {
   display: flex;
-  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--dashboard-primary-light);
-  color: var(--dashboard-primary);
-  font-size: 22px;
+
+  flex-shrink: 0;
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 14px;
+
+  background: #e8f4ed;
+  color: #176b49;
+
+  font-size: 21px;
 }
 
 .metric-icon.success {
@@ -143,35 +164,83 @@
 }
 
 .metric-icon.warning {
-  background: #fff3df;
-  color: #c17b16;
+  background: #fff4e3;
+  color: #b7791f;
 }
+
+/* INFORMACIÓN */
 
 .metric-information {
   display: flex;
   flex-direction: column;
+
   min-width: 0;
-  gap: 5px;
+
+  gap: 6px;
 }
 
 .metric-label {
-  color: var(--dashboard-secondary);
+  color: #657b91;
+
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+
+  letter-spacing: 0.2px;
 }
 
+/* VALOR PRINCIPAL */
+
 .metric-value {
-  color: var(--dashboard-text);
-  font-size: 30px;
+  color: #172b3d;
+
+  font-size: 32px;
   font-weight: 750;
-  line-height: 1.2;
+
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+
   font-variant-numeric: tabular-nums;
 }
 
+/* TEXTO SECUNDARIO */
+
 .metric-description {
   color: #8795a3;
+
   font-size: 11px;
   line-height: 1.5;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .metric-card {
+    min-height: 120px;
+    padding: 20px;
+  }
+
+  .metric-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 12px;
+    font-size: 19px;
+  }
+
+  .metric-value {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .metric-card {
+    padding: 18px;
+    gap: 15px;
+  }
+
+  .metric-information {
+    gap: 4px;
+  }
 }
 
 
@@ -552,4 +621,462 @@
   outline: 2px solid #087f65;
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* =========================================================
+   REDISEÑO NEBULA — ENCABEZADO DEL DASHBOARD
+========================================================= */
+
+.welcome-section {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  padding: clamp(22px, 3vw, 34px);
+  margin-bottom: 26px;
+
+  border: 1px solid #dce9e2;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    115deg,
+    #eaf4ee 0%,
+    #f5f8f6 72%,
+    #ffffff 100%
+  );
+}
+
+/* Elemento decorativo */
+.welcome-section::after {
+  content: '';
+
+  position: absolute;
+  right: -55px;
+  top: -85px;
+
+  width: 230px;
+  height: 230px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(23, 107, 73, 0.10);
+
+  box-shadow:
+    0 0 0 28px rgba(23, 107, 73, 0.035),
+    0 0 0 56px rgba(23, 107, 73, 0.025);
+
+  pointer-events: none;
+}
+
+/* Mantiene el contenido por encima de la decoración */
+.welcome-content,
+.welcome-action {
+  position: relative;
+  z-index: 1;
+}
+
+/* Etiqueta superior */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 12px;
+  padding: 5px 9px;
+
+  border: 1px solid #c9e0d3;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  font-size: 10px;
+  letter-spacing: 0.8px;
+}
+
+/* Título */
+.welcome-content h1 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  letter-spacing: -0.7px;
+}
+
+/* Texto descriptivo */
+.welcome-content p {
+  max-width: 620px;
+  font-size: 13px;
+}
+
+/* Acción principal */
+.welcome-action {
+  min-height: 46px;
+  padding: 0 22px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 12px rgba(16, 86, 59, 0.12);
+}
+
+/* Adaptación para tablet */
+@media (max-width: 768px) {
+  .welcome-section {
+    padding: 22px;
+    border-radius: 15px;
+  }
+
+  .welcome-section::after {
+    right: -110px;
+  }
+}
+
+/* Adaptación para móvil */
+@media (max-width: 600px) {
+  .welcome-section {
+    gap: 18px;
+  }
+
+  .welcome-content h1 {
+    font-size: 25px;
+  }
+}
+
+/* =========================================================
+   REDISEÑO NEBULA — ACTIVIDAD RECIENTE
+========================================================= */
+
+/* Encabezado de la sección */
+
+.activity-section {
+  margin-top: 32px;
+}
+
+.section-heading {
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+.section-heading p {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Acceso al historial */
+
+.history-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  border: 1px solid #dce9e2;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: var(--dashboard-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.history-link:hover {
+  background: var(--dashboard-primary-light);
+  border-color: #cbded2;
+
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Contenedor principal */
+
+.activity-card {
+  min-height: 180px;
+
+  border: 1px solid #e3ebe6;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(23, 43, 61, 0.025);
+}
+
+/* Lista */
+
+.recent-activity-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada registro */
+
+.recent-activity-item {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  min-width: 0;
+
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #edf1ee;
+
+  background: #ffffff;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.recent-activity-item:hover {
+  background: #f8fbf9;
+
+  transform: translateX(3px);
+}
+
+.recent-activity-item:last-child {
+  border-bottom: none;
+}
+
+/* Iconos */
+
+.recent-activity-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 14px;
+
+  font-size: 19px;
+}
+
+.recent-activity-icon.success {
+  background: #e8f4ed;
+  color: #198754;
+}
+
+.recent-activity-icon.warning {
+  background: #fff4e3;
+  color: #b7791f;
+}
+
+.recent-activity-icon.danger {
+  background: #fcebec;
+  color: #dc3545;
+}
+
+/* Información */
+
+.recent-activity-information {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+  min-width: 0;
+
+  gap: 5px;
+}
+
+.recent-activity-information strong {
+  color: var(--dashboard-text);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.recent-activity-information span {
+  color: var(--dashboard-secondary);
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.recent-activity-information small {
+  color: #8795a3;
+
+  font-size: 11px;
+}
+
+/* Estado */
+
+.recent-activity-result {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  flex-shrink: 0;
+
+  gap: 8px;
+}
+
+.recent-activity-result .badge {
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+/* Errores y advertencias */
+
+.activity-errors {
+  color: var(--dashboard-secondary);
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  text-align: right;
+}
+
+/* Pie */
+
+.recent-activity-footer {
+  padding: 16px;
+
+  border-top: 1px solid #edf1ee;
+
+  background: #fafcfb;
+}
+
+.load-more-button {
+  padding: 9px 15px;
+
+  border: 1px solid #dce9e2;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: var(--dashboard-primary);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.load-more-button:hover {
+  background: var(--dashboard-primary-light);
+  border-color: #cbded2;
+}
+
+/* =========================================================
+   ESTADO VACÍO
+========================================================= */
+
+.empty-state {
+  padding: 42px 24px;
+}
+
+.empty-state-icon {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 18px;
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .activity-section {
+    margin-top: 26px;
+  }
+
+  .recent-activity-item {
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .recent-activity-item:hover {
+    transform: none;
+  }
+
+  .recent-activity-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+  }
+
+  .recent-activity-information strong {
+    font-size: 12px;
+  }
+
+  .recent-activity-information span {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .section-heading {
+    align-items: flex-start;
+  }
+
+  .section-heading h2 {
+    font-size: 18px;
+  }
+
+  .history-link {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .recent-activity-item {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .recent-activity-information {
+    flex-basis: calc(100% - 60px);
+  }
+
+  .recent-activity-result {
+    width: 100%;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-left: 58px;
+  }
+
+  .activity-errors {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .recent-activity-footer {
+    padding: 12px;
+  }
 }
