@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectorRef, inject, HostListener } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, ChangeDetectorRef, inject } from '@angular/core';
 
 import { EMPTY, Subscription, timer, firstValueFrom } from 'rxjs';
 
@@ -28,7 +28,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './validation.html',
   styleUrl: './validation.scss',
 })
-export class Validation implements OnDestroy {
+export class Validation implements OnDestroy, AfterViewInit {
   // =====================================================
   // DEPENDENCIAS
   // =====================================================
@@ -65,9 +65,14 @@ export class Validation implements OnDestroy {
   // Errores y advertencias encontrados.
   issues: ValidationIssue[] = [];
 
-  // Indica si el usuario se ha desplazado
-  // lo suficiente para mostrar el botón de subir.
-  showScrollTopButton = false;
+  // =====================================================
+  // POSICIONAMIENTO INICIAL DE LA VISTA
+  // =====================================================
+
+  ngAfterViewInit(): void {
+    // Al entrar a la vista, centramos la zona de carga.
+    window.setTimeout(() => this.scrollToUpload(), 100);
+  }
 
   // =====================================================
   // FILTROS DE INCIDENCIAS
@@ -259,8 +264,18 @@ export class Validation implements OnDestroy {
       }
     }
 
-    // Actualizamos la vista.
+    // Actualizamos la vista para reflejar los archivos agregados.
     this.cdr.detectChanges();
+
+    // Si se agregaron archivos válidos, esperamos a que el navegador
+    // termine de actualizar el layout antes de desplazar la vista.
+    if (validFiles.length > 0 && this.selectedFiles.length > 0) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.scrollToActions();
+        });
+      });
+    }
   }
 
   // =====================================================
@@ -761,14 +776,52 @@ export class Validation implements OnDestroy {
   }
 
   // =====================================================
-  // DESPLAZARSE AUTOMÁTICAMENTE A LOS RESULTADOS
+  // DESPLAZAMIENTO DE LA VISTA
   // =====================================================
 
   scrollToResults(): void {
-    // Buscamos el contenedor de resultados en el HTML.
-    document.getElementById('validation-results')?.scrollIntoView({
+    this.scrollToElement('validation-results', 'start');
+  }
+
+  // =====================================================
+  // DESPLAZARSE A LA ZONA DEL BOTÓN DE VALIDACIÓN
+  // =====================================================
+
+  scrollToActions(): void {
+    this.scrollToElement('validation-actions', 'center');
+  }
+
+  // =====================================================
+  // DESPLAZARSE A LA CARGA DE ARCHIVOS
+  // =====================================================
+
+  scrollToUpload(): void {
+    this.scrollToElement('upload-section', 'center');
+  }
+
+  // Desplazamos explícitamente el contenedor .page-content,
+  // que es el elemento que realmente tiene el scroll en el layout.
+  private scrollToElement(elementId: string, alignment: 'start' | 'center'): void {
+    const container = document.querySelector<HTMLElement>('.page-content');
+    const target = document.getElementById(elementId);
+
+    if (!container || !target) {
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const targetTop = targetRect.top - containerRect.top + container.scrollTop;
+
+    const destination =
+      alignment === 'center'
+        ? targetTop - (container.clientHeight - target.offsetHeight) / 2
+        : targetTop;
+
+    container.scrollTo({
+      top: Math.max(0, destination),
       behavior: 'smooth',
-      block: 'start',
     });
   }
 

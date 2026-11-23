@@ -184,7 +184,7 @@
        BOTÓN DE VALIDACIÓN
   ====================================================== -->
 
-  <div class="validation-actions">
+  <div class="validation-actions" id="validation-actions">
     <button
       type="button"
       class="btn btn-success"
@@ -381,6 +381,15 @@
 
             Descargar reporte consolidado
           </button>
+
+          <!-- VOLVER A LA ZONA DE CARGA -->
+
+          <div class="mt-4">
+            <button type="button" class="btn btn-outline-success" (click)="scrollToUpload()">
+              <i class="bi bi-arrow-up-circle me-2"></i>
+              Volver a cargar archivos
+            </button>
+          </div>
         }
       </div>
     </div>
