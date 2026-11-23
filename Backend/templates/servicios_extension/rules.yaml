@@ -39,7 +39,7 @@ sheets:
 
     DESCRIPCION_SERVICIO:
       datatype: alphanumeric
-      required: true
+      required: false
       max_length: 250
 
     VALOR_SERVICIO:
