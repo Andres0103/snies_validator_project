@@ -5,9 +5,7 @@
   <div class="issues-heading">
     <div>
       <h2>Consulta de incidencias</h2>
-      <p>
-        Consulta y analiza los errores y advertencias de tus procesos de validación.
-      </p>
+      <p>Consulta y analiza los errores y advertencias de tus procesos de validación.</p>
     </div>
   </div>
 
@@ -56,10 +54,7 @@
           type="button"
           class="btn btn-outline-secondary"
           (click)="clearSearch()"
-          [disabled]="
-            isLoading ||
-            (!validation && !validationId.trim() && !errorMessage)
-          "
+          [disabled]="isLoading || (!validation && !validationId.trim() && !errorMessage)"
           title="Limpiar consulta"
         >
           <i class="bi bi-x-circle"></i>
@@ -83,7 +78,6 @@
 
   <!-- ESTADO DE CARGA -->
   @if (isLoading) {
-
     <div class="card">
       <div class="card-body text-center py-5">
         <div class="spinner-border text-success"></div>
@@ -92,7 +86,6 @@
         </p>
       </div>
     </div>
-
   }
 
   <!-- VALIDACIÓN ENCONTRADA -->
@@ -100,13 +93,13 @@
 
     <!-- INFORMACIÓN DEL PROCESO -->
     <div class="card validation-information mb-4">
-
       <div class="card-body">
 
         <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
 
           <div>
             <span class="information-label">Identificador</span>
+
             <div class="validation-identifier">
               {{ validation.id }}
             </div>
@@ -142,12 +135,12 @@
 
           <div>
             <span class="information-label">Fecha de ejecución</span>
-            <strong>{{ validation.creado_en | date:'short' }}</strong>
+            <strong>{{ validation.creado_en | date: 'short' }}</strong>
           </div>
 
           <div>
             <span class="information-label">Fecha de almacenamiento</span>
-            <strong>{{ validation.savedAt | date:'short' }}</strong>
+            <strong>{{ validation.savedAt | date: 'short' }}</strong>
           </div>
 
           <div>
@@ -197,8 +190,8 @@
               <h6>No se encontraron incidencias</h6>
 
               <p>
-                La consulta se realizó correctamente y no se encontraron
-                errores ni advertencias en esta validación.
+                La consulta se realizó correctamente y no se encontraron errores
+                ni advertencias en esta validación.
               </p>
             </div>
 
@@ -211,8 +204,10 @@
         <div class="card issues-results-card">
 
           <div class="card-header">
+
             <div>
               <h5 class="mb-1">Detalle de incidencias</h5>
+
               <small class="text-secondary">
                 Filtra y consulta los resultados de la validación.
               </small>
@@ -221,6 +216,7 @@
             <span class="badge text-bg-secondary">
               {{ filteredIssues.length }} resultados
             </span>
+
           </div>
 
           <div class="card-body">
@@ -230,9 +226,11 @@
 
               <!-- BÚSQUEDA -->
               <div class="issue-search">
+
                 <label for="issueSearch">Buscar incidencia</label>
 
                 <div class="input-group">
+
                   <span class="input-group-text">
                     <i class="bi bi-search"></i>
                   </span>
@@ -243,59 +241,75 @@
                     class="form-control"
                     placeholder="Archivo, mensaje, valor, hoja o columna..."
                     [(ngModel)]="issueSearch"
+                    (ngModelChange)="resetPagination()"
                   />
+
                 </div>
+
               </div>
 
               <!-- SEVERIDAD -->
               <div class="issue-filter-field">
+
                 <label for="issueSeverity">Severidad</label>
 
                 <select
                   id="issueSeverity"
                   class="form-select"
                   [(ngModel)]="issueSeverity"
+                  (ngModelChange)="resetPagination()"
                 >
                   <option value="all">Todas</option>
                   <option value="error">Errores</option>
                   <option value="warning">Advertencias</option>
                 </select>
+
               </div>
 
               <!-- ARCHIVO -->
               <div class="issue-filter-field">
+
                 <label for="issueFile">Archivo</label>
 
                 <select
                   id="issueFile"
                   class="form-select"
                   [(ngModel)]="issueFile"
+                  (ngModelChange)="resetPagination()"
                 >
                   <option value="">Todos los archivos</option>
 
                   @for (file of issueFiles; track file) {
-                    <option [value]="file">{{ file }}</option>
+                    <option [value]="file">
+                      {{ file }}
+                    </option>
                   }
 
                 </select>
+
               </div>
 
               <!-- COLUMNA -->
               <div class="issue-filter-field">
+
                 <label for="issueColumn">Columna</label>
 
                 <select
                   id="issueColumn"
                   class="form-select"
                   [(ngModel)]="issueColumn"
+                  (ngModelChange)="resetPagination()"
                 >
                   <option value="">Todas las columnas</option>
 
                   @for (column of issueColumns; track column) {
-                    <option [value]="column">{{ column }}</option>
+                    <option [value]="column">
+                      {{ column }}
+                    </option>
                   }
 
                 </select>
+
               </div>
 
               <!-- LIMPIAR FILTROS -->
@@ -316,15 +330,22 @@
 
             </div>
 
-            <!-- RESULTADOS -->
+            <!-- CONTADOR DE RESULTADOS -->
             <div class="issue-results-label">
+
               Mostrando
-              <strong>{{ filteredIssues.length }}</strong>
+
+              <strong>{{ startItem }} - {{ endItem }}</strong>
+
               de
-              <strong>{{ issues.length }}</strong>
+
+              <strong>{{ filteredIssues.length }}</strong>
+
               incidencias
+
             </div>
 
+            <!-- RESULTADOS -->
             @if (filteredIssues.length === 0) {
 
               <div class="alert alert-light text-center">
@@ -333,6 +354,7 @@
 
             } @else {
 
+              <!-- TABLA -->
               <div class="table-responsive">
 
                 <table class="table table-hover align-middle issues-table">
@@ -351,13 +373,18 @@
 
                   <tbody>
 
-                    @for (issue of filteredIssues; track $index) {
+                    @for (issue of paginatedIssues; track $index) {
 
                       <tr>
+
                         <td>{{ issue.nombre_archivo }}</td>
+
                         <td>{{ issue.hoja }}</td>
+
                         <td>{{ issue.fila }}</td>
+
                         <td>{{ issue.columna }}</td>
+
                         <td>{{ issue.valor ?? '—' }}</td>
 
                         <td>
@@ -374,6 +401,7 @@
                         </td>
 
                         <td>{{ issue.mensaje }}</td>
+
                       </tr>
 
                     }
@@ -381,6 +409,85 @@
                   </tbody>
 
                 </table>
+
+              </div>
+
+              <!-- PAGINACIÓN -->
+              <div class="table-pagination">
+
+                <div class="pagination-info">
+
+                  Mostrando
+
+                  <strong>{{ startItem }} - {{ endItem }}</strong>
+
+                  de
+
+                  <strong>{{ filteredIssues.length }}</strong>
+
+                  registros
+
+                </div>
+
+                <div class="pagination-controls">
+
+                  <!-- PRIMERA PÁGINA -->
+                  <button
+                    type="button"
+                    class="page-btn"
+                    title="Primera página"
+                    aria-label="Primera página"
+                    (click)="firstPage()"
+                    [disabled]="!hasPreviousPage"
+                  >
+                    «
+                  </button>
+
+                  <!-- PÁGINA ANTERIOR -->
+                  <button
+                    type="button"
+                    class="page-btn"
+                    title="Página anterior"
+                    aria-label="Página anterior"
+                    (click)="previousPage()"
+                    [disabled]="!hasPreviousPage"
+                  >
+                    ‹
+                  </button>
+
+                  <!-- INDICADOR -->
+                  <span class="page-indicator">
+                    Página
+                    <strong>{{ currentPage }}</strong>
+                    de
+                    <strong>{{ totalPages }}</strong>
+                  </span>
+
+                  <!-- PÁGINA SIGUIENTE -->
+                  <button
+                    type="button"
+                    class="page-btn"
+                    title="Página siguiente"
+                    aria-label="Página siguiente"
+                    (click)="nextPage()"
+                    [disabled]="!hasNextPage"
+                  >
+                    ›
+                  </button>
+
+                  <!-- ÚLTIMA PÁGINA -->
+                  <button
+                    type="button"
+                    class="page-btn"
+                    title="Última página"
+                    aria-label="Última página"
+                    (click)="lastPage()"
+                    [disabled]="!hasNextPage"
+                  >
+                    »
+                  </button>
+
+                </div>
 
               </div>
 
@@ -399,16 +506,13 @@
 
           <div class="empty-issues">
 
-            <i
-              class="bi bi-exclamation-triangle text-warning"
-            ></i>
+            <i class="bi bi-exclamation-triangle text-warning"></i>
 
             <h6>No fue posible recuperar las incidencias</h6>
 
             <p>
               La información general de esta validación está almacenada,
-              pero la consulta de errores y advertencias no terminó
-              correctamente.
+              pero la consulta de errores y advertencias no terminó correctamente.
             </p>
 
             <p class="text-secondary mb-0">
@@ -429,6 +533,7 @@
   @if (!isLoading && !validation && !hasSearched && !errorMessage) {
 
     <div class="card initial-state">
+
       <div class="card-body text-center py-5">
 
         <i class="bi bi-search"></i>
@@ -440,6 +545,7 @@
         </p>
 
       </div>
+
     </div>
 
   }

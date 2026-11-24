@@ -1,5 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,7 @@ import { ValidationIssue } from '../../core/models/validation.model';
   styleUrl: './issues.scss',
 })
 export class Issues implements OnInit {
+
   // =========================================================
   // SERVICIOS
   // =========================================================
@@ -45,6 +46,14 @@ export class Issues implements OnInit {
   issueColumn = '';
 
   // =========================================================
+  // PAGINACIÓN
+  // =========================================================
+
+  readonly pageSize = 15;
+
+  currentPage = 1;
+
+  // =========================================================
   // ESTADOS DE LA INTERFAZ
   // =========================================================
 
@@ -57,8 +66,6 @@ export class Issues implements OnInit {
   // =========================================================
 
   ngOnInit(): void {
-    // Recuperamos el ID si llegamos desde el historial
-    // o si el usuario abre directamente una URL con ?id=...
     const id = this.route.snapshot.queryParamMap.get('id');
 
     if (id) {
@@ -83,10 +90,11 @@ export class Issues implements OnInit {
     this.hasSearched = true;
     this.errorMessage = '';
 
-    // Limpiamos los resultados anteriores.
     this.validation = null;
     this.issues = [];
+
     this.clearIssueFilters();
+    this.resetPagination();
 
     this.cdr.detectChanges();
 
@@ -100,18 +108,14 @@ export class Issues implements OnInit {
           'No se encontró una validación con ese identificador en el historial local.';
 
         console.warn('[ISSUES] No se encontró la validación:', id);
-
         return;
       }
 
-      // Recuperamos las incidencias almacenadas.
       this.issues = record.issues ?? [];
 
-      // Compatibilidad con registros anteriores a la incorporación
-      // de issuesLoadedSuccessfully.
-      const issuesLoaded = record.issuesLoadedSuccessfully ?? this.issues.length > 0;
+      const issuesLoaded =
+        record.issuesLoadedSuccessfully ?? this.issues.length > 0;
 
-      // Construimos el registro que utilizará la interfaz.
       this.validation = {
         ...record,
         issuesLoadedSuccessfully: issuesLoaded,
@@ -123,30 +127,28 @@ export class Issues implements OnInit {
         'Incidencias:',
         this.issues.length,
         'Consulta exitosa:',
-        record.issuesLoadedSuccessfully,
+        issuesLoaded,
       );
 
-      // Actualizamos explícitamente la vista.
+      this.resetPagination();
       this.cdr.detectChanges();
 
-      // Actualizamos la URL sin perder el registro recuperado
-      // si ocurre algún problema durante la navegación.
       void this.updateUrl(record.id);
+
     } catch (error) {
       console.error('[ISSUES] Error consultando validación:', error);
 
-      this.errorMessage = 'No fue posible consultar el registro almacenado localmente.';
+      this.errorMessage =
+        'No fue posible consultar el registro almacenado localmente.';
 
       this.validation = null;
       this.issues = [];
+
     } finally {
-      // La carga debe finalizar tanto si la consulta
-      // fue exitosa como si hubo un error.
       this.isLoading = false;
 
       console.log('[ISSUES] Consulta finalizada. isLoading:', this.isLoading);
 
-      // Forzamos la actualización de la interfaz.
       this.cdr.detectChanges();
     }
   }
@@ -173,11 +175,15 @@ export class Issues implements OnInit {
   // =========================================================
 
   get issueFiles(): string[] {
-    return [...new Set(this.issues.map((issue) => issue.nombre_archivo))].sort();
+    return [
+      ...new Set(this.issues.map(issue => issue.nombre_archivo)),
+    ].sort();
   }
 
   get issueColumns(): string[] {
-    return [...new Set(this.issues.map((issue) => issue.columna))].sort();
+    return [
+      ...new Set(this.issues.map(issue => issue.columna)),
+    ].sort();
   }
 
   // =========================================================
@@ -193,7 +199,10 @@ export class Issues implements OnInit {
   isWarning(issue: ValidationIssue): boolean {
     const severity = (issue.severidad ?? '').toLowerCase();
 
-    return severity.includes('warning') || severity.includes('advertencia');
+    return (
+      severity.includes('warning') ||
+      severity.includes('advertencia')
+    );
   }
 
   // =========================================================
@@ -201,11 +210,11 @@ export class Issues implements OnInit {
   // =========================================================
 
   get totalErrors(): number {
-    return this.issues.filter((issue) => this.isError(issue)).length;
+    return this.issues.filter(issue => this.isError(issue)).length;
   }
 
   get totalWarnings(): number {
-    return this.issues.filter((issue) => this.isWarning(issue)).length;
+    return this.issues.filter(issue => this.isWarning(issue)).length;
   }
 
   // =========================================================
@@ -215,7 +224,8 @@ export class Issues implements OnInit {
   get filteredIssues(): ValidationIssue[] {
     const search = this.issueSearch.trim().toLowerCase();
 
-    return this.issues.filter((issue) => {
+    return this.issues.filter(issue => {
+
       const matchesSearch =
         !search ||
         [
@@ -225,10 +235,8 @@ export class Issues implements OnInit {
           issue.valor ?? '',
           issue.mensaje,
           issue.severidad,
-        ].some((value) =>
-          String(value ?? '')
-            .toLowerCase()
-            .includes(search),
+        ].some(value =>
+          String(value ?? '').toLowerCase().includes(search)
         );
 
       const matchesSeverity =
@@ -236,12 +244,92 @@ export class Issues implements OnInit {
         (this.issueSeverity === 'error' && this.isError(issue)) ||
         (this.issueSeverity === 'warning' && this.isWarning(issue));
 
-      const matchesFile = !this.issueFile || issue.nombre_archivo === this.issueFile;
+      const matchesFile =
+        !this.issueFile ||
+        issue.nombre_archivo === this.issueFile;
 
-      const matchesColumn = !this.issueColumn || issue.columna === this.issueColumn;
+      const matchesColumn =
+        !this.issueColumn ||
+        issue.columna === this.issueColumn;
 
-      return matchesSearch && matchesSeverity && matchesFile && matchesColumn;
+      return (
+        matchesSearch &&
+        matchesSeverity &&
+        matchesFile &&
+        matchesColumn
+      );
     });
+  }
+
+  // =========================================================
+  // PAGINACIÓN: CÁLCULOS
+  // =========================================================
+
+  get totalPages(): number {
+    return Math.max(
+      1,
+      Math.ceil(this.filteredIssues.length / this.pageSize)
+    );
+  }
+
+  get paginatedIssues(): ValidationIssue[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+
+    return this.filteredIssues.slice(
+      start,
+      start + this.pageSize
+    );
+  }
+
+  get startItem(): number {
+    if (this.filteredIssues.length === 0) {
+      return 0;
+    }
+
+    return (this.currentPage - 1) * this.pageSize + 1;
+  }
+
+  get endItem(): number {
+    return Math.min(
+      this.currentPage * this.pageSize,
+      this.filteredIssues.length
+    );
+  }
+
+  get hasPreviousPage(): boolean {
+    return this.currentPage > 1;
+  }
+
+  get hasNextPage(): boolean {
+    return this.currentPage < this.totalPages;
+  }
+
+  // =========================================================
+  // PAGINACIÓN: NAVEGACIÓN
+  // =========================================================
+
+  resetPagination(): void {
+    this.currentPage = 1;
+  }
+
+  firstPage(): void {
+    this.currentPage = 1;
+  }
+
+  previousPage(): void {
+    if (this.hasPreviousPage) {
+      this.currentPage--;
+    }
+  }
+
+  nextPage(): void {
+    if (this.hasNextPage) {
+      this.currentPage++;
+    }
+  }
+
+  lastPage(): void {
+    this.currentPage = this.totalPages;
   }
 
   // =========================================================
@@ -253,6 +341,8 @@ export class Issues implements OnInit {
     this.issueSeverity = 'all';
     this.issueFile = '';
     this.issueColumn = '';
+
+    this.resetPagination();
   }
 
   // =========================================================
@@ -268,6 +358,7 @@ export class Issues implements OnInit {
     this.errorMessage = '';
 
     this.clearIssueFilters();
+    this.resetPagination();
 
     void this.router.navigate([], {
       relativeTo: this.route,

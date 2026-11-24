@@ -11,9 +11,9 @@
 FECHA_FINAL:
   kind: date_after_column
   after_column: FECHA_INICIO
-  strict: true
+  strict: false
   message: >
-    La fecha final debe ser estrictamente posterior
+    La fecha final debe ser igual o superior
     a la fecha de inicio.
 
 

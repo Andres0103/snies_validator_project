@@ -1080,3 +1080,36 @@
     padding: 12px;
   }
 }
+
+
+/* =========================================================
+   AJUSTE FINAL - ACTIVIDAD RECIENTE
+   La tarjeta debe adaptarse al contenido disponible.
+========================================================= */
+
+.activity-card {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* La lista ocupa únicamente el espacio de sus registros. */
+.recent-activity-list {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+/* Cada registro conserva una altura natural. */
+.recent-activity-item {
+  min-height: 0;
+  padding: 16px 20px;
+}
+
+/* Los estados vacíos mantienen espacio suficiente
+   para presentar su mensaje y acción. */
+.activity-card .empty-state {
+  min-height: 240px;
+}

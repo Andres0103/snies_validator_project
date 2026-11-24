@@ -1340,3 +1340,134 @@
 #validation-results {
   scroll-margin-top: 115px;
 }
+
+/* =========================================================
+   BOTÓN VOLVER A CARGAR ARCHIVOS
+========================================================= */
+
+.btn-reupload {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 44px;
+  padding: 0 22px;
+
+  background: #176b45;
+  border: 1px solid #176b45;
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(23, 107, 69, 0.16);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  i {
+    font-size: 16px;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    background: #105437;
+    border-color: #105437;
+    box-shadow: 0 5px 12px rgba(23, 107, 69, 0.24);
+    transform: translateY(-1px);
+
+    i {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(23, 107, 69, 0.15);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba(23, 107, 69, 0.25);
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-reupload {
+    width: 100%;
+  }
+}
+
+
+/* =========================================================
+   CORRECCIÓN DE ESPACIADO - ARCHIVOS PROCESADOS
+========================================================= */
+
+/* Separación entre el título y la tarjeta */
+.processed-files-section > h5,
+.processed-files-section > h6,
+.processed-files-section .section-title {
+  display: block;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+/* Tarjeta de archivo procesado */
+.processed-file-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  margin-top: 0;
+  padding: 16px;
+  border: 1px solid #dfe9e2;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Contenido superior */
+.processed-file-card .file-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* Separación del área de descarga */
+.processed-file-card .file-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e5ece7;
+}
+
+/* Evitar que los botones alteren la altura de la tarjeta */
+.processed-file-card button {
+  flex-shrink: 0;
+}
+
+/* Botón para volver a cargar */
+.btn-reupload {
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 9px;
+}
