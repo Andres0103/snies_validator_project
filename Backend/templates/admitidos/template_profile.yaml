@@ -1,0 +1,11 @@
+main_sheet: ADMITIDO
+
+sheets:
+  - ADMITIDO
+
+record_key:
+  - AÑO
+  - SEMESTRE
+  - ID_TIPO_DOCUMENTO
+  - NUM_DOCUMENTO
+  - PRO_CONSECUTIVO

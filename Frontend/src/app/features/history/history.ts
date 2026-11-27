@@ -1,3 +1,4 @@
+
 import {
   Component,
   OnInit,
@@ -20,6 +21,8 @@ import { ValidationIssue } from '../../core/models/validation.model';
 
 import { FormsModule } from '@angular/forms';
 
+type ValidationModule = 'extension' | 'snies';
+
 @Component({
   selector: 'app-history',
   standalone: true,
@@ -28,6 +31,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './history.scss',
 })
 export class History implements OnInit {
+
   // =========================================================
   // SERVICIOS
   // =========================================================
@@ -39,6 +43,41 @@ export class History implements OnInit {
   private route = inject(ActivatedRoute);
 
   private router = inject(Router);
+
+  // =========================================================
+  // MÓDULO ACTUAL
+  // =========================================================
+
+  private readonly modulo =
+    this.route.snapshot.data['modulo'] as ValidationModule | undefined;
+
+  private readonly extensionTemplates = new Set([
+    'ACTIVIDAD_CULTURAL',
+    'CONSULTORIA',
+    'CURSOS',
+    'EDUCACION_CONTINUA',
+    'EVENTO_CULTURAL',
+    'PROYECTOS_EXTENSION',
+    'SERVICIOS_EXTENSION',
+  ]);
+
+  private readonly sniesTemplates = new Set([
+    'ADMITIDOS',
+    'INSCRITO_PROGRAMA',
+    'INSCRITOS_RELACION_INSCRITOS',
+  ]);
+
+  private get allowedTemplates(): Set<string> {
+    if (this.modulo === 'extension') {
+      return this.extensionTemplates;
+    }
+
+    if (this.modulo === 'snies') {
+      return this.sniesTemplates;
+    }
+
+    return new Set();
+  }
 
   // =========================================================
   // REFERENCIAS DOM
@@ -76,7 +115,7 @@ export class History implements OnInit {
     return [
       ...new Set(
         this.issues
-          .map((issue) => issue.nombre_archivo)
+          .map(issue => issue.nombre_archivo)
           .filter(Boolean),
       ),
     ].sort((a, b) => a.localeCompare(b));
@@ -86,10 +125,116 @@ export class History implements OnInit {
     return [
       ...new Set(
         this.issues
-          .map((issue) => issue.columna)
+          .map(issue => issue.columna)
           .filter(Boolean),
       ),
     ].sort((a, b) => a.localeCompare(b));
+  }
+
+  // =========================================================
+  // FILTRADO DE VALIDACIONES POR MÓDULO
+  // =========================================================
+
+  private filterValidationByModule(
+    validation: LocalValidationRecord,
+  ): LocalValidationRecord | null {
+
+    // La ruta general conserva todos los registros.
+    if (!this.modulo) {
+      return validation;
+    }
+
+    const moduleFiles = (validation.archivos ?? []).filter(
+      file =>
+        file.plantilla !== null &&
+        this.allowedTemplates.has(file.plantilla),
+    );
+
+    // Si no contiene archivos del módulo, no aparece.
+    if (moduleFiles.length === 0) {
+      return null;
+    }
+
+    // Identificamos los archivos pertenecientes al módulo.
+    const fileNames = new Set(
+      moduleFiles.map(file => file.nombre_archivo),
+    );
+
+    // Filtramos las incidencias por archivo.
+    const moduleIssues = (validation.issues ?? []).filter(
+      issue => fileNames.has(issue.nombre_archivo),
+    );
+
+    // Recuperamos únicamente las plantillas del módulo.
+    const templates = [
+      ...new Set(
+        moduleFiles
+          .map(file => file.plantilla)
+          .filter((template): template is string => !!template),
+      ),
+    ];
+
+    // Filtramos también los archivos originales.
+    const originalFiles = (
+      validation.originalFiles ?? []
+    ).filter(file => fileNames.has(file.name));
+
+    // Identificamos los archivos marcados correspondientes.
+    const markedFileNames = new Set(
+      moduleFiles
+        .map(file => file.archivo_marcado)
+        .filter((name): name is string => !!name),
+    );
+
+    const generatedFiles = (
+      validation.generatedFiles ?? []
+    ).filter(file => markedFileNames.has(file.name));
+
+    const processedFiles = moduleFiles.filter(
+      file =>
+        file.estado !== 'PENDIENTE' &&
+        file.estado !== 'PROCESANDO',
+    );
+
+    const failedFiles = moduleFiles.filter(
+      file => file.estado === 'FALLIDO',
+    );
+
+    return {
+      ...validation,
+
+      plantilla:
+        templates.length === 1 ? templates[0] : null,
+
+      plantillas: templates,
+
+      archivos: moduleFiles,
+
+      originalFiles,
+
+      generatedFiles,
+
+      issues: moduleIssues,
+
+      total_archivos: moduleFiles.length,
+
+      total_archivos_procesados: processedFiles.length,
+
+      total_archivos_fallidos: failedFiles.length,
+
+      total_archivos_validos:
+        processedFiles.length - failedFiles.length,
+
+      total_errores: moduleFiles.reduce(
+        (total, file) => total + file.total_errores,
+        0,
+      ),
+
+      total_advertencias: moduleFiles.reduce(
+        (total, file) => total + file.total_advertencias,
+        0,
+      ),
+    };
   }
 
   // =========================================================
@@ -97,7 +242,15 @@ export class History implements OnInit {
   // =========================================================
 
   goToIssues(validation: LocalValidationRecord): void {
-    void this.router.navigate(['/issues'], {
+
+    const route =
+      this.modulo === 'snies'
+        ? '/snies/issues'
+        : this.modulo === 'extension'
+          ? '/extension/issues'
+          : '/issues';
+
+    void this.router.navigate([route], {
       queryParams: {
         id: validation.id,
       },
@@ -111,6 +264,7 @@ export class History implements OnInit {
   private getIssueType(
     severity: string,
   ): 'error' | 'warning' | 'other' {
+
     const normalized = (severity ?? '').trim().toLowerCase();
 
     if (normalized.includes('error')) {
@@ -132,9 +286,11 @@ export class History implements OnInit {
   // =========================================================
 
   get filteredIssues(): ValidationIssue[] {
+
     const search = this.issueSearch.trim().toLowerCase();
 
-    return this.issues.filter((issue) => {
+    return this.issues.filter(issue => {
+
       const matchesSearch =
         !search ||
         [
@@ -144,7 +300,7 @@ export class History implements OnInit {
           issue.valor ?? '',
           issue.mensaje,
           String(issue.fila),
-        ].some((value) =>
+        ].some(value =>
           String(value).toLowerCase().includes(search),
         );
 
@@ -188,7 +344,7 @@ export class History implements OnInit {
 
   countIssues(type: 'error' | 'warning'): number {
     return this.issues.filter(
-      (issue) => this.getIssueType(issue.severidad) === type,
+      issue => this.getIssueType(issue.severidad) === type,
     ).length;
   }
 
@@ -197,6 +353,7 @@ export class History implements OnInit {
   // =========================================================
 
   getStatusLabel(status: string | undefined | null): string {
+
     if (!status) {
       return 'No disponible';
     }
@@ -242,11 +399,13 @@ export class History implements OnInit {
   // =========================================================
 
   get filteredValidations(): LocalValidationRecord[] {
+
     if (!this.searchDate) {
       return this.validations;
     }
 
-    return this.validations.filter((validation) => {
+    return this.validations.filter(validation => {
+
       const date = new Date(validation.savedAt);
 
       if (Number.isNaN(date.getTime())) {
@@ -288,6 +447,7 @@ export class History implements OnInit {
   // =========================================================
 
   async loadHistory(): Promise<void> {
+
     this.isLoading = true;
 
     this.errorMessage = '';
@@ -295,18 +455,29 @@ export class History implements OnInit {
     this.cdr.detectChanges();
 
     try {
-      this.validations = await this.historyService.getAll();
+
+      const allValidations = await this.historyService.getAll();
+
+      // Aplicamos el filtro según el módulo de la ruta.
+      this.validations = allValidations
+        .map(validation => this.filterValidationByModule(validation))
+        .filter(
+          (validation): validation is LocalValidationRecord =>
+            validation !== null,
+        );
 
       const selectedId =
         this.route.snapshot.queryParamMap.get('id');
 
       // Apertura desde Dashboard.
       if (selectedId) {
+
         const requestedValidation = this.validations.find(
-          (validation) => validation.id === selectedId,
+          validation => validation.id === selectedId,
         );
 
         if (requestedValidation) {
+
           this.selectedValidation = requestedValidation;
 
           this.issues = requestedValidation.issues ?? [];
@@ -314,33 +485,42 @@ export class History implements OnInit {
           this.clearIssueFilters();
 
           console.log(
-            '[HISTORY] Validación abierta desde Dashboard:',
+            '[HISTORY] Validación abierta:',
             selectedId,
+            'Módulo:',
+            this.modulo ?? 'general',
           );
+
         } else {
+
           console.warn(
-            '[HISTORY] No se encontró la validación solicitada:',
+            '[HISTORY] La validación no pertenece al módulo actual:',
             selectedId,
           );
         }
       }
 
       console.log(
-        '[HISTORY] Registros recuperados de IndexedDB:',
+        '[HISTORY] Registros recuperados:',
         this.validations.length,
+        'Módulo:',
+        this.modulo ?? 'general',
       );
 
-      // Actualizamos el registro seleccionado si ya estaba abierto.
+      // Actualizamos el registro seleccionado.
       if (this.selectedValidation && !selectedId) {
+
         const updatedRecord = this.validations.find(
-          (item) => item.id === this.selectedValidation?.id,
+          item => item.id === this.selectedValidation?.id,
         );
 
         this.selectedValidation = updatedRecord ?? null;
 
         this.issues = updatedRecord?.issues ?? [];
       }
+
     } catch (error) {
+
       console.error(
         '[HISTORY] Error consultando IndexedDB:',
         error,
@@ -348,7 +528,9 @@ export class History implements OnInit {
 
       this.errorMessage =
         'No fue posible recuperar el historial almacenado en este navegador.';
+
     } finally {
+
       this.isLoading = false;
 
       this.cdr.detectChanges();
@@ -364,6 +546,7 @@ export class History implements OnInit {
   // =========================================================
 
   viewDetails(validation: LocalValidationRecord): void {
+
     this.selectedValidation = validation;
 
     this.issues = validation.issues ?? [];
@@ -387,9 +570,11 @@ export class History implements OnInit {
   // =========================================================
 
   private scrollToDetail(): void {
+
     this.cdr.detectChanges();
 
     requestAnimationFrame(() => {
+
       const detailElement =
         this.historyDetail?.nativeElement;
 
@@ -430,6 +615,7 @@ export class History implements OnInit {
   // =========================================================
 
   scrollToHistoryTop(): void {
+
     const element = this.historyTop?.nativeElement;
 
     const scrollContainer =
@@ -462,6 +648,7 @@ export class History implements OnInit {
   // =========================================================
 
   closeDetails(): void {
+
     this.selectedValidation = null;
 
     this.issues = [];
@@ -474,7 +661,9 @@ export class History implements OnInit {
   // =========================================================
 
   downloadReport(validation: LocalValidationRecord): void {
+
     if (!validation.report?.blob) {
+
       this.errorMessage =
         'Esta validación no tiene un reporte consolidado almacenado.';
 
@@ -495,11 +684,13 @@ export class History implements OnInit {
     validation: LocalValidationRecord,
     filename: string,
   ): void {
+
     const file = validation.generatedFiles?.find(
-      (item) => item.name === filename,
+      item => item.name === filename,
     );
 
     if (!file) {
+
       this.errorMessage =
         `No se encontró el archivo marcado: ${filename}`;
 
@@ -517,11 +708,13 @@ export class History implements OnInit {
     validation: LocalValidationRecord,
     filename: string,
   ): void {
+
     const file = validation.originalFiles?.find(
-      (item) => item.name === filename,
+      item => item.name === filename,
     );
 
     if (!file) {
+
       this.errorMessage =
         `No se encontró el archivo original: ${filename}`;
 
@@ -539,7 +732,9 @@ export class History implements OnInit {
     file: StoredValidationFile,
     filename: string,
   ): void {
+
     try {
+
       const url = window.URL.createObjectURL(file.blob);
 
       const link = document.createElement('a');
@@ -557,7 +752,9 @@ export class History implements OnInit {
       window.setTimeout(() => {
         window.URL.revokeObjectURL(url);
       }, 1000);
+
     } catch (error) {
+
       console.error(
         '[HISTORY] Error descargando archivo:',
         error,
@@ -573,6 +770,7 @@ export class History implements OnInit {
   // =========================================================
 
   formatDate(value: string | undefined | null): string {
+
     if (!value) {
       return 'Fecha no disponible';
     }

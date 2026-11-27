@@ -592,7 +592,7 @@ def _validate_configured_constraints(
                 f"Expresión regular inválida para " f"'{column_name}': {exc}"
             ) from exc
 
-        if not compiled_pattern.fullmatch(str(value).strip()):
+        if not compiled_pattern.fullmatch(str(value)):
 
             issues.append(
                 (

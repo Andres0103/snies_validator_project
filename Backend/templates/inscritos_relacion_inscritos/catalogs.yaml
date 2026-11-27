@@ -1,0 +1,8 @@
+
+# Catálogos externos utilizados por INSCRITOS - RELACIÓN DE INSCRITOS.
+#
+# En esta plantilla no necesitamos catálogos externos por ahora.
+# Los valores permitidos de tipo de documento, semestre y sexo
+# están definidos directamente en rules.yaml.
+
+master_tables: {}

@@ -76,18 +76,27 @@ async def upload_files(
 # ==========================================================
 
 
+
 @router.get(
     "",
     response_model=ValidationHistoryResponse,
 )
-async def get_history():
+async def get_history(modulo: str | None = None):
     """
     Devuelve el historial de validaciones.
+    Permite filtrar por módulo: extension o snies.
     """
 
+    if modulo is not None and modulo not in {"extension", "snies"}:
+        raise HTTPException(
+            status_code=400,
+            detail="El módulo debe ser 'extension' o 'snies'.",
+        )
+
     return {
-        "items": list_validations(),
+        "items": list_validations(modulo=modulo),
     }
+
 
 
 # ==========================================================

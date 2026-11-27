@@ -1,16 +1,24 @@
 
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
+
 :host {
   display: block;
   flex: 0 0 var(--sidebar-width);
   width: var(--sidebar-width);
   height: 100%;
   min-height: 0;
-  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
-  transition: width 0.25s ease;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
 }
 
 .sidebar {
-  position: relative;
   display: flex;
   flex-direction: column;
 
@@ -18,27 +26,31 @@
   height: 100%;
   min-height: 0;
 
-  padding: 27px 13px 17px;
+  padding: 28px 15px 18px;
 
   color: #ffffff;
-  background: var(--color-primary-dark);
+  background: linear-gradient(
+    180deg,
+    #105437 0%,
+    #0d4931 100%
+  );
 
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* =========================================
-   IDENTIDAD INSTITUCIONAL
+   IDENTIDAD DE NEBULA
    ========================================= */
 
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 
-  min-height: 58px;
-  padding: 0 9px;
-  margin-bottom: 43px;
+  min-height: 54px;
+  padding: 0 7px;
+  margin-bottom: 39px;
 }
 
 .brand-icon {
@@ -46,77 +58,85 @@
   align-items: center;
   justify-content: center;
 
-  width: 43px;
-  height: 43px;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
 
-  color: var(--color-primary-dark);
+  color: #105437;
   background: #ffffff;
 
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 13px;
+
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 .brand-icon span {
-  font-size: 23px;
-  font-weight: 700;
+  font-size: 25px;
+  font-weight: 750;
   letter-spacing: -1px;
 }
 
 .brand-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
   min-width: 0;
 }
 
 .brand-info h2 {
-  margin: 0 0 4px;
+  margin: 0;
 
   color: #ffffff;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
+
+  font-size: 21px;
+  font-weight: 750;
+  letter-spacing: -0.5px;
   line-height: 1.2;
 }
 
 .brand-info span {
-  display: block;
-
   color: rgba(255, 255, 255, 0.72);
+
   font-size: 10px;
   font-weight: 400;
-  letter-spacing: 0.15px;
+  letter-spacing: 0.1px;
   white-space: nowrap;
 }
 
 /* =========================================
-   SECCIONES
+   SECCIÓN DE NAVEGACIÓN
    ========================================= */
 
 .sidebar-section {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+  min-height: 0;
 }
 
 .section-title {
   display: block;
 
-  padding: 0 12px;
-  margin-bottom: 17px;
+  padding: 0 10px;
+  margin-bottom: 13px;
 
-  color: rgba(255, 255, 255, 0.58);
+  color: #b8d7c6;
 
   font-size: 10px;
-  font-weight: 650;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1.2px;
 }
 
 /* =========================================
-   NAVEGACIÓN
+   NAVEGACIÓN GENERAL
    ========================================= */
 
 .navigation {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
 }
 
 .nav-item {
@@ -124,27 +144,26 @@
 
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
 
-  min-height: 46px;
-  padding: 0 13px;
+  width: 100%;
+  min-height: 45px;
+  padding: 0 12px;
 
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.82);
   text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 450;
+  line-height: 1.4;
 
   border: 1px solid transparent;
   border-radius: 9px;
 
-  font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
+    border-color 0.2s ease;
 }
 
 .nav-item i {
@@ -156,59 +175,116 @@
   flex-shrink: 0;
 
   font-size: 17px;
-  opacity: 0.9;
-
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
 }
 
 .nav-item span {
-  line-height: 1.4;
+  min-width: 0;
 }
 
 .nav-item:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.075);
-  border-color: rgba(255, 255, 255, 0.045);
-}
-
-.nav-item:hover i {
-  opacity: 1;
-  transform: translateX(1px);
+  background: rgba(255, 255, 255, 0.09);
 }
 
 .nav-item.active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.13);
-  border-color: rgba(255, 255, 255, 0.07);
+
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.10);
 
   font-weight: 600;
-
-  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.025);
-}
-
-.nav-item.active i {
-  opacity: 1;
 }
 
 .nav-item.active::before {
   content: "";
 
   position: absolute;
+  top: 9px;
+  bottom: 9px;
   left: -1px;
-  top: 10px;
-  bottom: 10px;
 
   width: 3px;
 
-  background: #c6ead5;
+  background: #b8e2c9;
   border-radius: 0 4px 4px 0;
 }
 
 .nav-item:focus-visible {
-  outline: 2px solid #c6ead5;
+  outline: 2px solid #b8e2c9;
   outline-offset: 2px;
+}
+
+/* =========================================
+   AGRUPACIÓN DE MÓDULOS
+   ========================================= */
+
+.module-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  margin-top: 23px;
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.module-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-height: 39px;
+  padding: 0 6px 7px;
+}
+
+.module-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+
+  color: #d4e9dc;
+  background: rgba(255, 255, 255, 0.12);
+
+  border-radius: 8px;
+}
+
+.module-icon i {
+  font-size: 16px;
+}
+
+.module-heading-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.module-title {
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  line-height: 1.3;
+}
+
+.module-subtitle {
+  color: #b8d7c6;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.module-link {
+  margin-left: 4px;
+  width: calc(100% - 4px);
 }
 
 /* =========================================
@@ -217,48 +293,49 @@
 
 .sidebar-footer {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 11px;
 
-  padding: 18px 9px 5px;
-  margin-top: 24px;
+  padding: 17px 9px 4px;
+  margin-top: 25px;
 
   border-top: 1px solid rgba(255, 255, 255, 0.13);
 }
 
 .footer-indicator {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   flex-shrink: 0;
 
-  margin-top: 4px;
-
-  background: #a7d8b9;
+  background: #91d5a9;
   border-radius: 50%;
 
-  box-shadow: 0 0 7px rgba(167, 216, 185, 0.25);
+  box-shadow:
+    0 0 8px rgba(145, 213, 169, 0.35);
 }
 
 .footer-info {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .footer-title {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 10px;
-  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 11px;
+  font-weight: 650;
 }
 
 .footer-subtitle {
   color: rgba(255, 255, 255, 0.58);
-  font-size: 9px;
+
+  font-size: 10px;
   font-weight: 400;
 }
 
 /* =========================================
-   SCROLL
+   SCROLL PERSONALIZADO
    ========================================= */
 
 .sidebar::-webkit-scrollbar {
@@ -266,12 +343,12 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.20);
   border-radius: 5px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.32);
 }
 
 /* =========================================
@@ -279,19 +356,18 @@
    ========================================= */
 
 @media (max-width: 768px) {
-  .sidebar {
-    padding-right: 10px;
-    padding-left: 10px;
+  :host {
+    flex-basis: 215px;
+    width: 215px;
   }
 
-  .sidebar-brand {
-    gap: 9px;
-    padding-right: 4px;
-    padding-left: 4px;
+  .sidebar {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   .brand-info h2 {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .brand-info span {
@@ -302,12 +378,17 @@
     gap: 10px;
     padding-right: 9px;
     padding-left: 10px;
+
     font-size: 12px;
+  }
+
+  .module-title {
+    font-size: 11px;
   }
 }
 
 /* =========================================
-   MÓVILES
+   MÓVIL
    ========================================= */
 
 @media (max-width: 576px) {
@@ -334,6 +415,7 @@
 
   .brand-info,
   .section-title,
+  .module-heading,
   .nav-item span,
   .sidebar-footer {
     display: none;
@@ -343,8 +425,15 @@
     width: 100%;
   }
 
+  .module-group {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+
   .nav-item {
     justify-content: center;
+    margin-left: 0;
     padding: 0;
   }
 
@@ -355,4 +444,30 @@
   .nav-item.active::before {
     left: -6px;
   }
+}
+
+.module-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.3px;
+}
+
+.module-icon-extension {
+  color: #d4e9dc;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.module-icon-snies {
+  color: #d4e9dc;
+  background: rgba(255, 255, 255, 0.14);
 }

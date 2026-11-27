@@ -1,27 +1,24 @@
 
 <aside class="sidebar">
-
   <!-- IDENTIDAD DE NEBULA -->
   <div class="sidebar-brand">
-
     <div class="brand-icon">
       <span>N</span>
     </div>
 
     <div class="brand-info">
-      <h2>Nebula</h2>
+      <h2>NEBULA</h2>
       <span>Universidad de Antioquia</span>
     </div>
-
   </div>
 
-  <!-- NAVEGACIÓN -->
+  <!-- NAVEGACIÓN PRINCIPAL -->
   <div class="sidebar-section">
-
-    <span class="section-title">MENÚ PRINCIPAL</span>
+    <span class="section-title">ESPACIO DE TRABAJO</span>
 
     <nav class="navigation" aria-label="Navegación principal">
 
+      <!-- INICIO -->
       <a
         class="nav-item"
         routerLink="/"
@@ -33,50 +30,88 @@
         <span>Inicio</span>
       </a>
 
+      <!-- VALIDACIÓN GENERAL -->
       <a
         class="nav-item"
         routerLink="/validation"
         routerLinkActive="active"
-        title="Validación"
+        title="Validación general de información"
       >
         <i class="bi bi-file-earmark-check"></i>
-        <span>Validación</span>
+        <span>Validación de información</span>
       </a>
 
-      <a
-        class="nav-item"
-        routerLink="/history"
-        routerLinkActive="active"
-        title="Historial"
-      >
-        <i class="bi bi-clock-history"></i>
-        <span>Historial</span>
-      </a>
+      <!-- MÓDULO EXTENSIÓN -->
+      <section class="module-group">
+        <div class="module-heading">
+          <div class="module-icon module-icon-extension">EX</div>
 
-      <a
-        class="nav-item"
-        routerLink="/issues"
-        routerLinkActive="active"
-        title="Consulta de incidencias"
-      >
-        <i class="bi bi-exclamation-diamond"></i>
-        <span>Consulta de incidencias</span>
-      </a>
+          <span class="module-title">Extensión</span>
+        </div>
+
+        <a
+          class="nav-item module-link"
+          routerLink="/extension/history"
+          routerLinkActive="active"
+          title="Historial de validaciones de Extensión"
+        >
+          <i class="bi bi-clock-history"></i>
+          <span>Historial</span>
+        </a>
+
+        <a
+          class="nav-item module-link"
+          routerLink="/extension/issues"
+          routerLinkActive="active"
+          title="Consulta de incidencias de Extensión"
+        >
+          <i class="bi bi-exclamation-diamond"></i>
+          <span>Consulta de incidencias</span>
+        </a>
+      </section>
+
+      <!-- MÓDULO POBLACIÓN ESTUDIANTIL -->
+      <section class="module-group">
+        <div class="module-heading">
+          <div class="module-icon module-icon-snies">SN</div>
+
+          <div class="module-heading-info">
+            <span class="module-title">Población estudiantil</span>
+            <span class="module-subtitle">SNIES</span>
+          </div>
+        </div>
+
+        <a
+          class="nav-item module-link"
+          routerLink="/snies/history"
+          routerLinkActive="active"
+          title="Historial de validaciones SNIES"
+        >
+          <i class="bi bi-clock-history"></i>
+          <span>Historial</span>
+        </a>
+
+        <a
+          class="nav-item module-link"
+          routerLink="/snies/issues"
+          routerLinkActive="active"
+          title="Consulta de incidencias SNIES"
+        >
+          <i class="bi bi-exclamation-diamond"></i>
+          <span>Consulta de incidencias</span>
+        </a>
+      </section>
 
     </nav>
-
   </div>
 
   <!-- PIE DEL MENÚ -->
   <div class="sidebar-footer">
-
     <div class="footer-indicator"></div>
 
     <div class="footer-info">
-      <span class="footer-title">Plataforma NEBULA</span>
-      <span class="footer-subtitle">Universidad de Antioquia</span>
+      <span class="footer-title">NEBULA</span>
+      <span class="footer-subtitle">Plataforma institucional</span>
     </div>
-
   </div>
-
 </aside>

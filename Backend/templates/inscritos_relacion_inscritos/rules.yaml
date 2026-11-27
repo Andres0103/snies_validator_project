@@ -1,0 +1,54 @@
+
+# Definición de campos de INSCRITOS - RELACIÓN DE INSCRITOS.
+# Fuente: Manual MEN V8.12, diciembre de 2025, sección 3.1.
+
+sheets:
+  INSCRITO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      allowed_values: [CC, DE, CE, TI, PS, CA, PT]
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+
+    PRIMER_NOMBRE:
+      datatype: alphanumeric
+      required: true
+      max_length: 50
+
+    SEGUNDO_NOMBRE:
+      datatype: alphanumeric
+      required: false
+      max_length: 150
+
+    PRIMER_APELLIDO:
+      datatype: alphanumeric
+      required: true
+      max_length: 50
+
+    SEGUNDO_APELLIDO:
+      datatype: alphanumeric
+      required: false
+      max_length: 50
+
+    ID_SEXO_BIOLOGICO:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2, 3, 4]

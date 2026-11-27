@@ -328,6 +328,10 @@ def process_workbook(workbook):
 
     detected_templates = detect_templates(workbook.sheetnames)
 
+    print(
+        f"[DETECCION] Hojas: {workbook.sheetnames} | "
+        f"Plantillas: {detected_templates}"
+    )
     # Solo asignamos una plantilla cuando la detección
     # identifica exactamente una.
     template_name = detected_templates[0] if len(detected_templates) == 1 else None
@@ -843,8 +847,26 @@ def get_validation(validation_id: str):
     return read_json(directory / "metadata.json")
 
 
-def list_validations():
-    """Obtiene el historial de validaciones."""
+
+EXTENSION_TEMPLATES = {
+    "ACTIVIDAD_CULTURAL",
+    "CONSULTORIA",
+    "CURSOS",
+    "EDUCACION_CONTINUA",
+    "EVENTO_CULTURAL",
+    "PROYECTOS_EXTENSION",
+    "SERVICIOS_EXTENSION",
+}
+
+SNIES_TEMPLATES = {
+    "ADMITIDOS",
+    "INSCRITO_PROGRAMA",
+    "INSCRITOS_RELACION_INSCRITOS",
+}
+
+
+def list_validations(modulo=None):
+    """Obtiene el historial de validaciones, opcionalmente filtrado por módulo."""
 
     if not STORAGE_DIR.exists():
         return []
@@ -852,7 +874,6 @@ def list_validations():
     validations = []
 
     for directory in STORAGE_DIR.iterdir():
-
         if not directory.is_dir():
             continue
 
@@ -861,14 +882,44 @@ def list_validations():
 
         metadata = read_json(directory / "metadata.json")
 
-        if metadata is not None:
-            validations.append(metadata)
+        if metadata is None:
+            continue
+
+        if modulo is not None:
+            module_templates = {
+                "extension": EXTENSION_TEMPLATES,
+                "snies": SNIES_TEMPLATES,
+            }
+
+            if modulo not in module_templates:
+                raise ValueError(f"Módulo no válido: {modulo}")
+
+            allowed_templates = module_templates[modulo]
+
+            validation_files = metadata.get("archivos", [])
+
+            matching_files = [
+                file
+                for file in validation_files
+                if file.get("plantilla") in allowed_templates
+            ]
+
+            if not matching_files:
+                continue
+
+            metadata = {
+                **metadata,
+                "archivos": matching_files,
+            }
+
+        validations.append(metadata)
 
     return sorted(
         validations,
         key=lambda item: item["creado_en"],
         reverse=True,
     )
+
 
 
 # ==========================================================
