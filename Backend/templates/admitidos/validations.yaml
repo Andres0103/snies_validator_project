@@ -1,0 +1,15 @@
+
+# Validaciones específicas de ADMITIDOS.
+# Fuente: Manual MEN V8.12, sección 3.4, páginas 24-26.
+
+sheets:
+  ADMITIDO:
+
+    NUM_DOCUMENTO:
+      pattern: "^\\S+$"
+
+    TELEFONO_CONTACTO:
+      min_value: 0
+
+    EMAIL_PERSONAL:
+      pattern: "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"

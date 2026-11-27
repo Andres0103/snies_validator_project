@@ -1,0 +1,29 @@
+# Campos que se repiten en (casi) todas las plantillas del MEN y cuyo
+# comentario en la celda NO alcanza a describir tipo/longitud/valores
+# (ej. "AÑO" solo dice "Año del reporte de información"). La regla real
+# está documentada en el Manual de Validaciones por Plantilla v8.12, no en
+# el comentario de Excel.
+#
+# Estas reglas SOLO se aplican como relleno: si el comentario de la celda
+# ya trae tipo/longitud/lista propios, esos tienen prioridad y este
+# catálogo no los toca. Así, si el MEN corrige el comentario en una futura
+# versión de la plantilla, el sistema usa automáticamente la información
+# más completa sin tocar código.
+#
+# Fuente: Manual_MEN_Validaciones_por_plantilla_8_12_diciembre_2025.pdf
+
+AÑO:
+  required: true
+  datatype: integer
+  max_length: 4
+  description: "Año del reporte de información. Debe ser el año de un periodo abierto."
+
+SEMESTRE:
+  required: true
+  datatype: integer
+  max_length: 1
+  allowed_values:
+    - code: "1"
+      label: "Periodo anual"
+    - code: "2"
+      label: "Periodo semestral"

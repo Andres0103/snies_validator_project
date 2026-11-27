@@ -1,0 +1,7 @@
+
+# Catálogos externos de INSCRITO_PROGRAMA.
+# No se configura una tabla maestra todavía.
+# El manual exige códigos SNIES y DIVIPOLA,
+# pero su validación requiere las tablas de referencia.
+
+master_tables: {}

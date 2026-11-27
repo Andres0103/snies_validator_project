@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Inscrito_programa_orignal_20262.xlsx",
+      "hoja": "ESTRUCTURA_LIBRO",
+      "fila": 1,
+      "columna": "PLANTILLA",
+      "valor": null,
+      "mensaje": "No fue posible identificar la plantilla SNIES. Verifica que el archivo contenga la hoja principal de una plantilla soportada.",
+      "severidad": "error"
+    }
+  ]
+}

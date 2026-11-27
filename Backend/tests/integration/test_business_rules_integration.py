@@ -74,22 +74,23 @@ def test_invalid_final_date_generates_cell_validation_error_without_duplicate():
     assert final_date_issues[0].severity == "error"
 
 
-def test_final_date_equal_to_start_date_violates_strict_rule():
+def test_final_date_equal_to_start_date_is_valid():
     wb = create_consultoria_workbook([
         ["10-12-2025", "10-12-2025"]
     ])
 
     issues = get_consultoria_issues(wb)
 
-    final_date_issues = issues_for_column(
-        issues, "FECHA_FINAL"
-    )
+    date_issues = [
+        issue for issue in issues
+        if issue.row == 2
+        and issue.column_name in {
+            "FECHA_INICIO",
+            "FECHA_FINAL",
+        }
+    ]
 
-    assert len(final_date_issues) == 1
-    assert final_date_issues[0].severity == "error"
-    assert "estrictamente posterior" in (
-        final_date_issues[0].message.lower()
-    )
+    assert date_issues == []
 
 
 def test_final_date_after_start_date_is_valid():

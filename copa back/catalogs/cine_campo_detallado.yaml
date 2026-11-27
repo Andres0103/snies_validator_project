@@ -1,0 +1,234 @@
+catalog_name: CINE_CAMPO_DETALLADO
+version: PENDIENTE_CONFIRMAR
+source: Archivo Cine_Campo_Detallado.xlsx; fuente oficial por confirmar
+last_updated: null
+records:
+  - codigo: '11'
+    descripcion: Programas y certificaciones básicas
+  - codigo: '21'
+    descripcion: Alfabetización y aritmética elemental
+  - codigo: '31'
+    descripcion: Competencias personales y desarrollo
+  - codigo: '111'
+    descripcion: Ciencias de la educación
+  - codigo: '112'
+    descripcion: Formación para docentes de educación pre-primaría
+  - codigo: '113'
+    descripcion: Formación para docentes sin asignatura de especialización
+  - codigo: '114'
+    descripcion: Formación para docentes con asignatura de especialización
+  - codigo: '211'
+    descripcion: Técnicas audiovisuales y producción para medios de comunicación
+  - codigo: '212'
+    descripcion: Diseño industrial, de moda e interiores
+  - codigo: '213'
+    descripcion: Bellas artes
+  - codigo: '214'
+    descripcion: Artesanías
+  - codigo: '215'
+    descripcion: Música y artes escénicas
+  - codigo: '221'
+    descripcion: Religión y Teología
+  - codigo: '222'
+    descripcion: Historia y arqueología
+  - codigo: '223'
+    descripcion: Filosofía y ética
+  - codigo: '231'
+    descripcion: Adquisición del lenguaje
+  - codigo: '232'
+    descripcion: Literatura y lingüística
+  - codigo: '311'
+    descripcion: Economía
+  - codigo: '312'
+    descripcion: Ciencias políticas y educación cívica
+  - codigo: '313'
+    descripcion: Psicología
+  - codigo: '314'
+    descripcion: Sociología, Antropología y estudios culturales
+  - codigo: '321'
+    descripcion: Periodismo, comunicación y reportajes
+  - codigo: '322'
+    descripcion: Bibliotecología, información y archivología
+  - codigo: '411'
+    descripcion: Contabilidad e impuestos
+  - codigo: '412'
+    descripcion: Gestión financiera, administración bancaria y seguros
+  - codigo: '413'
+    descripcion: Gestión y administración
+  - codigo: '414'
+    descripcion: Mercadotecnia y publicidad
+  - codigo: '415'
+    descripcion: Secretariado y trabajo de oficina
+  - codigo: '416'
+    descripcion: Ventas al por mayor y al por menor
+  - codigo: '417'
+    descripcion: Competencias laborales
+  - codigo: '421'
+    descripcion: Derecho
+  - codigo: '511'
+    descripcion: Biología
+  - codigo: '512'
+    descripcion: Bioquímica
+  - codigo: '521'
+    descripcion: Ciencias del medio ambiente
+  - codigo: '522'
+    descripcion: Medio ambiente natural y vida silvestre
+  - codigo: '531'
+    descripcion: Química
+  - codigo: '532'
+    descripcion: Ciencias de la tierra
+  - codigo: '533'
+    descripcion: Física
+  - codigo: '541'
+    descripcion: Matemáticas
+  - codigo: '542'
+    descripcion: Estadística
+  - codigo: '611'
+    descripcion: Uso de computadores
+  - codigo: '612'
+    descripcion: Diseño y administración de redes y bases de datos
+  - codigo: '613'
+    descripcion: Desarrollo y análisis de software y aplicaciones
+  - codigo: '711'
+    descripcion: Ingeniería y procesos químicos
+  - codigo: '712'
+    descripcion: Tecnología de protección del medio ambiente
+  - codigo: '713'
+    descripcion: Electricidad y energía
+  - codigo: '714'
+    descripcion: Electrónica y automatización
+  - codigo: '715'
+    descripcion: Mecánica y profesiones afines a la metalistería
+  - codigo: '716'
+    descripcion: Vehículos, barcos y aeronaves de motor
+  - codigo: '721'
+    descripcion: Procesamiento de alimentos
+  - codigo: '722'
+    descripcion: Materiales (vidrio, papel, plástico y madera)
+  - codigo: '723'
+    descripcion: Producción textiles (ropa, calzado y artículos de cuero)
+  - codigo: '724'
+    descripcion: Minería y extracción
+  - codigo: '731'
+    descripcion: Arquitectura y urbanismo
+  - codigo: '732'
+    descripcion: Construcción e ingeniería civil
+  - codigo: '811'
+    descripcion: Producción agrícola y ganadera
+  - codigo: '812'
+    descripcion: Horticultura (Técnicas de huertas, invernaderos, viveros y jardines)
+  - codigo: '821'
+    descripcion: Silvicultura
+  - codigo: '831'
+    descripcion: Pesca
+  - codigo: '841'
+    descripcion: Veterinaria
+  - codigo: '911'
+    descripcion: Odontología y estudios dentales
+  - codigo: '912'
+    descripcion: Medicina
+  - codigo: '913'
+    descripcion: Enfermería y partería
+  - codigo: '914'
+    descripcion: Tecnología de diagnóstico y tratamiento médico
+  - codigo: '915'
+    descripcion: Fisioterapia, Fonoaudiología, Terapia ocupacional, Nutrición y afines
+  - codigo: '916'
+    descripcion: Farmacia
+  - codigo: '917'
+    descripcion: Medicina y terapia tradicional y complementaria
+  - codigo: '921'
+    descripcion: Atención a adultos, adultos mayores con o sin discapacitados
+  - codigo: '922'
+    descripcion: Atención, protección y servicios a la infancia, adolescencia y juventud
+  - codigo: '1011'
+    descripcion: Servicios domésticos
+  - codigo: '1012'
+    descripcion: Peluquería y tratamientos de belleza
+  - codigo: '1013'
+    descripcion: Hotelería, restaurantes y servicios de banquetes
+  - codigo: '1014'
+    descripcion: Deportes
+  - codigo: '1015'
+    descripcion: Viajes, turismo y actividades recreativas
+  - codigo: '1021'
+    descripcion: Saneamiento de la comunidad
+  - codigo: '1022'
+    descripcion: Salud y protección laboral
+  - codigo: '1031'
+    descripcion: Educación militar y de defensa
+  - codigo: '1032'
+    descripcion: Protección de las personas y de la propiedad
+  - codigo: '1041'
+    descripcion: Servicios de transporte
+  - codigo: '315'
+    descripcion: Trabajo social
+  - codigo: '119'
+    descripcion: Educación no clasificada en otra parte
+  - codigo: '188'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a educación
+  - codigo: '219'
+    descripcion: Artes no clasificadas en otra parte
+  - codigo: '229'
+    descripcion: Humanidades (excepto idiomas) no clasificados en otra parte
+  - codigo: '239'
+    descripcion: Idiomas no clasificados en otra parte
+  - codigo: '288'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a artes y humanidades
+  - codigo: '319'
+    descripcion: Ciencias sociales y del comportamiento no clasificadas en otra parte
+  - codigo: '329'
+    descripcion: Periodismo e información no clasificados en otra parte
+  - codigo: '388'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a ciencias sociales,
+      periodismo e información
+  - codigo: '419'
+    descripcion: Educación comercial y administración no clasificados en otra parte
+  - codigo: '488'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a administración
+      de empresas y derecho
+  - codigo: '519'
+    descripcion: Ciencias biológicas y afines no clasificados en otra parte
+  - codigo: '529'
+    descripcion: Medio ambiente no clasificados en otra parte
+  - codigo: '539'
+    descripcion: Ciencias físicas no clasificadas en otra parte
+  - codigo: '588'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a ciencias naturales,
+      matemáticas y estadística
+  - codigo: '619'
+    descripcion: Tecnologías de la información  y la comunicación (TIC) no clasificada en
+      otra parte
+  - codigo: '688'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a tecnologías de
+      la información y la comunicación (TIC)
+  - codigo: '719'
+    descripcion: Ingeniería y profesiones afines no clasificadas en otra parte
+  - codigo: '729'
+    descripcion: Industria y procesamiento no clasificados en otra parte
+  - codigo: '788'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a ingeniería, industria
+      y construcción
+  - codigo: '819'
+    descripcion: Agropecuario no clasificado en otra parte
+  - codigo: '888'
+    descripcion: Programas y certificaciones interdisciplinarias relativos a agropecuario,
+      silvicultura, pesca y veterinaria
+  - codigo: '918'
+    descripcion: Instrumentación quirúrgica
+  - codigo: '919'
+    descripcion: Salud no clasificada en otra parte
+  - codigo: '929'
+    descripcion: Bienestar no clasificado en otra parte
+  - codigo: '988'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a salud y bienestar
+  - codigo: '1016'
+    descripcion: Servicios funerarios
+  - codigo: '1019'
+    descripcion: Servicios personales no clasificados en otra parte
+  - codigo: '1029'
+    descripcion: Servicios de higiene y salud ocupacional no clasificadas en otra parte
+  - codigo: '1039'
+    descripcion: Servicios de seguridad no clasificados en otra parte
+  - codigo: '1088'
+    descripcion: Programas y certificaciones interdisciplinarios relativos a servicios

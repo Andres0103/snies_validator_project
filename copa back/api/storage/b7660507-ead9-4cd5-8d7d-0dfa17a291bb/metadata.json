@@ -1,0 +1,30 @@
+{
+  "id": "b7660507-ead9-4cd5-8d7d-0dfa17a291bb",
+  "plantilla": "ACTIVIDAD_CULTURAL",
+  "plantillas": [
+    "ACTIVIDAD_CULTURAL"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T15:44:52.914139+00:00",
+  "iniciado_en": "2026-11-17T15:44:52.945406+00:00",
+  "finalizado_en": "2026-11-17T15:44:53.234063+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 10,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "plantilla": "ACTIVIDAD_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES_marcado.xlsx",
+      "total_errores": 10,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

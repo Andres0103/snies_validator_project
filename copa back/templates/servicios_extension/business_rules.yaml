@@ -1,0 +1,9 @@
+# Reglas de negocio específicas de SERVICIOS DE EXTENSIÓN.
+
+FECHA_FINAL:
+  kind: date_after_column
+  after_column: FECHA_INICIO
+  strict: false
+  message: >
+    La fecha final debe ser igual o posterior
+    a la fecha de inicio.

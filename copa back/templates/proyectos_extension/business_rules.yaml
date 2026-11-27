@@ -1,0 +1,9 @@
+# Reglas de negocio específicas de PROYECTOS DE EXTENSIÓN.
+
+FECHA_FINAL:
+  kind: date_after_column
+  after_column: FECHA_INICIO
+  strict: true
+  message: >
+    La fecha final debe ser estrictamente posterior
+    a la fecha de inicio.

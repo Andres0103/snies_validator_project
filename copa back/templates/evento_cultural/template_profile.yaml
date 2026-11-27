@@ -1,0 +1,27 @@
+main_sheet: EVENTO_CULTURAL
+
+sheets:
+  - EVENTO_CULTURAL
+  - EVENTO_CULT_REC_HUMANO
+  - EVENTO_CULT_BENEFICIARIOS
+
+record_key:
+  - CODIGO_UNIDAD_ORGANIZACIONAL
+  - CODIGO_EVENTO
+
+references:
+  - child_sheet: EVENTO_CULT_REC_HUMANO
+    parent_sheet: EVENTO_CULTURAL
+    key:
+      - AÑO
+      - SEMESTRE
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_EVENTO
+
+  - child_sheet: EVENTO_CULT_BENEFICIARIOS
+    parent_sheet: EVENTO_CULTURAL
+    key:
+      - AÑO
+      - SEMESTRE
+      - CODIGO_UNIDAD_ORGANIZACIONAL
+      - CODIGO_EVENTO

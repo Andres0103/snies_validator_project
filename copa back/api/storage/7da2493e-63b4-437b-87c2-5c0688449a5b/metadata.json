@@ -1,0 +1,47 @@
+{
+  "id": "7da2493e-63b4-437b-87c2-5c0688449a5b",
+  "plantilla": null,
+  "plantillas": [
+    "ACTIVIDAD_CULTURAL",
+    "CONSULTORIA"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T20:35:08.340351+00:00",
+  "iniciado_en": "2026-11-17T20:35:08.388521+00:00",
+  "finalizado_en": "2026-11-17T20:35:09.548968+00:00",
+  "total_archivos": 3,
+  "total_archivos_validos": 3,
+  "total_archivos_procesados": 3,
+  "total_archivos_fallidos": 0,
+  "total_errores": 21,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_VALIDOS.xlsx",
+      "plantilla": "ACTIVIDAD_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "ACTIVIDAD_CULTURAL_VALIDOS_marcado.xlsx",
+      "total_errores": 1,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_ERRORES_INTENCIONALES.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CONSULTORIA_ERRORES_INTENCIONALES_marcado.xlsx",
+      "total_errores": 17,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "CONSULTORIA_VALIDOS.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CONSULTORIA_VALIDOS_marcado.xlsx",
+      "total_errores": 3,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

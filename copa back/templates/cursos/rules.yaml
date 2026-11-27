@@ -1,0 +1,38 @@
+
+# Definición de campos de la plantilla CURSOS.
+# Fuente: Manual MEN 2025, sección 11.1.
+# Complemento: Manual conceptual SNIES 2023, sección 3.7.3.
+
+sheets:
+  CURSO:
+    CODIGO_CURSO:
+      datatype: alphanumeric
+      required: true
+      max_length: 20
+      description: "Código del curso."
+
+    NOMBRE_CURSO:
+      datatype: alphanumeric
+      required: true
+      max_length: 200
+      description: "Nombre del curso."
+
+    ID_CINE_CAMPO_DETALLADO:
+      datatype: integer
+      required: true
+      max_length: 4
+      description: "Campo detallado según clasificación CINE 2013."
+
+    ES_EXTENSION:
+      datatype: alphanumeric
+      required: true
+      max_length: 1
+      allowed_values: ["S", "N"]
+      description: "Indica si el curso es de extensión."
+
+    ACTIVO:
+      datatype: alphanumeric
+      required: true
+      max_length: 1
+      allowed_values: ["S", "N"]
+      description: "Indica si el curso está activo."

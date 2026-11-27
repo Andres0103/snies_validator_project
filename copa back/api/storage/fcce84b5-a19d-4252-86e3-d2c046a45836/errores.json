@@ -1,0 +1,4324 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "18",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "Corporación de Alta Tecnología para la Defensa – CODALTEC",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 2,
+      "columna": "FECHA_FINAL",
+      "valor": "2026-03-12 00:00:00",
+      "mensaje": "La fecha final debe ser estrictamente posterior a la fecha de inicio.\n",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 3,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 3,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 4,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 5,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "1001392440-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 6,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10850002-002-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 7,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005730",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 8,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2026-316",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 9,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 10,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 11,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005658",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 11,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "6565",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 12,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005672",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 12,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "6565",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 13,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 13,
+      "columna": "ID_CINE_CAMPO_DETALLADO",
+      "valor": "6565",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 14,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CV10200152-2026205",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 15,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-739",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 16,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-740",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 16,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "Ingenieros Electricos S.A.S",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 17,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-741",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 18,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-742",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 18,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "La Cimarrona E.S.P",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 19,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-743",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 20,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 20,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "Distrito Especial de Ciencia, Tecnología e Innovación de Medellín - Departamento Administrativo de Planeación",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 21,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO ",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 21,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO ",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 22,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA TP ON NÚMERO 26000020",
+      "mensaje": "La longitud es de 37 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 22,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA TP ON NÚMERO 26000020",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 22,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA TP ON NÚMERO 26000020",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 23,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 23,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 23,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 24,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 24,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 24,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 25,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10410031-006-2026 ",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 26,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10410031-006-2026 ",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 27,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 28,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "021-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 28,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "E.S.E. Norte 3",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 29,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "020-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 29,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "E.S.E. Norte 3",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 30,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "072-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 30,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "E.S.E. Quilisalud",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 31,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "073-2026",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 31,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "E.S.E. Quilisalud",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 32,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 33,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2025/013",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 33,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2025/013",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[A-Z0-9-]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 33,
+      "columna": "NOMBRE_ENTIDAD",
+      "valor": "Organización de Estados Iberoamericanos para la Educación, la Ciencia y la Cultura (OEI)",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 33,
+      "columna": "NOMBRE_INSTITUCION",
+      "valor": "Organización de Estados Iberoamericanos para la Educación, la Ciencia y la Cultura (OEI)",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA",
+      "fila": 34,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CV09200186",
+      "mensaje": "La longitud debe ser exactamente 30 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 2,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "18",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 3,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 4,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 5,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 6,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 7,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "-1",
+      "mensaje": "La longitud es de 2 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "-1",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "-1",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 8,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 9,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 10,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 11,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 12,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 13,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 14,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 15,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 16,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 17,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 18,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 19,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 20,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 21,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 22,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 23,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 24,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 25,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 26,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 27,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 28,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 29,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 30,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 31,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 32,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 33,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 34,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 35,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 36,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 37,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 38,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 39,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 40,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 41,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 42,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 43,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 44,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 45,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 46,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 47,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 48,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 49,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 50,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 51,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 52,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 53,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 54,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 55,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 56,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 57,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 58,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 59,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 60,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 61,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 62,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 63,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI-531-2025",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 65,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10850002-002-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 66,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10850002-002-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 67,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005730",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 68,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2026-316",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 69,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2026-316",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 70,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 71,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 72,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 73,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 74,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 75,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 76,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 77,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 78,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 79,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 80,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 81,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 82,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 83,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 84,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 85,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 86,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 86,
+      "columna": "SEGUNDO_APELLIDO",
+      "valor": "D`León",
+      "mensaje": "El campo debe contener únicamente letras.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 87,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 88,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 89,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 89,
+      "columna": "PRIMER_APELLIDO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('PRIMER_APELLIDO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 90,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 91,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 92,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 93,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 94,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 95,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 96,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 97,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 98,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 99,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 100,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 101,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 102,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 103,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 104,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 105,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 106,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 107,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 108,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 109,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 110,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 111,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 112,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600018949",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 113,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 114,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 115,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 116,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 117,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 118,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 119,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 120,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600019106",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 121,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005658",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 122,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005658",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 123,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005658",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 124,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005672",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 125,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 126,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 127,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 128,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 129,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 130,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 131,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 132,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 133,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 134,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 135,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 136,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 137,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 138,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 139,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 140,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 141,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 142,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 143,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 144,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 145,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 146,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 147,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 148,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 149,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 150,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 151,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 152,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "40005712",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 153,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CV10200152-2026205",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 154,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CV10200152-2026205",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 155,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CV10200152-2026205",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 156,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-739",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 157,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-740",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 158,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-741",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 159,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-742",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 160,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ASCON26-743",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 161,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 162,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 163,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 164,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 165,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 166,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 167,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 168,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 169,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 170,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 171,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 172,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "4600107536",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 173,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 173,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 174,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 174,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 175,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 175,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 176,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA\n TP ON NÚMERO 26000020",
+      "mensaje": "La longitud es de 38 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 176,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA\n TP ON NÚMERO 26000020",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 177,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 177,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 178,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 178,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 179,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 179,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 180,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 180,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 181,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 181,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 182,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 182,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 183,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 183,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 184,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 184,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 185,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 185,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 186,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud es de 49 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 186,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO 21940010-CV12210151-12189-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 187,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 187,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 188,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 188,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 189,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 189,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 190,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 190,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 191,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 191,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 192,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 192,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 193,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 193,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 194,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 194,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 195,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 195,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 196,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 196,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 197,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 197,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 198,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 198,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 199,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 199,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 200,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 200,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 201,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 201,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 202,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 202,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 203,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 203,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 204,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 204,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 205,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 205,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 206,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 206,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 207,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 207,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 208,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 208,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 209,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 209,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 210,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 210,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 211,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 211,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 212,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 212,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 213,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 213,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 214,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 214,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 215,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 215,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 216,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 216,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 217,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 217,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 218,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 218,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 219,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 219,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 220,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 220,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 221,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 221,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 222,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 222,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 223,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 223,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 224,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 224,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 225,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 225,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 226,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 226,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 227,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 227,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 228,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 228,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 229,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 229,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 230,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 230,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 231,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 231,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 232,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 232,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 233,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 233,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 234,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 234,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 235,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 235,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 236,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 236,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 237,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 237,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 238,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 238,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 239,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 239,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 240,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 240,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 241,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 241,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 242,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 242,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 243,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 243,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 244,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 244,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 245,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 245,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 246,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 246,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 247,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 247,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 248,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 248,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 249,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 249,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 250,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 250,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 251,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud es de 66 caracteres; máximo permitido: 30.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 251,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO INTERDEPENDENCIAS 22040008-CV20200157-001--2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 252,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10410031-006-2026 ",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 253,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "10410031-006-2026 ",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 254,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 255,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 256,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 257,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 258,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 259,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 260,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 261,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 262,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 263,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 264,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 265,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 266,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 267,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 268,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 269,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 270,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 271,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 272,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 273,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 274,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 275,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 276,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 277,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 278,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 279,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 280,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 281,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 282,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 283,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 284,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 285,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 286,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 287,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 288,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 289,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 290,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 291,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 292,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 293,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 294,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 295,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 296,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 297,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 298,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 299,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 300,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 301,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 302,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 303,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 304,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 305,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 306,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 306,
+      "columna": "ID_MAXIMO_NIVEL_ESTUDIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_MAXIMO_NIVEL_ESTUDIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 307,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 307,
+      "columna": "ID_MAXIMO_NIVEL_ESTUDIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_MAXIMO_NIVEL_ESTUDIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 308,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 309,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 310,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 311,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 312,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "9071594-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 313,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "020-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 314,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "020-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 315,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "020-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 316,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "021-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 317,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "021-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 318,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "021-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 319,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "021-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 320,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "072-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 321,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "072-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 322,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "072-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 323,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "073-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 324,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "073-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 325,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "073-2026",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 326,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 327,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 328,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 329,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 330,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 331,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 332,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 333,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "CE09250019",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 334,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2025/013",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 335,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "2025/013",
+      "mensaje": "La longitud debe ser exactamente 15 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 8,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "SE-CD-CI- 529-2025",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2026 | SEMESTRE=-1 | CODIGO_CONSULTORIA=SE-CD-CI- 529-2025.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 173,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2026 | SEMESTRE=1 | CODIGO_CONSULTORIA=ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 174,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2026 | SEMESTRE=1 | CODIGO_CONSULTORIA=ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 175,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2026 | SEMESTRE=1 | CODIGO_CONSULTORIA=ACTA DE COMPROMISO No. 10410023-ES92250002-001-2026.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "hoja": "CONSULTORIA_REC_HUMANO",
+      "fila": 176,
+      "columna": "CODIGO_CONSULTORIA",
+      "valor": "ORDEN DE COMPRA\n TP ON NÚMERO 26000020",
+      "mensaje": "El registro de 'CONSULTORIA_REC_HUMANO' no tiene un registro principal correspondiente en 'CONSULTORIA'. Clave: AÑO=2026 | SEMESTRE=1 | CODIGO_CONSULTORIA=ORDEN DE COMPRA\n TP ON NÚMERO 26000020.",
+      "severidad": "error"
+    }
+  ]
+}

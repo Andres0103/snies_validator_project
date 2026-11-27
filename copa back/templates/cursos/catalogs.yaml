@@ -1,0 +1,10 @@
+# Catálogos utilizados por la plantilla CURSOS.
+# Se reutiliza el catálogo general CINE 2013.
+
+master_tables:
+
+  cine_campos:
+    file: "catalogs/cine_campo_detallado.yaml"
+    records_path: "records"
+    key_column: "codigo"
+    description_column: "descripcion"

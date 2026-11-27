@@ -1,0 +1,48 @@
+{
+  "id": "f8d4632b-b587-41ab-90f9-6c503a62d858",
+  "plantilla": "CONSULTORIA",
+  "plantillas": [
+    "CONSULTORIA"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-19T13:58:18.772383+00:00",
+  "iniciado_en": "2026-11-19T13:58:18.848438+00:00",
+  "finalizado_en": "2026-11-19T13:58:32.776649+00:00",
+  "total_archivos": 3,
+  "total_archivos_validos": 3,
+  "total_archivos_procesados": 3,
+  "total_archivos_fallidos": 0,
+  "total_errores": 1775,
+  "total_advertencias": 556,
+  "archivos": [
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_16022026_marcado.xlsx",
+      "total_errores": 21,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CONSULTOR_A_VRE_20252-revisi_n_febrero_2026_18022026_marcado.xlsx",
+      "total_errores": 21,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "CONSULTOR_A_VRE_18122025.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CONSULTOR_A_VRE_18122025_marcado.xlsx",
+      "total_errores": 1733,
+      "total_advertencias": 556
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

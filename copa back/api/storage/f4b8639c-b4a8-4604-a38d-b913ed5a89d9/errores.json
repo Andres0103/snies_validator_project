@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Inscritos_-_relacion_de_inscritos_1201.xlsx",
+      "hoja": "INSCRITO",
+      "fila": 2739,
+      "columna": "SEGUNDO_APELLIDO",
+      "valor": "PARRA`",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "5b7d5e85-d7d1-475c-b954-0ec8b631e813",
+  "plantilla": "CURSOS",
+  "plantillas": [
+    "CURSOS"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-23T19:54:51.435548+00:00",
+  "iniciado_en": "2026-11-23T19:54:51.470124+00:00",
+  "finalizado_en": "2026-11-23T19:54:51.917099+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 9,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Cursos_2025-2.xlsx",
+      "plantilla": "CURSOS",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Cursos_2025-2_marcado.xlsx",
+      "total_errores": 9,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

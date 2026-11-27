@@ -1,0 +1,10 @@
+
+# Reglas de negocio de INSCRITOS - RELACIÓN DE INSCRITOS.
+#
+# Pendiente de implementación:
+#
+# 1. AÑO debe corresponder al año de un período abierto.
+#
+# Esta regla requiere consultar los períodos registrados en SNIES.
+# No se implementa todavía porque necesita una fuente de datos y
+# un mecanismo de consulta desde el backend.

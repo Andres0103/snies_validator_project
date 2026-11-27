@@ -1,0 +1,5 @@
+# Educación Continua
+# No requiere catálogos externos en las reglas
+# de la sección 11.2 del manual MEN.
+
+master_tables: {}

@@ -1,0 +1,3406 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 1,
+      "columna": "__ENCABEZADO_VACIO__",
+      "valor": null,
+      "mensaje": "La columna R contiene datos, pero tiene el encabezado vacío en la fila 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 2,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 3,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 4,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 5,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 6,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "NOMBRE_SERVICIO",
+      "valor": "Noveno ciclo conversemos sobre mediación\nSegundo encuentro - La mediación como camino: experiencias desde la Universidad y la comunidad\nNoveno ciclo conversemos sobre mediación\nSegundo encuentro - La mediación como camino: experiencias desde la Universidad y la comunidad\nNoveno ciclo conversemos sobre mediación\nSegundo encuentro - La mediación como camino: experiencias desde la Universidad y la comunidad",
+      "mensaje": "La longitud es de 407 caracteres; máximo permitido: 400.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 7,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "NOMBRE_SERVICIO",
+      "valor": "Conversatorio | Mutación constitucional: una reflexión sobre la experiencia ecuatoriana",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 8,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 9,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": "Diplomado Construcción de paz, derechos humanos y mecanismos de prevención y autoprotección",
+      "mensaje": "La longitud es de 91 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "FECHA_INICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('FECHA_INICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "NOMBRE_SERVICIO",
+      "valor": "10° Congreso Internacional de Derecho de familia",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Evento con costo de inscripción al público ",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Evento con costo de inscripción al público ",
+      "mensaje": "La longitud es de 42 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Evento con costo de inscripción al público ",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "TIENE_COSTO",
+      "valor": "Con Costo al público",
+      "mensaje": "La longitud es de 20 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "TIENE_COSTO",
+      "valor": "Con Costo al público",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "TIENE_COSTO",
+      "valor": "Con Costo al público",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "SEMESTRE",
+      "valor": "II",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "CODIGO_UNIDAD_ORGANIZACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_UNIDAD_ORGANIZACIONAL').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El campo debe contener un valor numérico válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "La longitud es de 19 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "VALOR_SERVICIO",
+      "valor": "Extension solidaria",
+      "mensaje": "El valor debe ser numérico para cumplir los límites configurados.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud es de 9 caracteres; máximo permitido: 1.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "La longitud debe ser exactamente 1 caracteres.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "TIENE_COSTO",
+      "valor": "Sin costo",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 17,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 20,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Calibración de 15 micropipetas monocanal a GENTECH S.A.S. pertenecientes al usuario UNIVERSIDAD NACIONAL DE COLOMBIA y COLGENES realizadas en el mes de diciembre de 2024. De acuerdo con el contrato de prestación de servicios No. 20240002-002-24 realizado con el Laboratorio de Metrología de la Universidad de Antioquia (LMUA).",
+      "mensaje": "La longitud es de 326 caracteres; máximo permitido: 250.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 21,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 22,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 24,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 25,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Calibración de 2 micropipetas, pertenecientes al Laboratorio de Microbiología de Aguas y Alimentos de la Facultad de Ciencias - Universidad Nacional de Colombia sede Medellin, de acuerdo con la cotización No. 2856 del Laboratorio de Metrología de la Universidad de Antioquia - LMUA.",
+      "mensaje": "La longitud es de 282 caracteres; máximo permitido: 250.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 26,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 27,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 28,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 29,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Calibración de 6 micropipetas identificadas con No. de serie 10221210454, 10221300681, J16117701, K20317151, 10621170424 y 10721170584 pertenecientes al usuario GENTECH S.A.S, cuyos certificados de calibración se enviaron el 20 de JUNIO de 2025. Estas calibraciones se realizaron de acuerdo con el contrato de prestación de servicios No. 20240002-002-24 realizado con el Laboratorio de Metrología de la Universidad de Antioquia (LMUA).",
+      "mensaje": "La longitud es de 435 caracteres; máximo permitido: 250.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 30,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 31,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Realización de análisis ASAP a muestra de ESTEREATO DE MAGNESIO TQJ2323847 por valor de: 427.300 $ y tratamiento de residuos por valor de 5500",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 32,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 33,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 34,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 35,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Pruebas microbiológicas en ambientes. Recuento de bacillus cereus, enterobacterias,mesófilos, mohos y levaduras, salmonella sp. y sthaphylococcus coagulasa (+). ",
+      "mensaje": "El campo debe contener letras, números y signos de puntuación válidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 36,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 37,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 38,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 39,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "ID_AREA_EXTENSION",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('ID_AREA_EXTENSION').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "NOMBRE_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('NOMBRE_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "APELLIDO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('APELLIDO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "TELEFONO_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TELEFONO_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "EMAIL_CONTACTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('EMAIL_CONTACTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "TIENE_COSTO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('TIENE_COSTO').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 40,
+      "columna": "CRITERIO_ELEGIBILIDAD",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CRITERIO_ELEGIBILIDAD').",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "SERVICIOS_DE_EXTENSI_N_VRE_18122025.xlsx",
+      "hoja": "SERV_EXT_OTRAS_ENTIDADES",
+      "fila": 2,
+      "columna": "CODIGO_SERVICIO",
+      "valor": null,
+      "mensaje": "Campo obligatorio vacío ('CODIGO_SERVICIO').",
+      "severidad": "error"
+    }
+  ]
+}

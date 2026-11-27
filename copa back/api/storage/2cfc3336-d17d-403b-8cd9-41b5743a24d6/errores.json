@@ -1,0 +1,13 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Inscrito_programa_1201.xlsx",
+      "hoja": "INSCRITO_PROGRAMA",
+      "fila": 8,
+      "columna": "NUM_DOCUMENTO",
+      "valor": "10142 91152",
+      "mensaje": "El valor no cumple con el patrón permitido: ^\\S+$.",
+      "severidad": "error"
+    }
+  ]
+}

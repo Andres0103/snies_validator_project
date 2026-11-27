@@ -1,0 +1,41 @@
+master_tables:
+  sectores_consultoria:
+    source_file: Tabla sector consultoria.csv
+    columns:
+    - ID_SECTOR_CONSULTORIA
+    - DESC_SECTOR_CONSULTORIA
+    - FECHA_INICIAL
+    - FECHA_FINAL
+    records:
+    - ID_SECTOR_CONSULTORIA: '1'
+      DESC_SECTOR_CONSULTORIA: Sector Empresarial
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '2'
+      DESC_SECTOR_CONSULTORIA: Sector Administración Pública
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '3'
+      DESC_SECTOR_CONSULTORIA: Centros de Investigación y Desarrollo Tecnológico
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '4'
+      DESC_SECTOR_CONSULTORIA: Hospitales y Clínicas
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '5'
+      DESC_SECTOR_CONSULTORIA: Instituciones privadas sin ánimo de lucro
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '6'
+      DESC_SECTOR_CONSULTORIA: Instituciones de Educación
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '7'
+      DESC_SECTOR_CONSULTORIA: Comunidad
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null
+    - ID_SECTOR_CONSULTORIA: '8'
+      DESC_SECTOR_CONSULTORIA: Otro
+      FECHA_INICIAL: 01/01/1900
+      FECHA_FINAL: null

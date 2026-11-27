@@ -1,0 +1,26 @@
+{
+  "id": "b3ec7d98-9ad6-45d2-bb1f-9b449fc361b5",
+  "plantilla": null,
+  "plantillas": [],
+  "estado": "FALLIDO",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-20T12:30:40.686852+00:00",
+  "iniciado_en": "2026-11-20T12:30:40.769878+00:00",
+  "finalizado_en": "2026-11-20T12:30:41.779284+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 0,
+  "total_archivos_fallidos": 1,
+  "total_errores": 0,
+  "total_advertencias": 0,
+  "archivos": [],
+  "archivos_rechazados": [
+    {
+      "nombre_archivo": "Educacion_continua_2025-2.xlsx",
+      "motivo": "No fue posible procesar el archivo. Revisa los registros del servidor."
+    }
+  ],
+  "reporte_disponible": false,
+  "advertencia_reporte": null
+}

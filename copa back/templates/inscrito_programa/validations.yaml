@@ -1,0 +1,7 @@
+# Validaciones específicas de INSCRITO_PROGRAMA.
+# Fuente: Manual MEN V8.12, sección 3.2.
+
+sheets:
+  INSCRITO_PROGRAMA:
+    NUM_DOCUMENTO:
+      pattern: "^\\S+$"

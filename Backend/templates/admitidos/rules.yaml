@@ -1,0 +1,67 @@
+
+# Reglas de ADMITIDOS
+# Fuente: Manual MEN V8.12, sección 3.4, páginas 24-26.
+
+sheets:
+  ADMITIDO:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      allowed_values: [CC, DE, CE, TI, PS, CA, PT]
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+
+    PRO_CONSECUTIVO:
+      datatype: integer
+      required: true
+      max_length: 6
+
+    ID_MUNICIPIO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 5
+
+    TELEFONO_CONTACTO:
+      datatype: integer
+      required: false
+      max_length: 15
+
+    EMAIL_PERSONAL:
+      datatype: alphanumeric
+      required: false
+      max_length: 200
+
+    FECHA_NACIMIENTO:
+      datatype: date
+      required: false
+      date_formats:
+        - "%d/%m/%Y"
+        - "%d-%m-%Y"
+
+    ID_ESTRATO:
+      datatype: integer
+      required: false
+      exact_length: 1
+      allowed_values: [0, 1, 2, 3, 4, 5, 6, 7]
+
+    ID_BENEFICIARIO_LEY_VETERANOS:
+      datatype: integer
+      required: false
+      exact_length: 1
+      allowed_values: [1, 2, 3, 4, 5]

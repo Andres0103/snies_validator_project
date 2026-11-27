@@ -814,6 +814,22 @@ def _get_sheet_configuration(
         ),
     }
 
+def _get_normalized_config_value(
+    config: dict[str, Any],
+    column_name: str,
+    default: Any = None,
+) -> Any:
+    normalized_name = column_name.strip().casefold()
+
+    for configured_name, value in config.items():
+        if (
+            isinstance(configured_name, str)
+            and configured_name.strip().casefold() == normalized_name
+        ):
+            return value
+
+    return default
+
 
 def _build_column_rules(
     headers: list,
@@ -833,6 +849,7 @@ def _build_column_rules(
 
     rules_by_column: dict[str, ValidationRule] = {}
 
+    # Obtener primero las validaciones y los catálogos
     validations_by_column = sheet_configuration.get(
         "validations",
         {},
@@ -845,12 +862,14 @@ def _build_column_rules(
 
     if not isinstance(validations_by_column, dict):
         raise ValueError(
-            f"Las validaciones de la hoja '{sheet_name}' " "deben ser un diccionario."
+            f"Las validaciones de la hoja '{sheet_name}' "
+            "deben ser un diccionario."
         )
 
     if not isinstance(catalogs, dict):
         raise ValueError(
-            f"Los catálogos de la hoja '{sheet_name}' " "deben ser un diccionario."
+            f"Los catálogos de la hoja '{sheet_name}' "
+            "deben ser un diccionario."
         )
 
     # --------------------------------------------------------
@@ -889,10 +908,10 @@ def _build_column_rules(
         if isinstance(configured_rule, dict):
 
             configured_datatype = configured_rule.get("datatype")
-
             configured_required = configured_rule.get("required")
-
-            configured_allowed_values = configured_rule.get("allowed_values")
+            configured_allowed_values = configured_rule.get(
+                "allowed_values"
+            )
 
             # A. OBLIGATORIEDAD
 
@@ -917,14 +936,38 @@ def _build_column_rules(
                 if configured_datatype in datatype_map:
                     rule.datatype = datatype_map[configured_datatype]
 
-            # C. VALORES PERMITIDOS
+            # C. LONGITUDES CONFIGURADAS
+
+            for property_name in (
+                "exact_length",
+                "max_length",
+                "min_length",
+            ):
+                configured_length = configured_rule.get(
+                    property_name
+                )
+
+                if configured_length is None:
+                    continue
+
+                if (
+                    isinstance(configured_length, bool)
+                    or not isinstance(configured_length, int)
+                    or configured_length <= 0
+                ):
+                    raise ValueError(
+                        f"'{property_name}' de '{column_name}' "
+                        f"en la hoja '{sheet_name}' "
+                        "debe ser un entero mayor que cero."
+                    )
+
+                setattr(rule, property_name, configured_length)
+
+            # D. VALORES PERMITIDOS
 
             if configured_allowed_values is not None:
 
-                if not isinstance(
-                    configured_allowed_values,
-                    list,
-                ):
+                if not isinstance(configured_allowed_values, list):
                     raise ValueError(
                         f"'allowed_values' de '{column_name}' "
                         f"en la hoja '{sheet_name}' "
@@ -1001,7 +1044,8 @@ def _build_column_rules(
         # 3. OBTENER VALIDACIONES DE validations.yaml
         # ----------------------------------------------------
 
-        validation = validations_by_column.get(
+        validation = _get_normalized_config_value(
+            validations_by_column,
             column_name,
             {},
         )
@@ -1022,10 +1066,7 @@ def _build_column_rules(
             [],
         )
 
-        if not isinstance(
-            configured_excluded_values,
-            list,
-        ):
+        if not isinstance(configured_excluded_values, list):
             raise ValueError(
                 f"'excluded_values' de '{column_name}' "
                 f"en la hoja '{sheet_name}' debe ser "
@@ -1072,7 +1113,9 @@ def _build_column_rules(
 
         if "format" in validation:
 
-            configured_formats = _normalize_date_formats(validation["format"])
+            configured_formats = _normalize_date_formats(
+                validation["format"]
+            )
 
             if not configured_formats or any(
                 not isinstance(item, str) or not item.strip()
@@ -1121,7 +1164,9 @@ def _build_column_rules(
         # 6. CARGAR allowed_values DE validations.yaml
         # ----------------------------------------------------
 
-        configured_validation_allowed_values = validation.get("allowed_values")
+        configured_validation_allowed_values = validation.get(
+            "allowed_values"
+        )
 
         if configured_validation_allowed_values is not None:
 
@@ -1136,10 +1181,11 @@ def _build_column_rules(
                 )
 
             parsed_allowed_values: list[AllowedValue] = []
-
             seen_codes: set[str] = set()
 
-            for index, item in enumerate(configured_validation_allowed_values):
+            for index, item in enumerate(
+                configured_validation_allowed_values
+            ):
 
                 if not isinstance(item, dict):
                     raise ValueError(
@@ -1152,7 +1198,11 @@ def _build_column_rules(
                 code = item.get("code")
                 label = item.get("label")
 
-                if code is None or not isinstance(label, str) or not label.strip():
+                if (
+                    code is None
+                    or not isinstance(label, str)
+                    or not label.strip()
+                ):
                     raise ValueError(
                         f"El elemento {index + 1} de "
                         "'allowed_values' en "
@@ -1201,7 +1251,10 @@ def _build_column_rules(
 
         if catalog_name is not None:
 
-            if not isinstance(catalog_name, str) or not catalog_name.strip():
+            if (
+                not isinstance(catalog_name, str)
+                or not catalog_name.strip()
+            ):
                 raise ValueError(
                     f"El catálogo de '{column_name}' "
                     f"en la hoja '{sheet_name}' "
@@ -1236,8 +1289,6 @@ def _build_column_rules(
         rules_by_column,
         validations_by_column,
     )
-
-    return rules_by_column, validations_by_column
 
 
 # VALIDACIONES ESTRUCTURALES AUXILIARES

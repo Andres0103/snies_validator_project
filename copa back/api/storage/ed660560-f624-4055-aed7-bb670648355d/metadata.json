@@ -1,0 +1,32 @@
+{
+  "id": "ed660560-f624-4055-aed7-bb670648355d",
+  "plantilla": "ACTIVIDAD_CULTURAL",
+  "plantillas": [
+    "ACTIVIDAD_CULTURAL"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-27T14:37:48.437358+00:00",
+  "iniciado_en": "2026-11-27T14:37:48.471909+00:00",
+  "finalizado_en": "2026-11-27T14:37:52.823298+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 2622,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Actividad_cultural_jul_nov_2025-2.xlsx",
+      "plantilla": "ACTIVIDAD_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Actividad_cultural_jul_nov_2025-2_marcado.xlsx",
+      "total_errores": 2622,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

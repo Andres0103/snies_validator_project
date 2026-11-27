@@ -1,0 +1,18 @@
+
+# Reglas de negocio de ADMITIDOS.
+# Fuente: Manual MEN V8.12, página 26.
+
+conditional_required_fields:
+  ADMITIDO:
+
+    ID_ESTRATO:
+      when:
+        column: AÑO
+        operator: gt
+        value: 2021
+
+    ID_BENEFICIARIO_LEY_VETERANOS:
+      when:
+        column: AÑO
+        operator: gt
+        value: 2022

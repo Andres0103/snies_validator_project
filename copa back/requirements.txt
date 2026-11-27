@@ -1,0 +1,11 @@
+# Dependencias del backend SNIES Validator
+# Instalacion: python -m pip install -r requirements.txt
+
+# API REST
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.34,<1.0
+python-multipart>=0.0.20
+
+# Procesamiento de Excel y reglas SNIES
+openpyxl==3.1.5
+PyYAML==6.0.3

@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_VALIDOS.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio para fuente internacional.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "AÑO",
+      "valor": "20X5",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "ID_TIPO_ACTIVIDAD_CULTURAL",
+      "valor": "99",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "FECHA_FINAL",
+      "valor": "2024-01-01 00:00:00",
+      "mensaje": "La fecha final debe ser estrictamente posterior a la fecha de inicio.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "ID_FUENTE_NACIONAL",
+      "valor": "99",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_NACIONAL",
+      "valor": "-10",
+      "mensaje": "El valor debe ser mayor o igual a 0.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "ID_PAIS_FINANCIADOR",
+      "valor": "170",
+      "mensaje": "El valor '170' no está permitido para el campo 'ID_PAIS_FINANCIADOR'.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACTIVIDAD_CULTURAL",
+      "fila": 2,
+      "columna": "VLR_FINANCIACION_INTERNACIONAL",
+      "valor": null,
+      "mensaje": "Campo obligatorio por condición: obligatorio para fuente internacional.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACT_CULTURAL_REC_HUMANO",
+      "fila": 2,
+      "columna": "AÑO",
+      "valor": "20X5",
+      "mensaje": "El campo debe contener un número entero válido.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACT_CULTURAL_REC_HUMANO",
+      "fila": 3,
+      "columna": "CODIGO_ACTIVIDAD",
+      "valor": "CODIGO-SIN-PADRE",
+      "mensaje": "La longitud es de 16 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "hoja": "ACT_CULTURAL_REC_HUMANO",
+      "fila": 3,
+      "columna": "CODIGO_ACTIVIDAD",
+      "valor": "CODIGO-SIN-PADRE",
+      "mensaje": "El registro de 'ACT_CULTURAL_REC_HUMANO' no tiene un registro principal correspondiente en 'ACTIVIDAD_CULTURAL'. Clave: AÑO=2025 | SEMESTRE=1 | CODIGO_UNIDAD_ORGANIZACIONAL=UDEA-TEST | CODIGO_ACTIVIDAD=CODIGO-SIN-PADRE.",
+      "severidad": "error"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "archivos": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "ruta": "D:\\snies_validator_proyecto\\backend\\api\\storage\\451eae1c-be83-44be-8e67-69ec8bc8575f\\originales\\ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx"
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_VALIDOS.xlsx",
+      "ruta": "D:\\snies_validator_proyecto\\backend\\api\\storage\\451eae1c-be83-44be-8e67-69ec8bc8575f\\originales\\ACTIVIDAD_CULTURAL_VALIDOS.xlsx"
+    },
+    {
+      "nombre_archivo": "CURSOS_VALIDOS.xlsx",
+      "ruta": "D:\\snies_validator_proyecto\\backend\\api\\storage\\451eae1c-be83-44be-8e67-69ec8bc8575f\\originales\\CURSOS_VALIDOS.xlsx"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "f4b8639c-b4a8-4604-a38d-b913ed5a89d9",
+  "plantilla": "INSCRITOS_RELACION_INSCRITOS",
+  "plantillas": [
+    "INSCRITOS_RELACION_INSCRITOS"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-27T14:14:04.111333+00:00",
+  "iniciado_en": "2026-11-27T14:14:04.138522+00:00",
+  "finalizado_en": "2026-11-27T14:14:05.663561+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 1,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Inscritos_-_relacion_de_inscritos_1201.xlsx",
+      "plantilla": "INSCRITOS_RELACION_INSCRITOS",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Inscritos_-_relacion_de_inscritos_1201_marcado.xlsx",
+      "total_errores": 1,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

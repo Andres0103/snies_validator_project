@@ -1,0 +1,26 @@
+{
+  "id": "e50eb79d-61b0-46cb-9f0a-4caf5dc8c084",
+  "plantilla": "CONSULTORIA",
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-13T20:28:03.433952+00:00",
+  "iniciado_en": "2026-11-13T20:28:03.533412+00:00",
+  "finalizado_en": "2026-11-13T20:28:04.653352+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 185,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Consultoria_origina.xlsx",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Consultoria_origina_marcado.xlsx",
+      "total_errores": 185,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

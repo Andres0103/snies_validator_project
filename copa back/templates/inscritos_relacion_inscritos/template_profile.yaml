@@ -1,0 +1,8 @@
+main_sheet: INSCRITO
+
+sheets:
+  - INSCRITO
+
+record_key:
+  - ID_TIPO_DOCUMENTO
+  - NUM_DOCUMENTO

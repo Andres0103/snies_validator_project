@@ -1,0 +1,382 @@
+{
+  "items": [
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 10,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 11,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 12,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 13,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 14,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 15,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "La longitud es de 51 caracteres; máximo permitido: 50.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 16,
+      "columna": "EMAIL_CONTACTO",
+      "valor": "direccionud.fca@udea.edu.co\nsara.lopezo@udea.edu.co",
+      "mensaje": "El valor no cumple con el patrón permitido: ^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 18,
+      "columna": "VALOR_SERVICIO",
+      "valor": "132721.42857142858",
+      "mensaje": "La longitud es de 18 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 19,
+      "columna": "VALOR_SERVICIO",
+      "valor": "30106.380270485282",
+      "mensaje": "La longitud es de 18 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERVICIOS_EXTENSION",
+      "fila": 23,
+      "columna": "DESCRIPCION_SERVICIO",
+      "valor": "Presta servicios especializados de medicina del trabajo, evaluación de pérdida de capacidad laboral, exámenes médico-ocupacionales y peritaje médico para apoyar la gestión de la salud laboral, la protección de los trabajadores y los procesos administrativos y judiciales.",
+      "mensaje": "La longitud es de 271 caracteres; máximo permitido: 250.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_AREA_TRABAJO",
+      "fila": 3,
+      "columna": "CODIGO_SERVICIO",
+      "valor": "53377",
+      "mensaje": "El registro de 'SERV_EXT_AREA_TRABAJO' no tiene un registro principal correspondiente en 'SERVICIOS_EXTENSION'. Clave: AÑO=2026 | SEMESTRE=1 | CODIGO_UNIDAD_ORGANIZACIONAL=20340005 | CODIGO_SERVICIO=53377.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 4,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 5,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 6,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 7,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 8,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 9,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 10,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 11,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 12,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 13,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 14,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 15,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 16,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 17,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 18,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 19,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 20,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 21,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 22,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 23,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 24,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_CICLO_VITAL",
+      "fila": 25,
+      "columna": "ID_CICLO_VITAL",
+      "valor": "6",
+      "mensaje": "El valor no está dentro de los valores permitidos.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_FUENTE_NACIONAL",
+      "fila": 18,
+      "columna": "VALOR_FINANCIACION",
+      "valor": "132721.42857142858",
+      "mensaje": "La longitud es de 18 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    },
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "hoja": "SERV_EXT_FUENTE_NACIONAL",
+      "fila": 19,
+      "columna": "VALOR_FINANCIACION",
+      "valor": "30106.380270485282",
+      "mensaje": "La longitud es de 18 caracteres; máximo permitido: 15.",
+      "severidad": "error"
+    }
+  ]
+}

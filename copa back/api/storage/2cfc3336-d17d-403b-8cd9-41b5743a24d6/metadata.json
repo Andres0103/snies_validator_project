@@ -1,0 +1,32 @@
+{
+  "id": "2cfc3336-d17d-403b-8cd9-41b5743a24d6",
+  "plantilla": "INSCRITO_PROGRAMA",
+  "plantillas": [
+    "INSCRITO_PROGRAMA"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-27T19:15:07.345631+00:00",
+  "iniciado_en": "2026-11-27T19:15:07.373885+00:00",
+  "finalizado_en": "2026-11-27T19:15:08.408954+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 1,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Inscrito_programa_1201.xlsx",
+      "plantilla": "INSCRITO_PROGRAMA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Inscrito_programa_1201_marcado.xlsx",
+      "total_errores": 1,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

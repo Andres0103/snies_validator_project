@@ -208,3 +208,72 @@ def run_all_tests():
 
 if __name__ == "__main__":
     run_all_tests()
+
+
+
+ADMITIDOS_RULES = {
+    "conditional_required_fields": {
+        "ADMITIDO": {
+            "ID_ESTRATO": {
+                "when": {
+                    "column": "AÑO",
+                    "operator": "gt",
+                    "value": 2021,
+                }
+            },
+            "ID_BENEFICIARIO_LEY_VETERANOS": {
+                "when": {
+                    "column": "AÑO",
+                    "operator": "gt",
+                    "value": 2022,
+                }
+            },
+        }
+    }
+}
+
+
+
+def test_admitidos_conditional_required_fields():
+    from validators.post_hoc_validator import (
+        _conditional_requirement_applies,
+    )
+
+    cases = [
+        # Año, semestre, estrato obligatorio, veteranos obligatorio
+        (2021, 2, False, False),
+        (2022, 1, True, False),
+        (2022, 2, True, False),
+        (2023, 1, True, True),
+        (2023, 2, True, True),
+        (2024, 1, True, True),
+    ]
+
+    for year, semester, expected_estrato, expected_veteranos in cases:
+        row = {
+            "AÑO": year,
+            "SEMESTRE": semester,
+        }
+
+        estrato_applies = _conditional_requirement_applies(
+            ADMITIDOS_RULES,
+            "ADMITIDO",
+            "ID_ESTRATO",
+            row,
+        )
+
+        veteranos_applies = _conditional_requirement_applies(
+            ADMITIDOS_RULES,
+            "ADMITIDO",
+            "ID_BENEFICIARIO_LEY_VETERANOS",
+            row,
+        )
+
+        assert estrato_applies is expected_estrato, (
+            f"ID_ESTRATO incorrecto para {year}-{semester}"
+        )
+
+        assert veteranos_applies is expected_veteranos, (
+            f"ID_BENEFICIARIO_LEY_VETERANOS incorrecto "
+            f"para {year}-{semester}"
+        )

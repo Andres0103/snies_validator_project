@@ -1,0 +1,17 @@
+
+main_sheet: CONSULTORIA
+
+sheets:
+  - CONSULTORIA
+  - CONSULTORIA_REC_HUMANO
+
+record_key:
+  - CODIGO_CONSULTORIA
+
+references:
+  - child_sheet: CONSULTORIA_REC_HUMANO
+    parent_sheet: CONSULTORIA
+    key:
+      - AÑO
+      - SEMESTRE
+      - CODIGO_CONSULTORIA

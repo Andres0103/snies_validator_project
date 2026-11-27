@@ -131,7 +131,7 @@ def test_get_history_returns_validations(client, monkeypatch):
     monkeypatch.setattr(
         validation_routes,
         "list_validations",
-        lambda: validations,
+        lambda modulo=None: validations,
     )
 
     response = client.get("/api/validaciones")

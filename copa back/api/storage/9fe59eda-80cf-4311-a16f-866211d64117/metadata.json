@@ -1,0 +1,32 @@
+{
+  "id": "9fe59eda-80cf-4311-a16f-866211d64117",
+  "plantilla": "EVENTO_CULTURAL",
+  "plantillas": [
+    "EVENTO_CULTURAL"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-23T19:33:25.830021+00:00",
+  "iniciado_en": "2026-11-23T19:33:26.096139+00:00",
+  "finalizado_en": "2026-11-23T19:33:30.029953+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 2420,
+  "total_advertencias": 638,
+  "archivos": [
+    {
+      "nombre_archivo": "Evento_cultural_jul_nov_2025-2.xlsx",
+      "plantilla": "EVENTO_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Evento_cultural_jul_nov_2025-2_marcado.xlsx",
+      "total_errores": 2420,
+      "total_advertencias": 638
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

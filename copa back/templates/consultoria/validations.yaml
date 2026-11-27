@@ -1,0 +1,32 @@
+
+sheets:
+  CONSULTORIA:
+    ID_CINE_CAMPO_DETALLADO:
+      catalog: cine_campos
+
+    ID_SECTOR_CONSULTORIA:
+      catalog: sector_consultoria
+
+    VALOR:
+      min_value: 0
+
+    FECHA_INICIO:
+      date_within_past_years: 80
+
+    ID_FUENTE_NACIONAL:
+      catalog: fuente_nacional
+
+    VLR_FINANCIACION_NACIONAL:
+      min_value: 0
+
+    ID_PAIS_FINANCIADOR:
+      catalog: paises
+      excluded_values:
+        - '170'
+
+    ID_FUENTE_INTERNACIONAL:
+      catalog: fuente_internacional
+
+    VLR_FINANCIACION_INTERNACIONAL:
+      min_value: 0
+

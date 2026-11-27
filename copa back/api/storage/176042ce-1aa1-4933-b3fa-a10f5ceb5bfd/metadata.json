@@ -1,0 +1,32 @@
+{
+  "id": "176042ce-1aa1-4933-b3fa-a10f5ceb5bfd",
+  "plantilla": "SERVICIOS_EXTENSION",
+  "plantillas": [
+    "SERVICIOS_EXTENSION"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-24T16:17:12.553190+00:00",
+  "iniciado_en": "2026-11-24T16:17:12.588707+00:00",
+  "finalizado_en": "2026-11-24T16:17:13.205718+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 42,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Servicios_de_extension_20261_corregido_revision.xlsx",
+      "plantilla": "SERVICIOS_EXTENSION",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Servicios_de_extension_20261_corregido_revision_marcado.xlsx",
+      "total_errores": 42,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

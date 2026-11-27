@@ -1,0 +1,32 @@
+{
+  "id": "44c3e168-5b87-4405-bf5b-dccffa19c227",
+  "plantilla": "CONSULTORIA",
+  "plantillas": [
+    "CONSULTORIA"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-24T16:11:27.152008+00:00",
+  "iniciado_en": "2026-11-24T16:11:27.194080+00:00",
+  "finalizado_en": "2026-11-24T16:11:28.252407+00:00",
+  "total_archivos": 1,
+  "total_archivos_validos": 1,
+  "total_archivos_procesados": 1,
+  "total_archivos_fallidos": 0,
+  "total_errores": 147,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "Consultoria_20261_corregido.xlsx",
+      "plantilla": "CONSULTORIA",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "Consultoria_20261_corregido_marcado.xlsx",
+      "total_errores": 147,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": [],
+  "reporte_disponible": true,
+  "advertencia_reporte": null
+}

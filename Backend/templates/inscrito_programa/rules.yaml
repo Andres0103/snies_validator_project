@@ -1,0 +1,38 @@
+
+# Reglas de INSCRITO_PROGRAMA
+# Fuente: Manual MEN V8.12, sección 3.2, página 23.
+
+sheets:
+  INSCRITO_PROGRAMA:
+
+    AÑO:
+      datatype: integer
+      required: true
+      exact_length: 4
+
+    SEMESTRE:
+      datatype: integer
+      required: true
+      exact_length: 1
+      allowed_values: [1, 2]
+
+    ID_TIPO_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 2
+      allowed_values: [CC, DE, CE, TI, PS, CA, PT]
+
+    NUM_DOCUMENTO:
+      datatype: alphanumeric
+      required: true
+      max_length: 30
+
+    PRO_CONSECUTIVO:
+      datatype: integer
+      required: true
+      max_length: 6
+
+    ID_MUNICIPIO:
+      datatype: alphanumeric
+      required: true
+      exact_length: 5

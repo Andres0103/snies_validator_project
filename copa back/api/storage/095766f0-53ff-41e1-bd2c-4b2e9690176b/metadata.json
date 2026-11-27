@@ -1,0 +1,47 @@
+{
+  "id": "095766f0-53ff-41e1-bd2c-4b2e9690176b",
+  "plantilla": null,
+  "plantillas": [
+    "ACTIVIDAD_CULTURAL",
+    "CURSOS"
+  ],
+  "estado": "COMPLETADO_CON_OBSERVACIONES",
+  "progreso": 100,
+  "mensaje": "Validación finalizada.",
+  "creado_en": "2026-11-17T14:03:31.709865+00:00",
+  "iniciado_en": "2026-11-17T14:03:31.764444+00:00",
+  "finalizado_en": "2026-11-17T14:03:32.442415+00:00",
+  "total_archivos": 3,
+  "total_archivos_validos": 3,
+  "total_archivos_procesados": 3,
+  "total_archivos_fallidos": 0,
+  "total_errores": 11,
+  "total_advertencias": 0,
+  "archivos": [
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_VALIDOS.xlsx",
+      "plantilla": "ACTIVIDAD_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "ACTIVIDAD_CULTURAL_VALIDOS_marcado.xlsx",
+      "total_errores": 1,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "CURSOS_VALIDOS.xlsx",
+      "plantilla": "CURSOS",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "CURSOS_VALIDOS_marcado.xlsx",
+      "total_errores": 0,
+      "total_advertencias": 0
+    },
+    {
+      "nombre_archivo": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES.xlsx",
+      "plantilla": "ACTIVIDAD_CULTURAL",
+      "estado": "COMPLETADO",
+      "archivo_marcado": "ACTIVIDAD_CULTURAL_ERRORES_INTENCIONALES_marcado.xlsx",
+      "total_errores": 10,
+      "total_advertencias": 0
+    }
+  ],
+  "archivos_rechazados": []
+}

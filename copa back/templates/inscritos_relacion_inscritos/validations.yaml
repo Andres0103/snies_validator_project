@@ -1,0 +1,13 @@
+
+# Validaciones específicas de INSCRITOS - RELACIÓN DE INSCRITOS.
+# Fuente: Manual MEN V8.12, diciembre de 2025, sección 3.1.
+#
+# Los tipos de datos, longitudes, obligatoriedad y valores permitidos
+# están definidos en rules.yaml.
+
+#usamos una expresion regular para indicar que el valor debe contener uno o mas caracteres 
+sheets:
+  INSCRITO:
+
+    NUM_DOCUMENTO:
+      pattern: "^\\S+$"
